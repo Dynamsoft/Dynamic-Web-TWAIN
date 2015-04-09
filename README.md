@@ -78,6 +78,7 @@ A Simple Web Scanning Application
 1. Start a Web Application
   1. Copy the Dynamsoft's Resources folder to your project
   2. Create an empty HTML page
+  
       ```
       /Resources
       /HelloWorld.html
