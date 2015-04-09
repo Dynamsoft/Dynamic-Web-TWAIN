@@ -1,0 +1,16 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.1'
+    }
+}
+    
+subprojects {
+   apply plugin : "java"
+   repositories {
+      mavenCentral()
+   }
+}
