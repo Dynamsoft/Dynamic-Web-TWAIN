@@ -77,12 +77,11 @@ A Simple Web Scanning Application
 ---------------------------------
 1. Start a Web Application
   1. Copy the Dynamsoft's Resources folder to your project
+  
+      ![image](http://www.dynamsoft.com/Support/DWTGuide/Documents/res/Images/ResourcesFolder.png)
   2. Create an empty HTML page
   
-      ```
-      /Resources
-      /HelloWorld.html
-      ```
+      ![image](http://www.dynamsoft.com/Support/DWTGuide/Documents/res/Images/ResourcesAndHTML.png)
 2. Add Dynamic Web TWAIN to the HTML Page
   1. Include the two Dynamsoft's JS files in the <head> tag.
   
