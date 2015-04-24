@@ -12,6 +12,11 @@ How to Run
 2. `gradle tomcatRunWar`
 3. Open `http://localhost:8080/web/`
 
+Blog
+----
+[How to Build Web Scanning Application with Gradle][2]
+
 [1]:http://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx
+[2]:http://www.codepool.biz/gradle/how-to-build-web-scanning-application-with-gradle.html
 
 

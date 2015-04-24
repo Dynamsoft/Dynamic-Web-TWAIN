@@ -77,24 +77,27 @@ A Simple Web Scanning Application
 ---------------------------------
 1. Start a Web Application
   1. Copy the Dynamsoft's Resources folder to your project
+  
+      ![image](http://www.dynamsoft.com/Support/DWTGuide/Documents/res/Images/ResourcesFolder.png)
   2. Create an empty HTML page
-      ```
-      /Resources
-      /HelloWorld.html
-      ```
+  
+      ![image](http://www.dynamsoft.com/Support/DWTGuide/Documents/res/Images/ResourcesAndHTML.png)
 2. Add Dynamic Web TWAIN to the HTML Page
   1. Include the two Dynamsoft's JS files in the <head> tag.
+  
       ```
       <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"> </script>
       <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"> </script>
       ```
   2. Add Dynamic Web TWAIN container to the <body> tag.
+
       ```
       <div id="dwtcontrolContainer"> </div>
       ```
 
 3. Use Dynamic Web TWAIN
   1. Add a Scan button and the minimum scripts to scan
+  
       ```
       <input type="button" value="Scan" onclick="AcquireImage();" />
 <script type="text/javascript">
@@ -108,6 +111,7 @@ A Simple Web Scanning Application
 </script>
       ```
   2. Review the complete code.
+  
       ```
       <html>  
     <head>
