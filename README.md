@@ -9,7 +9,7 @@ Introduction
 
 Download
 -----------
-http://www.dynamsoft.com/Downloads/WebTWAIN-Sample-Download.aspx
+http://www.dynamsoft.com/Downloads/WebTWAIN_Download.aspx
 
 Documentation
 --------------
