@@ -8,9 +8,10 @@ Screenshots
 
 How to Run
 ----------
-1. `gradle build`
-2. `gradle tomcatRunWar`
-3. Open `http://localhost:8080/web/`
+1. Copy **Resources** folder from **{Dynamic Web TWAIN Installation Directory}** to **gradle\web\src\main\webapp**
+2. `gradle build`
+3. `gradle tomcatRunWar`
+4. Open `http://localhost:8080/web/`
 
 Blog
 ----
