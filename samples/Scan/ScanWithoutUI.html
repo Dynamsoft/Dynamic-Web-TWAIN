@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Use Dynamic Web TWAIN to Scan</title>
+    <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
+    <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
+</head>
+<body>
+    <label>
+        <input type="checkbox" id="ShowUI">Show UI</label>
+    <input type="button" value="Scan" onclick="AcquireImage();" />
+
+    <!-- dwtcontrolContainer is the default div id for Dynamic Web TWAIN control.
+    If you need to rename the id, you should also change the id in the dynamsoft.webtwain.config.js accordingly. -->
+    <div id="dwtcontrolContainer"></div>
+
+    <script type="text/javascript">
+        Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady);  // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
+
+        var DWObject;
+
+        function Dynamsoft_OnReady() {
+            DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');    // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
+        }
+        function AcquireImage() {
+            if (DWObject) {
+                DWObject.SelectSource();
+                DWObject.OpenSource();
+                DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan.
+                if (document.getElementById("ShowUI").checked)
+                    DWObject.IfShowUI = true; //Enable the Data Source's default User Interface
+                else
+                    DWObject.IfShowUI = false; //Disable the Data Source's default User Interface
+                DWObject.AcquireImage();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "C:\...\Visual Studio Demo\", "Visual Studio Demo\", "{B6577FC7-3087-4028-8037-5C9C40BA3AA2}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.VirtualPath = "/Visual Studio Demo"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\Desktop\DWT Samples for Installer\Visual Studio Sample\Visual Studio Demo\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Visual Studio Demo\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Visual Studio Demo"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\Desktop\DWT Samples for Installer\Visual Studio Sample\Visual Studio Demo\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Visual Studio Demo\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1242"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6577FC7-3087-4028-8037-5C9C40BA3AA2}.Debug|.NET.ActiveCfg = Debug|.NET
+		{B6577FC7-3087-4028-8037-5C9C40BA3AA2}.Debug|.NET.Build.0 = Debug|.NET
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

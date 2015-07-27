@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Use Auto Feeder to scan</title>
+    <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
+    <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
+</head>
+<body>
+    <label>
+        <input type="checkbox" id="ADF" checked="checked">Auto Feeder</label>
+    <input type="button" value="Scan" onclick="AcquireImage();" />
+
+    <!-- dwtcontrolContainer is the default div id for Dynamic Web TWAIN control.
+    If you need to rename the id, you should also change the id in the dynamsoft.webtwain.config.js accordingly. -->
+    <div id="dwtcontrolContainer"></div>
+
+    <script type="text/javascript">
+        Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
+
+        var DWObject;
+
+        function Dynamsoft_OnReady() {
+            DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
+        }
+
+        function AcquireImage() {
+            if (DWObject) {
+                DWObject.SelectSource();
+                DWObject.OpenSource();
+                DWObject.IfShowUI = false;//Disable scanner UI.
+                DWObject.IfDisableSourceAfterAcquire = true;//Scanner source will be disabled automatically after scan.
+                if (document.getElementById("ADF").checked)//Use auto feeder or use the flatbed
+                    DWObject.IfFeederEnabled = true;//Enbale Document Feeder
+                else
+                    DWObject.IfFeederEnabled = false;//Disable Document Feeder
+					
+				if(document.getElementById("ADF").checked && DWObject.IfFeederEnabled == true)  // if paper is NOT loaded on the feeder
+				{
+					if(DWObject.IfFeederLoaded != true && DWObject.ErrorCode == 0)
+					{
+						alert("No paper detected! Please load papers and try again!");
+						return;
+					}
+				}
+
+				DWObject.AcquireImage();
+            }
+        }
+    </script>
+</body>
+</html>
