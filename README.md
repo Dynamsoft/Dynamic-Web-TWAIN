@@ -64,7 +64,7 @@ http://www.dynamsoft.com/Downloads/WebTWAIN-Sample-Download.aspx
 Package
 -------
 ```
-Dynamic Web TWAIN SDK 10.2 Trial
+Dynamic Web TWAIN SDK 11.0 Trial
 /Documents
 /Resources
 /Samples
