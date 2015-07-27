@@ -1,6 +1,6 @@
 Dynamic Web TWAIN SDK
 =========
-version 10.2
+version 11.0
 
 Introduction
 -----------
@@ -9,7 +9,7 @@ Introduction
 
 Download
 -----------
-http://www.dynamsoft.com/Downloads/WebTWAIN-Sample-Download.aspx
+http://www.dynamsoft.com/Downloads/WebTWAIN_Download.aspx
 
 Documentation
 --------------
