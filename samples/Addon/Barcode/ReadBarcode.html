@@ -24,16 +24,19 @@
 
         var BarcodeInfo = 
             [
-               { desc: "CODABAR", val: EnumDWT_BarcodeFormat.CODABAR },
+               { desc: "All", val: EnumDWT_BarcodeFormat.All },
+               { desc: "1D Barcodes", val: EnumDWT_BarcodeFormat.OneD },
+               { desc: "QR Code", val: EnumDWT_BarcodeFormat.QR_CODE },
                { desc: "CODE_39", val: EnumDWT_BarcodeFormat.CODE_39 },
-               { desc: "CODE_93", val: EnumDWT_BarcodeFormat.CODE_93 },
                { desc: "CODE_128", val: EnumDWT_BarcodeFormat.CODE_128 },
-               { desc: "EAN_8", val: EnumDWT_BarcodeFormat.EAN_8 },
+               { desc: "CODE_93", val: EnumDWT_BarcodeFormat.CODE_93 },
+               { desc: "CODABAR", val: EnumDWT_BarcodeFormat.CODABAR },
                { desc: "EAN_13", val: EnumDWT_BarcodeFormat.EAN_13 },
-               { desc: "ITF", val: EnumDWT_BarcodeFormat.ITF },
+               { desc: "EAN_8", val: EnumDWT_BarcodeFormat.EAN_8 },
                { desc: "UPC_A", val: EnumDWT_BarcodeFormat.UPC_A },
                { desc: "UPC_E", val: EnumDWT_BarcodeFormat.UPC_E },
-               { desc: "OneD", val: EnumDWT_BarcodeFormat.OneD }
+               { desc: "Interleaved 2 of 5", val: EnumDWT_BarcodeFormat.ITF },
+               { desc: "Industrial 2 of 5", val: EnumDWT_BarcodeFormat.INDUSTRIAL_25 }
             ];
 
         function Dynamsoft_OnReady() {
