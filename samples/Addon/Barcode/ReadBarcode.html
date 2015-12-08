@@ -27,6 +27,8 @@
                { desc: "All", val: EnumDWT_BarcodeFormat.All },
                { desc: "1D Barcodes", val: EnumDWT_BarcodeFormat.OneD },
                { desc: "QR Code", val: EnumDWT_BarcodeFormat.QR_CODE },
+               { desc: "PDF417", val: EnumDWT_BarcodeFormat.PDF417 },
+               { desc: "DATAMATRIX", val: EnumDWT_BarcodeFormat.DATAMATRIX },
                { desc: "CODE_39", val: EnumDWT_BarcodeFormat.CODE_39 },
                { desc: "CODE_128", val: EnumDWT_BarcodeFormat.CODE_128 },
                { desc: "CODE_93", val: EnumDWT_BarcodeFormat.CODE_93 },
@@ -41,7 +43,7 @@
 
         function Dynamsoft_OnReady() {
             DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
-            if (DWObject) {//Currently only code 39 and code 128 are supported
+            if (DWObject) {
                 for (var index = 0; index < BarcodeInfo.length; index ++)
                     document.getElementById("barcodeformat").options.add(new Option(BarcodeInfo[index].desc, index));
             }

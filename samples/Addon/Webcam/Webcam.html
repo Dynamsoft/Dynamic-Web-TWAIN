@@ -50,7 +50,7 @@
                 }
                 // optional
                 var OnCaptureEnd = function () {
-                    //Call DWObject.Addon.Webcam.CloseSource() to release webcam.
+                    DWObject.Addon.Webcam.CloseSource();
                 }
 
                 DWObject.Addon.Webcam.CaptureImage(showUI, OnCaptureStart, OnCaptureSuccess, OnCaptureError, OnCaptureEnd);
