@@ -15,6 +15,7 @@
     <div id="dwtcontrolContainer"></div>
 
     <script type="text/javascript">
+		var console = window['console']?window['console']:{'log':function(){}};
         Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
 
         var DWObject;
@@ -25,10 +26,18 @@
 
         function AcquireImage() {
             if (DWObject) {
-                DWObject.SelectSource();
-                DWObject.OpenSource();
-                DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan.
-                DWObject.AcquireImage();
+                var bSelected = DWObject.SelectSource();
+				
+				if(bSelected){
+					var OnAcquireImageSuccess, OnAcquireImageFailure;
+					OnAcquireImageSuccess = OnAcquireImageFailure = function (){
+						DWObject.CloseSource();
+					};
+					
+					DWObject.OpenSource();
+					DWObject.IfDisableSourceAfterAcquire = true; // Scanner source will be disabled/closed automatically after the scan.
+					DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
+				}
             }
         }
 

@@ -4,9 +4,9 @@
     <title>Use Dynamic Web TWAIN to load and save images</title>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
+    <script type="text/javascript" src="Resources/addon/dynamsoft.webtwain.addon.pdf.js"> </script>
 </head>
 <body>
-    <input type="button" value="Scan and Save" onclick="AcquireImage();" />
     <input type="button" value="Load" onclick="LoadImage();" />
     <input type="button" value="Save" onclick="SaveWithFileDialog();" />
     <br />
@@ -19,33 +19,13 @@
     <div id="dwtcontrolContainer"></div>
 
     <script type="text/javascript">
-		var console = window['console']?window['console']:{'log':function(){}};
+	var console = window['console']?window['console']:{'log':function(){}};
         Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
 
         var DWObject;
 
         function Dynamsoft_OnReady() {
             DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
-            if (DWObject) {
-                DWObject.RegisterEvent('OnPostAllTransfers', SaveWithFileDialog);
-            }
-        }
-
-        function AcquireImage() {
-            if (DWObject) {
-                var bSelected = DWObject.SelectSource();
-				
-				if(bSelected){
-					var OnAcquireImageSuccess, OnAcquireImageFailure;
-					OnAcquireImageSuccess = OnAcquireImageFailure= function (){
-						DWObject.CloseSource();
-					};
-					
-					DWObject.OpenSource();
-					DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan. 
-					DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
-				}
-            }
         }
 
         //Callback functions for async APIs
@@ -59,8 +39,13 @@
 
         function LoadImage() {
             if (DWObject) {
+            	//Please NOTE that the PDF Rasterizer doesn't work for Chrome/Firefox 26-			
+                // Call DWObject.Addon.PDF.Download(url) to download PDF Rasterizer module to local.
+                DWObject.Addon.PDF.SetResolution(200);   
+                DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConverMode.CM_RENDERALL);   
+
                 DWObject.IfShowFileDialog = true; // Open the system's file dialog to load image
-                DWObject.LoadImageEx("", EnumDWT_ImageType.IT_ALL, OnSuccess, OnFailure); // Load images in all supported formats (.bmp, .jpg, .tif, .png, .pdf). OnSuccess or OnFailure will be called after the operation
+                DWObject.LoadImageEx("", EnumDWT_ImageType.IT_PDF, OnSuccess, OnFailure); // Load images in all supported formats (.bmp, .jpg, .tif, .png, .pdf). OnSuccess or OnFailure will be called after the operation
             }
         }
 

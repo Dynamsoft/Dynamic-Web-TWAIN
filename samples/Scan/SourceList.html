@@ -22,16 +22,29 @@
             DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');    // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
             if (DWObject) {
                 var count = DWObject.SourceCount;
+				if(count == 0 && Dynamsoft.Lib.env.bMac)
+				{
+					DWObject.CloseSourceManager();
+					DWObject.ImageCaptureDriverType = 0;
+					DWObject.OpenSourceManager();
+					count = DWObject.SourceCount;
+				}
+				
                 for (var i = 0; i < count; i++)
                     document.getElementById("source").options.add(new Option(DWObject.GetSourceNameItems(i), i)); // Get Data Source names from Data Source Manager and put them in a drop-down box
             }
         }
         function AcquireImage() {
             if (DWObject) {
+				var OnAcquireImageSuccess, OnAcquireImageFailure;
+				OnAcquireImageSuccess = OnAcquireImageFailure = function (){
+					DWObject.CloseSource();
+				};
+				
                 DWObject.SelectSourceByIndex(document.getElementById("source").selectedIndex); //Use method SelectSourceByIndex to avoid the 'Select Source' dialog
                 DWObject.OpenSource();
                 DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan.
-                DWObject.AcquireImage();
+                DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
             }
         }
     </script>

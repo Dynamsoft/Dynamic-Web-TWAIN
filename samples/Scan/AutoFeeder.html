@@ -25,25 +25,33 @@
 
         function AcquireImage() {
             if (DWObject) {
-                DWObject.SelectSource();
-                DWObject.OpenSource();
-                DWObject.IfShowUI = false;//Disable scanner UI.
-                DWObject.IfDisableSourceAfterAcquire = true;//Scanner source will be disabled automatically after scan.
-                if (document.getElementById("ADF").checked)//Use auto feeder or use the flatbed
-                    DWObject.IfFeederEnabled = true;//Enbale Document Feeder
-                else
-                    DWObject.IfFeederEnabled = false;//Disable Document Feeder
+                var bSelected = DWObject.SelectSource();
+				
+				if(bSelected){
+					var OnAcquireImageSuccess, OnAcquireImageFailure;
+					OnAcquireImageSuccess = OnAcquireImageFailure= function (){
+						DWObject.CloseSource();
+					};
 					
-				if(document.getElementById("ADF").checked && DWObject.IfFeederEnabled == true)  // if paper is NOT loaded on the feeder
-				{
-					if(DWObject.IfFeederLoaded != true && DWObject.ErrorCode == 0)
+					DWObject.OpenSource();
+					DWObject.IfShowUI = false; //Disable scanner UI.
+					DWObject.IfDisableSourceAfterAcquire = true;//Scanner source will be disabled automatically after scan.
+					if (document.getElementById("ADF").checked)//Use auto feeder or use the flatbed
+						DWObject.IfFeederEnabled = true;//Enbale Document Feeder
+					else
+						DWObject.IfFeederEnabled = false;//Disable Document Feeder
+						
+					if(document.getElementById("ADF").checked && DWObject.IfFeederEnabled == true)  // if paper is NOT loaded on the feeder
 					{
-						alert("No paper detected! Please load papers and try again!");
-						return;
+						if(DWObject.IfFeederLoaded != true && DWObject.ErrorCode == 0)
+						{
+							alert("No paper detected! Please load papers and try again!");
+							return;
+						}
 					}
-				}
 
-				DWObject.AcquireImage();
+					DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
+				}
             }
         }
     </script>

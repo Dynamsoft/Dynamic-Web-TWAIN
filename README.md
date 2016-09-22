@@ -1,6 +1,6 @@
 Dynamic Web TWAIN SDK
 =========
-version 11.2
+version 12.0
 
 Introduction
 -----------
@@ -61,60 +61,47 @@ Samples
 -------
 http://www.dynamsoft.com/Downloads/WebTWAIN-Sample-Download.aspx
 
-Package
--------
-```
-Dynamic Web TWAIN SDK 11.0 Trial
-/Documents
-/Resources
-/Samples
-/DWTLicensing.exe
-/Dynamic Web TWAIN SDK.html
-
-```
-
-A Simple Web Scanning Application
+Getting Started
 ---------------------------------
-1. Start a Web Application
-  1. Copy the Dynamsoft's Resources folder to your project
+1. Create a new web project and copy the Dynamsoft's Resources folder to your project:
 
-      ![image](http://www.dynamsoft.com/Support/DWTGuide/Documents/res/Images/ResourcesFolder.png)
-  2. Create an empty HTML page
+    ![image](http://www.dynamsoft.com/Support/DWTGuide/Documents/res/Images/ResourcesFolder.png)
+2. Create an empty HTML page:
 
-      ![image](http://www.dynamsoft.com/Support/DWTGuide/Documents/res/Images/ResourcesAndHTML.png)
-2. Add Dynamic Web TWAIN to the HTML Page
-  1. Include the two Dynamsoft's JS files in the <head> tag.
+    ![image](http://www.dynamsoft.com/Support/DWTGuide/Documents/res/Images/ResourcesAndHTML.png)
+3. Include the Dynamic Web TWAIN JavaScript library:
 
-      ```
-      <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"> </script>
-      <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"> </script>
-      ```
-  2. Add Dynamic Web TWAIN container to the <body> tag.
+    ```
+    <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"> </script>
+    <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"> </script>
+    ```
+4. Add Dynamic Web TWAIN container:
 
-      ```
-      <div id="dwtcontrolContainer"> </div>
-      ```
+    ```
+    <div id="dwtcontrolContainer"> </div>
+    ```
 
-3. Use Dynamic Web TWAIN
-  1. Add a Scan button and the minimum scripts to scan
+5. Add a Scan button:
 
-      ```
-      <input type="button" value="Scan" onclick="AcquireImage();" />
-<script type="text/javascript">
-    function AcquireImage(){
-        var DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
-        DWObject.IfDisableSourceAfterAcquire = true;
-        DWObject.SelectSource();
-        DWObject.OpenSource();
-        DWObject.AcquireImage();
-    }
-</script>
-      ```
-  2. Review the complete code.
+    ```
+    <input type="button" value="Scan" onclick="AcquireImage();" />
+    <script type="text/javascript"> 
+        function AcquireImage(){
+            var DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+            DWObject.IfDisableSourceAfterAcquire = true;
+            DWObject.SelectSource();
+            DWObject.OpenSource();
+            DWObject.AcquireImage();
+        }
+    </script>
+    ```
 
-      ```
-      <html>  
-    <head>
+Full Sample
+----------
+
+```
+<html>  
+    <head>    
         <title>Hello World</title>
         <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"> </script>
         <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"> </script>
@@ -123,7 +110,7 @@ A Simple Web Scanning Application
     <body>
         <input type="button" value="Scan" onclick="AcquireImage();" />
         <div id="dwtcontrolContainer"> </div>
-        <script type="text/javascript">
+        <script type="text/javascript"> 
             function AcquireImage(){
                 var DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
                 DWObject.IfDisableSourceAfterAcquire = true;
@@ -134,7 +121,7 @@ A Simple Web Scanning Application
         </script>
     </body>  
 </html>
-      ```
+```
 
 [1]:http://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx
 [2]:http://www.dynamsoft.com/Products/WebTWAIN_Features.aspx

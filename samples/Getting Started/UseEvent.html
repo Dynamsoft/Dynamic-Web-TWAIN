@@ -31,10 +31,18 @@
 
         function AcquireImage() {
             if (DWObject) {
-                DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan.
-                DWObject.SelectSource();                        // Select a Data Source (a device like scanner) from the Data Source Manager.            
-                DWObject.OpenSource();                          // Open the source. You can set resolution, pixel type, etc. after this method. Please refer to the sample 'Scan' -> 'Custom Scan' for more info.
-                DWObject.AcquireImage();                        // Acquire image(s) from the Data Source. Please NOTE this is a asynchronous method. In other words, it doesn't wait for the Data Source to come back. 
+                DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan.  
+                var bSelected = DWObject.SelectSource();                        // Select a Data Source (a device like scanner) from the Data Source Manager. 
+
+				if(bSelected){
+					var OnAcquireImageSuccess, OnAcquireImageFailure;
+					OnAcquireImageSuccess = OnAcquireImageFailure = function (){
+						DWObject.CloseSource();
+					};
+				
+					DWObject.OpenSource();                          // Open the source. You can set resolution, pixel type, etc. after this method. Please refer to the sample 'Scan' -> 'Custom Scan' for more info.
+					DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);                        // Acquire image(s) from the Data Source. Please NOTE this is a asynchronous method. In other words, it doesn't wait for the Data Source to come back. 
+				}
             }
         }
     </script>
