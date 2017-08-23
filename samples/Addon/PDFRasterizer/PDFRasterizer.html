@@ -19,56 +19,69 @@
     <div id="dwtcontrolContainer"></div>
 
     <script type="text/javascript">
-	var console = window['console']?window['console']:{'log':function(){}};
-        Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
+		var console = window['console']?window['console']:{'log':function(){}};
+	
+		Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
 
-        var DWObject;
+		var DWObject;
 
-        function Dynamsoft_OnReady() {
-            DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
-        }
+		function Dynamsoft_OnReady() {
+			DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
+		}
 
-        //Callback functions for async APIs
-        function OnSuccess() {
-            console.log('successful');
-        }
+		//Callback functions for async APIs
+		function OnSuccess() {
+			console.log('successful');
+		}
 
-        function OnFailure(errorCode, errorString) {
-            alert(errorString);
-        }
+		function OnFailure(errorCode, errorString) {
+			alert(errorString);
+		}
 
-        function LoadImage() {
-            if (DWObject) {
-            	//Please NOTE that the PDF Rasterizer doesn't work for Chrome/Firefox 26-			
-                // Call DWObject.Addon.PDF.Download(url) to download PDF Rasterizer module to local.
-                DWObject.Addon.PDF.SetResolution(200);   
-                DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConverMode.CM_RENDERALL);   
+		function LoadImage() {
+			if (DWObject) {
+				//Please NOTE that the PDF Rasterizer doesn't work for Chrome/Firefox 26-			
+				// Call DWObject.Addon.PDF.Download(url) to download PDF Rasterizer module to local.
+				DWObject.Addon.PDF.SetResolution(200);   
+				DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConverMode.CM_RENDERALL);   
 
-                DWObject.IfShowFileDialog = true; // Open the system's file dialog to load image
-                DWObject.LoadImageEx("", EnumDWT_ImageType.IT_PDF, OnSuccess, OnFailure); // Load images in all supported formats (.bmp, .jpg, .tif, .png, .pdf). OnSuccess or OnFailure will be called after the operation
-            }
-        }
+				DWObject.IfShowFileDialog = true; // Open the system's file dialog to load image
+				DWObject.LoadImageEx("", EnumDWT_ImageType.IT_PDF, OnSuccess, OnFailure); // Load images in all supported formats (.bmp, .jpg, .tif, .png, .pdf). OnSuccess or OnFailure will be called after the operation
+			}
+		}
 
-        function SaveWithFileDialog() {
-            if (DWObject) {
-                if (DWObject.HowManyImagesInBuffer > 0) {
-                    DWObject.IfShowFileDialog = true;
-                    if (document.getElementById("imgTypejpeg").checked == true) {
-                        //If the current image is B&W
-                        //1 is B&W, 8 is Gray, 24 is RGB
-                        if (DWObject.GetImageBitDepth(DWObject.CurrentImageIndexInBuffer) == 1)
-                            //If so, convert the image to Gray
-                            DWObject.ConvertToGrayScale(DWObject.CurrentImageIndexInBuffer);
-                        //Save image in JPEG
-                        DWObject.SaveAsJPEG("DynamicWebTWAIN.jpg", DWObject.CurrentImageIndexInBuffer);
-                    }
-                    else if (document.getElementById("imgTypetiff").checked == true)
-                        DWObject.SaveAllAsMultiPageTIFF("DynamicWebTWAIN.tiff", OnSuccess, OnFailure);
-                    else if (document.getElementById("imgTypepdf").checked == true)
-                        DWObject.SaveAllAsPDF("DynamicWebTWAIN.pdf", OnSuccess, OnFailure);
-                }
-            }
-        }
+		function SaveWithFileDialog() {
+			if (DWObject) {
+				if (DWObject.HowManyImagesInBuffer > 0) {
+					DWObject.IfShowFileDialog = true;
+					if (document.getElementById("imgTypejpeg").checked == true) {
+						//If the current image is B&W
+						//1 is B&W, 8 is Gray, 24 is RGB
+						if (DWObject.GetImageBitDepth(DWObject.CurrentImageIndexInBuffer) == 1)
+							//If so, convert the image to Gray
+							DWObject.ConvertToGrayScale(DWObject.CurrentImageIndexInBuffer);
+						//Save image in JPEG
+						DWObject.SaveAsJPEG("DynamicWebTWAIN.jpg", DWObject.CurrentImageIndexInBuffer);
+					}
+					else if (document.getElementById("imgTypetiff").checked == true)
+						DWObject.SaveAllAsMultiPageTIFF("DynamicWebTWAIN.tiff", OnSuccess, OnFailure);
+					else if (document.getElementById("imgTypepdf").checked == true)
+						DWObject.SaveAllAsPDF("DynamicWebTWAIN.pdf", OnSuccess, OnFailure);
+				}
+			}
+		}
+		
+		(function(){
+			var _platform = navigator.platform.toLowerCase(),
+				_bWin = (_platform == 'win32') || (_platform == 'win64') || (_platform == 'windows');
+			
+			if(!_bWin)
+			{
+				alert("Currently, the PDF Rasterizer only works on Windows.");
+			}
+
+		})();
+
     </script>
 </body>
 </html>
