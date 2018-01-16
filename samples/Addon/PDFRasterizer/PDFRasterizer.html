@@ -7,6 +7,10 @@
     <script type="text/javascript" src="Resources/addon/dynamsoft.webtwain.addon.pdf.js"> </script>
 </head>
 <body>
+    <label>The PDF Rasterizer needs to be deployed, please check out <a target="_blank" href="https://developer.dynamsoft.com/dwt/how-to-use-the-pdf-
+rasterizer">https://developer.dynamsoft.com/dwt/how-to-use-the-pdf-rasterizer</a></label>
+    <br />
+    <br />
     <input type="button" value="Load" onclick="LoadImage();" />
     <input type="button" value="Save" onclick="SaveWithFileDialog();" />
     <br />
@@ -71,17 +75,6 @@
 			}
 		}
 		
-		(function(){
-			var _platform = navigator.platform.toLowerCase(),
-				_bWin = (_platform == 'win32') || (_platform == 'win64') || (_platform == 'windows');
-			
-			if(!_bWin)
-			{
-				alert("Currently, the PDF Rasterizer only works on Windows.");
-			}
-
-		})();
-
     </script>
 </body>
 </html>
