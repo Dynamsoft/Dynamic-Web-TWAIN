@@ -1,6 +1,6 @@
 Dynamic Web TWAIN SDK
 =========
-version 13.3
+version 13.4
 
 Introduction
 -----------
@@ -9,12 +9,12 @@ Introduction
 
 Download
 -----------
-http://www.dynamsoft.com/Downloads/WebTWAIN_Download.aspx
+https://www.dynamsoft.com/Downloads/WebTWAIN_Download.aspx
 
 Documentation
 --------------
 
-http://www.dynamsoft.com/help/TWAIN/WebTwain/index.htm.
+https://www.dynamsoft.com/help/TWAIN/WebTwain/index.htm.
 
 Highlights
 -----------
@@ -59,16 +59,16 @@ Highlights
 
 Samples
 -------
-http://www.dynamsoft.com/Downloads/WebTWAIN-Sample-Download.aspx
+https://www.dynamsoft.com/Downloads/WebTWAIN-Sample-Download.aspx
 
 Getting Started
 ---------------------------------
 1. Create a new web project and copy the Dynamsoft's Resources folder to your project:
 
-    ![image](http://www.dynamsoft.com/Support/DWTGuide/Documents/res/Images/ResourcesFolder.png)
+    ![image](https://www.dynamsoft.com/Support/DWTGuide/Documents/res/Images/ResourcesFolder.png)
 2. Create an empty HTML page:
 
-    ![image](http://www.dynamsoft.com/Support/DWTGuide/Documents/res/Images/ResourcesAndHTML.png)
+    ![image](https://www.dynamsoft.com/Support/DWTGuide/Documents/res/Images/ResourcesAndHTML.png)
 3. Include the Dynamic Web TWAIN JavaScript library:
 
     ```
@@ -123,5 +123,9 @@ Full Sample
 </html>
 ```
 
-[1]:http://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx
-[2]:http://www.dynamsoft.com/Products/WebTWAIN_Features.aspx
+Contact Us
+-------
+support@dynamsoft.com
+
+[1]:https://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx
+[2]:https://www.dynamsoft.com/Products/WebTWAIN_Features.aspx

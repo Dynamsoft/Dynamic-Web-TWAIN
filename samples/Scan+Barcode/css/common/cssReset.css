@@ -1,0 +1,31 @@
+﻿/* cssBase
+ * Keillion@dynamsoft.com
+ */
+/* cssReset http://meyerweb.com/eric/tools/css/reset/ v2.0 | 20110126 */
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+/*ie6,7 button width*/
+button {*width:auto;*overflow:visible;}
+/*ie6,7 fixed not twinkling*/
+html,body{*background-image:url(about:blank);*background-attachment:fixed;}
+* {-webkit-box-sizing: border-box;-moz-box-sizing:border-box;box-sizing: border-box;}
+/*select,input{*behavior:none;}*/
+/**/
+button {cursor:pointer;padding:0;outline:none;}
+input[type='checkbox'], input[type='radio'] {vertical-align:text-top;}
+label{cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none;}
+/*util*/
+.inline-block{display:inline-block;*zoom:1;*display:inline;}
+.fr{float:right;}
+.position-fixed-cm{position:fixed;margin:auto;left:0;top:0;right:0;bottom:0;*left:50%;*top:50%;/*width:200px;height:200px;*margin-left:-100px;*margin-top:-100px;*/_position:absolute;_top:expression(eval(document.documentElement.scrollTop + document.documentElement.clientHeight/2))}
+.ml10 {margin-left:10px;}
+.ml15 {margin-left:15px;}
+.ml20 {margin-left:20px;}
+.ml25 {margin-left:25px;}
+.ml30 {margin-left:30px;}
+.ml50 {margin-left:50px;}
+.mt10 {margin-top:10px;}
+.mt15 {margin-top:15px;}
+.mt20 {margin-top:20px;}
+.mt25 {margin-top:25px;}
+.mt30 {margin-top:30px;}
+.mt50 {margin-top:50px;}

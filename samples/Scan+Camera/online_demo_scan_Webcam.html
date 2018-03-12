@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Capture images and video stream from webcams in browsers | Webcam SDK</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+<meta http-equiv="Content-Language" content="en-us"/>
+<meta http-equiv="X-UA-Compatible" content="requiresActiveX=true" />
+<meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+<meta name="description" content="This online demo application (JavaScript + ASP.NET-C#) shows how to use the Dynamsoft Camera SDK to control webcams in a web page to capture images, edit and then upload to web servers." />
+<meta name="keyword" content="Dynamsoft, TWAIN, Scanners, SDK, Scanning"/>
+<link href="Styles/style.css" type="text/css" rel="stylesheet" />
+<link href="Styles/dcs_style.css" type="text/css" rel="stylesheet" />
+<script src="Scripts/common.js?t=170607"></script>
+<script>
+if (dynamsoft.onlineNavInfo.deviceType == 'pc') {
+
+} else {
+    var accept = confirm("Sorry, the demo is designed for web browsers on Windows PC or macOS only.\n\nYou are using a mobile device, would you like to visit our mobile camera web demo instead?");
+	if (accept) {
+      window.location.replace("https://demo.dynamsoft.com/m/mobile-camera-web-capture.aspx");
+    } else{/**/}
+}
+</script>
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="demoContent">
+        <div id="ScanWebcamDemo">
+            <div class="ct-top"> <span class="title">Capture from Scanner & Webcam</span> <span class="desc">Related products:</span> <a target="_blank" href="https://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx"><img src="Images/icon-dwt.svg" style="height:35px" title="Dynamic Web TWAIN" alt="Dynamic Web TWAIN"></a> <a target="_blank" href="https://www.dynamsoft.com/Products/dynamsoft-webcam-sdk.aspx"><img src="Images/icon-dcs.svg" style="height:35px" title="Dynamsoft Camera SDK" alt="Dynamsoft Camera SDK"></a> </div>
+            <div id="DWTcontainer" class="container">
+                <div id="DWTcontainerTop">
+                    <div id ="divEdit">
+                        <ul class="operateGrp">
+                            <li><img src="Images/ShowEditor.png" title= "Show Image Editor" alt="Show Image Editor" id="btnEditor" onclick="btnShowImageEditor_onclick()"/> </li>
+                            <li><img src="Images/RotateLeft.png" title="Rotate Left" alt="Rotate Left" id="btnRotateL"  onclick="btnRotateLeft_onclick()"/> </li>
+                            <li><img src="Images/RotateRight.png" title="Rotate Right" alt="Rotate Right" id="btnRotateR"  onclick="btnRotateRight_onclick()"/> </li>
+                            <li><img src="Images/Rotate180.png" alt="Rotate 180" title="Rotate 180" onclick="btnRotate180_onclick()" /> </li>
+                            <li><img src="Images/Mirror.png" title="Mirror" alt="Mirror" id="btnMirror"  onclick="btnMirror_onclick()"/> </li>
+                            <li><img src="Images/Flip.png" title="Flip" alt="Flip" id="btnFlip" onclick="btnFlip_onclick()"/> </li>
+                            <li><img src="Images/RemoveSelectedImages.png" title="Remove Selected Images" alt="Remove Selected Images" id="DW_btnRemoveCurrentImage" onclick="btnRemoveCurrentImage_onclick();"/></li>
+                            <li><img src="Images/RemoveAllImages.png" title="Remove All Images" alt="Remove All Images" id="DW_btnRemoveAllImages" onclick="btnRemoveAllImages_onclick();"/></li>
+                            <li><img src="Images/ChangeSize.png" title="Change Image Size" alt="Change Image Size" id="btnChangeImageSize" onclick="btnChangeImageSize_onclick();"/> </li>
+                            <li> <img src="Images/Crop.png" title="Crop" alt="Crop" id="btnCrop" onclick="btnCrop_onclick();"/></li>
+                        </ul>
+                        <div id="ImgSizeEditor" style="visibility:hidden">
+                            <ul>
+                                <li>
+                                    <label for="img_height"><b>New Height :</b>
+                                        <input type="text" id="img_height" style="width:50%;" size="10"/>
+                                        pixel</label>
+                                </li>
+                                <li>
+                                    <label for="img_width"><b>New Width :</b>&nbsp;
+                                        <input type="text" id="img_width" style="width:50%;" size="10"/>
+                                        pixel</label>
+                                </li>
+                                <li>Interpolation method:
+                                    <select size="1" id="InterpolationMethod">
+                                        <option value = ""></option>
+                                    </select>
+                                </li>
+                                <li style="text-align:center;">
+                                    <input type="button" value="   OK   " id="btnChangeImageSizeOK" onclick ="btnChangeImageSizeOK_onclick();"/>
+                                    <input type="button" value=" Cancel " id="btnCancelChange" onclick ="btnCancelChange_onclick();"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="dwtcontrolContainer"></div>
+                    <div id="DWTNonInstallContainerID"></div>
+                    <div id="btnGroupBtm" class="clearfix"></div>
+                    <div class="D_dcsView">
+                        <div id="video-container" class="video-container inline-block"></div>
+                        <div id="image-container" class="image-container inline-block"></div>
+                    </div>
+                </div>
+                <div id="ScanWrapper">
+                    <div id="divScanner" class="divinput">
+                        <ul class="PCollapse">
+                            <li>
+                                <div class="toggle">Image Acquisition</div>
+                                <div id="div_ScanImage" class="divTableStyle">
+                                    <div>
+                                        <label id="txtDcsSelectSource" for="source">Select a scanner or camera:</label>
+                                        <p style="display:none;" id="pNoScanner"> <a href="javascript: void(0)" class="ShowtblLoadImage" style="color:#fe8e14" id="aNoScanner">(No TWAIN compatible drivers detected)</a> </p>
+                                        <select size="1" id="webcamsource" style="position:relative" onchange="dcs_source_onchange()">
+                                        </select>
+                                    </div>
+                                    <div id="tblLoadImage" style="visibility:hidden;"> <a href="javascript: void(0)" class="ClosetblLoadImage"><img src="Images/icon-ClosetblLoadImage.png" alt="Close tblLoadImage"/></a>
+                                        <p>You can Install a Virtual Scanner:</p>
+                                        <div id="notformac1">
+                                            <p><a id="samplesource32bit" href="http://demo.dynamsoft.com/DWT/Sources/twainds.win32.installer.2.1.3.msi">32-bit Sample Source</a> <a id="samplesource64bit" style="display:none;" href="http://demo.dynamsoft.com/DWT/Sources/twainds.win64.installer.2.1.3.msi">64-bit Sample Source</a> from <a target="_blank" href="http://www.twain.org">TWG</a></p>
+                                        </div>
+                                    </div>
+                                    <ul id="ulScaneImageHIDE">
+                                        <li id="divProductDetail"></li>
+                                        <li id="divWebcamDetail"></li>
+                                        <li class="tc">
+                                            <div class="D_dwtButtons">
+                                                <input id="btnScan" disabled="disabled" type="button" value="Scan" onclick ="dcsAcquireImage();"/>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="D_dcsButtons" style="display:none">
+                                                <input id="btn-grab" class="d-btn bgBlue" type="button" value="Grab" />
+                                                <input id="btn-switch" class="d-btn bgBlue ml10" type="button" value="Switch to Image Viewer" />
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="divUpload" class="divinput mt30" style="position:relative;">
+                        <ul>
+                            <li class="toggle">Save Documents</li>
+                            <li>
+                                <p>File Name:</p>
+                                <input type="text" size="20" id="txt_fileName" />
+                            </li>
+                            <li style="padding-right:0;">
+                                <label for="imgTypebmp">
+                                    <input type="radio" value="bmp" name="ImageType" id="imgTypebmp" onclick ="rd_onclick();"/>
+                                    BMP</label>
+                                <label for="imgTypejpeg">
+                                    <input type="radio" value="jpg" name="ImageType" id="imgTypejpeg" onclick ="rd_onclick();"/>
+                                    JPEG</label>
+                                <label for="imgTypetiff">
+                                    <input type="radio" value="tif" name="ImageType" id="imgTypetiff" onclick ="rdTIFF_onclick();"/>
+                                    TIFF</label>
+                                <label for="imgTypepng">
+                                    <input type="radio" value="png" name="ImageType" id="imgTypepng" onclick ="rd_onclick();"/>
+                                    PNG</label>
+                                <label for="imgTypepdf">
+                                    <input type="radio" value="pdf" name="ImageType" id="imgTypepdf" onclick ="rdPDF_onclick();"/>
+                                    PDF</label>
+                            </li>
+                            <li>
+                                <label for="MultiPageTIFF">
+                                    <input type="checkbox" id="MultiPageTIFF"/>
+                                    Multi-Page TIFF</label>
+                                <label for="MultiPagePDF">
+                                    <input type="checkbox" id="MultiPagePDF"/>
+                                    Multi-Page PDF </label>
+                            </li>
+                            <li>
+                                <input id="btnSave" class="d-btn bgBlue" type="button" value="Save to Local" onclick ="saveUploadImage('local')"/>
+                                <input id="btnUpload" class="d-btn bgBlue" type="button" value="Upload to Server" onclick ="saveUploadImage('server')"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="DWTcontainerBtm" class="clearfix">
+                    <div id="DWTemessageContainer"></div>
+                    <div id="divNoteMessage"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="loaderContent" class="invisible" > <img id="imgLoader" src="Images/loader.gif" /> <span id="spLoader">Initiating...</span> </div>
+<div id="loadingLayer" class="invisible"></div>
+<script>
+    window['bDCSOnlineDemo'] = true;
+</script>
+<script src="Scripts/jquery.js?t=170607"></script> 
+<script src="DWTResources/dynamsoft.webtwain.config.js?t=170607"></script> 
+<script src="DWTResources/dynamsoft.webtwain.initiate.js?t=170607"></script> 
+<script src="Scripts/online_demo_operation.js?t=170607"></script> 
+<script src="Scripts/online_demo_initpage.js?t=170607"></script> 
+<script src="DCSResources/dynamsoft.camera.config.js"> </script> 
+<script src="DCSResources/dynamsoft.camera.initiate.js"> </script> 
+<script src="Scripts/dcs_script.js"></script> 
+<script>
+    $("ul.PCollapse li>div").click(function() {
+        if ($(this).next().css("display") == "none") {
+            $(".divType").next().hide("normal");
+            $(".divType").children(".mark_arrow").removeClass("expanded");
+            $(".divType").children(".mark_arrow").addClass("collapsed");
+            $(this).next().show("normal");
+            $(this).children(".mark_arrow").removeClass("collapsed");
+            $(this).children(".mark_arrow").addClass("expanded");
+        }
+    });
+</script> 
+<script>
+    // Assign the page onload fucntion.
+    $(function() {
+        pageonloadforWebcam();
+    });
+
+</script>
+</body>
+</html>

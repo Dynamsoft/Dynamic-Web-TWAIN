@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Read barcode from scanners online - 1D, QRCode, DataMatrix and PDF417</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="The online demo allows fast and robust linear barcode (Code 39, Code 128, etc.), QR Code, DataMatrix and PDF417 recognition from scanned documents."/>
+<link rel="stylesheet" type="text/css" href="css/common/cssReset.css?v=20180226" />
+<link rel="stylesheet" type="text/css" href="css/scan/style.css?v=20180124" />
+</head>
+<body>
+<div id="wrapper">
+    <div id="demoContent">
+        <div id="scanBarcode" class="clearfix">
+            <div class="ct-top"> <span class="title">Read Barcode from Scanners</span> <span class="desc">Related products:</span> <a target="_blank" href="https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader.aspx"><img src="image/icon-dbr.svg" style="height:35px" title="Dynamsoft Barcode Reader" alt="Dynamsoft Barcode Reader" /></a> </div>
+            <div class="ct-rt">
+                <div class="scanBox">
+                    <div class="title">Acquire Images</div>
+                    <div class="content">
+                        <div class="item-ss">
+                            <div class="lbl">Select Source:</div>
+                            <select id="dwtSourceList">
+                                <option>Looking for devices.Please wait.</option>
+                            </select>
+                            <a href="https://developer.dynamsoft.com/dwt/kb/2541" target="_blank"> <img title="Why is my scanner not shown or not responding in the browser?" alt="Why is my scanner not shown or not responding in the browser?" src="image/icn-question-12x12.png"/> </a> </div>
+                        <div class="item-cbGrp">
+                            <label style="margin-left:0">
+                                <input style="margin-left:0" type="checkbox" id="dwt-isShowUI">
+                                Show UI</label>
+                            <label>
+                                <input type="checkbox" id="dwt-AutoFeeder">
+                                AutoFeeder</label>
+                            <label>
+                                <input type="checkbox" id="dwt-Duplex">
+                                Duplex</label>
+                        </div>
+                        <div class="item-pt"> Pixel Type:
+                            <label style="margin-left:5px">
+                                <input type="radio" name="dwt-pixelType" value="BW">
+                                B&W</label>
+                            <label>
+                                <input type="radio" name="dwt-pixelType" value="GRAY">
+                                Gray</label>
+                            <label>
+                                <input type="radio" name="dwt-pixelType" value="RGB" checked="checked">
+                                Color</label>
+                        </div>
+                        <div class="item-sr">
+                            <div class="lbl">Resolution:</div
+                        >
+                            <select id="dwtResolutionList">
+                                <option value="150">150</option>
+                                <option value="200">200</option>
+                                <option value="300" selected>300</option>
+                            </select>
+                            <div id="resolutionWarn" class="resolutionWarn">We suggest choosing resolution higher than 800x600 for barcode reading.</div>
+                        </div>
+                        <button id="btn-scan" class="d-btn bgBlue" disabled>Scan</button>
+                    </div>
+                </div>
+                <div class="barcodeBox">
+                    <div class="title">Read Barcode</div>
+                    <div class="content">
+                        <div class="item-bt">
+                            <div class="lbl">Barcode Types:</div>
+                            <div class="ldiv">
+                                <label>
+                                    <input type="checkbox" id="chkLinear" name="BarcodeType" checked="checked" value="0x3FF"/>
+                                    Linear</label>
+                                <img id="linearToolTip" src="image/icn-question-12x12.png"/></div>
+                            <div class="rdiv">
+                                <label>
+                                    <input type="checkbox" id="chkQRCode" name="BarcodeType" checked="checked" value="0x4000000"/>
+                                    QRCode</label>
+                                <img id="qrCodeToolTip" src="image/icn-question-12x12.png"/></div>
+                            <div class="ldiv">
+                                <label>
+                                    <input type="checkbox" id="chkPdf" name="BarcodeType" checked="checked" value="0x2000000"/>
+                                    PDF417</label>
+                                <img id="pdf417ToolTip" src="image/icn-question-12x12.png"/></div>
+                            <div class="rdiv">
+                                <label>
+                                    <input type="checkbox" id="chkDM" name="BarcodeType" checked="checked" value="0x8000000"/>
+                                    DataMatrix</label>
+                                <img id="dmToolTip" src="image/icn-question-12x12.png"/></div>
+                        </div>
+                        <button id="btn-readBarcode" class="d-btn bgBlue" disabled>Read Barcode</button>
+                    </div>
+                </div>
+                <div class="browserSupInf">
+                    <p>Platform &amp; Browser Support: </p>
+                    Internet Explorer 6 and above (32 bit/64 bit), Chrome 27 and above (32 bit/64 bit), Firefox 27 and above (32 bit/64 bit) on Windows. </div>
+            </div>
+            <div class="ct-lt">
+                <div class="imageBox" draggable="false">
+                    <div class="image-container">
+                        <div id="dwtcontrolContainer"></div>
+                    </div>
+                    <div class="image-toolbar">
+                        <div class="image-toolbar-middle">
+                            <button id="dwt-img-first" name="dwt-changePage" style="margin-left:0" disabled>I&lt;</button>
+                            <button id="dwt-img-pre" name="dwt-changePage" disabled>&lt;</button>
+                            <span id="dwt-img-num">0/0</span>
+                            <button id="dwt-img-next" name="dwt-changePage" disabled>&gt;</button>
+                            <button id="dwt-img-last" name="dwt-changePage" disabled>&gt;I</button>
+                        </div>
+                        <div class="image-toolbar-right"> <img id="dwt-rmSld" alt="remove the current page" title="remove the current page" src="image/RemoveSelectedImages.png" style="margin-left:0"> <img id="dwt-rmAll" alt="remove all pages" title="remove all pages" src="image/RemoveAllImages.png"> </div>
+                    </div>
+                </div>
+                <div class="messageTitle">Message:</div>
+                <div id="messageBoxWrapper" class="messageBoxWrapper">
+                    <div class="messageBox" id="divResult"></div>
+                    <button id="btn-messClr" class="messageClear" style="display:none">Clear Message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/common/jquery.min.js?v=20180205"></script> 
+<script src="js/common/masterPage.js?v=20180124"></script> 
+<script>
+	$("button").click(function(e){
+		e.preventDefault();
+	});
+</script> 
+<script src="DWTResources/dynamsoft.webtwain.config.js?v=20180124"></script> 
+<script>
+    Dynamsoft.WebTwainEnv.AutoLoad = false;
+	Dynamsoft.WebTwainEnv.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 638, Height: 428 }];
+</script> 
+<script src="DWTResources/dynamsoft.webtwain.initiate.js?v=20180124"></script> 
+<script src="DBRResources/dynamsoft.barcodereader.config.js?v=20180124"></script> 
+<script src="DBRResources/dynamsoft.barcodereader.initiate.js?v=20180124"></script> 
+<script src="js/scan/ui.js?v=20180124"></script> 
+<script src="js/scan/script.js?v=20180124"></script>
+</body>
+</html>
