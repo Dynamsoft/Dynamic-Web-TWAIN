@@ -30,7 +30,6 @@
 				if(count == 0 && Dynamsoft.Lib.env.bMac)
 				{
 					DWObject.CloseSourceManager();
-					DWObject.ImageCaptureDriverType = 0;
 					DWObject.OpenSourceManager();
 					count = DWObject.SourceCount;
 				}

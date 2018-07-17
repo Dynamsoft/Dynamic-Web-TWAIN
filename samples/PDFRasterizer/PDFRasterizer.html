@@ -47,7 +47,7 @@ rasterizer">https://developer.dynamsoft.com/dwt/how-to-use-the-pdf-rasterizer</a
 				//Please NOTE that the PDF Rasterizer doesn't work for Chrome/Firefox 26-			
 				// Call DWObject.Addon.PDF.Download(url) to download PDF Rasterizer module to local.
 				DWObject.Addon.PDF.SetResolution(200);   
-				DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConverMode.CM_RENDERALL);   
+				DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConvertMode.CM_RENDERALL);   
 
 				DWObject.IfShowFileDialog = true; // Open the system's file dialog to load image
 				DWObject.LoadImageEx("", EnumDWT_ImageType.IT_PDF, OnSuccess, OnFailure); // Load images in all supported formats (.bmp, .jpg, .tif, .png, .pdf). OnSuccess or OnFailure will be called after the operation

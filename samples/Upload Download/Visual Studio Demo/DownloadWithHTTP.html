@@ -35,7 +35,7 @@
         function DownloadImage() {
             if (DWObject) {
                 var strHTTPServer = location.hostname; //The name of the HTTP server. For example: "www.dynamsoft.com";
-                var file = "/Resources/reference/imgs/img.png";
+                var file = "/UploadedImages/img.png";
                 var downloadfilename = location.pathname.substring(0, location.pathname.lastIndexOf('/')) + file;
                 DWObject.HTTPPort = location.port == "" ? 80 : location.port;                
                 DWObject.HTTPDownload(strHTTPServer, downloadfilename, OnSuccess, OnFailure);
