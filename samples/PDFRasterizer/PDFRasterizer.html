@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Use Dynamic Web TWAIN to load and save images</title>
-    <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
-    <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
-    <script type="text/javascript" src="Resources/addon/dynamsoft.webtwain.addon.pdf.js"> </script>
+	<title>Use Dynamic Web TWAIN to load and save images</title>
+	<script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
+	<script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
+	<script type="text/javascript" src="Resources/addon/dynamsoft.webtwain.addon.pdf.js"> </script>
 </head>
+
 <body>
-    <label>The PDF Rasterizer needs to be deployed, please check out <a target="_blank" href="https://developer.dynamsoft.com/dwt/how-to-use-the-pdf-
-rasterizer">https://developer.dynamsoft.com/dwt/how-to-use-the-pdf-rasterizer</a></label>
-    <br />
-    <br />
-    <input type="button" value="Load" onclick="LoadImage();" />
-    <input type="button" value="Save" onclick="SaveWithFileDialog();" />
-    <br />
-    <label><input type="radio" value="jpg" name="ImageType" id="imgTypejpeg" />JPEG</label>
-    <label><input type="radio" value="tif" name="ImageType" id="imgTypetiff" />TIFF</label>
-    <label><input type="radio" value="pdf" name="ImageType" id="imgTypepdf" checked="checked" />PDF</label>
-
-    <!-- dwtcontrolContainer is the default div id for Dynamic Web TWAIN control.
+	<label>
+		<input type="radio" value="jpg" name="ImageType" id="imgTypejpeg" />JPEG</label>
+	<label>
+		<input type="radio" value="tif" name="ImageType" id="imgTypetiff" />TIFF</label>
+	<label>
+		<input type="radio" value="pdf" name="ImageType" id="imgTypepdf" checked="checked" />PDF</label>
+	<input type="button" value="Load" onclick="LoadImage();" />
+	<input type="button" value="Save" onclick="SaveWithFileDialog();" />
+	<!-- dwtcontrolContainer is the default div id for Dynamic Web TWAIN control.
      If you need to rename the id, you should also change the id in dynamsoft.webtwain.config.js accordingly. -->
-    <div id="dwtcontrolContainer"></div>
+	<div id="dwtcontrolContainer"></div>
 
-    <script type="text/javascript">
-		var console = window['console']?window['console']:{'log':function(){}};
-	
+	<br />
+	<br />
+	<label>The PDF Rasterizer needs to be deployed, please check out
+		<a target="_blank" href="https://developer.dynamsoft.com/dwt/how-to-use-the-pdf-rasterizer">How to use the PDF Rasterizer</a>
+	</label>
+	<script type="text/javascript">
+		var console = window['console'] ? window['console'] : { 'log': function () { } };
+
 		Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
 
 		var DWObject;
@@ -44,11 +48,37 @@ rasterizer">https://developer.dynamsoft.com/dwt/how-to-use-the-pdf-rasterizer</a
 
 		function LoadImage() {
 			if (DWObject) {
-				//Please NOTE that the PDF Rasterizer doesn't work for Chrome/Firefox 26-			
-				// Call DWObject.Addon.PDF.Download(url) to download PDF Rasterizer module to local.
-				DWObject.Addon.PDF.SetResolution(200);   
-				DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConvertMode.CM_RENDERALL);   
+				// Please NOTE that the PDF Rasterizer doesn't work for Chrome/Firefox 26-			
+				// Call DWObject.Addon.PDF.Download(url) to download PDF Rasterizer module to local, notice that this requires the sample to be deployed to the server
+				var strPDFPath = Dynamsoft.WebTwainEnv.ResourcesPath;
+				if (Dynamsoft.Lib.env.bMac)
+					strPDFPath += "/dist/mac/MacPdf.zip";
+				else if (Dynamsoft.Lib.env.bLinux)
+					strPDFPath += "/dist/linux/LinuxPdf.zip";
+				else if (Dynamsoft.Lib.env.bWin && !dynamsoft.dcp.b64bit)
+					strPDFPath += "/dist/win/Pdf.zip";
+				else if (Dynamsoft.Lib.env.bWin && dynamsoft.dcp.b64bit)
+					strPDFPath += "/dist/win/Pdfx64.zip";
 
+				DWObject.Addon.PDF.Download(
+					strPDFPath,
+					function () {
+						LoadImageInner();
+					}, function (errorCode, errorString) {
+						console.log(errorString);
+						console.log("The PDF Rasterizer wasn't installed correctly, you may not be able to load text-based PDF files.");
+						LoadImageInner();
+					}
+				);
+			}
+		}
+
+		function LoadImageInner() {
+			if (DWObject) {
+				if (DWObject.Addon.PDF.IsModuleInstalled()) {
+					DWObject.Addon.PDF.SetResolution(200);
+					DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConvertMode.CM_RENDERALL);
+				}
 				DWObject.IfShowFileDialog = true; // Open the system's file dialog to load image
 				DWObject.LoadImageEx("", EnumDWT_ImageType.IT_PDF, OnSuccess, OnFailure); // Load images in all supported formats (.bmp, .jpg, .tif, .png, .pdf). OnSuccess or OnFailure will be called after the operation
 			}
@@ -74,7 +104,8 @@ rasterizer">https://developer.dynamsoft.com/dwt/how-to-use-the-pdf-rasterizer</a
 				}
 			}
 		}
-		
-    </script>
+
+	</script>
 </body>
+
 </html>

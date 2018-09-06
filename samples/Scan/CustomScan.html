@@ -1,10 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <title>Use Auto Feeder to scan</title>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
 </head>
+
 <body>
     <label for="BW">
         <input type="radio" id="BW" name="PixelType">B&amp;W </label>
@@ -17,7 +19,8 @@
     <label>
         <input type="checkbox" id="ADF" checked="checked">Auto Feeder</label>
     <label>
-        <input type="checkbox" id="ShowUI" checked="checked">Show UI<br />
+        <input type="checkbox" id="ShowUI" checked="checked">Show UI
+        <br />
     </label>
 
     <select size="1" id="Resolution">
@@ -40,24 +43,17 @@
             DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
             if (DWObject) {
                 var count = DWObject.SourceCount;
-				if(count == 0 && Dynamsoft.Lib.env.bMac)
-				{
-					DWObject.CloseSourceManager();
-					DWObject.OpenSourceManager();
-					count = DWObject.SourceCount;
-				}
-				
                 for (var i = 0; i < count; i++)
                     document.getElementById("source").options.add(new Option(DWObject.GetSourceNameItems(i), i));
             }
         }
         function AcquireImage() {
             if (DWObject) {
-				var OnAcquireImageSuccess, OnAcquireImageFailure;
-				OnAcquireImageSuccess = OnAcquireImageFailure = function (){
-					DWObject.CloseSource();
-				};
-				
+                var OnAcquireImageSuccess, OnAcquireImageFailure;
+                OnAcquireImageSuccess = OnAcquireImageFailure = function () {
+                    DWObject.CloseSource();
+                };
+
                 DWObject.SelectSourceByIndex(document.getElementById("source").selectedIndex);
                 DWObject.OpenSource();
                 DWObject.IfDisableSourceAfterAcquire = true;
@@ -80,19 +76,19 @@
                     DWObject.IfShowUI = false;
                 //Resolution
                 DWObject.Resolution = parseInt(document.getElementById("Resolution").value);
-				
-				if(document.getElementById("ADF").checked && DWObject.IfFeederEnabled == true)  // if paper is NOT loaded on the feeder
-				{
-					if(DWObject.IfFeederLoaded != true && DWObject.ErrorCode == 0)
-					{
-						alert("No paper detected! Please load papers and try again!");
-						return;
-					}			
-				}
-					
-				DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
+
+                if (document.getElementById("ADF").checked && DWObject.IfFeederEnabled == true)  // if paper is NOT loaded on the feeder
+                {
+                    if (DWObject.IfFeederLoaded != true && DWObject.ErrorCode == 0) {
+                        alert("No paper detected! Please load papers and try again!");
+                        return;
+                    }
+                }
+
+                DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
             }
         }
     </script>
 </body>
+
 </html>

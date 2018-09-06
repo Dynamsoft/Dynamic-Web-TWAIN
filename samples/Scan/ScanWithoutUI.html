@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Use Dynamic Web TWAIN to Scan</title>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
 </head>
+
 <body>
     <label>
         <input type="checkbox" id="ShowUI">Show UI</label>
@@ -24,24 +26,25 @@
         }
         function AcquireImage() {
             if (DWObject) {
-                var bSelected = DWObject.SelectSource();
-				
-				if(bSelected){
-					var OnAcquireImageSuccess, OnAcquireImageFailure;
-					OnAcquireImageSuccess = OnAcquireImageFailure = function (){
-						DWObject.CloseSource();
-					};			
-				
-					DWObject.OpenSource();
-					DWObject.IfDisableSourceAfterAcquire = true; // Scanner source will be disabled/closed automatically after the scan.
-					if (document.getElementById("ShowUI").checked)
-						DWObject.IfShowUI = true; //Enable the Data Source's default User Interface
-					else
-						DWObject.IfShowUI = false; //Disable the Data Source's default User Interface
-					DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
-				}
+                DWObject.SelectSource(function () {
+                    var OnAcquireImageSuccess, OnAcquireImageFailure;
+                    OnAcquireImageSuccess = OnAcquireImageFailure = function () {
+                        DWObject.CloseSource();
+                    };
+
+                    DWObject.OpenSource();
+                    DWObject.IfDisableSourceAfterAcquire = true; // Scanner source will be disabled/closed automatically after the scan.
+                    if (document.getElementById("ShowUI").checked)
+                        DWObject.IfShowUI = true; //Enable the Data Source's default User Interface
+                    else
+                        DWObject.IfShowUI = false; //Disable the Data Source's default User Interface
+                    DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
+                }, function () {
+                    console.log('SelectSource failed!');
+                });
             }
         }
     </script>
 </body>
+
 </html>

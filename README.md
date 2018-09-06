@@ -1,6 +1,6 @@
 Dynamic Web TWAIN SDK
 =========
-version 14.0
+version 14.1
 
 Introduction
 -----------

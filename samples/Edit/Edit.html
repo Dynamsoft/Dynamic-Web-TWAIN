@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Use Dynamic Web TWAIN's Editing features</title>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
 </head>
+
 <body>
     <input type="button" value="Scan" onclick="AcquireImage();" />
     <input type="button" value="Load" onclick="LoadImage();" />
@@ -18,7 +20,7 @@
     <div id="dwtcontrolContainer"></div>
 
     <script type="text/javascript">
-		var console = window['console']?window['console']:{'log':function(){}};
+        var console = window['console'] ? window['console'] : { 'log': function () { } };
         Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
 
         var DWObject;
@@ -29,18 +31,18 @@
 
         function AcquireImage() {
             if (DWObject) {
-                var bSelected = DWObject.SelectSource();
-				
-				if(bSelected){
-					var OnAcquireImageSuccess, OnAcquireImageFailure;
-					OnAcquireImageSuccess = OnAcquireImageFailure= function (){
-						DWObject.CloseSource();
-					};
-					
-					DWObject.OpenSource();
-					DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan. 
-					DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
-				}
+                DWObject.SelectSource(function () {
+                    var OnAcquireImageSuccess, OnAcquireImageFailure;
+                    OnAcquireImageSuccess = OnAcquireImageFailure = function () {
+                        DWObject.CloseSource();
+                    };
+
+                    DWObject.OpenSource();
+                    DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan. 
+                    DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
+                }, function () {
+                    console.log('SelectSource failed!');
+                });
             }
         }
 
@@ -61,29 +63,30 @@
         }
 
         function RotateLeft() {
-            if (DWObject) 
+            if (DWObject)
                 if (DWObject.HowManyImagesInBuffer > 0)
                     DWObject.RotateLeft(DWObject.CurrentImageIndexInBuffer);
         }
 
         function RotateRight() {
-            if (DWObject) 
+            if (DWObject)
                 if (DWObject.HowManyImagesInBuffer > 0)
                     DWObject.RotateRight(DWObject.CurrentImageIndexInBuffer);
         }
 
         function Mirror() {
-            if (DWObject) 
+            if (DWObject)
                 if (DWObject.HowManyImagesInBuffer > 0)
                     DWObject.Mirror(DWObject.CurrentImageIndexInBuffer);
         }
 
         function Flip() {
-            if (DWObject) 
+            if (DWObject)
                 if (DWObject.HowManyImagesInBuffer > 0)
                     DWObject.Flip(DWObject.CurrentImageIndexInBuffer);
-            
+
         }
     </script>
 </body>
+
 </html>

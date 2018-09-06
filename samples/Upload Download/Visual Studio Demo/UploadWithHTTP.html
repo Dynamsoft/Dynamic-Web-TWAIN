@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Use Dynamic Web TWAIN to Upload</title>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
 </head>
+
 <body>
     <select size="1" id="source" style="position: relative; width: 220px;"></select>
     <input type="button" value="Scan" onclick="AcquireImage();" />
@@ -23,7 +25,7 @@
     <div id="dwtcontrolContainer"></div>
 
     <script type="text/javascript">
-		var console = window['console']?window['console']:{'log':function(){}};
+        var console = window['console'] ? window['console'] : { 'log': function () { } };
         Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
 
         var DWObject;
@@ -32,13 +34,6 @@
             DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
             if (DWObject) {
                 var count = DWObject.SourceCount; // Populate how many sources are installed in the system
-				if(count == 0 && Dynamsoft.Lib.env.bMac)
-				{
-					DWObject.CloseSourceManager();
-					DWObject.OpenSourceManager();
-					count = DWObject.SourceCount;
-				}
-				
                 for (var i = 0; i < count; i++)
                     document.getElementById("source").options.add(new Option(DWObject.GetSourceNameItems(i), i));  // Add the sources in a drop-down list
                 document.getElementById("imgTypejpeg").checked = true;
@@ -47,11 +42,11 @@
 
         function AcquireImage() {
             if (DWObject) {
-				var OnAcquireImageSuccess, OnAcquireImageFailure;
-				OnAcquireImageSuccess = OnAcquireImageFailure = function (){
-					DWObject.CloseSource();
-				};
-				
+                var OnAcquireImageSuccess, OnAcquireImageFailure;
+                OnAcquireImageSuccess = OnAcquireImageFailure = function () {
+                    DWObject.CloseSource();
+                };
+
                 DWObject.SelectSourceByIndex(document.getElementById("source").selectedIndex);
                 DWObject.OpenSource();
                 DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan.
@@ -121,4 +116,5 @@
         }
     </script>
 </body>
+
 </html>

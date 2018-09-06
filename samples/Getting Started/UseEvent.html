@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Use Dynamic Web TWAIN's built-in Events</title>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"> </script>
@@ -8,6 +9,8 @@
 
 <body>
     <input type="button" value="Scan" onclick="AcquireImage();" />
+    <br />
+    <span id='info'></span>
 
     <!-- dwtcontrolContainer is the default div id for Dynamic Web TWAIN control. 
          If you need to rename the id, you should also change the id in the dynamsoft.webtwain.config.js accordingly. -->
@@ -24,7 +27,7 @@
             //DWObject.Height = 400;      // Set the height of the Dynamic Web TWAIN Object
             if (DWObject) {
                 DWObject.RegisterEvent('OnPostAllTransfers', function () {          // Register OnPostAllTransfers event. This event fires when all pages have been scanned and transferred
-                    alert("The event OnPostAllTransfers is fired.");                // You can register other events here as well. Please check out 'Handling Events' in Developer's Guide
+                    document.getElementById('info').innerHTML = "The event OnPostAllTransfers is fired.";                // You can register other events here as well. Please check out 'Handling Events' in Developer's Guide
                 });
             }
         }
@@ -32,19 +35,20 @@
         function AcquireImage() {
             if (DWObject) {
                 DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan.  
-                var bSelected = DWObject.SelectSource();                        // Select a Data Source (a device like scanner) from the Data Source Manager. 
+                DWObject.SelectSource(function () {   // Select a Data Source (a device like scanner) from the Data Source Manager. 
+                    var OnAcquireImageSuccess, OnAcquireImageFailure;
+                    OnAcquireImageSuccess = OnAcquireImageFailure = function () {
+                        DWObject.CloseSource();
+                    };
 
-				if(bSelected){
-					var OnAcquireImageSuccess, OnAcquireImageFailure;
-					OnAcquireImageSuccess = OnAcquireImageFailure = function (){
-						DWObject.CloseSource();
-					};
-				
-					DWObject.OpenSource();                          // Open the source. You can set resolution, pixel type, etc. after this method. Please refer to the sample 'Scan' -> 'Custom Scan' for more info.
-					DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);                        // Acquire image(s) from the Data Source. Please NOTE this is a asynchronous method. In other words, it doesn't wait for the Data Source to come back. 
-				}
+                    DWObject.OpenSource();                          // Open the source. You can set resolution, pixel type, etc. after this method. Please refer to the sample 'Scan' -> 'Custom Scan' for more info.
+                    DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);                        // Acquire image(s) from the Data Source. Please NOTE this is a asynchronous method. In other words, it doesn't wait for the Data Source to come back. 
+                }, function () {
+                    console.log('SelectSource failed!');
+                });
             }
         }
     </script>
 </body>
+
 </html>

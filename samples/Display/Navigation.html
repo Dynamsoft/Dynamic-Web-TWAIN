@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Dynamic Web TWAIN Navigation Sample</title>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
 </head>
+
 <body>
     <select size="1" id="source" style="position: relative; width: 220px;"></select>
     <input type="button" value="Scan" onclick="AcquireImage();" />
@@ -19,12 +21,10 @@
         <div>
             <input onclick="btnFirstImage_onclick()" type="button" value=" |< " />
             <input onclick="btnPreImage_onclick()" type="button" value=" < " />
-            <input type="text" size="2" id="DW_CurrentImage" readonly="readonly" value="0" />
-            /
+            <input type="text" size="2" id="DW_CurrentImage" readonly="readonly" value="0" /> /
             <input type="text" size="2" id="DW_TotalImage" readonly="readonly" value="0" />
             <input onclick="btnNextImage_onclick()" type="button" value=" > " />
-            <input onclick="btnLastImage_onclick()" type="button" value=" >| " />
-            Preview Mode:
+            <input onclick="btnLastImage_onclick()" type="button" value=" >| " /> Preview Mode:
             <select size="1" id="DW_PreviewMode" onchange="setlPreviewMode();">
                 <option value="0">1X1</option>
                 <option value="1">2X2</option>
@@ -39,8 +39,8 @@
     <input onclick="btnRemoveAllImages_onclick()" type="button" value="Remove All Images" />
 
     <script type="text/javascript">
-		var console = window['console']?window['console']:{'log':function(){}};
-		
+        var console = window['console'] ? window['console'] : { 'log': function () { } };
+
         Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
 
         var DWObject;
@@ -49,13 +49,7 @@
             DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
             if (DWObject) {
                 var count = DWObject.SourceCount; // Get how many sources are installed in the system
-				if(count == 0 && Dynamsoft.Lib.env.bMac)
-				{
-					DWObject.CloseSourceManager();
-					DWObject.OpenSourceManager();
-					count = DWObject.SourceCount;
-				}
-				
+
                 for (var i = 0; i < count; i++)
                     document.getElementById("source").options.add(new Option(DWObject.GetSourceNameItems(i), i)); // Add the sources in a drop-down list
 
@@ -84,11 +78,11 @@
 
         function AcquireImage() {
             if (DWObject) {
-				var OnAcquireImageSuccess, OnAcquireImageFailure;
-				OnAcquireImageSuccess = OnAcquireImageFailure = function (){
-					DWObject.CloseSource();
-				};
-				
+                var OnAcquireImageSuccess, OnAcquireImageFailure;
+                OnAcquireImageSuccess = OnAcquireImageFailure = function () {
+                    DWObject.CloseSource();
+                };
+
                 DWObject.SelectSourceByIndex(document.getElementById("source").selectedIndex);
                 DWObject.OpenSource();
                 DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan.
@@ -183,4 +177,5 @@
         }
     </script>
 </body>
+
 </html>

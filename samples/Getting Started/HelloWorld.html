@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Hello World</title>
-    <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"> </script>
-    <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"> </script>
+    <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
+    <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
 </head>
 
 <body>
-    <input type="button" value="Scan" onclick="AcquireImage();" />
-
-    <!-- dwtcontrolContainer is the default div id for Dynamic Web TWAIN control. 
-         If you need to rename the id, you should also change the id in dynamsoft.webtwain.config.js accordingly. -->
     <div id="dwtcontrolContainer"></div>
-
+    <input type="button" value="Scan" onclick="AcquireImage();" />
     <script type="text/javascript">
         function AcquireImage() {
-            var DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'.
-            DWObject.IfDisableSourceAfterAcquire = true;    // Source will be closed automatically after acquisition.
-            var bSelected = DWObject.SelectSource();                        // Select a Data Source (a device like scanner) from the Data Source Manager.
-            
-            if(bSelected){
-				var OnAcquireImageSuccess, OnAcquireImageFailure;
-				OnAcquireImageSuccess = OnAcquireImageFailure = function (){
-					DWObject.CloseSource();
-				};
-			
-				DWObject.OpenSource();                          // Open the source. You can set resolution, pixel type, etc. after this method. Please refer to the sample 'Scan' -> 'Custom Scan' for more info.
-				DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);                        // Acquire image(s) from the Data Source. Please NOTE this is a asynchronous method. In other words, it doesn't wait for the Data Source to come back. 
-				// In order to do things during the scanning, you can use the events OnPostTransfer and OnPostAllTransfers. Please check out the sample UseEvent.html
-			}
+			var DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+            if (DWObject) {
+                DWObject.SelectSource(function () {
+                    var OnAcquireImageSuccess, OnAcquireImageFailure;
+                    OnAcquireImageSuccess = OnAcquireImageFailure = function () {
+                        DWObject.CloseSource();
+                    };
+                    DWObject.OpenSource();
+                    DWObject.IfDisableSourceAfterAcquire = true;
+                    DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
+                }, function () {
+                    console.log('SelectSource failed!');
+                });
+            }
         }
     </script>
 </body>
+
 </html>
