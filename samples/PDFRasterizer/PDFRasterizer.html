@@ -49,27 +49,7 @@
 		function LoadImage() {
 			if (DWObject) {
 				// Please NOTE that the PDF Rasterizer doesn't work for Chrome/Firefox 26-			
-				// Call DWObject.Addon.PDF.Download(url) to download PDF Rasterizer module to local, notice that this requires the sample to be deployed to the server
-				var strPDFPath = Dynamsoft.WebTwainEnv.ResourcesPath;
-				if (Dynamsoft.Lib.env.bMac)
-					strPDFPath += "/dist/mac/MacPdf.zip";
-				else if (Dynamsoft.Lib.env.bLinux)
-					strPDFPath += "/dist/linux/LinuxPdf.zip";
-				else if (Dynamsoft.Lib.env.bWin && !dynamsoft.dcp.b64bit)
-					strPDFPath += "/dist/win/Pdf.zip";
-				else if (Dynamsoft.Lib.env.bWin && dynamsoft.dcp.b64bit)
-					strPDFPath += "/dist/win/Pdfx64.zip";
-
-				DWObject.Addon.PDF.Download(
-					strPDFPath,
-					function () {
-						LoadImageInner();
-					}, function (errorCode, errorString) {
-						console.log(errorString);
-						console.log("The PDF Rasterizer wasn't installed correctly, you may not be able to load text-based PDF files.");
-						LoadImageInner();
-					}
-				);
+				LoadImageInner();
 			}
 		}
 
