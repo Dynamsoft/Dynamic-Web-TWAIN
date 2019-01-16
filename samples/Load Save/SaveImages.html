@@ -59,7 +59,8 @@
         }
 
         function OnFailure(errorCode, errorString) {
-            alert(errorString);
+            if(errorCode != -2326)
+			alert(errorString);
         }
 
         function LoadImage() {
