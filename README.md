@@ -5,7 +5,10 @@ version 14.3.1
 Introduction
 -----------
 
-[Dynamic Web TWAIN][1] is a TWAIN-based scanning SDK software specifically designed for web applications. With just a few lines of code, you can develop robust applications to scan documents from TWAIN-compatible scanners, edit the scanned images and save them to a file system.
+[Dynamic Web TWAIN][1] is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems on **Windows**, **Linux** and **macOS**.
+
+## License
+Get a [FREE 30-day trial license](https://www.dynamsoft.com/CustomerPortal/Portal/Triallicense.aspx).
 
 Download
 -----------
@@ -86,12 +89,21 @@ Getting Started
     ```
     <input type="button" value="Scan" onclick="AcquireImage();" />
     <script type="text/javascript"> 
-        function AcquireImage(){
-            var DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
-            DWObject.IfDisableSourceAfterAcquire = true;
-            DWObject.SelectSource();
-            DWObject.OpenSource();
-            DWObject.AcquireImage();
+        function AcquireImage() {
+			var DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+            if (DWObject) {
+                DWObject.SelectSource(function () {
+                    var OnAcquireImageSuccess, OnAcquireImageFailure;
+                    OnAcquireImageSuccess = OnAcquireImageFailure = function () {
+                        DWObject.CloseSource();
+                    };
+                    DWObject.OpenSource();
+                    DWObject.IfDisableSourceAfterAcquire = true;
+                    DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
+                }, function () {
+                    console.log('SelectSource failed!');
+                });
+            }
         }
     </script>
     ```
@@ -100,26 +112,38 @@ Full Sample
 ----------
 
 ```
-<html>  
-    <head>    
-        <title>Hello World</title>
-        <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"> </script>
-        <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"> </script>
-    </head>
+<!DOCTYPE html>
+<html>
 
-    <body>
-        <input type="button" value="Scan" onclick="AcquireImage();" />
-        <div id="dwtcontrolContainer"> </div>
-        <script type="text/javascript"> 
-            function AcquireImage(){
-                var DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
-                DWObject.IfDisableSourceAfterAcquire = true;
-                DWObject.SelectSource();
-                DWObject.OpenSource();
-                DWObject.AcquireImage();
+<head>
+    <title>Hello World</title>
+    <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
+    <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
+</head>
+
+<body>
+    <div id="dwtcontrolContainer"></div>
+    <input type="button" value="Scan" onclick="AcquireImage();" />
+    <script type="text/javascript">
+        function AcquireImage() {
+			var DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+            if (DWObject) {
+                DWObject.SelectSource(function () {
+                    var OnAcquireImageSuccess, OnAcquireImageFailure;
+                    OnAcquireImageSuccess = OnAcquireImageFailure = function () {
+                        DWObject.CloseSource();
+                    };
+                    DWObject.OpenSource();
+                    DWObject.IfDisableSourceAfterAcquire = true;
+                    DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
+                }, function () {
+                    console.log('SelectSource failed!');
+                });
             }
-        </script>
-    </body>  
+        }
+    </script>
+</body>
+
 </html>
 ```
 
