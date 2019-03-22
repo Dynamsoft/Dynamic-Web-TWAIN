@@ -151,5 +151,8 @@ Contact Us
 -------
 support@dynamsoft.com
 
+## License Agreement
+https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
+
 [1]:https://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx
 [2]:https://www.dynamsoft.com/Products/WebTWAIN_Features.aspx
