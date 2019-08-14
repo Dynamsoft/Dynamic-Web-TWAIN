@@ -57,7 +57,7 @@
 			if (DWObject) {
 				if (DWObject.Addon.PDF.IsModuleInstalled()) {
 					DWObject.Addon.PDF.SetResolution(200);
-					DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConvertMode.CM_RENDERALL);
+					DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConvertMode.CM_AUTO);
 				}
 				DWObject.IfShowFileDialog = true; // Open the system's file dialog to load image
 				DWObject.LoadImageEx("", EnumDWT_ImageType.IT_PDF, OnSuccess, OnFailure); // Load images in all supported formats (.bmp, .jpg, .tif, .png, .pdf). OnSuccess or OnFailure will be called after the operation
