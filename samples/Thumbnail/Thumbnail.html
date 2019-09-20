@@ -82,8 +82,11 @@
             updateLargeViewer();
         }
         function updateLargeViewer() {
-            DWObject.CopyToClipboard(DWObject.CurrentImageIndexInBuffer); // Copy the current image in the thumbnail to clipboard in DIB format.
-            DWObjectLargeViewer.LoadDibFromClipboard(); // Load the image from Clipboard into the large viewer.
+			if(DWObject.CurrentImageIndexInBuffer >= 0)
+			{
+				DWObject.CopyToClipboard(DWObject.CurrentImageIndexInBuffer); // Copy the current image in the thumbnail to clipboard in DIB format.
+				DWObjectLargeViewer.LoadDibFromClipboard(); // Load the image from Clipboard into the large viewer.
+			}
         }
     </script>
 </body>
