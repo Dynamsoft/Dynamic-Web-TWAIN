@@ -36,8 +36,8 @@
                     document.getElementById("source").options.add(new Option(DWObject.GetSourceNameItems(i), i)); // Add the sources in a drop-down list
 
                 // Register the events
-                DWObject.RegisterEvent("OnPostTransfer", Dynamsoft_OnPostTransfer);
-                DWObject.RegisterEvent("OnPostLoad", Dynamsoft_OnPostLoad);
+                DWObject.RegisterEvent("OnPostTransfer", function(){setTimeout(Dynamsoft_OnPostTransfer, 20);});
+                DWObject.RegisterEvent("OnPostLoad", function(){setTimeout(Dynamsoft_OnPostLoad, 20);});
                 DWObject.RegisterEvent("OnMouseClick", Dynamsoft_OnMouseClick);
             }
         }

@@ -55,17 +55,17 @@
 
                 // The event OnPostTransfer fires after each image is scanned and transferred
                 DWObject.RegisterEvent("OnPostTransfer", function () {
-                    updatePageInfo();
+                    setTimeout(updatePageInfo,20);
                 });
 
                 // The event OnPostLoad fires after the images from a local directory have been loaded into the control
                 DWObject.RegisterEvent("OnPostLoad", function () {
-                    updatePageInfo();
+                    setTimeout(updatePageInfo,20);
                 });
 
                 // The event OnMouseClick fires when the mouse clicks on an image on Dynamic Web TWAIN viewer
                 DWObject.RegisterEvent("OnMouseClick", function () {
-                    updatePageInfo();
+                   updatePageInfo();
                 });
 
                 // The event OnTopImageInTheViewChanged fires when the top image currently displayed in the viewer changes

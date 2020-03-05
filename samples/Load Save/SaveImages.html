@@ -32,7 +32,7 @@
         function Dynamsoft_OnReady() {
             DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
             if (DWObject) {
-                DWObject.RegisterEvent('OnPostAllTransfers', SaveWithFileDialog);
+                DWObject.RegisterEvent('OnPostAllTransfers', function(){setTimeout(SaveWithFileDialog,20);});
             }
         }
 
