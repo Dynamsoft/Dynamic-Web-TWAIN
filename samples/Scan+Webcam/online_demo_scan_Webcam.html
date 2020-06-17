@@ -1,7 +1,238 @@
-﻿<html>
+<!DOCTYPE html>
+<html>
+
 <head>
-<meta http-equiv="Refresh" content="0;url=https://demo.dynamsoft.com/Samples/dwt/Capture-Images-with-Scanners-and-Webcams/Capture-Images-with-Scanners-and-Webcams.html?utm_source=installer&utm_campaign=dwt15.3.1">
-</head>	
+	<title>Use Dynamic Web TWAIN to capture image from Webcam</title>
+	<script src="Resources/dynamsoft.webtwain.initiate.js"> </script>
+	<script src="Resources/dynamsoft.webtwain.config.js"> </script>
+	<script src="Resources/addon/dynamsoft.webtwain.addon.webcam.js"> </script>
+	<link rel="stylesheet" href="Style/ds.demo.css">
+</head>
+
 <body>
+	<div id="tipTop">
+		<span onclick="this.parentElement.style.display='none'" class="close">&times;</span>
+		<p>This demo only works on Windows</p>
+	</div>
+	<div id="header">
+		<span onclick="this.parentElement.style.display='none'" class="close">&times;</span>
+		<div class="container">
+			<div id="headerTop" class="row">
+				<div class="ct-lt fl clearfix">
+					<div class="logo mr20 fl">
+						<img src="Style/Images/logo-dwt-56x56.png" alt="Logo"> </div>
+					<div class="fl">
+						<div class="linkGroup">
+							<a target="_blank" class="bluelink" href="http://www.dynamsoft.com">Dynamsoft</a>
+							<span> / </span>
+							<a target="_blank" class="bluelink" href="http://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx">Dynamic Web TWAIN</a>
+							<span> / </span>
+							<a target="_blank" class="bluelink" href="http://www.dynamsoft.com/Downloads/WebTWAIN-Sample-Download.aspx">Code Gallery</a>
+						</div>
+						<h1>Acquire Images from Scanners and Webcams</h1>
+					</div>
+				</div>
+				<div class="ct-rt fr">
+					<a target="_blank" href="http://www.dynamsoft.com/Downloads/WebTWAIN_Download.aspx" class="btn lgBtn bgOrange">Download SDK</a>
+				</div>
+			</div>
+			<div id="headerBtm" class="row"> The demo demonstrates how to use Dynamic Web TWAIN to acquire images from scanners or webcams. </div>
+		</div>
+	</div>
+	<!--The Key Part of the Sample Starts Here-->
+	<div id="main">
+		<div class="container">
+			<div class="ct-lt clearfix">
+				<div id="dwtcontrolContainer"></div>
+			</div>
+			<div class="ct-rt">
+				<div class="content clearfix">
+					<div class="section">
+						<select class="w100p" id="source"></select>
+						<br />
+						<br />
+						<input type="button" id="btn-switch" class="btn  bgBlue mt20" value="Hide Video" onclick="SwitchViews();" />
+						<input type="button" id="btn-grab" class="btn  bgBlue mt20" value="Acquire From a Scanner" onclick="CaptureImage();" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<div id="loaderContent" class="invisible">
+			<img id="imgLoader" src="Style/Images/loader.gif" />
+			<span id="spLoader">Initiating...</span>
+		</div>
+		<div id="loadingLayer" class="invisible"></div>
+
+	</div>
+
+	<!--The Key Part of the Sample Ends Here-->
+	<div id="footer">
+		<span onclick="this.parentElement.style.display='none'" class="close">&times;</span>
+		<div class="container">
+			<div id="footerTop" class="row">
+				<div class="item contact">
+					<strong class="fc4">Contact Us</strong>
+					<ul>
+						<li>
+							<a class="graylink" href="mailto:support@dynamsoft.com">support@dynamsoft.com</a>
+						</li>
+						<li>
+							<a target="_blank" class="graylink" href="http://www.dynamsoft.com/Support/LiveHelp.aspx">Live Chat</a> /
+							<a target="_blank" class="graylink" href="http://www.dynamsoft.com/Support/LiveHelp.aspx">Submit a Form</a>
+						</li>
+						<li>1-604-605-5491 (Toll-Free)</li>
+					</ul>
+				</div>
+				<div class="item features">
+					<strong class="fc4">Features Demonstrated</strong>
+					<ul class="org-li">
+						<li>Scan Documents from Scanners</li>
+						<li>Acquire Images from Webcams</li>
+					</ul>
+				</div>
+				<div class="item license">
+					<strong class="fc4">License Required</strong>
+					<ul class="org-li">
+						<li>Core SDK Licenses (Windows HTML5)</li>
+						<li>Dynamsoft Webcam SDK License</li>
+						<li>
+							<a class="bluelink ds-demo-font-size-14" href="mailto:sales@dynamsoft.com">Contact Dynamsoft Sales</a>&nbsp;
+							<span class="fcBlue"> | </span>&nbsp;
+							<a target="_blank" class="bluelink ds-demo-font-size-14" href="https://www.dynamsoft.com/Secure/WebTWAIN_BuyIt.aspx">Visit Online Store</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="footerBtm" class="row">
+				<div class="ct-lt tc fl">&copy; 2003 -
+					<script>document.write((new Date()).getFullYear());</script> Dynamsoft. All rights reserved.
+					<a href="http://www.dynamsoft.com/PrivacyStatement.aspx">Privacy Statement</a> /
+					<a href="http://www.dynamsoft.com/SiteMap.html">Site Map</a>
+				</div>
+				<div class="ct-rt tr fr">
+					<a href="http://www.dynamsoft.com/">Home</a> /
+					<a href="http://www.dynamsoft.com/Purchase/Purchase.aspx">Purchase</a> /
+					<a href="http://www.dynamsoft.com/Support/Support.aspx">Support</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+
+		window.onload = function () {
+			if (Dynamsoft && (!Dynamsoft.Lib.env.bWin)) {
+				var ObjString = [];
+				ObjString.push('<div class="p15">');
+				ObjString.push("Please note that the webcam SDK currently only works on Windows.");
+				ObjString.push('</div>');
+				Dynamsoft.WebTwainEnv.ShowDialog(400, 180, ObjString.join(''));
+				if (document.getElementsByClassName("dynamsoft-dialog-close"))
+					document.getElementsByClassName("dynamsoft-dialog-close")[0].style.display = "none";
+			} else {
+				Dynamsoft.WebTwainEnv.Load();
+			}
+		};
+
+		Dynamsoft.WebTwainEnv.AutoLoad = false;
+		Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
+
+		var webCamStartingIndex;//This is used to separate scanners and webcams
+		var DWObject;
+		var isVideoOn = true;
+
+		function Dynamsoft_OnReady() {
+			DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
+			if (DWObject) {
+			    DWObject.Width = 504;
+			    DWObject.Height = 600;
+
+			    document.getElementById('source').options.length = 0;
+				var count = DWObject.SourceCount;
+				for (var i = 0; i < count; i++) {
+					document.getElementById('source').options.add(new Option(DWObject.GetSourceNameItems(i), i));
+				}
+	            webCamStartingIndex = i;
+
+	            var arySource = DWObject.Addon.Webcam.GetSourceList();
+	            for (var i = 0; i < arySource.length; i++)
+	                document.getElementById("source").options.add(new Option(arySource[i], arySource[i]), i + webCamStartingIndex); // Get Webcam Source names and put them in a drop-down box
+
+	        }
+
+	        document.getElementById('source').onchange = function () {
+	            if (document.getElementById('source').selectedIndex < webCamStartingIndex) {
+	                DWObject.Addon.Webcam.StopVideo();
+	                isVideoOn = false;
+	                document.getElementById("btn-grab").style.backgroundColor = "";
+	                document.getElementById('btn-grab').value = 'Acquire From a Scanner';
+	                document.getElementById("btn-switch").style.display = 'none';
+	            }
+	            else {
+	                DWObject.Addon.Webcam.SelectSource(document.getElementById("source").options[document.getElementById("source").selectedIndex].value);
+
+	                SetIfWebcamPlayVideo(true);
+
+	                document.getElementById('btn-grab').value = 'Acquire From a Webcam';
+	                document.getElementById("btn-switch").style.display = '';
+	            }
+	            document.getElementById("btn-grab").disabled = "";
+	        }
+
+	        document.getElementById('source').onchange();
+		}
+
+		function SetIfWebcamPlayVideo(bShow) {
+		    if (bShow) {
+		        DWObject.Addon.Webcam.StopVideo();
+		        DWObject.Addon.Webcam.PlayVideo(DWObject, 80, function () { });
+		        isVideoOn = true;
+		        document.getElementById("btn-grab").style.backgroundColor = "";
+		        document.getElementById("btn-grab").disabled = "";
+		        document.getElementById("btn-switch").value = "Hide Video";
+		    }
+		    else {
+		        DWObject.Addon.Webcam.StopVideo();
+		        isVideoOn = false;
+		        document.getElementById("btn-grab").style.backgroundColor = "#aaa";
+		        document.getElementById("btn-grab").disabled = "disabled";
+		        document.getElementById("btn-switch").value = "Show Video";
+		    }
+		}
+
+		function SwitchViews() {
+		    if (isVideoOn == false) {
+		        // continue the video
+		        SetIfWebcamPlayVideo(true);
+		    } else {
+		        // stop the video
+		        SetIfWebcamPlayVideo(false);
+		    }
+		}
+
+		function CaptureImage() {
+			if (DWObject) {
+				if (document.getElementById('source').selectedIndex < webCamStartingIndex) {
+				    DWObject.IfShowUI = true;
+				    DWObject.IfDisableSourceAfterAcquire = true;
+				    DWObject.SelectSourceByIndex(document.getElementById('source').selectedIndex);
+				    DWObject.CloseSource();
+				    DWObject.OpenSource();
+				    DWObject.AcquireImage();
+				}
+				else {
+
+				    var funCaptureImage = function () {
+				        SetIfWebcamPlayVideo(false);
+                    };
+				    DWObject.Addon.Webcam.CaptureImage(funCaptureImage, funCaptureImage);
+				}
+			}
+		}
+
+	</script>
 </body>
+
 </html>
