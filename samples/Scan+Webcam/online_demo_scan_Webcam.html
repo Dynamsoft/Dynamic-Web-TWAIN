@@ -121,19 +121,20 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-
 		window.onload = function () {
-			if (Dynamsoft && (!Dynamsoft.Lib.env.bWin)) {
-				var ObjString = [];
-				ObjString.push('<div class="p15">');
-				ObjString.push("Please note that the webcam SDK currently only works on Windows.");
-				ObjString.push('</div>');
-				Dynamsoft.WebTwainEnv.ShowDialog(400, 180, ObjString.join(''));
-				if (document.getElementsByClassName("dynamsoft-dialog-close"))
-					document.getElementsByClassName("dynamsoft-dialog-close")[0].style.display = "none";
-			} else {
-				Dynamsoft.WebTwainEnv.Load();
-			}
+			Dynamsoft && Dynamsoft.Ready(function(){
+				if (!Dynamsoft.Lib.env.bWin) {
+					var ObjString = [];
+					ObjString.push('<div class="p15">');
+					ObjString.push("Please note that the webcam SDK currently only works on Windows.");
+					ObjString.push('</div>');
+					Dynamsoft.WebTwainEnv.ShowDialog(400, 180, ObjString.join(''));
+					if (document.getElementsByClassName("dynamsoft-dialog-close"))
+						document.getElementsByClassName("dynamsoft-dialog-close")[0].style.display = "none";
+				} else {
+					Dynamsoft.WebTwainEnv.Load();
+				}
+			});
 		};
 
 		Dynamsoft.WebTwainEnv.AutoLoad = false;
@@ -164,7 +165,8 @@
 
 	        document.getElementById('source').onchange = function () {
 	            if (document.getElementById('source').selectedIndex < webCamStartingIndex) {
-	                DWObject.Addon.Webcam.StopVideo();
+					if(arySource.length > 0)
+						DWObject.Addon.Webcam.StopVideo();
 	                isVideoOn = false;
 	                document.getElementById("btn-grab").style.backgroundColor = "";
 	                document.getElementById('btn-grab').value = 'Acquire From a Scanner';

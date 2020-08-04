@@ -39,6 +39,7 @@
                 DWObject.RegisterEvent("OnPostTransfer", function(){setTimeout(Dynamsoft_OnPostTransfer, 20);});
                 DWObject.RegisterEvent("OnPostLoad", function(){setTimeout(Dynamsoft_OnPostLoad, 20);});
                 DWObject.RegisterEvent("OnMouseClick", Dynamsoft_OnMouseClick);
+				DWObject.RegisterEvent('OnIndexChangeDragDropDone', Dynamsoft_OnIndexChangeDragDropDone);
             }
         }
 
@@ -81,6 +82,9 @@
         function Dynamsoft_OnMouseClick() { // The event OnMouseClick will get fired when the mouse clicks on an image.
             updateLargeViewer();
         }
+		function Dynamsoft_OnIndexChangeDragDropDone(){
+			updateLargeViewer();
+		}
         function updateLargeViewer() {
 			if(DWObject.CurrentImageIndexInBuffer >= 0)
 			{

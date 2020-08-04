@@ -9,22 +9,26 @@
 
 <body>
     <div id="dwtcontrolContainer"></div>
-    <input type="button" value="Scan" onclick="AcquireImage();" />
+    <input type="button" value="Acquire" onclick="AcquireImage();" />
     <script type="text/javascript">
         function AcquireImage() {
 			var DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
             if (DWObject) {
-                DWObject.SelectSource(function () {
-                    var OnAcquireImageSuccess, OnAcquireImageFailure;
-                    OnAcquireImageSuccess = OnAcquireImageFailure = function () {
-                        DWObject.CloseSource();
-                    };
-                    DWObject.OpenSource();
-                    DWObject.IfDisableSourceAfterAcquire = true;
-                    DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
-                }, function () {
-                    console.log('SelectSource failed!');
-                });
+                if(DWObject.UseLocalService) {
+					DWObject.SelectSource(function () {
+							var OnAcquireImageSuccess, OnAcquireImageFailure;
+							OnAcquireImageSuccess = OnAcquireImageFailure = function () {
+								DWObject.CloseSource();
+							};
+							DWObject.OpenSource();
+							DWObject.IfDisableSourceAfterAcquire = true;
+							DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
+						}, function () {
+							console.log('SelectSource failed!');
+						});
+				} else {
+					DWObject.LoadImageEx("", -1);
+				}
             }
         }
     </script>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Pure JS Solution</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+  <script src="Resources/dynamsoft.webtwain.config.js?t=20200728"></script>
+  <script src="Resources/dynamsoft.webtwain.initiate.js?t=20200728"></script> 
+  <script src="Resources/addon/dynamsoft.webtwain.addon.pdf.js?t=20200728"></script>
+  <script src="Resources/addon/dynamsoft.webtwain.addon.barcodereader.js?t=20200728"></script>
+  <script src="Resources/addon/dynamsoft.webtwain.addon.camera.js?t=20200728"></script>
+  <script src="common.js?t=20200728"></script>
+</head>
+
+<body style="margin: 10px 0 0 10px;">
+  <div id="divNoteDeploy" style="margin: 10px 0 10px; display:none;" >Make sure you deploy the sample to an webserver that
+      <ul>
+          <li style="margin: 5px 0 5px 20px; font-size: 12px;">Runs HTTPS</li>
+          <li style="margin-left: 20px;font-size: 12px;">Serves  the *.wasm file with Content-Type: application/wasm.</li>
+      </ul>   
+  </div>
+  <div id="dwtcontrolContainer" style="float:left;"></div>
+  <div id="divResult" ondblclick="this.innerHTML='';" style="display:none;margin:0px 20px;float:left;width:300px; height:320px; overflow: auto;background-color:#e7f2fd;border:solid 1px black;"></div>
+  <div id="divButton" style="position: absolute; top: 415px;">
+	  <select id="source"></select>
+	  <input id="switchButton" type="button" style="width: 75px; height:20px; margin-bottom: 10px;" value="Hide Video" onclick="SwitchViews();" />
+	  <input id="captureButton" type="button" style="width: 100px; height:20px;" value="Capture Images" onclick="CaptureImages();" />
+	  <input id="loadButton" type="button" style="width: 85px; height:20px;margin-right: 20px;" value="Load Images" onclick="LoadImages();"/>
+	  <select id="barcodeformat" style="display:none;"></select>
+	  <input id="btnReadBarcode" style="width: 90px; height:20px;" type="button" value="Read Barcode" onclick="ReadBarcode();" />
+  </div>
+  <div id="divNote" style="position: absolute;top: 450px; display:none;">
+      <div>Click this <a href="https://demo.dynamsoft.com/Samples/dwt/Pure-JS-Solution/PureJSSolution.html?utm_source=installer&utm_campaign=dwt16.1" target="_blank" >link</a> to visit the sample from Dynamsoft demo server.<br/> Or you can scan the following barcode to visit it in your mobile devices.</div>
+      <img src="data:image/png;base64,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" style="height: 100px;" />
+  </div>
+  <script type="text/javascript">
+    Dynamsoft.WebTwainEnv.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 270, Height: 320 }];
+    var DWObject, barcodeText = [], isVideoOn = true, isDesktop = true;
+    var BarcodeInfo =
+      [
+          { desc: "All", val: -32505857, bf: 1 },
+          { desc: "1D Barcodes", val: 2047, bf: 1 },
+          { desc: "QR Code", val: 67108864, bf: 1 },
+          { desc: "PDF417", val: 33554432, bf: 1 },
+          { desc: "DATAMATRIX", val: 134217728, bf: 1 },
+          { desc: "Aztec Code", val: 268435456, bf: 1 },
+          { desc: "GS1 Databar", val: 260096, bf: 1 },
+          { desc: "Maxicode", val: 536870912, bf: 1 },
+          { desc: "Patch Code", val: 262144, bf: 1 },
+          { desc: "GS1 COMPOSITE", val: -2147483648, bf: 1 },
+          { desc: "Postal Code", val: 32505856, bf: 2 },
+          { desc: "DotCode", val: 2, bf: 2 },
+          { desc: "CODE_39", val: 1, bf: 1 },
+          { desc: "CODE_128", val: 2, bf: 1 },
+          { desc: "CODE_93", val: 4, bf: 1 },
+          { desc: "CODABAR", val: 8, bf: 1 },
+          { desc: "EAN_13", val: 32, bf: 1 },
+          { desc: "EAN_8", val: 64, bf: 1 },
+          { desc: "UPC_A", val: 128, bf: 1 },
+          { desc: "UPC_E", val: 256, bf: 1 },
+          { desc: "Interleaved 2 of 5", val: 16, bf: 1 },
+          { desc: "Industrial 2 of 5", val: 512, bf: 1 },
+          { desc: "CODE 39 EXTENDED", val: 1024, bf: 1 }
+      ];
+
+    function Dynamsoft_OnReady() {
+        DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+        if (DWObject) {
+			DWObject.RegisterEvent("OnTopImageInTheViewChanged", Dynamsoft_OnTopImageInTheViewChanged);
+			
+			isDesktopFunc().then(function(bDesktop){
+				isDesktop = bDesktop;
+				if (isDesktop) {
+					ShowDesktopForm();
+				} else {
+					ShowMobileForm();
+				}
+				for (var index = 0; index < BarcodeInfo.length; index++)
+					document.getElementById("barcodeformat").options.add(new Option(BarcodeInfo[index].desc, index));
+
+				DWObject.Addon.Camera.play(null, { width: 2560, height: 1440 }).then(function (r) {
+					isVideoOn = true;
+					document.getElementById("captureButton").style.backgroundColor = "";
+					document.getElementById("captureButton").disabled = "";
+					document.getElementById("switchButton").value = "Hide Video";
+					return DWObject.Addon.Camera.getSourceList();
+			   }).then(function (sourceName) {
+					var iCount = sourceName.length;
+					for (var i = 0; i < iCount; i++) {
+						document.getElementById("source").options.add(new Option(sourceName[i].label, sourceName[i].deviceId));
+					}
+					document.getElementById('source').onchange = function () {
+						var deviceId = document.getElementById("source").options[document.getElementById("source").selectedIndex].value;
+						DWObject.Addon.Camera.selectSource(deviceId).then(function () {
+							SetIfWebcamPlayVideo(true);
+
+							document.getElementById("switchButton").style.display = '';
+							document.getElementById("captureButton").disabled = "";
+						}, function (ex) { console.log(ex.message); });
+					}
+					return DWObject.Addon.Camera.getCurrentSource();
+				}).then(function (currentSource) {
+					var source = document.getElementById("source");
+					for (var i = 0; i < source.options.length; i++) {
+						if (source.options[i].value == currentSource.deviceId) {
+							source.selectedIndex = i;
+							break;
+						}
+					}
+				}, function (ex) {
+					console.log(ex.message);
+				});
+			});
+        }
+    }
+
+    function CaptureImages() {
+        if (DWObject) {
+            DWObject.Addon.Camera.capture().then(function () {
+                SetIfWebcamPlayVideo(false);
+            }, function (ex) {
+                console.log(ex.message);
+                SetIfWebcamPlayVideo(false);
+            });
+        }
+    }
+
+    function SetIfWebcamPlayVideo(bShow) {
+        if (bShow) {
+            DWObject.Addon.Camera.play(null, { width: 2560, height: 1440 }).then(function (r) {
+                isVideoOn = true;
+                document.getElementById("captureButton").style.backgroundColor = "";
+                document.getElementById("captureButton").disabled = "";
+                document.getElementById("switchButton").value = "Hide Video";
+            }, function (ex) {
+                console.log(ex.message);
+            });
+        }
+        else {
+            DWObject.Addon.Camera.stop();
+            isVideoOn = false;
+            document.getElementById("captureButton").style.backgroundColor = "#aaa";
+            document.getElementById("captureButton").disabled = "disabled";
+            document.getElementById("switchButton").value = "Show Video";
+
+        }
+    }
+
+    function SwitchViews() {
+        if (isVideoOn == false) {
+            // continue the video
+            SetIfWebcamPlayVideo(true);
+        } else {
+            // stop the video
+            SetIfWebcamPlayVideo(false);
+        }
+    }
+
+
+    function LoadImages() {
+        if (DWObject) {
+            if (isVideoOn) {
+                // stop the video
+                SetIfWebcamPlayVideo(false);
+            }
+            if (DWObject.Addon && DWObject.Addon.PDF) {
+              DWObject.Addon.PDF.SetResolution(300);
+              DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConvertMode.CM_RENDERALL);
+            }
+            DWObject.LoadImageEx('', -1,
+              function () { },
+              function (errorCode, errorString) {
+                alert('Load Image:' + errorString);
+              }
+            );
+        }
+    }
+
+    function ReadBarcode() {
+        if (DWObject) {
+			if (isVideoOn) {
+                // stop the video
+                SetIfWebcamPlayVideo(false);
+            }
+			
+            if (DWObject.HowManyImagesInBuffer == 0) {
+                alert("Please scan or load an image first.");
+                return;
+            }
+			
+			if (isDesktop) {
+				ReadBarcodeInner();
+			} else {
+				ReadBarcodeForMobile();
+			}
+        }
+    }  
+
+    function ReadBarcodeInner() {
+      if (DWObject) {
+        if (DWObject.HowManyImagesInBuffer == 0) {
+          alert("Please scan or load an image first.");
+          return;
+        }
+        Dynamsoft.Lib.showMask();
+        var index = DWObject.CurrentImageIndexInBuffer;
+		
+		var readerMode = "balance";
+		if (!isDesktop)
+			readerMode = "speed";
+        DWObject.Addon.BarcodeReader.getRuntimeSettings(readerMode)
+          .then(function (settings) {
+
+            /**
+             * Setting up the barcode reader
+             */
+              if (DWObject.GetImageBitDepth(index) == 1)
+                  settings.scaleDownThreshold = 214748347;
+              else
+                  settings.scaleDownThreshold = 2300;
+              var ddlBarcodeInfo = BarcodeInfo[document.getElementById("barcodeformat").selectedIndex];
+              if (!isDesktop)
+                  ddlBarcodeInfo = BarcodeInfo[document.getElementById("mobileBarcodeformat").selectedIndex];
+              if (ddlBarcodeInfo.bf == 2) {
+                  settings.barcodeFormatIds = 0;
+                  settings.barcodeFormatIds_2 = ddlBarcodeInfo.val;
+              }
+              else {
+                  settings.barcodeFormatIds = ddlBarcodeInfo.val;
+                  if (ddlBarcodeInfo.val == BarcodeInfo[0].val) {
+                      settings.barcodeFormatIds_2 = 32505858; //POSTALCODE(32505856) + DOTCODE(2)
+                  } else
+                      settings.barcodeFormatIds_2 = 0;
+              }
+            settings.expectedBarcodesCount = 512;
+
+            /** End of settings */
+            return DWObject.Addon.BarcodeReader.updateRuntimeSettings(settings);
+          })
+          .then(function (settings) {
+              return DWObject.Addon.BarcodeReader.decode(index);
+          })
+          .then(function (results) {
+
+              Dynamsoft.Lib.hideMask();
+            var _now = new Date().toLocaleTimeString() + "<br />";
+            var objDiv = document.getElementById('divResult');
+            if (!isDesktop)
+                objDiv = document.getElementById('divMobileResult');
+            objDiv.innerHTML += _now;
+            if (results.length == 0) {
+              objDiv.innerHTML += "Nothing Found!<br />";
+            } else {
+              objDiv.innerHTML +=
+                "<p style='color: #fe8e14'>Barcode Found!!</p>";
+              barcodeText = [];
+              for (i = 0; i < results.length; i++) {
+                var result = results[i];
+                Barcode_text = result.barcodeText;
+                var loc = result.localizationResult;
+                var x = loc.x1;
+                var y = loc.y1;
+                var format = result.barcodeFormatString;
+                if (result.barcodeFormat == 0)
+                    format = result.barcodeFormatString_2;
+                barcodeText.push("barcode[" + (i + 1) + "]: " + "<br />");
+                barcodeText.push("<strong>" + Barcode_text + "</strong>");
+                barcodeText.push("<br />format:" + format + "<br />");
+                barcodeText.push("x:" + x + "y:" + y + "<br />");
+                barcodeText.push("------------------------------<br />");
+              }
+              barcodeText.splice(0, 0, '<p style="padding:5px; margin:0;">');
+              barcodeText.push('</p>');
+              objDiv.innerHTML += barcodeText.join('');
+            }
+            objDiv.scrollTop = objDiv.scrollHeight;
+          }, function (ex) {
+              Dynamsoft.Lib.hideMask();
+            alert(ex);
+          });
+      }
+    }
+	
+	function Dynamsoft_OnTopImageInTheViewChanged(index) {
+		DWObject.CurrentImageIndexInBuffer = index;
+	}
+  
+    function ReadBarcodeForMobile() {
+        var iWidth = parseInt(document.body.offsetWidth * 0.6);
+        var iHeight = parseInt(document.body.offsetHeight * 0.6);
+        var ObjString =
+       ['<div class="dynamsoft-dwt-dlg-tips">',
+           '<div style="font-size: 16px;margin-bottom: 5px;">Read Barcode</div>',
+           '<div style="', iHeight - 145, '">',
+           '<label  style="font-size: 8px;">Barcode Types:</label>',
+           '<select id="mobileBarcodeformat" style="width: 100px;margin: 2px;"></select>',
+           '<div id="divMobileResult" ondblclick="this.innerHTML="";" style="float:left;width:', (iWidth - 32), 'px; height:', (iHeight - 110), 'px; overflow: auto;background-color:#e7f2fd;border:solid 1px black;text-align: left;font-size: 8px;"></div>',
+           '</div>',
+           '<input class="dynamsoft_btnReadBarcode" style="width: 80px; height:20px;margin-right: 10px; font-size: 8px;"  type="button" value="Read Barcode" />',
+           '<input class="dynamsoft_btnClose" style="width: 80px; height:20px;font-size: 8px;"  type="button" value="Close" /></div>'
+       ];
+
+        Dynamsoft.WebTwainEnv.ShowDialog(iWidth, iHeight, ObjString.join(''), true);
+
+        for (var index = 0; index < BarcodeInfo.length; index++)
+            document.getElementById("mobileBarcodeformat").options.add(new Option(BarcodeInfo[index].desc, index));
+
+        var vbtnSave = Dynamsoft.Lib.one(".dynamsoft_btnReadBarcode").getEL();
+        if (vbtnSave)
+            vbtnSave.onclick = function () {
+                ReadBarcodeInner();
+            }
+
+        var vbtnCancel = Dynamsoft.Lib.one(".dynamsoft_btnClose").getEL();
+        if (vbtnCancel)
+            vbtnCancel.onclick = function () {
+                window.DCP_DWT_OnClickCloseInstall("dwtcontrolContainer");
+            }
+			
+		var divMobileResult = Dynamsoft.Lib.one("#divMobileResult").getEL();
+        if (divMobileResult)
+            divMobileResult.innerHTML = '<p style="margin: 10px;">Please select a Barcode type above and click "Read Barcode" to start reading.<p/>';
+    }
+
+    function ShowDesktopForm() {
+        var divMessage = document.getElementById("divResult");
+        divMessage.style.display = "";
+
+        var selBarcodeformat = document.getElementById("barcodeformat");
+        selBarcodeformat.style.display = "";
+
+        var divNote = document.getElementById("divNote");
+        divNote.style.display = "";
+
+        var divNoteDeploy = document.getElementById("divNoteDeploy");
+        divNoteDeploy.style.display = "";
+  
+    }
+
+    function ShowMobileForm() {
+        DWObject.Width = parseInt(document.body.offsetWidth - 20);
+        var iHeight = 725;
+        if (document.body.offsetHeight < 725)
+            iHeight = parseInt(document.body.offsetHeight - 60);
+        else
+            iHeight = 725 - 60;
+        DWObject.Height = iHeight;
+     
+        var selSource = document.getElementById("source");
+        selSource.style.height = "20px";
+        selSource.style.width = "80px";
+        selSource.style.fontSize = "8px";
+        var btnSwitchButton = document.getElementById("switchButton");
+        btnSwitchButton.style.width = "65px";
+        btnSwitchButton.style.fontSize = "8px";
+        var btnCaptureButton = document.getElementById("captureButton");
+        btnCaptureButton.style.width = "80px";
+        btnCaptureButton.style.fontSize = "8px";
+        var btnLoadButton = document.getElementById("loadButton");
+        btnLoadButton.style.marginRight = "10px";
+        btnLoadButton.style.width = "70px";
+        btnLoadButton.style.fontSize = "8px";
+        var btnReadBarcode = document.getElementById("btnReadBarcode");
+        btnReadBarcode.style.width = "70px";
+        btnReadBarcode.style.fontSize = "8px";
+		var divButton = document.getElementById("divButton");
+        divButton.style = "";	
+    }
+
+  </script>
+</body>
+
+</html>
