@@ -1,5 +1,5 @@
 # Dynamic Web TWAIN SDK
-version 16.1
+version 16.2
 
 ## Introduction
 
@@ -59,7 +59,7 @@ https://www.dynamsoft.com/Downloads/WebTWAIN-Sample-Download.aspx
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
     <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
     ```
-   
+
 
 4. Add Dynamic Web TWAIN container:
 

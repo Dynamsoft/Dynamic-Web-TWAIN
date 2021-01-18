@@ -63,18 +63,20 @@
                     setTimeout(updatePageInfo,20);
                 });
 
-                // The event OnMouseClick fires when the mouse clicks on an image on Dynamic Web TWAIN viewer
-                DWObject.RegisterEvent("OnMouseClick", function () {
+                // The event click fires when the mouse clicks on an image on Dynamic Web TWAIN viewer
+                DWObject.Viewer.on("click", function () {
                    updatePageInfo();
                 });
 
-                // The event OnTopImageInTheViewChanged fires when the top image currently displayed in the viewer changes
-                DWObject.RegisterEvent("OnTopImageInTheViewChanged", function (index) {
-                    DWObject.CurrentImageIndexInBuffer = index;
-                    updatePageInfo();
-                });
+                // The event topPageChanged fires when the top image currently displayed in the viewer changes
+                DWObject.Viewer.on("topPageChanged", topPageChanged);
             }
         }
+		
+		function topPageChanged(index){
+			DWObject.CurrentImageIndexInBuffer = index;
+			updatePageInfo();
+		}
 
         function AcquireImage() {
             if (DWObject) {
@@ -108,43 +110,45 @@
 
         function btnPreImage_onclick() {
             if (DWObject) {
-                if (DWObject.HowManyImagesInBuffer > 0) {
-                    DWObject.CurrentImageIndexInBuffer = DWObject.CurrentImageIndexInBuffer - 1;
-                    updatePageInfo();
-                }
+				DWObject.Viewer.off("topPageChanged", topPageChanged);
+				DWObject.Viewer.previous();
+				updatePageInfo();
+				DWObject.Viewer.on("topPageChanged", topPageChanged);
             }
         }
 
         function btnNextImage_onclick() {
             if (DWObject) {
-                if (DWObject.HowManyImagesInBuffer > 0) {
-                    DWObject.CurrentImageIndexInBuffer = DWObject.CurrentImageIndexInBuffer + 1;
-                    updatePageInfo();
-                }
+				DWObject.Viewer.off("topPageChanged", topPageChanged);
+				DWObject.Viewer.next();
+				updatePageInfo();
+				DWObject.Viewer.on("topPageChanged", topPageChanged);
             }
         }
 
         function btnFirstImage_onclick() {
             if (DWObject) {
-                if (DWObject.HowManyImagesInBuffer != 0 && DWObject.CurrentImageIndexInBuffer != 0) {
-                    DWObject.CurrentImageIndexInBuffer = 0;
-                    updatePageInfo();
-                }
+				DWObject.Viewer.first();
+				updatePageInfo();
             }
         }
 
         function btnLastImage_onclick() {
             if (DWObject) {
-                if (DWObject.HowManyImagesInBuffer > 0) {
-                    DWObject.CurrentImageIndexInBuffer = DWObject.HowManyImagesInBuffer - 1;
-                    updatePageInfo();
-                }
+				DWObject.Viewer.off("topPageChanged", topPageChanged);
+				
+				DWObject.Viewer.last();
+				updatePageInfo();
+				
+				DWObject.Viewer.on("topPageChanged", topPageChanged);
             }
         }
         function setlPreviewMode() {
             if (DWObject) {
                 var o = parseInt(document.getElementById("DW_PreviewMode").selectedIndex + 1);
-                DWObject.SetViewMode(o, o);
+				DWObject.Viewer.off("topPageChanged", topPageChanged);
+                DWObject.Viewer.setViewMode(o, o);
+				DWObject.Viewer.on("topPageChanged", topPageChanged);
             }
         }
 

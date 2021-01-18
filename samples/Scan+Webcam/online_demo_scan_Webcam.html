@@ -147,8 +147,8 @@
 		function Dynamsoft_OnReady() {
 			DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
 			if (DWObject) {
-			    DWObject.Width = 504;
-			    DWObject.Height = 600;
+			    DWObject.Viewer.width = 504;
+			    DWObject.Viewer.height = 600;
 
 			    document.getElementById('source').options.length = 0;
 				var count = DWObject.SourceCount;

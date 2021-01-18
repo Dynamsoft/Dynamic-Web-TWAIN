@@ -77,14 +77,6 @@
                 //Resolution
                 DWObject.Resolution = parseInt(document.getElementById("Resolution").value);
 
-                if (document.getElementById("ADF").checked && DWObject.IfFeederEnabled == true)  // if paper is NOT loaded on the feeder
-                {
-                    if (DWObject.IfFeederLoaded != true && DWObject.ErrorCode == 0) {
-                        alert("No paper detected! Please load papers and try again!");
-                        return;
-                    }
-                }
-
                 DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
             }
         }

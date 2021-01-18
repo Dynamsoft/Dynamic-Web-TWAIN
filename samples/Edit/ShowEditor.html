@@ -63,8 +63,10 @@
             if (DWObject) {
                 if (DWObject.HowManyImagesInBuffer == 0)
                     alert("There is no image in buffer.");
-                else
-                    DWObject.ShowImageEditor();
+                else{
+					var imageEditor = DWObject.Viewer.createImageEditor();
+					imageEditor.show();
+				}
             }
         }
     </script>

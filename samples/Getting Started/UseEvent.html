@@ -23,8 +23,8 @@
 
         function Dynamsoft_OnReady() {
             DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');    // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
-            //DWObject.Width = 270;       // Set the width of the Dynamic Web TWAIN Object
-            //DWObject.Height = 400;      // Set the height of the Dynamic Web TWAIN Object
+            //DWObject.Viewer.width = 270;       // Set the width of the Dynamic Web TWAIN Object
+            //DWObject.Viewer.height = 400;      // Set the height of the Dynamic Web TWAIN Object
             if (DWObject) {
                 DWObject.RegisterEvent('OnPostAllTransfers', function () {          // Register OnPostAllTransfers event. This event fires when all pages have been scanned and transferred
                     document.getElementById('info').innerHTML = "The event OnPostAllTransfers is fired.";                // You can register other events here as well. Please check out 'Handling Events' in Developer's Guide
