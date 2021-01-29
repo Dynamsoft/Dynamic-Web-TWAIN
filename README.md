@@ -9,8 +9,8 @@ version 16.2
 Get a [FREE 30-day trial license](https://www.dynamsoft.com/CustomerPortal/Portal/Triallicense.aspx).
 
 ## Download
-https://www.dynamsoft.com/Downloads/WebTWAIN_Download.aspx
-
+- [Dynamic Web TWAIN SDK](https://www.dynamsoft.com/Downloads/WebTWAIN_Download.aspx)
+- [Virtual Scanner for Windows](https://download.dynamsoft.com/tool/twainds.win32.installer.2.1.3.msi)
 ## Documentation
 
 https://www.dynamsoft.com/help/TWAIN/WebTwain/index.htm.
