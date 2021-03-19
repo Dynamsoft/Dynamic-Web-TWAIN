@@ -1,5 +1,5 @@
 # Dynamic Web TWAIN SDK
-version 16.2
+[![release](https://img.shields.io/github/release/Dynamsoft/Dynamic-Web-TWAIN.svg)](https://github.com/Dynamsoft/Dynamic-Web-TWAIN/releases/latest)
 
 ## Introduction
 
