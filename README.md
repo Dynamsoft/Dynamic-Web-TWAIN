@@ -1,5 +1,8 @@
 # Dynamic Web TWAIN SDK
-[![release](https://img.shields.io/github/release/Dynamsoft/Dynamic-Web-TWAIN.svg)](https://github.com/Dynamsoft/Dynamic-Web-TWAIN/releases/latest)
+![version](https://img.shields.io/npm/v/dwt.svg)
+![downloads](https://img.shields.io/npm/dm/dwt.svg) 
+![jsdelivr](https://img.shields.io/jsdelivr/npm/hm/dwt.svg)
+![](https://img.shields.io/snyk/vulnerabilities/npm/dwt.svg)
 
 ## Introduction
 
