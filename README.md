@@ -4,13 +4,46 @@
 ![jsdelivr](https://img.shields.io/jsdelivr/npm/hm/dwt.svg)
 ![](https://img.shields.io/snyk/vulnerabilities/npm/dwt.svg)
 
-Cross-platform cross-browser JavaScript library for web document scanning.
+Cross-platform and cross-browser JavaScript library for web document scanning.
+
+## Table of Contents
+- [Introduction](#Introduction)
+- [Online Demo](#Online-Demo)
+- [License Key](#License-Key)
+- [Installation](#Installation)
+- [Quick Start](#Quick-Start)
+- [Samples](#Included-Samples)
+- [Documentation](#Documentation)
+- [Features](#Features)
+- [Contact Us](#Contact-Us)
+- [License Agreement](#License-Agreement)
+- [Versions](#Versions)
 
 ## Introduction
 
 [Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems on **Windows**, **Linux** and **macOS**. You can even use your mobile devices running iOS | iPadOS | Android with the library starting in 16.2!
 
-## License
+### Supported OSs
+- Windows
+- Linux
+- macOS
+- Android / iOS (Remote scanner or camera)
+
+### Supported CPU Architectures
+- x86/x64
+- MIPS64
+- ARM64
+
+### Supported Web Browsers
+- Firefox
+- Edge
+- Chrome
+- Safari
+
+## Online Demo
+https://demo.dynamsoft.com/web-twain/
+
+## License Key
 Get a [30-day FREE Trial license](https://www.dynamsoft.com/customer/license/trialLicense/?product=dwt&utm_source=npm).
 
 ## Installation
@@ -224,7 +257,7 @@ Full Sample
 * [API Reference](https://www.dynamsoft.com/web-twain/docs/info/api/index.html)
 * [Sample Gallery](https://www.dynamsoft.com/web-twain/resources/code-gallery/)
 
-## Features (Desktop and Mobile)
+## Features
 
 - Document Scanning
 - Document Editing
@@ -250,13 +283,7 @@ Full Sample
 
 [More](https://www.dynamsoft.com/web-twain/features/)
 
-
-
-
-
-
-
-## Need Help?
+## Contact Us
 
 [Contact Dynamsoft](https://www.dynamsoft.com/company/contact/) to resolve any issue you encounter with the library.
 
