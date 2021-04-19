@@ -420,6 +420,7 @@ export interface DWT {
 }
 export interface DisplayInfo {
     loaderBarSource?: string;
+	loaderBarClassName?: string;
 	buttons?: any;
     customProgressText?: any;
     dialogText?: any;
