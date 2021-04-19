@@ -217,19 +217,19 @@ export interface Settings {
     /**
      * Specify the output format.
      */
-    OutputFormat: Dynamsoft.EnumDWT_OCRProOutputFormat | string;
+    OutputFormat: Dynamsoft.DWT.EnumDWT_OCRProOutputFormat | string;
     /**
      * Specify the PDF/A version.
      */
-    PDFAVersion: Dynamsoft.EnumDWT_OCRProPDFAVersion | string;
+    PDFAVersion: Dynamsoft.DWT.EnumDWT_OCRProPDFAVersion | string;
     /**
      * Specify the PDF version.
      */
-    PDFVersion: Dynamsoft.EnumDWT_OCRProPDFVersion | string;
+    PDFVersion: Dynamsoft.DWT.EnumDWT_OCRProPDFVersion | string;
     /**
      * Specify the recognition module.
      */
-    RecognitionModule: Dynamsoft.EnumDWT_OCRProRecognitionModule | string;
+    RecognitionModule: Dynamsoft.DWT.EnumDWT_OCRProRecognitionModule | string;
     /**
      * Configure the redaction.
      */
@@ -243,9 +243,9 @@ export interface Redaction {
     /**
      * Specify how the text is found.
      */
-    FindTextFlags: Dynamsoft.EnumDWT_OCRFindTextFlags | number;
+    FindTextFlags: Dynamsoft.DWT.EnumDWT_OCRFindTextFlags | number;
     /**
      * Specify how redaction is done.
      */
-    FindTextAction: Dynamsoft.EnumDWT_OCRFindTextAction | number;
+    FindTextAction: Dynamsoft.DWT.EnumDWT_OCRFindTextAction | number;
 }

@@ -35,7 +35,7 @@ export interface PDF {
      * Set the convert mode.
      * @param mode Specify the mode.
      */
-    SetConvertMode(mode: Dynamsoft.EnumDWT_ConvertMode | number): boolean;
+    SetConvertMode(mode: Dynamsoft.DWT.EnumDWT_ConvertMode | number): boolean;
     /**
      * Set the password for reading encrypted PDF files.
      * @param password Specify the password.
@@ -66,7 +66,7 @@ export interface PDFWSetting {
     /**
      * Specify the compression type.
      */
-    compression: Dynamsoft.EnumDWT_PDFCompressionType | number;
+    compression: Dynamsoft.DWT.EnumDWT_PDFCompressionType | number;
     /**
      * Specify the creator.
      */

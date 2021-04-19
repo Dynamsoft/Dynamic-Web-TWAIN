@@ -2,7 +2,7 @@ import Dynamsoft from 'dwt';
 import { DeviceConfiguration } from 'dwt/WebTwain.Acquire';
 
 function Dynamsoft_OnReady() {
-    const DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+    const DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     if (DWObject) {
         let count = DWObject.SourceCount;
         if (count === 0) {
@@ -15,7 +15,7 @@ function Dynamsoft_OnReady() {
 }
 
 function acquireImage() {
-    const DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+    const DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     if (DWObject) {
         DWObject.SelectSourceByIndex(0); // Use method SelectSourceByIndex to avoid the 'Select Source' dialog
         DWObject.OpenSource();
@@ -25,7 +25,7 @@ function acquireImage() {
 }
 
 function registerEvent() {
-    const DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+    const DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     if (DWObject) {
         DWObject.RegisterEvent("OnPostTransfer", function () { });
         DWObject.RegisterEvent("OnPostLoad", function () { });
@@ -37,7 +37,7 @@ function registerEvent() {
 }
 
 function editImage() {
-    const DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+    const DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     if (DWObject) {
         if (DWObject.HowManyImagesInBuffer > 0)
             DWObject.RotateLeft(DWObject.CurrentImageIndexInBuffer);
@@ -51,14 +51,14 @@ function editImage() {
 }
 
 function showImageEditor() {
-    const DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+    const DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     if (DWObject) {
         DWObject.ShowImageEditor();
     }
 }
 
 function saveImage() {
-    const DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+    const DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     if (DWObject) {
         DWObject.ConvertToGrayScale(DWObject.CurrentImageIndexInBuffer);
         DWObject.SaveAsJPEG("DynamicWebTWAIN.jpg", DWObject.CurrentImageIndexInBuffer);
@@ -68,8 +68,8 @@ function saveImage() {
 }
 
 function updateLargeViewer() {
-    const DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
-    const DWObjectLargeViewer = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainerLargeViewer');
+    const DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
+    const DWObjectLargeViewer = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainerLargeViewer');
     if (DWObject) {
         DWObject.CopyToClipboard(DWObject.CurrentImageIndexInBuffer); // Copy the current image in the thumbnail to clipboard in DIB format.
         DWObjectLargeViewer.LoadDibFromClipboard(); // Load the image from Clipboard into the large viewer.
@@ -77,7 +77,7 @@ function updateLargeViewer() {
 }
 
 function uploadImage() {
-    const DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+    const DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     if (DWObject) {
         DWObject.HTTPPort = 80;
         DWObject.IfSSL = false;
@@ -86,7 +86,7 @@ function uploadImage() {
 }
 
 function downloadImage() {
-    const DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+    const DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     if (DWObject) {
         DWObject.HTTPPort = 80;
         DWObject.HTTPDownload("www.dynamsoft.com", "img.png", () => { }, (errorCode: number, errorString: string) => { });
@@ -94,7 +94,7 @@ function downloadImage() {
 }
 
 function loadPDF() {
-    const DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+    const DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     if (DWObject) {
         DWObject.Addon.PDF.SetResolution(200);
         DWObject.Addon.PDF.SetConvertMode(1);

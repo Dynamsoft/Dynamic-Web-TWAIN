@@ -35,12 +35,12 @@
 
     <div id="dwtcontrolContainer"></div>
     <script type="text/javascript">
-        Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
+        Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
 
         var DWObject;
 
         function Dynamsoft_OnReady() {
-            DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
+            DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
             if (DWObject) {
                 var count = DWObject.SourceCount;
                 for (var i = 0; i < count; i++)
@@ -59,11 +59,11 @@
                 DWObject.IfDisableSourceAfterAcquire = true;
                 //Pixel type
                 if (document.getElementById("BW").checked)
-                    DWObject.PixelType = EnumDWT_PixelType.TWPT_BW;
+                    DWObject.PixelType = Dynamsoft.DWT.EnumDWT_PixelType.TWPT_BW;
                 else if (document.getElementById("Gray").checked)
-                    DWObject.PixelType = EnumDWT_PixelType.TWPT_GRAY;
+                    DWObject.PixelType = Dynamsoft.DWT.EnumDWT_PixelType.TWPT_GRAY;
                 else if (document.getElementById("RGB").checked)
-                    DWObject.PixelType = EnumDWT_PixelType.TWPT_RGB;
+                    DWObject.PixelType = Dynamsoft.DWT.EnumDWT_PixelType.TWPT_RGB;
                 //If auto feeder
                 if (document.getElementById("ADF").checked)
                     DWObject.IfFeederEnabled = true;

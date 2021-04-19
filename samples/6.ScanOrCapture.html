@@ -19,14 +19,14 @@
     <div id="dwtcontrolContainer"></div>
   </div>
   <script type="text/javascript">
-    Dynamsoft.WebTwainEnv.ResourcesPath = "../dist";
-    Dynamsoft.WebTwainEnv.ProductKey = 't00911wAAADwPAaIxHA38XfQgvv+o7wY1qFx4aAL6m5W9nK9ulevyXbe4DIRCPw4FUKWxOQpvvGnefCmnCtBu/1TALNmgEBeWrEAOcP/Asw44TCBWNwip6r+8VPorfA==';
-    Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady);
-    Dynamsoft.WebTwainEnv.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 600, Height: 800 }];
+    Dynamsoft.DWT.ResourcesPath = "../dist";
+    Dynamsoft.DWT.ProductKey = 't00881wAAAHA/txgTp/vaKgBUztynBN3DxSVf9ZSTJzA9UjKfc/e1/27DqH8/++u4qag2u3MS+GAYBb7bhR4O5XJqWQxEcZttiKx3zh2UAfwNmDwUM9kJ0ncsvA==';
+    Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady);
+    Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 600, Height: 800 }];
     var bWASMCamera = true, bWASM = false;
     window.onload = function () {
-      if (Dynamsoft.Lib.env.bMobile || Dynamsoft.WebTwainEnv.UseLocalService === false) {
-        Dynamsoft.WebTwainEnv.UseLocalService = false;
+      if (Dynamsoft.Lib.env.bMobile || Dynamsoft.DWT.UseLocalService === false) {
+        Dynamsoft.DWT.UseLocalService = false;
         document.getElementById("H5CameraLabel").style.display = "none";
         bWASM = true;
       }
@@ -38,10 +38,10 @@
       document.getElementById('source').onchange = function () {
         sourceChanged();
       }
-      if (Dynamsoft && Dynamsoft.Lib.env.bWin && Dynamsoft.WebTwainEnv.UseLocalService && !document.getElementById("H5Camera").checked) {
+      if (Dynamsoft && Dynamsoft.Lib.env.bWin && Dynamsoft.DWT.UseLocalService && !document.getElementById("H5Camera").checked) {
         bWASMCamera = false;
       }
-      Dynamsoft.WebTwainEnv.Load();
+      Dynamsoft.DWT.Load();
     };
     var DWObject;
     var webCamStartingIndex;
@@ -49,7 +49,7 @@
     var devices = [];
 
     function Dynamsoft_OnReady() {
-      DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+      DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
       updateSources();
     }
 

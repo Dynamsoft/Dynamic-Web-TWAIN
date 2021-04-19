@@ -21,16 +21,16 @@
     style="margin:0px 20px;float:left;width:300px; height:800px; overflow: auto;background-color:#e7f2fd;border:solid 1px black;">
   </div>
   <script type="text/javascript">
-    Dynamsoft.WebTwainEnv.ResourcesPath = "../dist";
-    Dynamsoft.WebTwainEnv.ProductKey = 't00911wAAADwPAaIxHA38XfQgvv+o7wY1qFx4aAL6m5W9nK9ulevyXbe4DIRCPw4FUKWxOQpvvGnefCmnCtBu/1TALNmgEBeWrEAOcP/Asw44TCBWNwip6r+8VPorfA==';
-    Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady);
+    Dynamsoft.DWT.ResourcesPath = "../dist";
+    Dynamsoft.DWT.ProductKey = 't00881wAAAHA/txgTp/vaKgBUztynBN3DxSVf9ZSTJzA9UjKfc/e1/27DqH8/++u4qag2u3MS+GAYBb7bhR4O5XJqWQxEcZttiKx3zh2UAfwNmDwUM9kJ0ncsvA==';
+    Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady);
     window.onload = function () {
       if (Dynamsoft.Lib.env.bMobile) {
         document.getElementById('scanButton').style.display = "none";
         document.getElementById('loadPDF').style.display = "";
       }
-      Dynamsoft.WebTwainEnv.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 600, Height: 800 }];
-      Dynamsoft.WebTwainEnv.Load();
+      Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 600, Height: 800 }];
+      Dynamsoft.DWT.Load();
     };
 
     function fileChanged(inputTarget) {
@@ -107,7 +107,7 @@
     ];
 
     function Dynamsoft_OnReady() {
-      DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+      DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
       if (DWObject) {
         for (var index = 0; index < BarcodeInfo.length; index++)
           document.getElementById("barcodeformat").options.add(new Option(BarcodeInfo[index].desc, index));
@@ -121,7 +121,7 @@
           DWObject.AcquireImage(
             {
               IfShowUI: false,
-              PixelType: Dynamsoft.EnumDWT_PixelType.TWPT_RGB,
+              PixelType: Dynamsoft.DWT.EnumDWT_PixelType.TWPT_RGB,
               Resolution: 200,
               IfDisableSourceAfterAcquire: true
             },
@@ -142,7 +142,7 @@
       if (DWObject) {
         if (DWObject.Addon && DWObject.Addon.PDF) {
           DWObject.Addon.PDF.SetResolution(300);
-          DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConvertMode.CM_RENDERALL);
+          DWObject.Addon.PDF.SetConvertMode(Dynamsoft.DWT.EnumDWT_ConvertMode.CM_RENDERALL);
         }
         DWObject.LoadImageEx('', 5,
           function () { },
@@ -157,7 +157,7 @@
       if (DWObject) {
         if (DWObject.Addon && DWObject.Addon.PDF) {
           DWObject.Addon.PDF.SetResolution(300);
-          DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConvertMode.CM_RENDERALL);
+          DWObject.Addon.PDF.SetConvertMode(Dynamsoft.DWT.EnumDWT_ConvertMode.CM_RENDERALL);
         }
         DWObject.LoadImageEx('', 4,
           function () { },

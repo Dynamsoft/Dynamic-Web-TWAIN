@@ -57,14 +57,14 @@ export interface Webcam {
      * @param property Specify the property.
      */
     GetCameraControlPropertySetting(
-        property: Dynamsoft.EnumDWT_CameraControlProperty | number
+        property: Dynamsoft.DWT.EnumDWT_CameraControlProperty | number
     ): CameraControlProperty;
     /**
      * Return detailed information about the specified camera property.
      * @param property Specify the property.
      */
     GetCameraControlPropertyMoreSetting(
-        property: Dynamsoft.EnumDWT_CameraControlProperty | number
+        property: Dynamsoft.DWT.EnumDWT_CameraControlProperty | number
     ): CameraControlPropertyExtra;
     /**
      * Set the specified camera property.
@@ -73,7 +73,7 @@ export interface Webcam {
      * @param auto Specify whether the propery should change automatically.
      */
     SetCameraControlPropertySetting(
-        property: Dynamsoft.EnumDWT_CameraControlProperty | number,
+        property: Dynamsoft.DWT.EnumDWT_CameraControlProperty | number,
         value: number,
         auto: boolean
     ): boolean;
@@ -82,14 +82,14 @@ export interface Webcam {
      * @param property Specify the property.
      */
     GetVideoPropertySetting(
-        property: Dynamsoft.EnumDWT_VideoProperty | number
+        property: Dynamsoft.DWT.EnumDWT_VideoProperty | number
     ): VideoControlProperty;
     /**
      * Return detailed information about the specified video property.
      * @param property Specify the property.
      */
     GetVideoPropertyMoreSetting(
-        property: Dynamsoft.EnumDWT_VideoProperty | number
+        property: Dynamsoft.DWT.EnumDWT_VideoProperty | number
     ): VideoControlPropertyExtra;
     /**
      * Set the specified video property.
@@ -98,7 +98,7 @@ export interface Webcam {
      * @param auto Specify whether the propery should change automatically.
      */
     SetVideoPropertySetting(
-        property: Dynamsoft.EnumDWT_VideoProperty | number,
+        property: Dynamsoft.DWT.EnumDWT_VideoProperty | number,
         value: number,
         auto: boolean
     ): boolean;
@@ -134,7 +134,7 @@ export interface Webcam {
      * @param mode Specify the rotate mode
      */
     SetVideoRotateMode(
-        mode: Dynamsoft.EnumDWT_VideoRotateMode | number
+        mode: Dynamsoft.DWT.EnumDWT_VideoRotateMode | number
     ): boolean;
     /**
      * Return the URL (http(s)://) for the latest frame.

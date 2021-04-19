@@ -27,7 +27,7 @@ export interface WebTwain extends WebTwainViewer {
     /**
      * [Deprecation] This API is no longer needed.
      */
-    BorderStyle: Dynamsoft.EnumDWT_BorderStyle | number;
+    BorderStyle: Dynamsoft.DWT.EnumDWT_BorderStyle | number;
     /**
      * Return whether a WebTwain instance is ready to use.
      */

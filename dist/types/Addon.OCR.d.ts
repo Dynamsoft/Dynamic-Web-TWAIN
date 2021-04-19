@@ -68,17 +68,17 @@ export interface OCR {
      * Configure the OCR operation.
      * @param language Specify the target language.
      */
-    SetLanguage(language: Dynamsoft.EnumDWT_OCRLanguage | string): boolean;
+    SetLanguage(language: Dynamsoft.DWT.EnumDWT_OCRLanguage | string): boolean;
     /**
      * Configure the OCR operation.
      * @param format Specify the output format.
      */
-    SetOutputFormat(format: Dynamsoft.EnumDWT_OCROutputFormat | number): boolean;
+    SetOutputFormat(format: Dynamsoft.DWT.EnumDWT_OCROutputFormat | number): boolean;
     /**
      * Configure the OCR operation.
      * @param mode Specify the OCR page layout analysis mode.
      */
-    SetPageSetMode(mode: Dynamsoft.EnumDWT_OCRPageSetMode | number): boolean;
+    SetPageSetMode(mode: Dynamsoft.DWT.EnumDWT_OCRPageSetMode | number): boolean;
     /**
      * Perform OCR on the specified image in the buffer.
      * @param index Specify the image.

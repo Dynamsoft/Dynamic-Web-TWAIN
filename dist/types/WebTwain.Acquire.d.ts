@@ -184,7 +184,7 @@ export interface WebTwainAcquire extends WebTwainEdit {
      */
     SetFileXferInfo(
         fileName: string,
-        fileFormat: Dynamsoft.EnumDWT_FileFormat | number
+        fileFormat: Dynamsoft.DWT.EnumDWT_FileFormat | number
     ): boolean;
     /**
      * Set the left, top, right, and bottom sides of the image layout
@@ -228,15 +228,15 @@ export interface WebTwainAcquire extends WebTwainEdit {
     /**
      * Return or set whether to use TWAIN or ICA protocol on macOS.
      */
-    ImageCaptureDriverType: Dynamsoft.EnumDWT_Driver | number;
+    ImageCaptureDriverType: Dynamsoft.DWT.EnumDWT_Driver | number;
     /**
      * Return or set the page size the data source uses to acquire images.
      */
-    PageSize: Dynamsoft.EnumDWT_CapSupportedSizes | number;
+    PageSize: Dynamsoft.DWT.EnumDWT_CapSupportedSizes | number;
     /**
      * Return or set the pixel type used when acquiring images.
      */
-    PixelType: Dynamsoft.EnumDWT_PixelType | number;
+    PixelType: Dynamsoft.DWT.EnumDWT_PixelType | number;
     /**
      * Return or set the resolution used when acquiring images.
      */
@@ -268,7 +268,7 @@ export interface WebTwainAcquire extends WebTwainEdit {
     /**
      * Return whether the source supports duplex. If yes, it further returns the level of duplex the data source supports.
      */
-    readonly Duplex: Dynamsoft.EnumDWT_DUPLEX | number;
+    readonly Duplex: Dynamsoft.DWT.EnumDWT_DUPLEX | number;
     /**
      * Return or set whether to enable the data source's auto-brightness feature.
      */
@@ -344,7 +344,7 @@ export interface WebTwainAcquire extends WebTwainEdit {
     /**
      * Return the pixel type of the current image.
      */
-    readonly ImagePixelType: Dynamsoft.EnumDWT_PixelType | number;
+    readonly ImagePixelType: Dynamsoft.DWT.EnumDWT_PixelType | number;
     /**
      * Return the length of the current image.
      */
@@ -368,7 +368,7 @@ export interface WebTwainAcquire extends WebTwainEdit {
     /**
      * Return the type of the magnetic data if the data source supports magnetic data recognition.
      */
-    readonly MagType: Dynamsoft.EnumDWT_MagType | number;
+    readonly MagType: Dynamsoft.DWT.EnumDWT_MagType | number;
     /**
      * Return the number of transfers the data source is ready to supply upon demand.
      */
@@ -380,11 +380,11 @@ export interface WebTwainAcquire extends WebTwainEdit {
     /**
      * Return or set the data source's transfer mode.
      */
-    TransferMode: Dynamsoft.EnumDWT_TransferMode | number;
+    TransferMode: Dynamsoft.DWT.EnumDWT_TransferMode | number;
     /**
      * Return or set the unit of measure for all quantities.
      */
-    Unit: Dynamsoft.EnumDWT_UnitType | number;
+    Unit: Dynamsoft.DWT.EnumDWT_UnitType | number;
     /**
      * Return and set the number of images your application is willing to accept for each scan job.
      */
@@ -420,7 +420,7 @@ export interface WebTwainAcquire extends WebTwainEdit {
      * [Deprecation] Specifies the capabiltiy to be negotiated. This is a runtime property.
      * [Alternative] Use getCapabilities() and setCapabilities() instead.
      */
-    Capability: Dynamsoft.EnumDWT_Cap;
+    Capability: Dynamsoft.DWT.EnumDWT_Cap;
     /**
      * [Deprecation] Return or set the index (0-based) of
      * a list to indicate the Current Value when the value of
@@ -487,7 +487,7 @@ export interface WebTwainAcquire extends WebTwainEdit {
      * to exchange capability information between application and source.
      * This is a runtime property.
      */
-    CapType: Dynamsoft.EnumDWT_CapType;
+    CapType: Dynamsoft.DWT.EnumDWT_CapType;
     /**
      * [Deprecation] Return or set the value of the capability specified by
      *  Capability property when the value of the CapType property is TWON_ONEVALUE.
@@ -562,9 +562,9 @@ export interface WebTwainAcquire extends WebTwainEdit {
     /**
      * [Deprecation] Queries whether the Source supports a particular operation on the capability.
      * [Alternative] Use getCapabilities() and setCapabilities() instead.
-     * @param {Dynamsoft.EnumDWT_MessageType} messageType specifies the type of capability operation.
+     * @param {Dynamsoft.DWT.EnumDWT_MessageType} messageType specifies the type of capability operation.
      */
-    CapIfSupported(messageType: Dynamsoft.EnumDWT_MessageType): boolean;
+    CapIfSupported(messageType: Dynamsoft.DWT.EnumDWT_MessageType): boolean;
     /**
      * [Deprecation] Changes the Current Value of the capability specified by
      * Capability property back to its power-on value.
@@ -624,7 +624,7 @@ export interface DeviceConfiguration {
     /**
      * How a pixel is represented. Basically it means whether to scan in color, grey or black & white
      */
-    PixelType?: Dynamsoft.EnumDWT_PixelType | number | string;
+    PixelType?: Dynamsoft.DWT.EnumDWT_PixelType | number | string;
     /**
      * How detailed is the acquisition. Measured by dots per pixel (DPI)
      */
@@ -730,7 +730,7 @@ export interface ScanSetup {
     /**
      * The TWAIN transfer mode.
      */
-    transferMode?: Dynamsoft.EnumDWT_TransferMode | number;
+    transferMode?: Dynamsoft.DWT.EnumDWT_TransferMode | number;
     /**
      * Set how the transfer is done.
      */
@@ -743,7 +743,7 @@ export interface ScanSetup {
         /**
          * Specify the file format.
          */
-        fileFormat?: Dynamsoft.EnumDWT_FileFormat | number,
+        fileFormat?: Dynamsoft.DWT.EnumDWT_FileFormat | number,
         /**
          * Specify the quality of JPEG files.
          */
@@ -751,7 +751,7 @@ export interface ScanSetup {
         /**
          * Specify the compression type of the file.
          */
-        compressionType?: Dynamsoft.EnumDWT_CompressionType | number
+        compressionType?: Dynamsoft.DWT.EnumDWT_CompressionType | number
     };
     /**
      * Set where the scanned images are inserted.
@@ -772,7 +772,7 @@ export interface ScanSetup {
         /**
          * Specify the pixel type.
          */
-        pixelType?: Dynamsoft.EnumDWT_PixelType | number,
+        pixelType?: Dynamsoft.DWT.EnumDWT_PixelType | number,
         /**
          * Specify the resolution.
          */
@@ -798,11 +798,11 @@ export interface ScanSetup {
         /**
          * Specify the page size.
          */
-        pageSize?: Dynamsoft.EnumDWT_CapSupportedSizes | number,
+        pageSize?: Dynamsoft.DWT.EnumDWT_CapSupportedSizes | number,
         /**
          * Specify the unit.
          */
-        unit?: Dynamsoft.EnumDWT_UnitType | number,
+        unit?: Dynamsoft.DWT.EnumDWT_UnitType | number,
         /**
          * Specify a layout to scan, if present, it'll override pageSize.
          */
@@ -815,7 +815,7 @@ export interface ScanSetup {
         /**
          * Specify the pixel flavor.
          */
-        pixelFlavor?: Dynamsoft.EnumDWT_CapPixelFlavor | number,
+        pixelFlavor?: Dynamsoft.DWT.EnumDWT_CapPixelFlavor | number,
         /**
          * Specify Brightness.
          */
@@ -860,7 +860,7 @@ export interface ScanSetup {
         /**
          * Set the output format.
          */
-        format?: Dynamsoft.EnumDWT_ImageType | number,
+        format?: Dynamsoft.DWT.EnumDWT_ImageType | number,
         /**
          * Specify how many times the library will try the output.
          */
@@ -891,7 +891,7 @@ export interface ScanSetup {
          */
         pdfSetup?: {
             author?: string,
-            compression?: Dynamsoft.EnumDWT_PDFCompressionType | number,
+            compression?: Dynamsoft.DWT.EnumDWT_PDFCompressionType | number,
             creator?: string,
             /**
              * Example: 'D:20181231'
@@ -913,7 +913,7 @@ export interface ScanSetup {
          */
         tiffSetup?: {
             quality?: number,
-            compression?: Dynamsoft.EnumDWT_TIFFCompressionType | number,
+            compression?: Dynamsoft.DWT.EnumDWT_TIFFCompressionType | number,
             /**
              * Specify Tiff custom tags.
              */
@@ -1025,7 +1025,7 @@ export interface ValueAndLabel {
     /**
      * Numeric representation of the item
      */
-    value: Dynamsoft.EnumDWT_Cap | Dynamsoft.EnumDWT_CapType | Dynamsoft.EnumDWT_CapValueType | number;
+    value: Dynamsoft.DWT.EnumDWT_Cap | Dynamsoft.DWT.EnumDWT_CapType | Dynamsoft.DWT.EnumDWT_CapValueType | number;
     /**
      * Label or name of the item
      */
@@ -1045,7 +1045,7 @@ export interface CapabilitySetup {
     /**
      * Specify a capability
      */
-    capability: Dynamsoft.EnumDWT_Cap | number;
+    capability: Dynamsoft.DWT.EnumDWT_Cap | number;
     /**
      * The value to set to the capability or the value of the capability after setting.
      */

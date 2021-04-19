@@ -24,17 +24,17 @@
 	<br />
 	<br />
 	<label>The PDF Rasterizer needs to be deployed, please check out
-		<a target="_blank" href="https://developer.dynamsoft.com/dwt/how-to-use-the-pdf-rasterizer">How to use the PDF Rasterizer</a>
+		<a target="_blank" href="https://www.dynamsoft.com/web-twain/docs/about/index.html?product=dwt&utm_source=npm">How to use the PDF Rasterizer</a>
 	</label>
 	<script type="text/javascript">
 		var console = window['console'] ? window['console'] : { 'log': function () { } };
 
-		Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
+		Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
 
 		var DWObject;
 
 		function Dynamsoft_OnReady() {
-			DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
+			DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
 		}
 
 		//Callback functions for async APIs
@@ -57,10 +57,10 @@
 			if (DWObject) {
 				if (DWObject.Addon.PDF.IsModuleInstalled()) {
 					DWObject.Addon.PDF.SetResolution(200);
-					DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConvertMode.CM_AUTO);
+					DWObject.Addon.PDF.SetConvertMode(Dynamsoft.DWT.EnumDWT_ConvertMode.CM_AUTO);
 				}
 				DWObject.IfShowFileDialog = true; // Open the system's file dialog to load image
-				DWObject.LoadImageEx("", EnumDWT_ImageType.IT_PDF, OnSuccess, OnFailure); // Load images in all supported formats (.bmp, .jpg, .tif, .png, .pdf). OnSuccess or OnFailure will be called after the operation
+				DWObject.LoadImageEx("", Dynamsoft.DWT.EnumDWT_ImageType.IT_PDF, OnSuccess, OnFailure); // Load images in all supported formats (.bmp, .jpg, .tif, .png, .pdf). OnSuccess or OnFailure will be called after the operation
 			}
 		}
 

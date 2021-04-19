@@ -12,7 +12,7 @@
     <input type="button" value="Acquire" onclick="AcquireImage();" />
     <script type="text/javascript">
         function AcquireImage() {
-			var DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+			var DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
             if (DWObject) {
                 if(DWObject.UseLocalService) {
 					DWObject.SelectSource(function () {

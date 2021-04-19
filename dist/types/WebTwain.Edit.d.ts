@@ -39,7 +39,7 @@ export interface WebTwainEdit extends WebTwainBuffer {
         index: number,
         width: number,
         height: number,
-        method: Dynamsoft.EnumDWT_InterpolationMethod | number,
+        method: Dynamsoft.DWT.EnumDWT_InterpolationMethod | number,
         successCallback?: () => void,
         failureCallback?: (
             errorCode: number,
@@ -63,7 +63,7 @@ export interface WebTwainEdit extends WebTwainBuffer {
         xResolution: number,
         yResolution: number,
         resample: boolean,
-        method: Dynamsoft.EnumDWT_InterpolationMethod | number,
+        method: Dynamsoft.DWT.EnumDWT_InterpolationMethod | number,
         successCallback?: () => void,
         failureCallback?: (
             errorCode: number,
@@ -235,7 +235,7 @@ export interface WebTwainEdit extends WebTwainBuffer {
         index: number,
         angle: number,
         keepSize: boolean,
-        method: Dynamsoft.EnumDWT_InterpolationMethod | number,
+        method: Dynamsoft.DWT.EnumDWT_InterpolationMethod | number,
         successCallback?: () => void,
         failureCallback?: (
             errorCode: number,

@@ -37,21 +37,21 @@
   <br />
   <div id="dwtcontrolContainer"></div>
   <script type="text/javascript">
-    Dynamsoft.WebTwainEnv.ResourcesPath = "../dist";
-    Dynamsoft.WebTwainEnv.ProductKey = 't00911wAAADwPAaIxHA38XfQgvv+o7wY1qFx4aAL6m5W9nK9ulevyXbe4DIRCPw4FUKWxOQpvvGnefCmnCtBu/1TALNmgEBeWrEAOcP/Asw44TCBWNwip6r+8VPorfA==';
-    Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
+    Dynamsoft.DWT.ResourcesPath = "../dist";
+    Dynamsoft.DWT.ProductKey = 't00881wAAAHA/txgTp/vaKgBUztynBN3DxSVf9ZSTJzA9UjKfc/e1/27DqH8/++u4qag2u3MS+GAYBb7bhR4O5XJqWQxEcZttiKx3zh2UAfwNmDwUM9kJ0ncsvA==';
+    Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
     window.onload = function () {
       if (Dynamsoft.Lib.env.bMobile) {
         document.getElementById('scanOptions').style.display = "none";
         document.getElementById('mobileFile').style.display = "";
       }
-      Dynamsoft.WebTwainEnv.Containers = [{ContainerId:'dwtcontrolContainer', Width:600, Height:800}];
-      Dynamsoft.WebTwainEnv.Load();
+      Dynamsoft.DWT.Containers = [{ContainerId:'dwtcontrolContainer', Width:600, Height:800}];
+      Dynamsoft.DWT.Load();
     };
     var DWObject;
 
     function Dynamsoft_OnReady() {
-      DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
+      DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
       if (DWObject) {
         var count = DWObject.SourceCount;
         for (var i = 0; i < count; i++)

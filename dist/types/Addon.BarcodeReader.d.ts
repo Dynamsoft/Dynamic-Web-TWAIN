@@ -40,11 +40,11 @@ export interface TextResult {
     /**
      * The barcode format.
      */
-    barcodeFormat: Dynamsoft.EnumBarcodeFormat | number;
+    barcodeFormat: Dynamsoft.DBR.EnumBarcodeFormat | number;
     /**
      * Extra barcde formats.
      */
-    barcodeFormat_2: Dynamsoft.EnumBarcodeFormat_2 | number;
+    barcodeFormat_2: Dynamsoft.DBR.EnumBarcodeFormat_2 | number;
     /**
      * Barcode formats as a string.
      */

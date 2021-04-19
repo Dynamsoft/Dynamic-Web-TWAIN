@@ -23,17 +23,17 @@
 						<img src="Style/Images/logo-dwt-56x56.png" alt="Logo"> </div>
 					<div class="fl">
 						<div class="linkGroup">
-							<a target="_blank" class="bluelink" href="http://www.dynamsoft.com">Dynamsoft</a>
+							<a target="_blank" class="bluelink" href="https://www.dynamsoft.com/?product=dwt&utm_source=npm">Dynamsoft</a>
 							<span> / </span>
-							<a target="_blank" class="bluelink" href="http://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx">Dynamic Web TWAIN</a>
+							<a target="_blank" class="bluelink" href="https://www.dynamsoft.com/web-twain/overview/?product=dwt&utm_source=npm">Dynamic Web TWAIN</a>
 							<span> / </span>
-							<a target="_blank" class="bluelink" href="http://www.dynamsoft.com/Downloads/WebTWAIN-Sample-Download.aspx">Code Gallery</a>
+							<a target="_blank" class="bluelink" href="https://www.dynamsoft.com/web-twain/overview/?product=dwt&utm_source=npm">Code Gallery</a>
 						</div>
 						<h1>Acquire Images from Scanners and Webcams</h1>
 					</div>
 				</div>
 				<div class="ct-rt fr">
-					<a target="_blank" href="http://www.dynamsoft.com/Downloads/WebTWAIN_Download.aspx" class="btn lgBtn bgOrange">Download SDK</a>
+					<a target="_blank" href="https://www.dynamsoft.com/web-twain/downloads/?product=dwt&utm_source=npm" class="btn lgBtn bgOrange">Download SDK</a>
 				</div>
 			</div>
 			<div id="headerBtm" class="row"> The demo demonstrates how to use Dynamic Web TWAIN to acquire images from scanners or webcams. </div>
@@ -80,8 +80,8 @@
 							<a class="graylink" href="mailto:support@dynamsoft.com">support@dynamsoft.com</a>
 						</li>
 						<li>
-							<a target="_blank" class="graylink" href="http://www.dynamsoft.com/Support/LiveHelp.aspx">Live Chat</a> /
-							<a target="_blank" class="graylink" href="http://www.dynamsoft.com/Support/LiveHelp.aspx">Submit a Form</a>
+							<a target="_blank" class="graylink" href="https://www.dynamsoft.com/company/contact/?product=dwt&utm_source=npm">Live Chat</a> /
+							<a target="_blank" class="graylink" href="https://www.dynamsoft.com/company/contact/?product=dwt&utm_source=npm">Submit a Form</a>
 						</li>
 						<li>1-604-605-5491 (Toll-Free)</li>
 					</ul>
@@ -101,7 +101,7 @@
 						<li>
 							<a class="bluelink ds-demo-font-size-14" href="mailto:sales@dynamsoft.com">Contact Dynamsoft Sales</a>&nbsp;
 							<span class="fcBlue"> | </span>&nbsp;
-							<a target="_blank" class="bluelink ds-demo-font-size-14" href="https://www.dynamsoft.com/Secure/WebTWAIN_BuyIt.aspx">Visit Online Store</a>
+							<a target="_blank" class="bluelink ds-demo-font-size-14" href="https://www.dynamsoft.com/store/dynamic-web-twain/#DynamicWebTWAIN?product=dwt&utm_source=npm">Visit Online Store</a>
 						</li>
 					</ul>
 				</div>
@@ -109,13 +109,13 @@
 			<div id="footerBtm" class="row">
 				<div class="ct-lt tc fl">&copy; 2003 -
 					<script>document.write((new Date()).getFullYear());</script> Dynamsoft. All rights reserved.
-					<a href="http://www.dynamsoft.com/PrivacyStatement.aspx">Privacy Statement</a> /
-					<a href="http://www.dynamsoft.com/SiteMap.html">Site Map</a>
+					<a href="https://www.dynamsoft.com/PrivacyStatement.aspx?product=dwt&utm_source=npm">Privacy Statement</a> /
+					<a href="https://www.dynamsoft.com/SiteMap.html?product=dwt&utm_source=npm">Site Map</a>
 				</div>
 				<div class="ct-rt tr fr">
-					<a href="http://www.dynamsoft.com/">Home</a> /
-					<a href="http://www.dynamsoft.com/Purchase/Purchase.aspx">Purchase</a> /
-					<a href="http://www.dynamsoft.com/Support/Support.aspx">Support</a>
+					<a href="https://www.dynamsoft.com?product=dwt&utm_source=npm">Home</a> /
+					<a href="https://www.dynamsoft.com/Support/How-to-purchase-Dynamsoft-products.aspx?product=dwt&utm_source=npm">Purchase</a> /
+					<a href="https://www.dynamsoft.com/Support/Support.aspx?product=dwt&utm_source=npm">Support</a>
 				</div>
 			</div>
 		</div>
@@ -128,24 +128,24 @@
 					ObjString.push('<div class="p15">');
 					ObjString.push("Please note that the webcam SDK currently only works on Windows.");
 					ObjString.push('</div>');
-					Dynamsoft.WebTwainEnv.ShowDialog(400, 180, ObjString.join(''));
+					Dynamsoft.DWT.ShowDialog(400, 180, ObjString.join(''));
 					if (document.getElementsByClassName("dynamsoft-dialog-close"))
 						document.getElementsByClassName("dynamsoft-dialog-close")[0].style.display = "none";
 				} else {
-					Dynamsoft.WebTwainEnv.Load();
+					Dynamsoft.DWT.Load();
 				}
 			});
 		};
 
-		Dynamsoft.WebTwainEnv.AutoLoad = false;
-		Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
+		Dynamsoft.DWT.AutoLoad = false;
+		Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
 
 		var webCamStartingIndex;//This is used to separate scanners and webcams
 		var DWObject;
 		var isVideoOn = true;
 
 		function Dynamsoft_OnReady() {
-			DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
+			DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
 			if (DWObject) {
 			    DWObject.Viewer.width = 504;
 			    DWObject.Viewer.height = 600;

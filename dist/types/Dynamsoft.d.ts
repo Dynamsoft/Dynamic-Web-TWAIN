@@ -6,7 +6,7 @@ import { FileUploader } from "./Dynamsoft.FileUploader";
 export namespace DynamsoftStatic {
     let Lib: DynamsoftLib;
     let MSG: Messages;
-    let WebTwainEnv: WebTwainEnv;
+    let DWT: DWT;
     let managerEnv: ManagerEnv;
     let FileUploader: FileUploader;
     namespace WebTwain {
@@ -212,7 +212,7 @@ export interface DSLibEnv {
      */
     readonly strIEVersion: number | string;
 }
-export interface WebTwainEnv {
+export interface DWT {
     /**
      * Whether to install the ActiveX with CAB.
      */
@@ -419,11 +419,12 @@ export interface WebTwainEnv {
      */
 }
 export interface DisplayInfo {
-    buttons: any;
-    customProgressText: any;
-    dialogText: any;
-    errorMessages: any;
-    generalMessages: any;
+    loaderBarSource?: string;
+	buttons?: any;
+    customProgressText?: any;
+    dialogText?: any;
+    errorMessages?: any;
+    generalMessages?: any;
 }
 /**
  * Define default messages.

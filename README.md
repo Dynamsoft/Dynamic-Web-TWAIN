@@ -21,7 +21,7 @@ Cross-platform and cross-browser JavaScript library for web document scanning.
 
 ## Introduction
 
-[Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems on **Windows**, **Linux** and **macOS**. You can even use your mobile devices running iOS | iPadOS | Android with the library starting in 16.2!
+[Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems on **Windows**, **Linux** and **macOS**. You can even use your mobile devices running iOS | iPadOS | Android with the library starting in 17.0!
 
 ### Supported OSs
 - Windows
@@ -100,7 +100,7 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
     <input type="button" value="Scan" onclick="AcquireImage();" />
     <script type="text/javascript"> 
         function AcquireImage() {
-			var DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+			var DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
             if (DWObject) {
                 DWObject.SelectSource(function () {
                     var OnAcquireImageSuccess, OnAcquireImageFailure;
@@ -133,7 +133,7 @@ Full Sample
     <input type="button" value="Scan" onclick="AcquireImage();" />
     <script type="text/javascript">
     function AcquireImage() {
-	var DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+	var DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
 	if (DWObject) {		
 		DWObject.SelectSource(function () {		
 		var OnAcquireImageSuccess = OnAcquireImageFailure = function () {
@@ -180,8 +180,8 @@ Full Sample
     </head>
     <body>
     <script type="text/javascript">
-        Dynamsoft.WebTwainEnv.ResourcesPath = "dist";
-        Dynamsoft.WebTwainEnv.ProductKey = 't0140cQMAA...';
+        Dynamsoft.DWT.ResourcesPath = "dist";
+        Dynamsoft.DWT.ProductKey = 't0140cQMAA...';
     </script>
     </body>
     </html>
@@ -207,15 +207,15 @@ Full Sample
     <input type="button" value="Scan" onclick="AcquireImage();" />
     <div id="dwtcontrolContainer"></div>
     <script type="text/javascript">
-        Dynamsoft.WebTwainEnv.ResourcesPath = "dist";
-        Dynamsoft.WebTwainEnv.ProductKey = 't0068MgAAAFgW05zp85JXvbVigG3piPN2/luDlLjQF55OJy48LymLDkYdTg6jZQeQ2SJ3ODHgLtAuKCpANd+NB4SXZQg3yXE='; // Put your own key here
+        Dynamsoft.DWT.ResourcesPath = "dist";
+        Dynamsoft.DWT.ProductKey = 't0068MgAAAFgW05zp85JXvbVigG3piPN2/luDlLjQF55OJy48LymLDkYdTg6jZQeQ2SJ3ODHgLtAuKCpANd+NB4SXZQg3yXE='; // Put your own key here
         window.onload = function () {
-        Dynamsoft.WebTwainEnv.Load();
+        Dynamsoft.DWT.Load();
         };
         var DWObject;
         function Dynamsoft_OnReady() {
         // dwtcontrolContainer is the id of the DIV to create the WebTwain instance in.
-        DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+        DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
         }
         function AcquireImage() {
         if (DWObject) {
@@ -287,33 +287,36 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
 >`Dynamsoft Service (DynamsoftService.exe, 64bit)`
 >
->**v16.2** (build version 1, 6, 2, 0112)
+>**v17.0** (build version 1, 7, 0, 0330)
 >
->`Dynamsoft Service Manager (DWASManager_16200112.dll, 64bit)`
+>`Dynamsoft Service Manager (DWASManager_17000330.dll, 64bit)`
 >
->**v16.2** (build version 16, 2, 0, 0112)
+>**v17.0** (build version 17, 0, 0, 0330)
 >
->`Dynamic Web TWAIN (dwt_16.2.0.0112.dll, 64bit)`
+>`Dynamic Web TWAIN (dwt_17.0.0.0330.dll, 64bit)`
 >
->**v16.2** (build version 16, 2, 0, 0112)
+>**v17.0** (build version 17, 0, 0, 0330)
 >
->`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.1.0.0112.dll, 64bit)`
+>`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.2.0.0330.dll, 64bit)`
 >
->**v16.2** (build version 11, 1, 0, 0112)
+>**v17.0** (build version 11, 2, 0, 0330)
 >
 >`Dynamsoft OCR Basic Engine (DynamicOCRx64_10.0.0.0618.dll, 64bit)`
 >
->**v16.2** (build version 10, 0, 0, 0618)
+>**v17.0** (build version 10, 0, 0, 0618)
 >
->`Dynamsoft Barcode Reader (dbrx64_7.6.0.0112.dll, 64bit)`
+>`Dynamsoft Barcode Reader (dbrx64_8.2.0.0330.dll, 64bit)`
 >
->**v7.6** (build version 7, 6, 0, 0112)
+>**v8.2.0** (build version 8, 2, 0, 0330)
 >
 >`Dynamsoft Webcam Addon (DynamicWebcamx64_15.0.0.0625.dll, 64bit)`
 >
->**v16.2** (build version 15, 0, 0, 0625)
+>**v17.0** (build version 15, 0, 0, 0625)
 >
->`Dynamsoft Upload Module (UploadModule_1.6.0.0428.dll, 64bit)`
+>`Dynamsoft Upload Module (UploadModule_1.7.0.0330.dll, 64bit)`
 >
->**v16.2** (build version 1, 6, 0, 0428)
+>**v17.0** (build version 1, 7, 0, 0330)
 
+## Changelog
+
+Check out the [release notes](https://www.dynamsoft.com/web-twain/docs/info/schedule/stable.html?product=dwt&utm_source=npm) of the Dynamic Web TWAIN library.
