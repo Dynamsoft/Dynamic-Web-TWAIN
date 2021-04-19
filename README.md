@@ -11,8 +11,8 @@ Cross-platform and cross-browser JavaScript library for web document scanning.
 - [Online Demo](#Online-Demo)
 - [License Key](#License-Key)
 - [Installation](#Installation)
+- [Deployment](#Deployment)
 - [Quick Start](#Quick-Start)
-- [Samples](#Included-Samples)
 - [Documentation](#Documentation)
 - [Features](#Features)
 - [Contact Us](#Contact-Us)
@@ -57,6 +57,12 @@ Get a [30-day FREE Trial license](https://www.dynamsoft.com/customer/license/tri
     ```bash
     npm install dwt
     ```
+
+## Deployment
+
+Dynamic Web TWAIN relies on the files in the `/dist/` folder to work. Make sure to put these files on your server and correctly refer to them by specifying the path with `ResourcesPath` (relative and absolute paths are both fine).
+
+If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt), you will still need to host the `/dist/` folder somewhere on your server and refer to it by specifying the path with `ResourcesPath`. This is because file types like .msi are not allowed by this CDN.
 
 ### A Virtual Scanner
 
@@ -237,19 +243,6 @@ Full Sample
     </body>
     </html>
     ```
-
-## Included Samples
-
-* **`AcquireImage.html` & `CustomScan.html`**
-  * Dynamic Web TWAIN core features
-* **`PDFRasterizer.html`**:
-  * Using the Rasterizer add-on to convert text-based PDF files
-* **`OCRADocument.html`**:
-  * Scan, Load images and then perform OCR on them (English)
-* **`ReadBarcode.html`**:
-  * Scan, Load images and then read barcode off them
-* **`ScanOrCapture.html`**:
-  * Scan documents from scanners or capture documents from webcams
 
 ## Documentation
 
