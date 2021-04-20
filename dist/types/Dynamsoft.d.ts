@@ -340,7 +340,14 @@ export interface DWT {
     /**
      * Set or return the product key for the library. A product key is required to enables certain modules of the library.
      */
-    ProductKey: string;
+    ProductKey: string;	
+    /**
+	 * LTS Settings
+	*/
+	licenseServer?: string[];
+	handshakeCode?: string;
+	sessionPassword?: string;
+	organizationID?: string;
     /**
      * The product name.
      */
