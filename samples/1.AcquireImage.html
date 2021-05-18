@@ -17,8 +17,28 @@
   <div id="dwtcontrolContainer"></div>
 
   <script type="text/javascript">
+    
+    /** v17.1 LICENSE ALERT - README
+     * The library requires a license to work, the APIs organizationID and handshakeCode specify how to acquire a license.
+     * If nothing is specified, a 7-day (public) trial license will be used by default which is the case in this sample.
+     * Note that network connection is required for this license to work.
+     */
+
+    /* When using your own license, please uncomment the following lines and fill in your own information. */
+    /* For more information, please refer to https://www.dynamsoft.com/license-tracking/docs/about/licensefaq.html?ver=latest#how-to-use-a-trackable-license. */
+
+    // Dynamsoft.DWT.organizationID = "YOUR-ORGANIZATION-ID";
+    // Dynamsoft.DWT.handshakeCode = "A-SPECIFIC-HANDSHAKECODE";
+    // Dynamsoft.DWT.sessionPassword = "PASSWORD-TO-PROTECT-YOUR-LICENSE"; // Important field to protect your license.
+    // Dynamsoft.DWT.licenseServer = ["YOUR-OWN-MAIN-LTS", "YOUR-OWN-STANDBY-LTS"]; // Ignore this line if you are using Dynamsoft-hosting LTS
+
+    /* The API "productKeys" is an alternative way to license the library, the major difference is that it does not require a network. Contact support@dynamsoft.com for more information. */
+
+    // Dynamsoft.DWT.productKeys = "YOUR-PRODUCT-KEY";
+
+    /** LICENSE ALERT - THE END */
+    
     Dynamsoft.DWT.ResourcesPath = "../dist";
-    Dynamsoft.DWT.ProductKey = 't00891wAAAJyHArHjdRL0wBNHC47fVCY41/FatXNtYRsY6D/2tMOnqU3ecIoRTzEw1WNKa7lZJEgzA3fD39lzbscdtF5Wtxa/Cwnz3QLUgU8QaQCj65BTN2rtK7Q=';
     Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); 
     window.onload = function () {
       if (Dynamsoft.Lib.env.bMobile) {
