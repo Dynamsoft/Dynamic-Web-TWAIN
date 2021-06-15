@@ -6,10 +6,6 @@
 
 Cross-platform and cross-browser JavaScript library for web document scanning.
 
-## What You Should Know
-- [![](https://img.shields.io/badge/Download-Offline%20SDK-orange)](https://www.dynamsoft.com/web-twain/downloads)
-- [![](https://img.shields.io/badge/Get-30--day%20FREE%20Trial%20License-blue)](https://www.dynamsoft.com/customer/license/trialLicense/?product=dwt)
-
 ## Table of Contents
 - [Introduction](#Introduction)
 - [Online Demo](#Online-Demo)
@@ -46,9 +42,6 @@ Cross-platform and cross-browser JavaScript library for web document scanning.
 
 ## Online Demo
 https://demo.dynamsoft.com/web-twain/
-
-## License Key
-Get a [30-day FREE Trial license](https://www.dynamsoft.com/customer/license/trialLicense/?product=dwt&utm_source=npm).
 
 ## Installation
 
@@ -185,17 +178,15 @@ Full Sample
     <body>
     <script type="text/javascript">
         Dynamsoft.DWT.ResourcesPath = "dist";
-        Dynamsoft.DWT.ProductKey = 't0140cQMAA...';
     </script>
     </body>
     </html>
     ```
+    
+> Note that `ResourcesPath`  must be set in order to use the library. 
 
-    > Note that `ResourcesPath` and `ProductKey` must be set in order to use the library. 
-
-    1. `ResourcesPath` is a relative path to where you put the directory "/dist/" and all the files in it.
-    2. If you don't have a valid `ProductKey`, you can [request a trial key](https://www.dynamsoft.com/customer/license/trialLicense) to use.
-
+1. `ResourcesPath` is a relative path to where you put the directory "/dist/" and all the files in it.
+    
 3. Write code to use the package to do a simple document scan
 
     > The following code demonstrates the minimum code needed to use the package. Note the addition of HTML elements as well as JavaScript code. For more sophisticated sample or demo, check out the [Sample Gallery](https://www.dynamsoft.com/web-twain/resources/code-gallery/) and our [Github Repositories](https://github.com/dynamsoft-dwt).
@@ -211,8 +202,26 @@ Full Sample
     <input type="button" value="Scan" onclick="AcquireImage();" />
     <div id="dwtcontrolContainer"></div>
     <script type="text/javascript">
+        /** v17.1 LICENSE ALERT - README
+         * The library requires a license to work, the APIs organizationID and handshakeCode specify how to acquire a license.
+         * If nothing is specified, a 7-day (public) trial license will be used by default which is the case in this sample.
+         * Note that network connection is required for this license to work.
+         */
+    
+        /* When using your own license, please uncomment the following lines and fill in your own information. */
+        /* For more information, please refer to https://www.dynamsoft.com/license-tracking/docs/about/licensefaq.html?ver=latest#how-to-use-a-trackable-license. */
+    
+        // Dynamsoft.DWT.organizationID = "YOUR-ORGANIZATION-ID";
+        // Dynamsoft.DWT.handshakeCode = "A-SPECIFIC-HANDSHAKECODE";
+        // Dynamsoft.DWT.sessionPassword = "PASSWORD-TO-PROTECT-YOUR-LICENSE"; // Important field to protect your license.
+        // Dynamsoft.DWT.licenseServer = ["YOUR-OWN-MAIN-LTS", "YOUR-OWN-STANDBY-LTS"]; // Ignore this line if you are using Dynamsoft-hosting LTS
+    
+        /* The API "ProductKey" is an alternative way to license the library, the major difference is that it does not require a network. Contact support@dynamsoft.com for more information. */
+    
+        // Dynamsoft.DWT.ProductKey = "YOUR-PRODUCT-KEY";
+    
+        /** LICENSE ALERT - THE END */
         Dynamsoft.DWT.ResourcesPath = "dist";
-        Dynamsoft.DWT.ProductKey = 't0068MgAAAFgW05zp85JXvbVigG3piPN2/luDlLjQF55OJy48LymLDkYdTg6jZQeQ2SJ3ODHgLtAuKCpANd+NB4SXZQg3yXE='; // Put your own key here
         window.onload = function () {
         Dynamsoft.DWT.Load();
         };
@@ -291,35 +300,35 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
 >`Dynamsoft Service (DynamsoftService.exe, 64bit)`
 >
->**v17.0** (build version 1, 7, 0, 0330)
+>**v17.1** (build version 1, 7, 0, 0330)
 >
->`Dynamsoft Service Manager (DWASManager_17000330.dll, 64bit)`
+>`Dynamsoft Service Manager (DWASManager_17100525.dll, 64bit)`
 >
->**v17.0** (build version 17, 0, 0, 0330)
+>**v17.1** (build version 17, 1, 0, 0525)
 >
->`Dynamic Web TWAIN (dwt_17.0.0.0330.dll, 64bit)`
+>`Dynamic Web TWAIN (dwt_17.1.0.0525.dll, 64bit)`
 >
->**v17.0** (build version 17, 0, 0, 0330)
+>**v17.1** (build version 17, 1, 0, 0525)
 >
 >`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.2.0.0330.dll, 64bit)`
 >
->**v17.0** (build version 11, 2, 0, 0330)
+>**v17.1** (build version 11, 2, 0, 0330)
 >
 >`Dynamsoft OCR Basic Engine (DynamicOCRx64_10.0.0.0618.dll, 64bit)`
 >
->**v17.0** (build version 10, 0, 0, 0618)
+>**v17.1** (build version 10, 0, 0, 0618)
 >
->`Dynamsoft Barcode Reader (dbrx64_8.2.0.0330.dll, 64bit)`
+>`Dynamsoft Barcode Reader (dbrx64_8.2.0.0525.dll, 64bit)`
 >
->**v8.2.0** (build version 8, 2, 0, 0330)
+>**v8.2.0** (build version 8, 2, 0, 0525)
 >
 >`Dynamsoft Webcam Addon (DynamicWebcamx64_15.0.0.0625.dll, 64bit)`
 >
->**v17.0** (build version 15, 0, 0, 0625)
+>**v17.1** (build version 15, 0, 0, 0625)
 >
->`Dynamsoft Upload Module (UploadModule_1.7.0.0330.dll, 64bit)`
+>`Dynamsoft Upload Module (UploadModule_1.7.1.0525.dll, 64bit)`
 >
->**v17.0** (build version 1, 7, 0, 0330)
+>**v17.0** (build version 1, 7, 1, 0525)
 
 ## Changelog
 

@@ -1,4 +1,4 @@
-export namespace DynamsoftEnums.DBR {
+export namespace DynamsoftEnumsDBR {
     /** Barcode Format */
     enum EnumBarcodeFormat {
         BF_ALL = -32505857,
@@ -63,7 +63,7 @@ export namespace DynamsoftEnums.DBR {
     }
 }
 
-export namespace DynamsoftEnums.DWT {
+export namespace DynamsoftEnumsDWT {
     /** OCR Languages */
     enum EnumDWT_OCRLanguage {
         OCRL_ENG = "eng",

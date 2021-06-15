@@ -1,4 +1,4 @@
-import { DynamsoftEnums as Dynamsoft } from "./Dynamsoft.Enum";
+import { DynamsoftEnumsDWT } from "./Dynamsoft.Enum";
 import { WebTwainUtil } from "./WebTwain.Util";
 
 export interface WebTwainIO extends WebTwainUtil {
@@ -71,7 +71,7 @@ export interface WebTwainIO extends WebTwainUtil {
     /**
      * Return or set the compression type for TIFF files.
      */
-    TIFFCompressionType: Dynamsoft.DWT.EnumDWT_TIFFCompressionType | number;
+    TIFFCompressionType: DynamsoftEnumsDWT.EnumDWT_TIFFCompressionType | number;
     /**
      * Return or set the name of the person who creates the PDF document.
      */
@@ -79,7 +79,7 @@ export interface WebTwainIO extends WebTwainUtil {
     /**
      * Return or set the compression type of PDF files. This is a runtime property.
      */
-    PDFCompressionType: Dynamsoft.DWT.EnumDWT_PDFCompressionType;
+    PDFCompressionType: DynamsoftEnumsDWT.EnumDWT_PDFCompressionType;
     /**
      * Return or set the date when the PDF document is created.
      */
@@ -134,7 +134,7 @@ export interface WebTwainIO extends WebTwainUtil {
      */
     ConvertToBase64(
         indices: number[],
-        type: Dynamsoft.DWT.EnumDWT_ImageType | number,
+        type: DynamsoftEnumsDWT.EnumDWT_ImageType | number,
         successCallback: (
             result: Base64Result,
             indices: number[],
@@ -157,7 +157,7 @@ export interface WebTwainIO extends WebTwainUtil {
      */
     ConvertToBlob(
         indices: number[],
-        type: Dynamsoft.DWT.EnumDWT_ImageType | number,
+        type: DynamsoftEnumsDWT.EnumDWT_ImageType | number,
         successCallback: (
             result: Blob,
             indices: number[],
@@ -196,7 +196,7 @@ export interface WebTwainIO extends WebTwainUtil {
     FTPDownloadEx(
         host: string,
         path: string,
-        type: Dynamsoft.DWT.EnumDWT_ImageType | number,
+        type: DynamsoftEnumsDWT.EnumDWT_ImageType | number,
         successCallback: () => void,
         failureCallBack: (
             errorCode: number,
@@ -236,7 +236,7 @@ export interface WebTwainIO extends WebTwainUtil {
         host: string,
         index: number,
         path: string,
-        type: Dynamsoft.DWT.EnumDWT_ImageType | number,
+        type: DynamsoftEnumsDWT.EnumDWT_ImageType | number,
         successCallback: () => void,
         failureCallback: (
             errorCode: number,
@@ -305,7 +305,7 @@ export interface WebTwainIO extends WebTwainUtil {
     FTPUploadAsMultiPageTIFF(
         host: string,
         path: string,
-        type: Dynamsoft.DWT.EnumDWT_ImageType | number,
+        type: DynamsoftEnumsDWT.EnumDWT_ImageType | number,
         successCallback: () => void,
         failureCallback: (
             errorCode: number,
@@ -341,7 +341,7 @@ export interface WebTwainIO extends WebTwainUtil {
     HTTPDownloadEx(
         host: string,
         path: string,
-        type: Dynamsoft.DWT.EnumDWT_ImageType | number,
+        type: DynamsoftEnumsDWT.EnumDWT_ImageType | number,
         successCallback: () => void,
         failureCallback: (
             errorCode: number,
@@ -361,7 +361,7 @@ export interface WebTwainIO extends WebTwainUtil {
     HTTPDownloadThroughPost(
         host: string,
         path: string,
-        type: Dynamsoft.DWT.EnumDWT_ImageType | number,
+        type: DynamsoftEnumsDWT.EnumDWT_ImageType | number,
         onEmptyResponse: () => void,
         onServerReturnedSomething: (
             errorCode: number,
@@ -403,8 +403,8 @@ export interface WebTwainIO extends WebTwainUtil {
     HTTPUpload(
         URL: string,
         indices: number[],
-        type: Dynamsoft.DWT.EnumDWT_ImageType | number,
-        dataFormat: Dynamsoft.DWT.EnumDWT_UploadDataFormat | number,
+        type: DynamsoftEnumsDWT.EnumDWT_ImageType | number,
+        dataFormat: DynamsoftEnumsDWT.EnumDWT_UploadDataFormat | number,
         fileName: string,
         onEmptyResponse: () => void,
         onServerReturnedSomething: (
@@ -415,8 +415,8 @@ export interface WebTwainIO extends WebTwainUtil {
     HTTPUpload(
         URL: string,
         indices: number[],
-        type: Dynamsoft.DWT.EnumDWT_ImageType | number,
-        dataFormat: Dynamsoft.DWT.EnumDWT_UploadDataFormat | number,
+        type: DynamsoftEnumsDWT.EnumDWT_ImageType | number,
+        dataFormat: DynamsoftEnumsDWT.EnumDWT_UploadDataFormat | number,
         onEmptyResponse: () => void,
         onServerReturnedSomething: (
             errorCode: number,
@@ -446,7 +446,7 @@ export interface WebTwainIO extends WebTwainUtil {
         host: string,
         index: number,
         path: string,
-        type: Dynamsoft.DWT.EnumDWT_ImageType | number,
+        type: DynamsoftEnumsDWT.EnumDWT_ImageType | number,
         successCallback: () => void,
         failureCallback: (
             errorCode: number,
@@ -494,7 +494,7 @@ export interface WebTwainIO extends WebTwainUtil {
         index: number,
         target: string,
         fileName: string,
-        type: Dynamsoft.DWT.EnumDWT_ImageType | number,
+        type: DynamsoftEnumsDWT.EnumDWT_ImageType | number,
         onEmptyResponse: () => void,
         onServerReturnedSomething: (
             errorCode: number,
@@ -634,7 +634,7 @@ export interface WebTwainIO extends WebTwainUtil {
      */
     LoadImageEx(
         fileName: string,
-        type: Dynamsoft.DWT.EnumDWT_ImageType | number,
+        type:DynamsoftEnumsDWT.EnumDWT_ImageType | number,
         successCallback?: () => void,
         failureCallback?: (
             errorCode: number,
@@ -650,7 +650,7 @@ export interface WebTwainIO extends WebTwainUtil {
      */
     LoadImageFromBase64Binary(
         imageData: string,
-        imageType: Dynamsoft.DWT.EnumDWT_ImageType,
+        imageType: DynamsoftEnumsDWT.EnumDWT_ImageType,
         successCallback?: () => void,
         failureCallback?: (
             errorCode: number,

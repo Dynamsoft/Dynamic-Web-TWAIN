@@ -1,4 +1,4 @@
-import { DynamsoftEnums as Dynamsoft } from "./Dynamsoft.Enum";
+import { DynamsoftEnumsDWT } from "./Dynamsoft.Enum";
 
 export interface PDF {
     /**
@@ -35,7 +35,7 @@ export interface PDF {
      * Set the convert mode.
      * @param mode Specify the mode.
      */
-    SetConvertMode(mode: Dynamsoft.DWT.EnumDWT_ConvertMode | number): boolean;
+    SetConvertMode(mode: DynamsoftEnumsDWT.EnumDWT_ConvertMode | number): boolean;
     /**
      * Set the password for reading encrypted PDF files.
      * @param password Specify the password.
@@ -66,7 +66,7 @@ export interface PDFWSetting {
     /**
      * Specify the compression type.
      */
-    compression: Dynamsoft.DWT.EnumDWT_PDFCompressionType | number;
+    compression: DynamsoftEnumsDWT.EnumDWT_PDFCompressionType | number;
     /**
      * Specify the creator.
      */

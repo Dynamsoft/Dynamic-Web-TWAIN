@@ -1,4 +1,4 @@
-import { DynamsoftEnums as Dynamsoft } from "./Dynamsoft.Enum";
+import { DynamsoftEnumsDWT } from "./Dynamsoft.Enum";
 
 export interface OCRPro {
     /**
@@ -217,19 +217,19 @@ export interface Settings {
     /**
      * Specify the output format.
      */
-    OutputFormat: Dynamsoft.DWT.EnumDWT_OCRProOutputFormat | string;
+    OutputFormat: DynamsoftEnumsDWT.EnumDWT_OCRProOutputFormat | string;
     /**
      * Specify the PDF/A version.
      */
-    PDFAVersion: Dynamsoft.DWT.EnumDWT_OCRProPDFAVersion | string;
+    PDFAVersion: DynamsoftEnumsDWT.EnumDWT_OCRProPDFAVersion | string;
     /**
      * Specify the PDF version.
      */
-    PDFVersion: Dynamsoft.DWT.EnumDWT_OCRProPDFVersion | string;
+    PDFVersion: DynamsoftEnumsDWT.EnumDWT_OCRProPDFVersion | string;
     /**
      * Specify the recognition module.
      */
-    RecognitionModule: Dynamsoft.DWT.EnumDWT_OCRProRecognitionModule | string;
+    RecognitionModule: DynamsoftEnumsDWT.EnumDWT_OCRProRecognitionModule | string;
     /**
      * Configure the redaction.
      */
@@ -243,9 +243,9 @@ export interface Redaction {
     /**
      * Specify how the text is found.
      */
-    FindTextFlags: Dynamsoft.DWT.EnumDWT_OCRFindTextFlags | number;
+    FindTextFlags: DynamsoftEnumsDWT.EnumDWT_OCRFindTextFlags | number;
     /**
      * Specify how redaction is done.
      */
-    FindTextAction: Dynamsoft.DWT.EnumDWT_OCRFindTextAction | number;
+    FindTextAction: DynamsoftEnumsDWT.EnumDWT_OCRFindTextAction | number;
 }

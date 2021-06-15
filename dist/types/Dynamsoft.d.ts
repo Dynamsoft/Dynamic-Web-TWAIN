@@ -1,12 +1,15 @@
-import { DynamsoftEnums } from "./Dynamsoft.Enum";
+import { DynamsoftEnumsDBR} from "./Dynamsoft.Enum";
+import { DynamsoftEnumsDWT} from "./Dynamsoft.Enum";
 import { WebTwain } from "./WebTwain";
 import { Settings } from "./Addon.OCRPro";
 import { FileUploader } from "./Dynamsoft.FileUploader";
 
+
 export namespace DynamsoftStatic {
     let Lib: DynamsoftLib;
     let MSG: Messages;
-    let DWT: DWT;
+    let DWT: (DWTPro & typeof DynamsoftEnumsDWT);
+    let DBR: typeof DynamsoftEnumsDBR;
     let managerEnv: ManagerEnv;
     let FileUploader: FileUploader;
     namespace WebTwain {
@@ -17,6 +20,8 @@ export namespace DynamsoftStatic {
         }
     }
 }
+
+
 export interface DWTInitialConfig {
     WebTwainId: string;
     Host?: string;
@@ -212,7 +217,7 @@ export interface DSLibEnv {
      */
     readonly strIEVersion: number | string;
 }
-export interface DWT {
+export interface DWTPro {
     /**
      * Whether to install the ActiveX with CAB.
      */
@@ -500,5 +505,5 @@ export interface WasmConfig {
      */
 	fetchOptions: any;
 }
-declare const Dynamsoft: (typeof DynamsoftEnums & typeof DynamsoftStatic);
+declare const Dynamsoft: (typeof DynamsoftStatic);
 export default Dynamsoft;

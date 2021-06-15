@@ -1,4 +1,4 @@
-import { DynamsoftEnums as Dynamsoft } from "./Dynamsoft.Enum";
+import { DynamsoftEnumsDWT } from "./Dynamsoft.Enum";
 import { WebTwainIO } from "./WebTwain.IO";
 
 export interface WebTwainBuffer extends WebTwainIO {
@@ -64,7 +64,7 @@ export interface WebTwainBuffer extends WebTwainIO {
      * @param index Specify the image.
      * @param type Sepcify the expected file type.
      */
-    GetImageSizeWithSpecifiedType(index: number, type: Dynamsoft.DWT.EnumDWT_ImageType | number): number;
+    GetImageSizeWithSpecifiedType(index: number, type: DynamsoftEnumsDWT.EnumDWT_ImageType | number): number;
     /**
      * Return the direct URL of the specified image, if width or height is set to -1,
      * you get the original image, otherwise you get the image with specified width or
@@ -99,7 +99,7 @@ export interface WebTwainBuffer extends WebTwainIO {
      * Calculate the size in bytes of all selected images assuming an expected file type.
      * @param type Sepcify the expected file type.
      */
-    GetSelectedImagesSize(type: Dynamsoft.DWT.EnumDWT_ImageType | number): number;
+    GetSelectedImagesSize(type: DynamsoftEnumsDWT.EnumDWT_ImageType | number): number;
     /**
      * Return the skew angle of the specified image.
      * @param index Specify the image.
