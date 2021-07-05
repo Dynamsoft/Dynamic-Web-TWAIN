@@ -179,8 +179,8 @@ export namespace DynamsoftEnumsDWT {
     }
     enum EnumDWT_ConvertMode {
         CM_RENDERALL = 1,
-		CM_IMAGEONLY = 2,
-		CM_AUTO = 3
+        CM_IMAGEONLY = 2,
+        CM_AUTO = 3
     }
     enum EnumErrorCode {
         DBR_1D_LICENSE_INVALID = -10017,
