@@ -178,8 +178,9 @@ export namespace DynamsoftEnumsDWT {
         OCRFT_MARKFORREDACT = 2
     }
     enum EnumDWT_ConvertMode {
-        CM_DEFAULT = 0,
-        CM_RENDERALL = 1
+        CM_RENDERALL = 1,
+		CM_IMAGEONLY = 2,
+		CM_AUTO = 3
     }
     enum EnumErrorCode {
         DBR_1D_LICENSE_INVALID = -10017,
