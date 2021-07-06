@@ -212,7 +212,7 @@ Full Sample
          */
     
         /* When using your own license, please uncomment the following lines and fill in your own information. */
-       /* To get a free trial, please visit https://www.dynamsoft.com/customer/license/trialLicense?product=dwt. */
+        /* To get a free trial, please visit https://www.dynamsoft.com/customer/license/trialLicense?product=dwt. */
     
         // Dynamsoft.DWT.organizationID = "YOUR-ORGANIZATION-ID";
         // Dynamsoft.DWT.handshakeCode = "A-SPECIFIC-HANDSHAKECODE";
