@@ -43,6 +43,9 @@ Cross-platform and cross-browser JavaScript library for web document scanning.
 ## Online Demo
 https://demo.dynamsoft.com/web-twain/
 
+## License Key
+To get a free trial, please visit https://www.dynamsoft.com/customer/license/trialLicense?product=dwt.
+
 ## Installation
 
 - Official web site
