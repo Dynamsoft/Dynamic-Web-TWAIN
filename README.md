@@ -189,7 +189,7 @@ Full Sample
 > Note that `ResourcesPath`  must be set in order to use the library. 
 
 1. `ResourcesPath` is a relative path to where you put the directory "/dist/" and all the files in it.
-    
+   
 3. Write code to use the package to do a simple document scan
 
     > The following code demonstrates the minimum code needed to use the package. Note the addition of HTML elements as well as JavaScript code. For more sophisticated sample or demo, check out the [Sample Gallery](https://www.dynamsoft.com/web-twain/resources/code-gallery/) and our [Github Repositories](https://github.com/dynamsoft-dwt).
@@ -212,7 +212,7 @@ Full Sample
          */
     
         /* When using your own license, please uncomment the following lines and fill in your own information. */
-        /* For more information, please refer to https://www.dynamsoft.com/license-tracking/docs/about/licensefaq.html?ver=latest#how-to-use-a-trackable-license. */
+       /* To get a free trial, please visit https://www.dynamsoft.com/customer/license/trialLicense?product=dwt. */
     
         // Dynamsoft.DWT.organizationID = "YOUR-ORGANIZATION-ID";
         // Dynamsoft.DWT.handshakeCode = "A-SPECIFIC-HANDSHAKECODE";
