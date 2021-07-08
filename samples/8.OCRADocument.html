@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>OCR scanned or loaded documents</title>
+  <script src="../dist/dynamsoft.webtwain.min.js"></script>
+</head>
+
+<body style="padding: 30px;">
+  <div id="notMobile">
+    <h1>Scan or Load documents and OCR them (English as an example)</h1>
+    <h4>Other languages are also supported, contact support@dynamsoft.com for more info.</h4>
+    <p>Note: To avoid CORS errors, please deploy this sample to a HTTP server to try.</p>
+    <br />
+    <input type="button" value="Scan Documents" onclick="AcquireImage();" />
+    <input type="button" value="Load Images or PDFs" onclick="LoadImages();" style="margin-right: 20px;" />
+    <input type="button" value="OCR An Image in English" onclick="DoOCR();" />
+    <br />
+    <br />
+    <div id="dwtcontrolContainer" style="float:left;"></div>
+    <div id="divNoteMessage" ondblclick="this.innerHTML='';"
+      style="margin:0px 20px; float:left;width:300px; height:350px; overflow: auto;background-color:#e7f2fd;border:solid 1px black;">
+    </div>
+
+    <br />
+  </div>
+  <h1 id="mobile" style="margin:10vmin; display: none;">
+    The OCR Add-on is coming to the mobile platform in a later version, stay tuned!!
+  </h1>
+  <script type="text/javascript">
+  
+  	/** v17.1 LICENSE ALERT - README
+     * The library requires a license to work, the APIs organizationID and handshakeCode specify how to acquire a license.
+     * If nothing is specified, a 7-day (public) trial license will be used by default which is the case in this sample.
+     * Note that network connection is required for this license to work.
+     */
+
+    /* When using your own license, please uncomment the following lines and fill in your own information. */
+    /* To get a free trial, please visit https://www.dynamsoft.com/customer/license/trialLicense?product=dwt. */
+
+    // Dynamsoft.DWT.organizationID = "YOUR-ORGANIZATION-ID";
+    // Dynamsoft.DWT.handshakeCode = "A-SPECIFIC-HANDSHAKECODE";
+    // Dynamsoft.DWT.sessionPassword = "PASSWORD-TO-PROTECT-YOUR-LICENSE"; // Important field to protect your license.
+    // Dynamsoft.DWT.licenseServer = ["YOUR-OWN-MAIN-LTS", "YOUR-OWN-STANDBY-LTS"]; // Ignore this line if you are using Dynamsoft-hosting LTS
+
+    /* The API "ProductKey" is an alternative way to license the library, the major difference is that it does not require a network. Contact support@dynamsoft.com for more information. */
+
+    // Dynamsoft.DWT.ProductKey = "YOUR-PRODUCT-KEY";
+
+    /** LICENSE ALERT - THE END */
+	
+	Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 270, Height: 350 }];
+    Dynamsoft.DWT.ResourcesPath = "../dist";
+    Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady);
+	Dynamsoft.Ready(function () {
+        onload();
+    });   
+    function onload() {
+      if (Dynamsoft && Dynamsoft.Lib.env.bWin && Dynamsoft.Lib.product.bHTML5Edition && Dynamsoft.DWT.UseLocalService != false) {
+        Dynamsoft.DWT.Load();
+      }
+      else {
+        if (Dynamsoft.Lib.env.bMobile) {
+          document.getElementById('notMobile').style.display = "none";
+          document.getElementById('mobile').style.display = "";
+        } else
+          alert("The OCR add-on doesn't work on your browser or in the WASM mode, please use modern browsers like Chrome, Firefox in the Service mode.");
+      }
+    };
+    var DWObject;
+
+    function Dynamsoft_OnReady() {
+      DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
+      if (DWObject) {
+        downloadOCRBasic(true);
+      }
+    }
+
+    function downloadOCRBasic(bDownloadDLL) {
+      var strOCRPath = Dynamsoft.DWT.ResourcesPath + "/addon/OCRx64.zip",
+        strOCRLangPath = Dynamsoft.DWT.ResourcesPath + '/addon/OCRBasicLanguages/English.zip';
+
+      if (bDownloadDLL) {
+        if (DWObject.Addon.OCR.IsModuleInstalled()) {
+          /*console.log('OCR dll is installed');*/
+          downloadOCRBasic(false);
+        } else {
+          DWObject.Addon.OCR.Download(
+            strOCRPath,
+            function () { /*console.log('OCR dll is installed');*/
+              downloadOCRBasic(false);
+            },
+            function (errorCode, errorString) {
+              console.log(errorString);
+            }
+          );
+        }
+      } else {
+        DWObject.Addon.OCR.DownloadLangData(
+          strOCRLangPath,
+          function () { },
+          function (errorCode, errorString) {
+            console.log(errorString);
+          });
+      }
+    }
+
+    function AcquireImage() {
+      if (DWObject) {
+        DWObject.SelectSource(function () {
+          DWObject.OpenSource();
+          DWObject.AcquireImage(
+            {
+              IfShowUI: false,
+              PixelType: Dynamsoft.DWT.EnumDWT_PixelType.TWPT_RGB,
+              Resolution: 200,
+              IfDisableSourceAfterAcquire: true
+            },
+            function () {
+              console.log("Successful!");
+            },
+            function (settings, errCode, errString) {
+              alert(errString)
+            }
+          );
+        }, function () {
+          alert('SelectSource failed!');
+        });
+      }
+    }
+
+    function LoadImages() {
+      if (DWObject) {
+        if (DWObject.Addon && DWObject.Addon.PDF) {
+          DWObject.Addon.PDF.SetResolution(300);
+          DWObject.Addon.PDF.SetConvertMode(Dynamsoft.DWT.EnumDWT_ConvertMode.CM_RENDERALL);
+        }
+        DWObject.LoadImageEx('', 5,
+          function () { },
+          function (errorCode, errorString) {
+            alert('Load Image:' + errorString);
+          }
+        );
+      }
+    }
+
+    function DoOCR() {
+      if (DWObject) {
+        if (DWObject.HowManyImagesInBuffer == 0) {
+          alert("Please scan or load an image first.");
+          return;
+        }
+        DWObject.Addon.OCR.SetLanguage('eng');
+        DWObject.Addon.OCR.SetOutputFormat(Dynamsoft.DWT.EnumDWT_OCROutputFormat.OCROF_TEXT);
+        DWObject.Addon.OCR.Recognize(
+          DWObject.CurrentImageIndexInBuffer,
+          function (sImageIndex, result) {
+            if (result == null)
+              return null;
+            var _textResult = (Dynamsoft.Lib.base64.decode(result.Get())).split(/\r?\n/g),
+              _resultToShow = [];
+            for (var i = 0; i < _textResult.length; i++) {
+              if (i == 0 && _textResult[i].trim() == "")
+                continue;
+              _resultToShow.push(_textResult[i] + '<br />');
+            }
+            _resultToShow.splice(0, 0, '<p style="padding:5px; margin:0;">');
+            _resultToShow.push('</p>');
+            document.getElementById('divNoteMessage').innerHTML = _resultToShow.join('');
+          },
+          function (errorcode, errorstring, result) {
+            alert(errorstring);
+          }
+        );
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Use Dynamic Web TWAIN to load and save images</title>
+    <script src="../dist/dynamsoft.webtwain.min.js"></script>
+</head>
+
+<body  style="padding: 30px;">
+    <input type="button" style="font-size: x-large;" value="Scan and Save" onclick="AcquireImage();" />
+    <input type="button" style="font-size: x-large;" value="Load" onclick="LoadImage();" />
+    <input type="button" style="font-size: x-large;" value="Save" onclick="SaveWithFileDialog();" />
+    <br />
+    <label style="font-size: x-large;">
+        <input type="radio" value="jpg" name="ImageType" id="imgTypejpeg" />JPEG</label>
+    <label style="font-size: x-large;">
+        <input type="radio" value="tif" name="ImageType" id="imgTypetiff" />TIFF</label>
+    <label style="font-size: x-large;">
+        <input type="radio" value="pdf" name="ImageType" id="imgTypepdf" checked="checked" />PDF</label>
+	<br />
+	<br />
+    <!-- dwtcontrolContainer is the default div id for Dynamic Web TWAIN control.
+     If you need to rename the id, you should also change the id in dynamsoft.webtwain.config.js accordingly. -->
+    <div id="dwtcontrolContainer"></div>
+
+    <script type="text/javascript">
+	    /** v17.1 LICENSE ALERT - README
+		 * The library requires a license to work, the APIs organizationID and handshakeCode specify how to acquire a license.
+		 * If nothing is specified, a 7-day (public) trial license will be used by default which is the case in this sample.
+		 * Note that network connection is required for this license to work.
+		 */
+
+		/* When using your own license, please uncomment the following lines and fill in your own information. */
+		/* To get a free trial, please visit https://www.dynamsoft.com/customer/license/trialLicense?product=dwt. */
+
+		// Dynamsoft.DWT.organizationID = "YOUR-ORGANIZATION-ID";
+		// Dynamsoft.DWT.handshakeCode = "A-SPECIFIC-HANDSHAKECODE";
+		// Dynamsoft.DWT.sessionPassword = "PASSWORD-TO-PROTECT-YOUR-LICENSE"; // Important field to protect your license.
+		// Dynamsoft.DWT.licenseServer = ["YOUR-OWN-MAIN-LTS", "YOUR-OWN-STANDBY-LTS"]; // Ignore this line if you are using Dynamsoft-hosting LTS
+
+		/* The API "ProductKey" is an alternative way to license the library, the major difference is that it does not require a network. Contact support@dynamsoft.com for more information. */
+
+		// Dynamsoft.DWT.ProductKey = "YOUR-PRODUCT-KEY";
+
+		/** LICENSE ALERT - THE END */
+		
+		Dynamsoft.DWT.ResourcesPath = "../dist";
+		window.onload = function () {
+            Dynamsoft.DWT.Containers = [{ContainerId:'dwtcontrolContainer', Width:600, Height:800}];
+            Dynamsoft.DWT.Load();
+		};
+
+        var console = window['console'] ? window['console'] : { 'log': function () { } };
+        Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
+
+        var DWObject;
+
+        function Dynamsoft_OnReady() {
+            DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
+            if (DWObject) {
+                DWObject.RegisterEvent('OnPostAllTransfers', function(){setTimeout(SaveWithFileDialog,20);});
+            }
+        }
+
+        function AcquireImage() {
+            if (DWObject) {
+                DWObject.SelectSource(function () {
+                    var OnAcquireImageSuccess, OnAcquireImageFailure;
+                    OnAcquireImageSuccess = OnAcquireImageFailure = function () {
+                        DWObject.CloseSource();
+                    };
+
+                    DWObject.OpenSource();
+                    DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan. 
+                    DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
+                }, function () {
+                    console.log('SelectSource failed!');
+                });
+            }
+        }
+
+        //Callback functions for async APIs
+        function OnSuccess() {
+            console.log('successful');
+        }
+
+        function OnFailure(errorCode, errorString) {
+            if(errorCode != -2326)
+			alert(errorString);
+        }
+
+        function LoadImage() {
+            if (DWObject) {
+                DWObject.IfShowFileDialog = true; // Open the system's file dialog to load image
+                DWObject.LoadImageEx("", Dynamsoft.DWT.EnumDWT_ImageType.IT_ALL, OnSuccess, OnFailure); // Load images in all supported formats (.bmp, .jpg, .tif, .png, .pdf). OnSuccess or OnFailure will be called after the operation
+            }
+        }
+
+        function SaveWithFileDialog() {
+            if (DWObject) {
+                if (DWObject.HowManyImagesInBuffer > 0) {
+                    DWObject.IfShowFileDialog = true;
+                    if (document.getElementById("imgTypejpeg").checked == true) {
+                        //If the current image is B&W
+                        //1 is B&W, 8 is Gray, 24 is RGB
+                        if (DWObject.GetImageBitDepth(DWObject.CurrentImageIndexInBuffer) == 1)
+                            //If so, convert the image to Gray
+                            DWObject.ConvertToGrayScale(DWObject.CurrentImageIndexInBuffer);
+                        //Save image in JPEG
+                        DWObject.SaveAsJPEG("DynamicWebTWAIN.jpg", DWObject.CurrentImageIndexInBuffer);
+                    }
+                    else if (document.getElementById("imgTypetiff").checked == true)
+                        DWObject.SaveAllAsMultiPageTIFF("DynamicWebTWAIN.tiff", OnSuccess, OnFailure);
+                    else if (document.getElementById("imgTypepdf").checked == true)
+                        DWObject.SaveAllAsPDF("DynamicWebTWAIN.pdf", OnSuccess, OnFailure);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
