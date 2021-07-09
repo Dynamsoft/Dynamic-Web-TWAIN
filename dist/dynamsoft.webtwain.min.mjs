@@ -1,4 +1,4 @@
-// @Wed 07/09/2021 150128
+// @Wed 07/09/2021 171128
 /*
 * @name: dwt all-in-one package
 * @version: 17.1
@@ -642,7 +642,8 @@ Dynamsoft._show_online_download_dialog = function (objInstallerUrl, bHTML5, iPla
     '"><div class="dynamsoft-dwt-dlg-button">Open Site</div></a></div>',
     '<div style="word-break: break-word;">Or, go to <br />',
     local_file_path,
-    ' if the file exists.<br /></div>',
+    ' if the file exists.</div>',
+    '<div>After the installation, please <strong>REFRESH</strong>  your browser.<br /></div>',
     '</div>'
   ];
 
