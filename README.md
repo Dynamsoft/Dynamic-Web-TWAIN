@@ -7,17 +7,17 @@
 Cross-platform and cross-browser JavaScript library for web document scanning.
 
 ## Table of Contents
-- [Introduction](#Introduction)
-- [Online Demo](#Online-Demo)
-- [License Key](#License-Key)
-- [Installation](#Installation)
-- [Deployment](#Deployment)
-- [Quick Start](#Quick-Start)
-- [Documentation](#Documentation)
-- [Features](#Features)
-- [Contact Us](#Contact-Us)
-- [License Agreement](#License-Agreement)
-- [Versions](#Versions)
+- [Introduction](#introduction)
+- [Online Demo](#online-demo)
+- [License Key](#license-key)
+- [Installation](#installation)
+- [Deployment](#deployment)
+- [Quick Start](#quick-start)
+- [Documentation](#documentation)
+- [Features](#features)
+- [Contact Us](#contact-us)
+- [License Agreement](#license-agreement)
+- [Versions](#versions)
 
 ## Introduction
 
