@@ -15,9 +15,9 @@ Cross-platform and cross-browser JavaScript library for web document scanning.
 - [Quick Start](#quick-start)
 - [Documentation](#documentation)
 - [Features](#features)
-- [Contact Us](#contact-us)
-- [License Agreement](#license-agreement)
-- [Versions](#versions)
+- [Contact Us](#Contact-Us)
+- [License Agreement](#License-Agreement)
+- [Versions](#Versions)
 
 ## Introduction
 
@@ -219,7 +219,8 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 ## License Agreement
 https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
-## Versions
+<h2>
+<a id="user-content-versions" class="anchor" href="#Versions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Versions</h2>
 
 >`Dynamsoft Service (DynamsoftService.exe, 64bit)`
 >
