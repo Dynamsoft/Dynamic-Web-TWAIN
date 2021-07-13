@@ -15,9 +15,9 @@ Cross-platform and cross-browser JavaScript library for web document scanning.
 - [Quick Start](#quick-start)
 - [Documentation](#documentation)
 - [Features](#features)
-- [Contact Us](#Contact-Us)
-- [License Agreement](#License-Agreement)
-- [Versions](#Versions)
+- [Contact Us](#contact-us)
+- [License Agreement](#license-agreement)
+- [Versions](#versions)
 
 ## Introduction
 
@@ -73,7 +73,7 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 
 ## Quick Start
 
-1. Create a HTML page and load **`dynamsoft.webtwain.min.js`** into your page:
+### Step 1 Create a HTML page and load **`dynamsoft.webtwain.min.js`** into your page:
 
     ```html
     <!DOCTYPE html>
@@ -89,7 +89,7 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 
     > Note that a **relative path** is used. You might want to change it based on where you are putting your code. The best practise is to put all the files on your own server and under the same domain as your web application.
 
-2. Add a script tag and make initial settings:
+### Step 2 Add a script tag and make initial settings:
 
     ```html
     <!DOCTYPE html>
@@ -108,9 +108,9 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
     
 > Note that `ResourcesPath`  must be set in order to use the library. 
 
-1. `ResourcesPath` is a relative path to where you put the directory "/dist/" and all the files in it.
+   `ResourcesPath` is a relative path to where you put the directory "/dist/" and all the files in it.
    
-3. Write code to use the package to do a simple document scan
+### Step 3 Write code to use the package to do a simple document scan
 
     > The following code demonstrates the minimum code needed to use the package. Note the addition of HTML elements as well as JavaScript code. For more sophisticated sample or demo, check out the [Sample Gallery](https://www.dynamsoft.com/web-twain/resources/code-gallery/) and our [Github Repositories](https://github.com/dynamsoft-dwt).
 
@@ -219,8 +219,8 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 ## License Agreement
 https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
-<h2>
-<a id="user-content-versions" class="anchor" href="#Versions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Versions</h2>
+
+## Versions
 
 >`Dynamsoft Service (DynamsoftService.exe, 64bit)`
 >
