@@ -4,7 +4,7 @@
 ![jsdelivr](https://img.shields.io/jsdelivr/npm/hm/dwt.svg)
 ![](https://img.shields.io/snyk/vulnerabilities/npm/dwt.svg)
 
-Cross-platform and cross-browser JavaScript library for web document scanning.
+Cross-platform and cross-browser JavaScript library for web document scanning. Interact with document scanners from Chrome, Firefox and more.
 
 ## Table of Contents
 - [Introduction](#introduction)
