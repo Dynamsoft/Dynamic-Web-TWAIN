@@ -1,10 +1,10 @@
-# Dynamic Web TWAIN SDK
+# Dynamic Web TWAIN SDK for Scanners
 ![version](https://img.shields.io/npm/v/dwt.svg)
 ![downloads](https://img.shields.io/npm/dm/dwt.svg) 
 ![jsdelivr](https://img.shields.io/jsdelivr/npm/hm/dwt.svg)
 ![](https://img.shields.io/snyk/vulnerabilities/npm/dwt.svg)
 
-Cross-platform and cross-browser JavaScript library for web document scanning.
+Cross-platform and cross-browser JavaScript library for web document scanning. Interact with document scanners from Chrome, Firefox and more.
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -40,7 +40,7 @@ Cross-platform and cross-browser JavaScript library for web document scanning.
 - Chrome
 - Safari
 
-## Online Demo
+## Online Demo - Interact with document scanners from Chrome, Firefox and more
 https://demo.dynamsoft.com/web-twain/
 
 ## License Key
