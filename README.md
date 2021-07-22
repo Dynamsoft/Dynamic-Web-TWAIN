@@ -40,7 +40,8 @@ Cross-platform and cross-browser JavaScript library for web document scanning. I
 - Chrome
 - Safari
 
-## Online Demo - Interact with document scanners from Chrome, Firefox and more
+## Online Demo
+#### Interact with document scanners from Chrome, Firefox and more
 https://demo.dynamsoft.com/web-twain/
 
 ## License Key
