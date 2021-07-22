@@ -134,33 +134,33 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 		window.onload = function () {
 			Dynamsoft.DWT.Load();
 		};
-        var DWObject;
-        function Dynamsoft_OnReady() {
-          // dwtcontrolContainer is the id of the DIV to create the WebTwain instance in.
-            DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
-        }
-        function AcquireImage() {
-            if (DWObject) {
-                DWObject.SelectSource(function () {
-                    DWObject.OpenSource();
-                    DWObject.AcquireImage(
-                        {
-                            PixelType: Dynamsoft.EnumDWT_PixelType.TWPT_RGB,
-                            Resolution: 200,
-                            IfDisableSourceAfterAcquire: true
-                        },
-                        function () {
-                            console.log("Successful!");
-                        },
-                        function (settings, errCode, errString) {
-                            alert(errString)
-                        }
-                    );
-                }, function () {
-                    alert('SelectSource failed!');
-                });
-            }
-        }
+		var DWObject;
+		function Dynamsoft_OnReady() {
+			// dwtcontrolContainer is the id of the DIV to create the WebTwain instance in.
+			DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
+		}
+		function AcquireImage() {
+			if (DWObject) {
+				DWObject.SelectSource(function () {
+					DWObject.OpenSource();
+					DWObject.AcquireImage(
+						{
+							PixelType: Dynamsoft.EnumDWT_PixelType.TWPT_RGB,
+							Resolution: 200,
+							IfDisableSourceAfterAcquire: true
+						},
+						function () {
+							console.log("Successful!");
+						},
+						function (settings, errCode, errString) {
+							alert(errString)
+						}
+					);
+				}, function () {
+					alert('SelectSource failed!');
+				});
+			}
+		}
 	</script>
 </body>
 </html>
