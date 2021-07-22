@@ -101,8 +101,8 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 </head>
 <body>
 	<script type="text/javascript">
-		Dynamsoft.DWT.ResourcesPath = "dist";
-		Dynamsoft.DWT.ProductKey = 't0140cQMAA...';
+	  Dynamsoft.DWT.ResourcesPath = "dist";
+	  Dynamsoft.DWT.ProductKey = 't0140cQMAA...';
 	</script>
 </body>
 </html>
