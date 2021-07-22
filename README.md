@@ -75,110 +75,95 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 
 ### Step 1 Create a HTML page and load **`dynamsoft.webtwain.min.js`** into your page:
 
-    ```html
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Hello World</title>
-        <script src="dist/dynamsoft.webtwain.min.js"></script>
-    </head>
-    <body>
-    </body>
-    </html>
-    ```
+   ```html
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello World</title>
+	<script src="dist/dynamsoft.webtwain.min.js"></script>
+</head>
+<body>
+</body>
+</html>
+   ```
 
-    > Note that a **relative path** is used. You might want to change it based on where you are putting your code. The best practise is to put all the files on your own server and under the same domain as your web application.
+   > Note that a **relative path** is used. You might want to change it based on where you are putting your code. The best practise is to put all the files on your own server and under the same domain as your web application.
 
 ### Step 2 Add a script tag and make initial settings:
 
-    ```html
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <title>Hello World</title>
-    <script src="dist/dynamsoft.webtwain.min.js"></script>
-    </head>
-    <body>
-    <script type="text/javascript">
-        Dynamsoft.DWT.ResourcesPath = "dist";
-    </script>
-    </body>
-    </html>
-    ```
-    
+   ```html
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello World</title>
+	<script src="dist/dynamsoft.webtwain.min.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		Dynamsoft.DWT.ResourcesPath = "dist";
+		Dynamsoft.DWT.ProductKey = 't0140cQMAA...';
+	</script>
+</body>
+</html>
+   ```
+
 > Note that `ResourcesPath`  must be set in order to use the library. 
 
-   `ResourcesPath` is a relative path to where you put the directory "/dist/" and all the files in it.
-   
+   1. `ResourcesPath` is a relative path to where you put the directory "/dist/" and all the files in it.
+   2. If you don't have a valid `ProductKey`, you can [request a trial key](https://www.dynamsoft.com/customer/license/trialLicense?product=dwt) to use.
+
+
 ### Step 3 Write code to use the package to do a simple document scan
 
-    > The following code demonstrates the minimum code needed to use the package. Note the addition of HTML elements as well as JavaScript code. For more sophisticated sample or demo, check out the [Sample Gallery](https://www.dynamsoft.com/web-twain/resources/code-gallery/) and our [Github Repositories](https://github.com/dynamsoft-dwt).
+> The following code demonstrates the minimum code needed to use the package. Note the addition of HTML elements as well as JavaScript code. For more sophisticated sample or demo, check out the [Sample Gallery](https://www.dynamsoft.com/web-twain/resources/code-gallery/) and our [Github Repositories](https://github.com/dynamsoft-dwt).
 
-    ```html
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <title>Hello World</title>
-    <script src="dist/dynamsoft.webtwain.min.js"></script>
-    </head>
-    <body>
-    <input type="button" value="Scan" onclick="AcquireImage();" />
-    <div id="dwtcontrolContainer"></div>
-    <script type="text/javascript">
-        /** v17.1 LICENSE ALERT - README
-         * The library requires a license to work, the APIs organizationID and handshakeCode specify how to acquire a license.
-         * If nothing is specified, a 7-day (public) trial license will be used by default which is the case in this sample.
-         * Note that network connection is required for this license to work.
-         */
-    
-        /* When using your own license, please uncomment the following lines and fill in your own information. */
-        /* To get a free trial, please visit https://www.dynamsoft.com/customer/license/trialLicense?product=dwt. */
-    
-        // Dynamsoft.DWT.organizationID = "YOUR-ORGANIZATION-ID";
-        // Dynamsoft.DWT.handshakeCode = "A-SPECIFIC-HANDSHAKECODE";
-        // Dynamsoft.DWT.sessionPassword = "PASSWORD-TO-PROTECT-YOUR-LICENSE"; // Important field to protect your license.
-        // Dynamsoft.DWT.licenseServer = ["YOUR-OWN-MAIN-LTS", "YOUR-OWN-STANDBY-LTS"]; // Ignore this line if you are using Dynamsoft-hosting LTS
-    
-        /* The API "ProductKey" is an alternative way to license the library, the major difference is that it does not require a network. Contact support@dynamsoft.com for more information. */
-    
-        // Dynamsoft.DWT.ProductKey = "YOUR-PRODUCT-KEY";
-    
-        /** LICENSE ALERT - THE END */
-        Dynamsoft.DWT.ResourcesPath = "dist";
-        window.onload = function () {
-        Dynamsoft.DWT.Load();
-        };
+   ```html
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello World</title>
+	<script src="dist/dynamsoft.webtwain.min.js"></script>
+</head>
+<body>
+	<input type="button" value="Scan" onclick="AcquireImage();" />
+	<div id="dwtcontrolContainer"></div>
+	<script type="text/javascript">
+		Dynamsoft.DWT.ResourcesPath = "dist";
+		Dynamsoft.DWT.ProductKey = 't0140cQMAA...'; // Put your own key here
+		window.onload = function () {
+			Dynamsoft.DWT.Load();
+		};
         var DWObject;
         function Dynamsoft_OnReady() {
-        // dwtcontrolContainer is the id of the DIV to create the WebTwain instance in.
-        DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
+          // dwtcontrolContainer is the id of the DIV to create the WebTwain instance in.
+            DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
         }
         function AcquireImage() {
-        if (DWObject) {
-            DWObject.SelectSource(function () {
-            DWObject.OpenSource();
-            DWObject.AcquireImage(
-                {
-                PixelType: Dynamsoft.EnumDWT_PixelType.TWPT_RGB,
-                Resolution: 200,
-                IfDisableSourceAfterAcquire: true
-                },
-                function () {
-                console.log("Successful!");
-                },
-                function (settings, errCode, errString) {
-                alert(errString)
-                }
-            );
-            }, function () {
-            alert('SelectSource failed!');
-            });
+            if (DWObject) {
+                DWObject.SelectSource(function () {
+                    DWObject.OpenSource();
+                    DWObject.AcquireImage(
+                        {
+                            PixelType: Dynamsoft.EnumDWT_PixelType.TWPT_RGB,
+                            Resolution: 200,
+                            IfDisableSourceAfterAcquire: true
+                        },
+                        function () {
+                            console.log("Successful!");
+                        },
+                        function (settings, errCode, errString) {
+                            alert(errString)
+                        }
+                    );
+                }, function () {
+                    alert('SelectSource failed!');
+                });
+            }
         }
-        }
-    </script>
-    </body>
-    </html>
-    ```
+	</script>
+</body>
+</html>
+   ```
 
 ## Documentation
 
