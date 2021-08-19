@@ -429,6 +429,7 @@ export interface DWTPro {
      * Trial, UseDefaultInstallUI, ViewerJSIntegerited,
      * inited, _srcUseLocalService
      */
+	 IfCheckDCP: boolean;
 }
 export interface DisplayInfo {
     loaderBarSource?: string;
