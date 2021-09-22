@@ -9,12 +9,13 @@
 <body style="padding: 30px;">
   <input type="button" style="font-size: x-large;" id="acquireButton" value="Acquire" onclick="AcquireImage();" />
   <input type="button" style="font-size: x-large;" id="loadButton" value="Load PDFs" onclick="LoadImages();" />
+  <input type="button" style="font-size: x-large;" id="saveButton" value="Save PDFs" onclick="SaveWithFileDialog();" />
   <br />
   <br />
   <div id="dwtcontrolContainer"></div>
   <script type="text/javascript">
-	  Dynamsoft.DWT.ResourcesPath = "../dist";
-	  Dynamsoft.DWT.ProductKey = 't00891wAAAKBfWo4sRRVNTyLqdC7nKomEJIfBYqfXWg5mblnP0eeJi+LsMIUdQvrBf//ocS3z8MJA47R4VdO4x24uJwlqKgkuZOa7BUQHPkFNA5hFSi6lG2qOK6I=';
+    Dynamsoft.DWT.ResourcesPath = "../dist";
+    Dynamsoft.DWT.ProductKey = 't00891wAAAKBfWo4sRRVNTyLqdC7nKomEJIfBYqfXWg5mblnP0eeJi+LsMIUdQvrBf//ocS3z8MJA47R4VdO4x24uJwlqKgkuZOa7BUQHPkFNA5hFSi6lG2qOK6I=';
     Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady);
     window.onload = function () {
       if (Dynamsoft.Lib.env.bMobile) {
@@ -67,6 +68,20 @@
         );
       }
     }
+	
+	function SaveWithFileDialog() {
+		if (DWObject) {
+			if (DWObject.HowManyImagesInBuffer > 0) {
+				DWObject.IfShowFileDialog = true;
+				DWObject.SaveAllAsPDF("DynamicWebTWAIN.pdf",  
+				  function () { },
+				  function (errorCode, errorString) {
+					alert('Load Image:' + errorString);
+				  }
+				);
+			}
+		}
+	}
   </script>
 </body>
 
