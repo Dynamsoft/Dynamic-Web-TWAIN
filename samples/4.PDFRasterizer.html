@@ -69,19 +69,19 @@
       }
     }
 	
-	function SaveWithFileDialog() {
-		if (DWObject) {
-			if (DWObject.HowManyImagesInBuffer > 0) {
-				DWObject.IfShowFileDialog = true;
-				DWObject.SaveAllAsPDF("DynamicWebTWAIN.pdf",  
-				  function () { },
-				  function (errorCode, errorString) {
-					alert('Save as PDF:' + errorString);
-				  }
-				);
-			}
-		}
-	}
+    function SaveWithFileDialog() {
+      if (DWObject) {
+        if (DWObject.HowManyImagesInBuffer > 0) {
+          DWObject.IfShowFileDialog = true;
+          DWObject.SaveAllAsPDF("DynamicWebTWAIN.pdf",  
+            function () { },
+            function (errorCode, errorString) {
+            alert('Save as PDF:' + errorString);
+            }
+          );
+        }
+      }
+    }
   </script>
 </body>
 
