@@ -342,6 +342,11 @@ dialog[closed] {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 }
 
+.dynamsoft-dialog-license a:link,.dynamsoft-dialog-license a:visited
+{
+  color: #50a8e1
+}
+
 .dynamsoft-dialog-license .dynamsoft-dialog-close {
     margin: 15px;
     width: 16px;
@@ -374,7 +379,7 @@ dialog[closed] {
 .dynamsoft-dialog2 {
     font-family: "Helvetica", "Arial", "sans-serif";
     color: #444444;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 24px;
     background-color: #FFFFFF;
     margin: 0 auto;
@@ -1055,9 +1060,10 @@ url('data:font/ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwR1NVQiCLJXoAAAE4AAAAVE9T
 }
 
 .dynamsoft-dwt-ltsdlg-header {
-  height: 32px;
+  height: 45px;
   position: relative;
-  background: black;
+  padding: 7px 0 7px 0;
+  background: #323234;
 }
   
 .dynamsoft-dwt-ltsdlg-body {
@@ -1085,12 +1091,12 @@ background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNi
 
 .dynamsoft-dwt-ltsdlg-header .dynamsoft-dialog-close {
   float: right;
-  margin: 5px;
-  width: 12px;
-  height: 12px;
+  margin: 2px 10px 0 0;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
   color: #CCCCCC;
-  background: black;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABHNCSVQICAgIfAhkiAAAAotJREFUSEuVVktSAjEQdWAjnyq9gbh0hZwAOIF4AvUE4gngBuIJxBOIJwBOAK5cijeAKmDcAL6X6qRCmCRC1RSZSTrvded1d5KTwG+3252v1+s6lrQwriRJ0tDL8T7C+wzvg2KxOMZ47tsq8U1g8/Z2u+3A+DxEhHMAnOdyuS7AXrLWHoCkaVrB5u9YfC0Gn2SN8ZRPuVyeLpdLzqlHvKvK2inAbguFAj00vz0QMR6SPTZeCLtezBPxugu7M3qF9U2S0XYGhB5sNpuJAIzz+fy9yygEJvZ92NcJBPuatjcgq9WKyFUsGIOFOeCYF+683oehLZVKNc4rELqLzZ8ZIjC4JgNR1iMPM6Qcd514NGXo8DzBvpdwEdC/GSb9kcD41sVfh4ywsJkFJABDCgDjB0Sg75Cew5vLBJu1MEE1feKDVhRlyRwZMYRZQDYAbUGkYROxwnZLEKLfwegFTNp2jH1AMQDuAaX2APqI4VuCF2YuFWHcjQC14OGAIcryQNti33vs+0oh0ZMdJ/BSs7XtA4JhirWFEIB4wkSdUM4GBOfhLTFC4gLK+SIAgaDAK/z/2GTcsXbgGE+UivD84jkNqc7xZPHfM9EAVNENzuTDpzrfmcTUZQMomcbkfaAuK09MGZAzYJ4cAGimMaC9PJGMn9llgBtZGX+QaFlAnoxfQFAVt3aZ6ilM26r2BLqeu86u5qZ2aVZWFR4hX5ohaUZkq6o580iXKbefqOoJdiNU44dj+4nuqHY1J6GszsgyozpcqG/b3tj3AQJgrpHZGbWR9HjWJtO36RmTjyGwejzndY839wEQawV7fAY71bdj50P2oftArF4xVxoAUfcuYc5QMiQ8vxn+ee9iiL33rj9rSGBbV1zs3AAAAABJRU5ErkJggg==');
 }
 
 /*!
