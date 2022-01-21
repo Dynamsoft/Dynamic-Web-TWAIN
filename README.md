@@ -223,35 +223,35 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
 >`Dynamsoft Service (DynamsoftService.exe, 64bit)`
 >
->**v17.1** (build version 1, 7, 0, 0330)
+>**v17.2** (build version 1, 7, 2, 1026)
 >
->`Dynamsoft Service Manager (DWASManager_17100525.dll, 64bit)`
+>`Dynamsoft Service Manager (DWASManager_17201026.dll, 64bit)`
 >
->**v17.1** (build version 17, 1, 0, 0525)
+>**v17.2** (build version 17, 2, 0, 1026)
 >
->`Dynamic Web TWAIN (dwt_17.1.0.0525.dll, 64bit)`
+>`Dynamic Web TWAIN (dwt_17.2.0.1026.dll, 64bit)`
 >
->**v17.1** (build version 17, 1, 0, 0525)
+>**v17.2** (build version 17, 2, 0, 1026)
 >
->`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.2.0.0330.dll, 64bit)`
+>`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.3.0.1026.dll, 64bit)`
 >
->**v17.1** (build version 11, 2, 0, 0330)
+>**v17.2** (build version 11, 3, 0, 1026)
 >
 >`Dynamsoft OCR Basic Engine (DynamicOCRx64_10.0.0.0618.dll, 64bit)`
 >
->**v17.1** (build version 10, 0, 0, 0618)
+>**v17.2** (build version 10, 0, 0, 0618)
 >
->`Dynamsoft Barcode Reader (dbrx64_8.2.0.0525.dll, 64bit)`
+>`Dynamsoft Barcode Reader (dbrx64_8.6.0.1026.dll, 64bit)`
 >
->**v8.2.0** (build version 8, 2, 0, 0525)
+>**v8.6.0** (build version 8, 6, 0, 1026)
 >
 >`Dynamsoft Webcam Addon (DynamicWebcamx64_15.0.0.0625.dll, 64bit)`
 >
->**v17.1** (build version 15, 0, 0, 0625)
+>**v17.2** (build version 15, 0, 0, 0625)
 >
->`Dynamsoft Upload Module (UploadModule_1.7.1.0525.dll, 64bit)`
+>`Dynamsoft Upload Module (UploadModule_1.7.2.1026.dll, 64bit)`
 >
->**v17.0** (build version 1, 7, 1, 0525)
+>**v17.2** (build version 1, 7, 2, 1026)
 
 ## Changelog
 
