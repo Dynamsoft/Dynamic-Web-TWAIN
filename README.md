@@ -176,28 +176,36 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 
 ## Features
 
-- Document Scanning
-- Document Editing
-- Saving, Uploading and Downloading
-- Opening Local Files
+### Dynamsoft Service for Scanner 
 
-| Document Scanning        | Desktop            | Mobile  |
+| Features     | Windows            | Linux  | macOS|
+| ------------- |:-------------:| -----:| -----:|
+| Supports up to TWAIN specification 2.3        | :heavy_check_mark: | :x: |:x:|
+| SANE compatible                               | :x:     |   :heavy_check_mark:|:x:|
+| Supports up to TWAIN specification 1.9; ICA compatible | :x:|  :x:   |    :heavy_check_mark: |
+| Supports capturing document  | :heavy_check_mark: | :heavy_check_mark: |:heavy_check_mark:|
+| Supports editing document     | :heavy_check_mark: | :heavy_check_mark: |:heavy_check_mark:|
+| Optional disk caching mechanism for high volume scanning (thousands of pages)    | :heavy_check_mark:     |   :heavy_check_mark: |:heavy_check_mark:|
+| Built-In Auto Document Feeder (ADF) and multiple image acquisition | :heavy_check_mark:      |    :heavy_check_mark: |:heavy_check_mark:|
+| Offers duplex scanning mode   | :heavy_check_mark: | :heavy_check_mark: |:heavy_check_mark:|
+| Supports blank page detection    | :heavy_check_mark:     |   :heavy_check_mark: |:heavy_check_mark:|
+| Supports setting up image acquisition parameters (resolution, pixel type, bit depth, brightness, contrast, page size, unit, etc.) | :heavy_check_mark: |:heavy_check_mark: |:heavy_check_mark:|
+| Provides native and disk file image transfer modes    | :heavy_check_mark:    |   :heavy_check_mark: |:heavy_check_mark:|
+| Buffered memory transfer mode | :heavy_check_mark:     |    :x: |:x:|
+
+### WebAssembly for Camera 
+
+| Features     | Desktop            | Mobile  |
 | ------------- |:-------------:| -----:|
-| Supports up to TWAIN specification 2.3        | Windows Client Only | N/A |
-| SANE compatible                               | Linux Client Only      |   N/A|
-| Supports up to TWAIN specification 1.9; ICA compatible | macOS Client Only     |    N/A |
-| Supports capturing document via camera    | ✓ | ✓ |
-| Supports editing document image    | ✓ | ✓ |
-| Optional disk caching mechanism for high volume scanning (thousands of pages)    | ✓      |   N/A |
-| Built-In Auto Document Feeder (ADF) and multiple image acquisition | ✓      |    N/A |
-| Offers duplex scanning mode   | ✓ | N/A |
-| Supports blank page detection    | ✓      |   N/A |
-| Built-in wizard mode intelligently manages TWAIN states | ✓      |    N/A |
-| Supports setting up image acquisition parameters (resolution, pixel type, bit depth, brightness, contrast, page size, unit, etc.) | ✓ | N/A |
-| Provides native and disk file image transfer modes    | ✓      |   N/A |
-| Buffered memory transfer mode | Windows Client Only      |    N/A |
-
-
+| Supports capturing document | :heavy_check_mark: | :heavy_check_mark: |
+| Supports editing document    | :heavy_check_mark: | :heavy_check_mark: |
+| Document edge detection    | :heavy_check_mark:     |  :heavy_check_mark: |
+| Document perspective correction | :heavy_check_mark:     |  :heavy_check_mark: |
+| Front and rear camera switching |:heavy_check_mark:     |  :heavy_check_mark: |
+| Camera resolution setting|:heavy_check_mark:     |  :heavy_check_mark: |
+| Document post-processing by filters| :heavy_check_mark:     |  :heavy_check_mark: |
+| Camera auto-focus| :heavy_check_mark:     |  :heavy_check_mark: |
+| UI customization| :heavy_check_mark:     |  :heavy_check_mark: |
 
 [More](https://www.dynamsoft.com/web-twain/features/)
 
