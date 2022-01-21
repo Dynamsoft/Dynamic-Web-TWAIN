@@ -1,4 +1,4 @@
-# Dynamic Web TWAIN SDK for Scanners
+# Dynamic Web TWAIN SDK for Scanner and Camera
 ![version](https://img.shields.io/npm/v/dwt.svg)
 ![downloads](https://img.shields.io/npm/dm/dwt.svg) 
 ![jsdelivr](https://img.shields.io/jsdelivr/npm/hm/dwt.svg)
