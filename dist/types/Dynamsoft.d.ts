@@ -294,6 +294,22 @@ export interface DWTPro {
      * @param WebTwainId The WebTwainId.
      */
     GetWebTwainEx(WebTwainId?: string): WebTwain;
+	/**
+     * Download and update the certificate on the local system.
+     * @param url The URL to download the certificate (typically a ZIP file).
+     * @param successCallback A callback function that is executed if the request succeeds.
+     * @param failureCallback A callback function that is executed if the request fails.
+     * @argument errorCode The error code.
+     * @argument errorString The error string.
+     */
+    UpdateCert(
+        url: string,
+        successCallback: () => void,
+        failureCallback: (
+            errorCode: number,
+            errorString: string
+        ) => void
+    ): void;
     /**
      * Whether or not an md5 header `dwt-md5` should be included in HTTP upload requests.
      */

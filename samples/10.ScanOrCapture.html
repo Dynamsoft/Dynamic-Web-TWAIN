@@ -9,6 +9,12 @@
 <body style="padding: 30px;">
   <div id="notMobile">
     <h1>Acquire Images</h1>
+	<div id="divNoteDeploy" style="margin: 10px 0 10px;" >Make sure you deploy the sample to an webserver that
+      <ul>
+          <li style="margin: 5px 0 5px 20px; font-size: 12px;">Runs HTTPS</li>
+          <li style="margin-left: 20px;font-size: 12px;">Serves  the *.wasm file with Content-Type: application/wasm.</li>
+      </ul>   
+	</div>
     <label style="font-size: x-large;" id="H5CameraLabel"><input type="checkbox" id="H5Camera" />Use H5
       Camera</label>
     <select style="font-size: x-large;" id="source"></select><br />
@@ -20,7 +26,8 @@
   </div>
   <script type="text/javascript">
     Dynamsoft.DWT.ResourcesPath = "../dist";
-	  Dynamsoft.DWT.ProductKey = 't00891wAAAKBfWo4sRRVNTyLqdC7nKomEJIfBYqfXWg5mblnP0eeJi+LsMIUdQvrBf//ocS3z8MJA47R4VdO4x24uJwlqKgkuZOa7BUQHPkFNA5hFSi6lG2qOK6I=';
+	Dynamsoft.DWT.UseCameraAddonWasm = true;
+	  Dynamsoft.DWT.ProductKey = 't00881wAAAJiZxwKrauMDAnLQZ4prFe5v+GIzhfe6tY5KYmPHgMl/HdEi/Vt0gw0oYrLdhvNToW0YknBnPyJr0T5IkwNgUinIjHfOHUQH/gYsW0kWed4BaK4rng==';
     Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady);
     Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 600, Height: 800 }];
     var bWASMCamera = true, bWASM = false;
@@ -176,8 +183,14 @@
               SetIfWebcamPlayVideo(false);
             }, 50);
           };
-          if (bWASMCamera)
-            DWObject.Addon.Camera.capture().then(function (blob) { DWObject.Viewer.render(); funCaptureImage(); });
+          if (bWASMCamera){
+		  	var p = document.location.protocol;
+			if (p == 'https:' || p == 'http:')
+				DWObject.Addon.Camera.capture().then(function (blob) { DWObject.Viewer.render(); funCaptureImage(); });
+			else {
+				alert("HTTPS is required for accessing cameras.");
+			}
+		  }
           else
             DWObject.Addon.Webcam.CaptureImage(funCaptureImage, funCaptureImage);
         }

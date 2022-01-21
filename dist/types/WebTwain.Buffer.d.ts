@@ -263,7 +263,35 @@ export interface WebTwainBuffer extends WebTwainIO {
      */
 	RemoveTag(tagName: string, indices?: number[]):boolean;
     /**
-     * Get the the status of the tags.
+     * Get the status of the tags.
      */
 	GetTagList(): any;
+	/**
+     * Get the status of the tags for a specific image.
+	 * @param index Specify one image.
+     */
+	GetTagListByIndex(index:number): any;	
+	/**
+     * Get the current file name.
+     */
+	GetCurrentFileName(): string;
+	/**
+     * Create the file.
+	 * @param fileName Specify the file name.
+     */
+	CreateFile(fileName: string):boolean;
+	/**
+     * open the file.
+	 * @param fileName Specify the file name.
+     */
+	OpenFile(fileName: string):boolean;
+	/**
+     * remove the file.
+	 * @param fileName Specify the file name.
+     */
+	RemoveFile():boolean;
+	/**
+     * Get the info of the all files.
+     */
+	GetFileInfoList(): any;
 }

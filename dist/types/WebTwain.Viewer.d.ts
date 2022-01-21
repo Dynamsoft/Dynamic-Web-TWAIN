@@ -182,7 +182,13 @@ export interface DynamsoftViewer {
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
      */
     showPageNumber: boolean;
-    /**
+	 /**
+     * [Scope] Main viewer
+     * [Description] Whether to show the checkbox for multiple selected. The default value is false.
+     * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
+     */
+    showCheckbox: boolean;
+	/**
      * [Scope] Main viewer
      * [Description] When set to true, will make sure the first image in the viewer is always selected when scrolling through multiple images.
      */
@@ -289,13 +295,19 @@ export interface DynamsoftViewer {
     setViewMode(
         columns: number,
         rows: number
-    ): boolean;
+    ): boolean;	
+	/**
+	 * [Scope] Global
+	 * [Description] Create a document webviewer with specified settings.
+	 * @param templateName The document webviewer settings. If not set, the default setting is used.
+	 */
+	createTemplate(templateName?: string): DocumentViewerTemplate;
     /**
      * [Scope] Global
      * [Description] Create a Dynamsoft Viewer instance and bind it to the WebTwain instance.
      * @param element Specify an HTML element to create the viewer.
      */
-    bind(element: HTMLDivElement): boolean;
+    bind(element: HTMLDivElement, documentViewerTemplate?: DocumentViewerTemplate): boolean;
     /**
      * [Scope] Main viewer
      * [Description] Show the viewer (Main viewer, ImageEditor, ThumbnailViewer, CustomElement).
@@ -471,6 +483,12 @@ export interface ThumbnailViewerSettings {
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
      */
     showPageNumber?: boolean;
+	/**
+     * [Scope] Thumbnail viewer
+     * [Description] Whether to show the checkbox for multiple selected. The default value is false.
+     * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
+     */
+    showCheckbox?: boolean;
     /**
      * [Scope] Thumbnail viewer
      * [Description] When set to true, will make sure the first image in the viewer is always selected when scrolling through multiple images.
@@ -542,6 +560,8 @@ export interface CustomElement {
      * [Description] Delete the element.
      */
     dispose(): void;
+	
+	element?: any;
 }
 export interface ImageEditor {
     /**
@@ -658,6 +678,12 @@ export interface ThumbnailViewer {
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
      */
     showPageNumber: boolean;
+	/**
+     * [Scope] Thumbnail viewer
+     * [Description] Whether to show the checkbox for multiple selected. The default value is false.
+     * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
+     */
+    showCheckbox: boolean;
     /**
      * [Scope] Thumbnail viewer
      * [Description] When set to true, will make sure the first image in the viewer is always selected when scrolling through multiple images.
@@ -761,4 +787,23 @@ export interface Area {
 	top: number;
     right: number;
     bottom: number;
+}
+export interface DocumentViewerTemplate {
+	/**
+     * Save button click event
+     */
+	onSaveFunc?: () => void;    
+	/**
+     * Upload button click event
+     */
+	onUploadFunc?: () => void;  
+	/**
+     * Remove button click event
+     */
+	onRemoveSelectedFunc?: () => void; 
+	onExitFunc?: () => void;  
+	/**
+     * Get CustomElement. Can display save & upload viewer in CustomElement.
+     */
+	getCustomElement(): CustomElement;  
 }

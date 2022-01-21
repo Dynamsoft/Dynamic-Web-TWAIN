@@ -13,6 +13,24 @@ export interface WebTwainEdit extends WebTwainBuffer {
         width?: number,
         height?: number
     ): boolean;
+	/**
+     * Change the brightness of the specified image.
+     * @param index Specify the image.
+     * @param value Specify the value of brightness.
+     */
+	ChangeBrightnessAsync(
+        index: number,
+        value: number
+    ): Promise<boolean>;
+	 /**
+     * Change the contrast of the specified image.
+     * @param index Specify the image.
+     * @param value Specify the value of contrast.
+     */
+	ChangeContrastAsnyc(
+        index: number,
+        value: number
+    ): Promise<boolean>;
     /**
      * Change the bit depth of the specified image.
      * @param index Specify the image.
