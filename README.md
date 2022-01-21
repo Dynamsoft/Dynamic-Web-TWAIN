@@ -45,13 +45,15 @@ Cross-platform and cross-browser JavaScript library for web document scanning. I
 https://demo.dynamsoft.com/web-twain/
 
 ## License Key
-To get a free trial, please visit https://www.dynamsoft.com/customer/license/trialLicense?product=dwt.
+[![](https://img.shields.io/badge/Get-30--day%20FREE%20Trial%20License-blue)](https://www.dynamsoft.com/customer/license/trialLicense/?product=dwt)
 
 ## Installation
 
 - Official web site
-
-    [Dynamic Web TWAIN SDK for Windows, Linux, macOS](https://www.dynamsoft.com/web-twain/downloads)
+	
+    **Dynamic Web TWAIN SDK for Windows, Linux, macOS**
+    
+    [![](https://img.shields.io/badge/Download-Offline%20SDK-orange)](https://www.dynamsoft.com/web-twain/downloads)
 
 - NPM
 
@@ -174,29 +176,40 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 
 ## Features
 
-- Document Scanning
-- Document Editing
-- Saving, Uploading and Downloading
-- Opening Local Files
+### Dynamsoft Service for Scanner 
 
-| Document Scanning        | Desktop            | Mobile  |
-| ------------- |:-------------:| -----:|
-| Supports up to TWAIN specification 2.3        | Windows Client Only | N/A |
-| SANE compatible                               | Linux Client Only      |   N/A|
-| Supports up to TWAIN specification 1.9; ICA compatible | macOS Client Only     |    N/A |
-| Supports capturing via built-in mobile camera    | N/A | ✓ |
-| Optional disk caching mechanism for high volume scanning (thousands of pages)    | ✓      |   N/A |
-| Built-In Auto Document Feeder (ADF) and multiple image acquisition | ✓      |    N/A |
-| Offers duplex scanning mode   | ✓ | N/A |
-|Supports blank page detection    | ✓      |   N/A |
-|Built-in wizard mode intelligently manages TWAIN states | ✓      |    N/A |
-| Supports setting up image acquisition parameters (resolution, pixel type, bit depth, brightness, contrast, page size, unit, etc.) | ✓ | N/A |
-| Provides native and disk file image transfer modes    | ✓      |   N/A |
-| Buffered memory transfer mode | Windows Client Only      |    N/A |
-
-
+| Features     | Windows            | Linux  | macOS|
+| ------------- |:-------------:| -----:| -----:|
+| Supports up to TWAIN specification 2.3        | :heavy_check_mark: | :x: |:x:|
+| SANE compatible                               | :x:     |   :heavy_check_mark:|:x:|
+| Supports up to TWAIN specification 1.9; ICA compatible | :x:|  :x:   |    :heavy_check_mark: |
+| Supports capturing document  | :heavy_check_mark: | :heavy_check_mark: |:heavy_check_mark:|
+| Supports editing document     | :heavy_check_mark: | :heavy_check_mark: |:heavy_check_mark:|
+| Optional disk caching mechanism for high volume scanning (thousands of pages)    | :heavy_check_mark:     |   :heavy_check_mark: |:heavy_check_mark:|
+| Built-In Auto Document Feeder (ADF) and multiple image acquisition | :heavy_check_mark:      |    :heavy_check_mark: |:heavy_check_mark:|
+| Offers duplex scanning mode   | :heavy_check_mark: | :heavy_check_mark: |:heavy_check_mark:|
+| Supports blank page detection    | :heavy_check_mark:     |   :heavy_check_mark: |:heavy_check_mark:|
+| Supports setting up image acquisition parameters (resolution, pixel type, bit depth, brightness, contrast, page size, unit, etc.) | :heavy_check_mark: |:heavy_check_mark: |:heavy_check_mark:|
+| Provides native and disk file image transfer modes    | :heavy_check_mark:    |   :heavy_check_mark: |:heavy_check_mark:|
+| Buffered memory transfer mode | :heavy_check_mark:     |    :x: |:x:|
 
 [More](https://www.dynamsoft.com/web-twain/features/)
+
+### WebAssembly for Camera 
+
+| Features     | Desktop            | Mobile  |
+| ------------- |:-------------:| -----:|
+| Document capture | :heavy_check_mark: | :heavy_check_mark: |
+| Document edge detection    | :heavy_check_mark:     |  :heavy_check_mark: |
+| Document perspective correction | :heavy_check_mark:     |  :heavy_check_mark: |
+| Document post-processing by filters| :heavy_check_mark:     |  :heavy_check_mark: |
+| Front and rear camera switching |:heavy_check_mark:     |  :heavy_check_mark: |
+| Dedicated image and PDF viewer|:heavy_check_mark:     |  :heavy_check_mark: |
+| Built-in ready-to-use UI| :heavy_check_mark:     |  :heavy_check_mark: |
+| SIMD and WebGL acceleration | :heavy_check_mark:     |  :heavy_check_mark: |
+| Multi-Format export and sharing | :heavy_check_mark:     |  :heavy_check_mark: |
+
+[More](https://www.dynamsoft.com/web-twain/features/mobile-web-capture-sdk/)
 
 ## Contact Us
 
