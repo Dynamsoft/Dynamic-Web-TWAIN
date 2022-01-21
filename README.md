@@ -45,13 +45,15 @@ Cross-platform and cross-browser JavaScript library for web document scanning. I
 https://demo.dynamsoft.com/web-twain/
 
 ## License Key
-To get a free trial, please visit https://www.dynamsoft.com/customer/license/trialLicense?product=dwt.
+[![](https://img.shields.io/badge/Get-30--day%20FREE%20Trial%20License-blue)](https://www.dynamsoft.com/customer/license/trialLicense/?product=dwt)
 
 ## Installation
 
 - Official web site
-
-    [Dynamic Web TWAIN SDK for Windows, Linux, macOS](https://www.dynamsoft.com/web-twain/downloads)
+	
+    **Dynamic Web TWAIN SDK for Windows, Linux, macOS**
+    
+    [![](https://img.shields.io/badge/Download-Offline%20SDK-orange)](https://www.dynamsoft.com/web-twain/downloads)
 
 - NPM
 
@@ -184,12 +186,13 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 | Supports up to TWAIN specification 2.3        | Windows Client Only | N/A |
 | SANE compatible                               | Linux Client Only      |   N/A|
 | Supports up to TWAIN specification 1.9; ICA compatible | macOS Client Only     |    N/A |
-| Supports capturing via built-in mobile camera    | N/A | ✓ |
+| Supports capturing document via camera    | ✓ | ✓ |
+| Supports editing document image    | ✓ | ✓ |
 | Optional disk caching mechanism for high volume scanning (thousands of pages)    | ✓      |   N/A |
 | Built-In Auto Document Feeder (ADF) and multiple image acquisition | ✓      |    N/A |
 | Offers duplex scanning mode   | ✓ | N/A |
-|Supports blank page detection    | ✓      |   N/A |
-|Built-in wizard mode intelligently manages TWAIN states | ✓      |    N/A |
+| Supports blank page detection    | ✓      |   N/A |
+| Built-in wizard mode intelligently manages TWAIN states | ✓      |    N/A |
 | Supports setting up image acquisition parameters (resolution, pixel type, bit depth, brightness, contrast, page size, unit, etc.) | ✓ | N/A |
 | Provides native and disk file image transfer modes    | ✓      |   N/A |
 | Buffered memory transfer mode | Windows Client Only      |    N/A |
