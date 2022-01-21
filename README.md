@@ -193,21 +193,23 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 | Provides native and disk file image transfer modes    | :heavy_check_mark:    |   :heavy_check_mark: |:heavy_check_mark:|
 | Buffered memory transfer mode | :heavy_check_mark:     |    :x: |:x:|
 
+[More](https://www.dynamsoft.com/web-twain/features/)
+
 ### WebAssembly for Camera 
 
 | Features     | Desktop            | Mobile  |
 | ------------- |:-------------:| -----:|
-| Supports capturing document | :heavy_check_mark: | :heavy_check_mark: |
-| Supports editing document    | :heavy_check_mark: | :heavy_check_mark: |
+| Document capture | :heavy_check_mark: | :heavy_check_mark: |
 | Document edge detection    | :heavy_check_mark:     |  :heavy_check_mark: |
 | Document perspective correction | :heavy_check_mark:     |  :heavy_check_mark: |
-| Front and rear camera switching |:heavy_check_mark:     |  :heavy_check_mark: |
-| Camera resolution setting|:heavy_check_mark:     |  :heavy_check_mark: |
 | Document post-processing by filters| :heavy_check_mark:     |  :heavy_check_mark: |
-| Camera auto-focus| :heavy_check_mark:     |  :heavy_check_mark: |
-| UI customization| :heavy_check_mark:     |  :heavy_check_mark: |
+| Front and rear camera switching |:heavy_check_mark:     |  :heavy_check_mark: |
+| Dedicated image and PDF viewer|:heavy_check_mark:     |  :heavy_check_mark: |
+| Built-in ready-to-use UI| :heavy_check_mark:     |  :heavy_check_mark: |
+| SIMD and WebGL acceleration | :heavy_check_mark:     |  :heavy_check_mark: |
+| Multi-Format export and sharing | :heavy_check_mark:     |  :heavy_check_mark: |
 
-[More](https://www.dynamsoft.com/web-twain/features/)
+[More](https://www.dynamsoft.com/web-twain/features/mobile-web-capture-sdk/)
 
 ## Contact Us
 
