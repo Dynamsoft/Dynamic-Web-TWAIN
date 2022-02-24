@@ -105,6 +105,7 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 	<script type="text/javascript">
 	  Dynamsoft.DWT.ResourcesPath = "dist";
 	  Dynamsoft.DWT.ProductKey = 't0140cQMAA...';
+      Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 270, Height: 350 }];
 	</script>
 </body>
 </html>
@@ -133,6 +134,7 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 	<script type="text/javascript">
 	  Dynamsoft.DWT.ResourcesPath = "dist";
 	  Dynamsoft.DWT.ProductKey = 't0140cQMAA...'; // Put your own key here
+      Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 270, Height: 350 }];
 	  window.onload = function () {
 	    Dynamsoft.DWT.Load();
 	  };
