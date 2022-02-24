@@ -3,11 +3,11 @@
 * Product: Dynamsoft Web Twain
 * Web Site: http://www.dynamsoft.com
 *
-* Copyright 2021, Dynamsoft Corporation 
+* Copyright 2022, Dynamsoft Corporation 
 * Author: Dynamsoft Support Team
 * Module: image io wasm js
 * Version: 1.7.2
-* @20220110163718.666000+480
+* @20220215173906.008000+480
 */
 
 
@@ -67,7 +67,7 @@ Dynamsoft.error.code.wasmJsWorkerRunFailed=Dynamsoft.error.code.wasmJsBase-1;Dyn
 Dynamsoft.conststring={version:"1.7.2",logInfo:"logInfo",logDebug:"logDebug",logAll:"logAll",initPending:"pending",initReady:"ready",initFailed:"failed",imgIO:"imgIO",core:"imgCore",imgProc:"imgProc",pdfR:"pdfReader",pdfW:"pdfWriter",crypto:"crypto",binaryBlobType:"application/octet-stream",wasmExtension:".wasm"};Dynamsoft.constDefine={mainIndex:0,pdfReaderIndex:1,wasmDefHeapSize:28};
 Dynamsoft.WasmEnv={wasmJSs:["dynamsoft.imageio_wasm-"+Dynamsoft.conststring.version+".js","dynamsoft.pdfReader_wasm-"+Dynamsoft.conststring.version+".js"],wasmHeap:[{maxHeapSize:300,initHeapSize:280},{maxHeapSize:200,initHeapSize:Dynamsoft.constDefine.wasmDefHeapSize}],moduleNames:[Dynamsoft.conststring.imgIO,Dynamsoft.conststring.crypto,Dynamsoft.conststring.core,Dynamsoft.conststring.imgProc,Dynamsoft.conststring.pdfR,Dynamsoft.conststring.pdfW],imgIO:{name:Dynamsoft.conststring.imgIO,autoLoad:!0,
 ver:Dynamsoft.conststring.version,status:"",prefixName:"dynamsoft.imageio-",wasmModule:null,wasmJSIndex:Dynamsoft.constDefine.mainIndex},imgCore:{name:Dynamsoft.conststring.core,autoLoad:!0,ver:Dynamsoft.conststring.version,status:"",prefixName:"dynamsoft.imagecore-",wasmModule:null,wasmJSIndex:Dynamsoft.constDefine.mainIndex},imgProc:{name:Dynamsoft.conststring.imgProc,autoLoad:!0,ver:Dynamsoft.conststring.version,status:"",prefixName:"dynamsoft.imageProc-",wasmModule:null,wasmJSIndex:Dynamsoft.constDefine.mainIndex},
-pdfReader:{name:Dynamsoft.conststring.pdfR,autoLoad:!0,ver:Dynamsoft.conststring.version,status:"",prefixName:"dynamsoft.pdfReader-",wasmModule:null,wasmJSIndex:Dynamsoft.constDefine.pdfReaderIndex},pdfWriter:{name:Dynamsoft.conststring.pdfW,autoLoad:!0,ver:Dynamsoft.conststring.version,status:"",prefixName:"dynamsoft.pdfWriter-",wasmModule:null,wasmJSIndex:Dynamsoft.constDefine.mainIndex},crypto:{name:Dynamsoft.conststring.crypto,autoLoad:!0,ver:Dynamsoft.conststring.version,status:"",prefixName:"dynamsoft.crypto-",
+pdfReader:{name:Dynamsoft.conststring.pdfR,autoLoad:!1,ver:Dynamsoft.conststring.version,status:"",prefixName:"dynamsoft.pdfReader-",wasmModule:null,wasmJSIndex:Dynamsoft.constDefine.pdfReaderIndex},pdfWriter:{name:Dynamsoft.conststring.pdfW,autoLoad:!0,ver:Dynamsoft.conststring.version,status:"",prefixName:"dynamsoft.pdfWriter-",wasmModule:null,wasmJSIndex:Dynamsoft.constDefine.mainIndex},crypto:{name:Dynamsoft.conststring.crypto,autoLoad:!0,ver:Dynamsoft.conststring.version,status:"",prefixName:"dynamsoft.crypto-",
 wasmModule:null,wasmJSIndex:Dynamsoft.constDefine.mainIndex}};Dynamsoft.WasmEnv.buildWasmFileName=function(c,b,a,e){return c+(e?"sn-":"")+b+a};Dynamsoft.WasmEnv.fetchRetry=function(c,b,a,e){var d=b.retries,g=b.retryDelay;return new Promise(function(f,h){function k(b,c,d){a&&a(e,c);setTimeout(function(){r(++b)},g)}var r=function(a){fetch(c,b).then(function(a){f(a)}).catch(function(b){a<d?k(a,b,null):h(b)})};r(0)})};
 Dynamsoft.Enum_ImageType={IT_DIB:-1,IT_RGBA:-2,IT_BGRA:-3,IT_BMP:0,IT_JPG:1,IT_PNG:3,IT_ALL:5};Dynamsoft.Enum_ReturnType={RT_AUTO:-1,RT_BINARY:1,RT_BASE64:2};Dynamsoft.Enum_ErrorMessage={PARAMETER_TYPE_ERROR:"Parameter Type not Supported: ",TIMEOUT:"Timeout no Response: ",FILE_STREAM_ERROR:"File Stream Error: ",WASM_EXCEPTION_ERROR:"An WASM exception occurred."};Dynamsoft.Enum_SimdFlag={SF_DEF:0,SF_ENABLE:1,SF_DISABLE:2};
 Dynamsoft.WasmInit=function(){function c(a,b){postMessage({id:a.id,func:"status",log:b});a.params&&"function"===typeof a.params.callback&&a.params.callback(b)}function b(a,b){postMessage({id:a.id,func:"log",log:b});a.params&&"function"===typeof a.params.callback&&a.params.callback(b)}function a(a){if(k[a])return k[a];k[a]=Object.create(null);k[a].name=a;k[a].promise=new Promise(function(b,c){k[a].resolve=b;k[a].reject=c});k[a].wasmModule=null;k[a].promise.then(function(a){},function(a){});return k[a]}

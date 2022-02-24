@@ -223,23 +223,23 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
 >`Dynamsoft Service (DynamsoftService.exe, 64bit)`
 >
->**v17.2** (build version 1, 7, 2, 1026)
+>**v17.2.1** (build version 1, 7, 2, 0228)
 >
->`Dynamsoft Service Manager (DWASManager_17201026.dll, 64bit)`
+>`Dynamsoft Service Manager (DWASManager_17210228.dll, 64bit)`
 >
->**v17.2** (build version 17, 2, 0, 1026)
+>**v17.2.1** (build version 17, 2, 1, 0228)
 >
->`Dynamic Web TWAIN (dwt_17.2.0.1026.dll, 64bit)`
+>`Dynamic Web TWAIN (dwt_17.2.1.0228.dll, 64bit)`
 >
->**v17.2** (build version 17, 2, 0, 1026)
+>**v17.2.1** (build version 17, 2, 1, 0228)
 >
 >`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.3.0.1026.dll, 64bit)`
 >
->**v17.2** (build version 11, 3, 0, 1026)
+>**v17.2.1** (build version 11, 3, 0, 1026)
 >
 >`Dynamsoft OCR Basic Engine (DynamicOCRx64_10.0.0.0618.dll, 64bit)`
 >
->**v17.2** (build version 10, 0, 0, 0618)
+>**v17.2.1** (build version 10, 0, 0, 0618)
 >
 >`Dynamsoft Barcode Reader (dbrx64_8.6.0.1026.dll, 64bit)`
 >
@@ -247,12 +247,21 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 >
 >`Dynamsoft Webcam Addon (DynamicWebcamx64_15.0.0.0625.dll, 64bit)`
 >
->**v17.2** (build version 15, 0, 0, 0625)
+>**v17.2.1** (build version 15, 0, 0, 0625)
 >
 >`Dynamsoft Upload Module (UploadModule_1.7.2.1026.dll, 64bit)`
 >
->**v17.2** (build version 1, 7, 2, 1026)
+>**v17.2.1** (build version 1, 7, 2, 1026)
 
 ## Changelog
 
 Check out the [release notes](https://www.dynamsoft.com/web-twain/docs/info/schedule/stable.html?product=dwt&utm_source=npm) of the Dynamic Web TWAIN library.
+
+
+**Note**
+
+If you are upgrading from the old versions to V17.1+, please add the following code after Dynamsoft.DWT.ProductKey to make [Dynamsoft.DWT.Load](https://www.dynamsoft.com/web-twain/docs/info/api/Dynamsoft_WebTwainEnv.html#load) take effect.
+
+> Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 270, Height: 350 }];
+
+Otherwise, the initialization will fail.

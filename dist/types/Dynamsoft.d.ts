@@ -497,7 +497,7 @@ export interface ManagerEnv {
  * Interface for a WebTwain profile.
  */
 export interface Container {
-    WebTwainId: string;
+    WebTwainId?: string;
     ContainerId?: string;
     Width?: string | number;
     Height?: string | number;
