@@ -4,11 +4,12 @@
 ![jsdelivr](https://img.shields.io/jsdelivr/npm/hm/dwt.svg)
 ![](https://img.shields.io/snyk/vulnerabilities/npm/dwt.svg)
 
-Cross-platform and cross-browser JavaScript library for web document scanning. Interact with document scanners from Chrome, Firefox and more.
+[Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems. To see it in action, please visit <a href="https://demo.dynamsoft.com/web-twain/" target="_blank">**this online demo**</a>
+
+Note: Dynamic Web TWAIN SDK **v17.2.1** is built in this package. For more detail, check the [Version Info](#versions).
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Online Demo](#online-demo)
+- [Supported Environments](#Supported-Environment)
 - [License Key](#license-key)
 - [Installation](#installation)
 - [Deployment](#deployment)
@@ -19,9 +20,19 @@ Cross-platform and cross-browser JavaScript library for web document scanning. I
 - [License Agreement](#license-agreement)
 - [Versions](#versions)
 
-## Introduction
+## Supported Environments
 
-[Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems on **Windows**, **Linux** and **macOS**. You can even use your mobile devices running iOS | iPadOS | Android with the library starting in 17.0!
+### Supported Image Capturing Devices
+- Physical Document Scanners
+- Desktop Webcam
+- Mobile Camera
+
+### Supported Web Browsers
+- Chrome
+- Firefox
+- Edge
+- Internet Explorer
+- Safari
 
 ### Supported OSs
 - Windows
@@ -33,16 +44,6 @@ Cross-platform and cross-browser JavaScript library for web document scanning. I
 - x86/x64
 - MIPS64
 - ARM64
-
-### Supported Web Browsers
-- Firefox
-- Edge
-- Chrome
-- Safari
-
-## Online Demo
-#### Interact with document scanners from Chrome, Firefox and more
-https://demo.dynamsoft.com/web-twain/
 
 ## License Key
 [![](https://img.shields.io/badge/Get-30--day%20FREE%20Trial%20License-blue)](https://www.dynamsoft.com/customer/license/trialLicense/?product=dwt)
