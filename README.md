@@ -9,7 +9,7 @@
 Note: Dynamic Web TWAIN SDK **v17.2.1** is built in this package. For more detail, check the [Version Info](#versions).
 
 ## Table of Contents
-- [Supported Environments](#supported-environment)
+- [Supported Environments](#supported-environments)
 - [License Key](#license-key)
 - [Installation](#installation)
 - [Deployment](#deployment)
