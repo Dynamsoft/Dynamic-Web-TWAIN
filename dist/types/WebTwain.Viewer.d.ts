@@ -329,14 +329,14 @@ export interface DynamsoftViewer {
      * @param name Specify the event name.
      * @param callback The event listener
      */
-	on(name: string, callback: (event?: any, event1?: any, event2?: any) => void): void;
+	on(eventName: string, callback: (...param: any[]) => void): void;
     /**
      * [Scope] Main viewer
      * [Description] Remove the event handler.
      * @param eventName Specify the event name.
      * @param callback The event listener.
      */
-    off(eventName: string, callback?: () => void): void;
+	off(eventName: string, callback?: (...param: any[]) => void): void;
 }
 export interface EditorSettings {
     /**
@@ -607,14 +607,14 @@ export interface ThumbnailViewer {
      * @param name Specify the event name.
      * @param callback The event listener.
      */
-    on(name: string, callback: (event?: any, event1?: any, event2?: any) => void): void;
+	on(eventName: string, callback: (...param: any[]) => void): void;
     /**
      * [Scope] Thumbnail viewer
      * [Description] Remove the event handler.
      * @param eventName Specify the event name.
      * @param callback The event listener.
      */
-    off(eventName: string, callback?: () => void): void;
+	off(eventName: string, callback?: (...param: any[]) => void): void;
     /**
      * [Scope] Thumbnail viewer
      * [Description] Where to put the thumbnail view. The allowed values are left, top, right, bottom. The default value is left.

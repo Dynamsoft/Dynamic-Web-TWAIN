@@ -333,23 +333,23 @@ export interface DWTPro {
     /**
      * A callback function that is executed when the WebTwain related files are not found.
      */
-    OnWebTwainNotFound: () => {};
+    OnWebTwainNotFound: () => void;
     /**
      * A callback function that is executed after a time-consuming operation.
      */
-    OnWebTwainPostExecute: () => {};
+    OnWebTwainPostExecute: () => void;
     /**
      * A callback function that is executed before a time-consuming operation.
      */
-    OnWebTwainPreExecute: () => {};
+    OnWebTwainPreExecute: () => void;
     /**
      * A callback function that is executed when a WebTwain instance is created.
      */
-    OnWebTwainReady: () => {};
+    OnWebTwainReady: () => void;
     /**
      * A callback function that is executed right before the creation of a WebTwain instance.
      */
-    OnWebTwainWillInit: () => {};
+    OnWebTwainWillInit: () => void;
     /**
      * The version of the PDF module (not the rasterizer).
      */

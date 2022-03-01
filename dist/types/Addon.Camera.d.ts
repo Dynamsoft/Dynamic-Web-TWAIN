@@ -88,15 +88,15 @@ export interface Camera {
     closeVideo(): void;
     /**
      * Specify an event listener for the specified built-in viewer event.
-     * @param name Specify the event name.
+     * @param eventName Specify the event name.
      * @param callback The event listener.
      */
-	on(name: string, callback: (event?: any, event1?: any, event2?: any) => void): void;
+	on(eventName: string, callback: (...param: any[]) => void): void;
     /**
      * Remove a built-in viewer event handler.
      * @param eventName Specify the event name.
      */
-	off(eventName: string, callback?: (event: ViewerEvent) => void): boolean;
+	off(eventName: string, callback?: (...param: any[]) => void): void;
 }
 export interface DeviceInfo {
     deviceId: string;
@@ -177,11 +177,11 @@ export interface ScanConfiguration {
 		   visibility?: boolean;   //Whether to display the load local file icon. The default value is true.
 		};
 
-		funcConfirmExitContinuousScan?: (bExistImage: boolean) => void;
+		funcConfirmExitContinuousScan?: (bExistImage: boolean) => boolean;
 		 //funcConfirmExitContinuousScan is the callback funtion
 		 //Return true：Exit continuous scan mode without saving the captured image data. Return false: Stay on the original viewer
 
-		funcConfirmExit?: (bExistImage: boolean) => void;
+		funcConfirmExit?: (bExistImage: boolean) => boolean;
 		 //funcConfirmExit is the callback funtion，
 		 //Return true：End this capture without saving the image data. Return false: Stay on the original viewer
     };
@@ -202,12 +202,12 @@ export interface ScanConfiguration {
 			visibility?: boolean;    //Whether to display the rotate left icon. The default value is true.
 		};
   
-	filter?: {  
-		visibility?: boolean;   //Whether to display the filter icon. The default value is true.
+		filter?: {  
+	      visibility?: boolean;   //Whether to display the filter icon. The default value is true.
 	      valueList?:any;
 	      defaultValue?: string;  //Filter selected by default. By default, the original filter is selected.
 		};
-		exitDocumentScanAfterSave: boolean;  //The default value is false.
+		exitDocumentScanAfterSave?: boolean;  //The default value is false.
 	};
 
 	cropViewer?: { 

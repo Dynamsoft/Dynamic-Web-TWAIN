@@ -62,49 +62,49 @@ export interface PDFWSetting {
     /**
      * Specify the author.
      */
-    author: string;
+    author?: string;
     /**
      * Specify the compression type.
      */
-    compression: DynamsoftEnumsDWT.EnumDWT_PDFCompressionType | number;
+    compression?: DynamsoftEnumsDWT.EnumDWT_PDFCompressionType | number;
     /**
      * Specify the creator.
      */
-    creator: string;
+    creator?: string;
     /**
      * Specify the creation date.
      * Note that the argument should start with 'D:' like 'D:20181231'.
      */
-    creationDate: string;
+    creationDate?: string;
     /**
      * Specify the key words.
      */
-    keyWords: string;
+    keyWords?: string;
     /**
      * Specify the modified date.
      * Note that the argument should start with 'D:' like 'D:20181231'.
      */
-    modifiedDate: string;
+    modifiedDate?: string;
     /**
      * Specify the producer.
      */
-    producer: string;
+    producer?: string;
     /**
      * Specify the subject.
      */
-    subject: string;
+    subject?: string;
     /**
      * Specify the title.
      */
-    title: string;
+    title?: string;
     /**
      * Specify the PDF version. For example, '1.5'.
      */
-    version: string;
+    version?: string;
     /**
      * Specify the quality of the images in the file.
      * The value ranges from 0 to 100.
      * Only valid when the {compression} is 'JPEG' or 'JPEG2000'.
      */
-    quality: number;
+    quality?: number;
 }

@@ -79,7 +79,7 @@ export interface WebTwainIO extends WebTwainUtil {
     /**
      * Return or set the compression type of PDF files. This is a runtime property.
      */
-    PDFCompressionType: DynamsoftEnumsDWT.EnumDWT_PDFCompressionType;
+    PDFCompressionType: DynamsoftEnumsDWT.EnumDWT_PDFCompressionType | number;
     /**
      * Return or set the date when the PDF document is created.
      */

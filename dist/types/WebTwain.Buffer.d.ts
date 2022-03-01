@@ -265,12 +265,12 @@ export interface WebTwainBuffer extends WebTwainIO {
     /**
      * Get the status of the tags.
      */
-	GetTagList(): any;
+	GetTagList(): TagInfo[];
 	/**
      * Get the status of the tags for a specific image.
 	 * @param index Specify one image.
      */
-	GetTagListByIndex(index:number): any;	
+	GetTagListByIndex(index:number): TagName[];	
 	/**
      * Get the current file name.
      */
@@ -293,5 +293,19 @@ export interface WebTwainBuffer extends WebTwainIO {
 	/**
      * Get the info of the all files.
      */
-	GetFileInfoList(): any;
+	GetFileInfoList(): FileInfo[];
+}
+
+export interface TagName {
+    name: string;
+}
+
+export interface TagInfo {
+    name: string;
+    imageIds: number[];
+}
+
+export interface FileInfo {
+    name: string;
+    imageIds: number[];
 }

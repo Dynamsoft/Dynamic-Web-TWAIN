@@ -84,14 +84,8 @@ export interface WebTwainAcquire extends WebTwainEdit {
     ): boolean | void;
     /**
      * Bring up the Source Selection User Interface (UI) for the user to choose a data source.
-     * @param successCallback A callback function that is executed if the request succeeds.
-     * @param failureCallback A callback function that is executed if the request fails.
-     * @argument errorCode The error code.
-     * @argument errorString The error string.
      */
     SelectSourceAsync(
-        successCallBack?: () => void,
-        failureCallBack?: (errorCode: number, errorString: string) => void
     ): Promise<boolean>;
     /**
      * Select a data source by its index.
@@ -653,6 +647,21 @@ export interface DeviceConfiguration {
      * How much extended information is retrieved. Only valid when {IfGetExtImageInfo} is true.
      */
     extendedImageInfoQueryLevel?: number;
+	 /**
+     * Whether to simulate the manufacturer's UI inside the client-side browser (only effective when IfShowUI is true).
+     * (Added in 16.2)
+     */
+    RemoteScan?:boolean;
+    /**
+     * Whether to simulate the manufacturer's UI inside the client-side browser (only effective when IfShowUI and RemoteScan are both true and the WebTwain instance doing the scan has no viewer of its own).
+     * (Added in 16.2)
+     */
+    ShowRemoteScanUI?:boolean;
+    /**
+     * Specify a source by its index.
+     * (Added in 16.2)
+     */
+    SelectSourceByIndex?: number;
 }
 export interface SourceDetails {
     /**
@@ -982,23 +991,23 @@ export interface CapabilityDetails {
     /**
      * The container type of the Capability
      */
-    conType: ValueAndLabel;
+    conType?: ValueAndLabel;
     /**
      * The index for the current value of the Capability
      */
-    curIndex: number;
+    curIndex?: number;
     /**
      * The current value of the Capability
      */
-    curValue: ValueAndLabel;
+    curValue?: ValueAndLabel;
     /**
      * The index for the default value of the Capability
      */
-    defIndex: number;
+    defIndex?: number;
     /**
      * The operation types that are supported by the Capability. Types include {"get", "set", "reset" "getdefault", "getcurrent"}
      */
-    query: string[];
+    query?: string[];
     /**
      * The value type of the Capability. Value types include
      * TWTY_BOOL: 6
@@ -1015,21 +1024,22 @@ export interface CapabilityDetails {
      * TWTY_UINT16: 4
      * TWTY_int: 5
      */
-    valueType: ValueAndLabel;
+    valueType?: ValueAndLabel;
     /**
      * The available values of the Capability
      */
-    values: ValueAndLabel[];
+    values?: ValueAndLabel[];
 }
 export interface ValueAndLabel {
     /**
      * Numeric representation of the item
      */
-    value: DynamsoftEnumsDWT.EnumDWT_Cap | DynamsoftEnumsDWT.EnumDWT_CapType | DynamsoftEnumsDWT.EnumDWT_CapValueType | number;
+    value?: DynamsoftEnumsDWT.EnumDWT_Cap | DynamsoftEnumsDWT.EnumDWT_CapType | DynamsoftEnumsDWT.EnumDWT_CapValueType | number;
     /**
      * Label or name of the item
      */
-    label: string;
+    label?: string;
+	[key:string]:any;
 }
 export interface Capabilities {
     /**
@@ -1049,7 +1059,7 @@ export interface CapabilitySetup {
     /**
      * The value to set to the capability or the value of the capability after setting.
      */
-    curValue: number | string;
+    curValue: number | string | object;
     errorCode?: number;
     errorString?: string;
     /**

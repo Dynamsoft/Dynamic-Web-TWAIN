@@ -4,7 +4,7 @@
 ![jsdelivr](https://img.shields.io/jsdelivr/npm/hm/dwt.svg)
 ![](https://img.shields.io/snyk/vulnerabilities/npm/dwt.svg)
 
-[Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems. To see it in action, please visit <a href="https://demo.dynamsoft.com/web-twain/default.aspx?_blank">**this online demo**</a>
+[Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems. To see it in action, please visit <a href='https://demo.dynamsoft.com/web-twain/' target='_blank'>**this online demo**</a>
 
 Note: Dynamic Web TWAIN SDK **v17.2.1** is built in this package. For more detail, check the [Version Info](#versions).
 
