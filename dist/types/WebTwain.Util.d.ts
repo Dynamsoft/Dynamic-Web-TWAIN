@@ -70,7 +70,7 @@ export interface WebTwainUtil {
      * @param name Specify the event
      * @param callback The event listener
      */
-    UnregisterEvent(name: string, callback: () => void): boolean;
+    UnregisterEvent(name: string, callback?: (...arg: any[]) => void): boolean;
     /**
      * VersionInfo in the identity string of the Dynamic Web TWAIN library.
      */
