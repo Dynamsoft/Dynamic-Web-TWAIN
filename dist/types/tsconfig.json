@@ -18,7 +18,6 @@
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "dwt-tests.ts",
         "index.d.ts"
     ]
 }
