@@ -1,10 +1,11 @@
 License Agreement
 
-Revision date: 06/15/2021
+Revision date: 02/24/2022
 
 IMPORTANT - READ CAREFULLY: THIS IS A LEGAL AGREEMENT BETWEEN YOU AND DYNAMSOFT CORPORATION, FOR THE DYNAMSOFT SOFTWARE AND ANY ACCOMPANYING ONLINE OR ELECTRONIC DOCUMENTATION ("SOFTWARE"). BEFORE CONTINUING WITH THE INSTALLATION OF THE SOFTWARE, YOU MUST READ, ACKNOWLEDGE AND ACCEPT THE TERMS AND CONDITIONS OF THE SOFTWARE LICENSE AGREEMENT THAT FOLLOWS ("AGREEMENT"). IF YOU DO NOT ACCEPT THE TERMS AND CONDITIONS OF THE AGREEMENT, DO NOT CLICK AN "AGREE" OR SIMILAR BUTTON AND DO NOT INSTALL OR USE THE SOFTWARE.
 1. DEFINITIONS
 "Application" means an end user program that the Licensee develops using the Software and into which the Redistributables are incorporated, and which contain significant additional functionality over and above the functionality contained in the Software. Read what is counted as a single application to learn more.
+"Client Device" means: (i) a desktop computer (Windows, macOS or Linux) that runs Dynamic Web TWAIN Service, or (ii) a browser client of a mobile device that accesses the Software.
 "Licensee" means the person or entity entering into this Agreement with Dynamsoft. Any person who is entering into this Agreement on behalf of an organizational entity represents that he or she has the authority to bind such entity.
 "Redistributables" are those runtime libraries and files intended for duplication and distribution with the Application.
 "Server" means a device or computer that has the Software loaded into its RAM. Server includes the following: (i) a networked device with the Software installed that's accessible by multiple users who can independently operate the Software from another machine, (ii) a networked device with the Software running as a service that accepts connections from other machines or applications, (iii) a computer with the Software running to service the public or multiple users, e.g. a kiosk or a scan station, and (iv) a web server with the Software deployed that accepts end user connection to run the Software on the client machines.
@@ -14,29 +15,30 @@ Dynamsoft Corporation grants you a nonexclusive, non-transferable, and limited l
 2.1 Installation and Use
 You may install and use the Software only in the configuration and for the number of licenses acquired by you. In order to exercise your rights to the Software under this License Agreement you must activate your copy of the Software in the manner described during the launch sequence. Dynamsoft may control the number and type of licenses and the use of the Software by keycode(s).
 2.2 Evaluation License
-An Evaluation License may be used only for the quantity, type of licenses specified and for the period specified on the Software packaging, ordering or shipping documentation. Upon expiration of such specified period, the Software associated with an Evaluation License will cease to function unless Licensee has purchased full license keys. If the ordering or shipping documentation specifies a particular project, the Software may be used only with that project.  
+An Evaluation License may be used only for quantity, type of licenses specified and for the period specified on the Software packaging, ordering or shipping documentation. Upon expiration of such specified period, the Software associated with an Evaluation License will cease to function unless Licensee has purchased full license keys. If the ordering or shipping documentation specifies a particular project, the Software may be used only with that project.  
 An Evaluation License may only be used for evaluation or testing purposes and may not be used for production purposes. Notwithstanding any other provision of this Agreement, Software provided under an Evaluation License is provided "AS-IS" without warranty of any kind, express or implied. An Evaluation License may be terminated by Dynamsoft Corporation upon written notice at any time.
 2.3 Deployment License	
 A Deployment License allows copying, deployment, and distribution of the Redistributables to end users, without further distribution, as part of the Application for your internal business purposes, not for resale to external customers. 
 Unless otherwise stated in a duly executed agreement, annual subscription licenses will be valid for one year beginning with the license activation date. Licensee can extend licenses for additional one-year periods (each a "Renewal Term").
 The Deployment Licenses is on a per Application basis with the following licensing options available:
-•	Per Browser Client
-One Browser Client License allows access to a same-origin Application (same protocol, same host, and same port) to use the functionalities provided by the Software from one unique browser client. 
-A Browser Client that has not accessed any functionality of the Software for a consecutive 90 day period is considered an inactive browser client. The license seat taken by an inactive browser client will be automatically released and available for use by any other active browser client.
-When you reach the limit of the granted number of license seats, Dynamsoft offers a free additional 10% of your browser client allowance for your emergency use. Once running out of the additional browser client allowance, no new browser clients can access and use the Software until there are available license seats again. Please note that running out of your browser client allowance wouldn't impact any browser client that has already been licensed.
-•	Per Server License
+•	2.3.1 Per Client Device License
+One Client Device License allows access to a same-origin Application (same protocol, same host, and same port) to use the functionalities provided by the Software from one unique Client Device. 
+A Client Device that has not accessed any functionality of the Software for a consecutive 90-day period is considered an inactive Client Device. The license seat taken by an inactive Client Device will be automatically released and available for use by any other active Client Device.
+When you reach the limit of the granted number of license seats, Dynamsoft offers a free additional 10% of your client device allowance for your emergency use. Once running out of the additional client device allowance, no new client devices can access and use the Software until there are available license seats again. Please note that running out of your client device allowance wouldn't impact any client device that has already been licensed.
+•	2.3.2 Per Server License
 One Server License is required to deploy the Application to one Server. Servers apply to both physical and virtual servers and include but are not limited to production servers all of which require licensing: failover servers, development servers that are also used for testing purposes, quality assurance servers, testing servers, and staging servers. Continuous integration servers (build servers) and localhost development servers don't require additional licenses. 
-If the Application is deployed to cloud platforms, each cloud instance or container that the Application runs on is counted as one Server.
-Once a Server License has been purchased, there is no limit on the number of client browsers that access the Application and no limit on the number of document pages to be scanned or processed by the Software. 
-•	Per Page
+Per-server license is only for on-premises server deployment and is not applicable for cloud deployments. Please refer to section 2.4 below for applicable licensing if you are providing a cloud hosted/service application.
+•	2.3.3 Per Page License
 With a Per Page License, the Software can be used for processing a given number of document pages. For example, with a license for 100K pages of the scanner module of the Software, you can scan up to 100K document pages and save them to your server. 
 Please contact sales@dynamsoft.com if you are interested in the Per Page License option.
 2.4 OEM, ASP/Service Bureau and other Deployment Licenses 
 Licensee must execute a separate agreement prior to making any commercial deployment of the Application to third-party end users, either directly or through distribution channels. This may happen when Licensee acts as an ISV, OEM, ASP/service bureau, or solution provider offering the Application to the public.
-Additional licensing options can be discussed with sales@dynamsoft.com.
-3.EFFECT OF TERMINATION
+Applicable and additional licensing options can be discussed with sales@dynamsoft.com.
+3. MAINTENANCE SERVICES AND TECHNICAL SUPPORT
+Dynamsoft's annual software maintenance and technical support plan benefits are posted on Dynamsoft's website (www.dynamsoft.com) and Dynamsoft reserves the right to amend and modify its technical support policies and annual maintenance plan from time to time, at its sole discretion.
+4. EFFECT OF TERMINATION
 Upon the expiration of subscription licenses, all rights granted to the Licensee under this Agreement (including but not limited to, the rights to use, and/or provide access to the Software) shall terminate unless renewed, and Licensee shall immediately: (a) cease incorporating the Software into the Application; (b) cease use of the Software (in any form, including partial copies in its possession or under its control), and (c) destroy and decommission all copies of the Software.
-4.RESTRICTIONS
+5. RESTRICTIONS
 All rights reserved. Except as expressly permitted by this License Agreement or by applicable law you may not: (a) lease, loan, resell, assign, sublicense, or otherwise distribute the Software or any of the rights granted by this License Agreement without the express written permission of Dynamsoft; (b) use the Software to provide or operate Application Service Provider (ASP), service bureau, marketing, training, outsourcing services, or consulting services, or any other commercial service related to the Software or to develop training materials; (c) modify (even for purposes of error correction), adapt, or translate the Software or create derivative works there from except as necessary to configure the Software using the menus, options and tools provided for such purposes and contained in the Software; (d) in any way reverse engineer, disassemble or decompile the Software (including reverse compiling to ensure interoperability) or any portion thereof except to the extent and for the express purposes authorized by applicable law notwithstanding this limitation; (e) use the Software to develop a product which is competitive with any Dynamsoft Corporation product offerings; (f) use unauthorized keycode(s); (g) disclose any Software benchmark results to any third party without Dynamsoft prior written approval, (h) permit third party access to, or use of the Software except as expressly permitted herein, and (i) distribute or publish keycode(s). If you wish to exercise any right to reverse engineer to ensure interoperability in accordance with applicable law, you shall first provide written notice to Dynamsoft and permit Dynamsoft, at its discretion, to make an offer to provide information and assistance reasonably required to ensure Software interoperability with your other products for a fee to be mutually agreed upon (if any).  
 Your product is targeted to end users. The end-user application you develop using the Software must not be another development tool and/or SDK.
 Users of end-user applications you develop using the Software may not further use the Software, in whole or in part, for software development, copying or distribution. You must enforce this restriction in a separate agreement between you and the end user of your applications.
@@ -44,12 +46,13 @@ Evaluation License holders are granted the use of only one copy of the Software 
 You may make a single copy of the Software for backup purposes only.
 Old license(s) will be revoked within 60 days after a license upgrade.
 Dynamsoft reserves the right to change these terms and conditions at any time without prior notice.
-5.OWNERSHIP
+6. OWNERSHIP
 Dynamsoft and/or its suppliers retain all right, title and interest in and to the Software and all copies at all times, regardless of the form or media in or on which the original or other copies may subsequently exist. You neither own nor hereby acquire any claim or right of ownership to the Software or to any related patents, copyrights, trademarks or other intellectual property. You agree to retain the Software, the terms of this Agreement as well as any Software benchmark or similar tests (whether performed by you, Dynamsoft or any third party) in confidence and prevent them from unauthorized disclosure or use except with Dynamsoft prior written consent. Dynamsoft and/or its suppliers reserve all rights not expressly granted to you. Dynamsoft suppliers are the intended third-party beneficiaries of this License Agreement and have the express right to rely upon and directly enforce the terms set forth herein.
-6.WARRANTIES AND DISCLAIMERS
+7.WARRANTIES AND DISCLAIMERS
 THIS SOFTWARE AND THE ACCOMPANYING FILES ARE SOLD "AS IS" WITHOUT WARRANTY OF ANY KIND EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. ANY USE BY YOU OF THE SOFTWARE IS AT YOUR OWN RISK.
 NO LIABILITY FOR CONSEQUENTIAL DAMAGES. UNDER NO CIRCUMSTANCE SHALL DYNAMSOFT BE LIABLE FOR ANY DAMAGES WHATSOEVER ARISING FROM THE USE OR INABILITY TO USE DYNAMSOFT PRODUCTS.
-7.APPLICABLE LAWS
+8.APPLICABLE LAWS
 This agreement shall be governed by the laws of Canada.
 Business Practices. You shall (a) comply with all applicable laws and regulations, including the Foreign Corrupt Practices Act, (b) avoid deceptive, misleading or unethical practices, and (c) conduct business in a manner that reflects favorably at all times on the Dynamsoft Products and Dynamsoft's goodwill and reputation.
+
 
