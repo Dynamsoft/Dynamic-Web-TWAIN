@@ -277,7 +277,7 @@ export interface DynamsoftViewer {
      * [Description] Fit the image to the window
      * @param type Specify a type to fit. (width, height, both)
      */
-    fitWindow(type: string): void;
+    fitWindow(type?: 'height' | 'width'): void;
     /**
      * [Description] Set the CSS class name of the specified button defined in updateUISetting.
      * @param name Specify the button.
