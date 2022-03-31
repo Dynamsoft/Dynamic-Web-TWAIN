@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dynamic Web TWAIN Navigation Sample</title>
+    <script src="../dist/dynamsoft.webtwain.min.js"></script>
+</head>
+
+<body style="padding: 30px;">
+    <select size="1" id="source" style="position: relative; width: 220px;font-size: x-large;"></select>
+    <input type="button" style="font-size: x-large;" value="Scan" onclick="AcquireImage();" />
+    <input type="button" style="font-size: x-large;" value="Load" onclick="LoadImage();" />
+	<br />
+	<br />
+    <div style="width: 480px; display: block;">
+
+        <!-- dwtcontrolContainer is the default div id for Dynamic Web TWAIN control.
+        If you need to rename the id, you should also change the id in the dynamsoft.webtwain.config.js accordingly. -->
+        <div id="dwtcontrolContainer"></div>
+
+        <div style="width: 800px;">
+            <input style="font-size: x-large;" onclick="btnFirstImage_onclick()" type="button" value=" |< " />
+            <input style="font-size: x-large;" onclick="btnPreImage_onclick()" type="button" value=" < " />
+            <input style="font-size: x-large;" type="text" size="2" id="DW_CurrentImage" readonly="readonly" value="0" /> /
+            <input style="font-size: x-large;" type="text" size="2" id="DW_TotalImage" readonly="readonly" value="0" />
+            <input style="font-size: x-large;" onclick="btnNextImage_onclick()" type="button" value=" > " />
+            <input style="font-size: x-large;" onclick="btnLastImage_onclick()" type="button" value=" >| " /> Preview Mode:
+            <select style="font-size: x-large;" size="1" id="DW_PreviewMode" onchange="setlPreviewMode();">
+                <option value="0">1X1</option>
+                <option value="1">2X2</option>
+                <option value="2">3X3</option>
+                <option value="3">4X4</option>
+                <option value="4">5X5</option>
+            </select>
+        </div>
+    </div>
+
+    <input style="font-size: x-large;" onclick="btnRemoveSelectedImages_onclick()" type="button" value="Remove Selected Images" />
+    <input style="font-size: x-large;" onclick="btnRemoveAllImages_onclick()" type="button" value="Remove All Images" />
+
+    <script type="text/javascript">	
+		Dynamsoft.DWT.ResourcesPath = "../dist";
+		Dynamsoft.DWT.ProductKey = 't0078lQAAADwjfAgjja9bJQCvNLF+I95M8NcRwxGzd6Q8Rcy81WN4OKf50aIDZsYiqnFigGCu3ijhiwna69wgsZCtTcBpYF1QeJx78AEA7B9g';
+		window.onload = function () {
+            Dynamsoft.DWT.Containers = [{ContainerId:'dwtcontrolContainer', Width:700, Height:600}];
+            Dynamsoft.DWT.Load();
+		};
+		var console = window['console'] ? window['console'] : { 'log': function () { } };
+
+        Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
+
+        var DWObject;
+
+        function Dynamsoft_OnReady() {
+            DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
+            if (DWObject) {
+                var count = DWObject.SourceCount; // Get how many sources are installed in the system
+
+                for (var i = 0; i < count; i++)
+                    document.getElementById("source").options.add(new Option(DWObject.GetSourceNameItems(i), i)); // Add the sources in a drop-down list
+
+                // The event OnPostTransfer fires after each image is scanned and transferred
+                DWObject.RegisterEvent("OnPostTransfer", function () {
+                    setTimeout(updatePageInfo,20);
+                });
+
+                // The event OnPostLoad fires after the images from a local directory have been loaded into the control
+                DWObject.RegisterEvent("OnPostLoad", function () {
+                    setTimeout(updatePageInfo,20);
+                });
+
+                // The event click fires when the mouse clicks on an image on Dynamic Web TWAIN viewer
+                DWObject.Viewer.on("click", function () {
+                   updatePageInfo();
+                });
+
+                // The event topPageChanged fires when the top image currently displayed in the viewer changes
+                DWObject.Viewer.on("topPageChanged", topPageChanged);
+            }
+        }
+		
+		function topPageChanged(index){
+			DWObject.CurrentImageIndexInBuffer = index;
+			updatePageInfo();
+		}
+
+        function AcquireImage() {
+            if (DWObject) {
+                var OnAcquireImageSuccess, OnAcquireImageFailure;
+                OnAcquireImageSuccess = OnAcquireImageFailure = function () {
+                    DWObject.CloseSource();
+                };
+
+                DWObject.SelectSourceByIndex(document.getElementById("source").selectedIndex);
+                DWObject.OpenSource();
+                DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan.
+                DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
+            }
+        }
+
+        //Callback functions for async APIs
+        function OnSuccess() {
+            console.log('successful');
+        }
+
+        function OnFailure(errorCode, errorString) {
+            alert(errorString);
+        }
+
+        function LoadImage() {
+            if (DWObject) {
+                DWObject.IfShowFileDialog = true; // Open the system's file dialog to load image
+                DWObject.LoadImageEx("", Dynamsoft.DWT.EnumDWT_ImageType.IT_ALL, OnSuccess, OnFailure); // Load images in all supported formats (.bmp, .jpg, .tif, .png, .pdf). OnSuccess or OnFailure will be called after the operation
+            }
+        }
+
+        function btnPreImage_onclick() {
+            if (DWObject) {
+				DWObject.Viewer.off("topPageChanged", topPageChanged);
+				DWObject.Viewer.previous();
+				updatePageInfo();
+				DWObject.Viewer.on("topPageChanged", topPageChanged);
+            }
+        }
+
+        function btnNextImage_onclick() {
+            if (DWObject) {
+				DWObject.Viewer.off("topPageChanged", topPageChanged);
+				DWObject.Viewer.next();
+				updatePageInfo();
+				DWObject.Viewer.on("topPageChanged", topPageChanged);
+            }
+        }
+
+        function btnFirstImage_onclick() {
+            if (DWObject) {
+				DWObject.Viewer.first();
+				updatePageInfo();
+            }
+        }
+
+        function btnLastImage_onclick() {
+            if (DWObject) {
+				DWObject.Viewer.off("topPageChanged", topPageChanged);
+				
+				DWObject.Viewer.last();
+				updatePageInfo();
+				
+				DWObject.Viewer.on("topPageChanged", topPageChanged);
+            }
+        }
+        function setlPreviewMode() {
+            if (DWObject) {
+                var o = parseInt(document.getElementById("DW_PreviewMode").selectedIndex + 1);
+				DWObject.Viewer.off("topPageChanged", topPageChanged);
+                DWObject.Viewer.setViewMode(o, o);
+				if (document.getElementById("DW_PreviewMode").selectedIndex != 0) {
+					DWObject.Viewer.cursor = "pointer";
+				}
+				else {
+					DWObject.Viewer.cursor = "crosshair";
+				}
+				DWObject.Viewer.on("topPageChanged", topPageChanged);
+            }
+        }
+
+        function btnRemoveSelectedImages_onclick() {
+            if (DWObject) {
+                DWObject.RemoveAllSelectedImages();
+                if (DWObject.HowManyImagesInBuffer == 0) {
+                    document.getElementById("DW_CurrentImage").value = "0";
+                    document.getElementById("DW_TotalImage").value = "0";
+                }
+                else {
+                    updatePageInfo();
+                }
+            }
+        }
+
+        function btnRemoveAllImages_onclick() {
+            if (DWObject) {
+                DWObject.RemoveAllImages();
+                document.getElementById("DW_TotalImage").value = "0";
+                document.getElementById("DW_CurrentImage").value = "0";
+            }
+        }
+
+        function updatePageInfo() {
+            if (DWObject) {
+                document.getElementById("DW_TotalImage").value = DWObject.HowManyImagesInBuffer;
+                document.getElementById("DW_CurrentImage").value = DWObject.CurrentImageIndexInBuffer + 1;
+            }
+        }
+    </script>
+</body>
+
+</html>

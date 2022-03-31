@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Use Auto Feeder to scan</title>
+  <script src="../dist/dynamsoft.webtwain.min.js"></script>
+</head>
+
+<body style="padding: 30px;">
+  <lable id="ADF" style="font-size: x-large;" ><input type="checkbox" checked="checked">Auto Feeder</lable>
+  <input type="button" style="font-size: x-large;" id="acquireButton" value="Acquire" onclick="AcquireImage();" />
+  <input type="button" style="font-size: x-large;display:none;" id="mobileFile" value="Acquire" onclick="LoadImage()" />
+  <!-- dwtcontrolContainer is the default div id for Dynamic Web TWAIN control.
+    If you need to rename the id, you should also change the id in the dynamsoft.webtwain.config.js accordingly. -->
+  <br />
+  <br />
+  <div id="dwtcontrolContainer"></div>
+
+  <script type="text/javascript">
+    Dynamsoft.DWT.ResourcesPath = "../dist";
+    Dynamsoft.DWT.ProductKey = 't0078lQAAADwjfAgjja9bJQCvNLF+I95M8NcRwxGzd6Q8Rcy81WN4OKf50aIDZsYiqnFigGCu3ijhiwna69wgsZCtTcBpYF1QeJx78AEA7B9g';
+    Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); 
+    window.onload = function () {
+      if (Dynamsoft.Lib.env.bMobile) {
+        document.getElementById('ADF').style.display = "none";
+        document.getElementById('acquireButton').style.display = "none";
+        document.getElementById('mobileFile').style.display = "";
+      }
+      Dynamsoft.DWT.Containers = [{ContainerId:'dwtcontrolContainer', Width:600, Height:800}];
+      Dynamsoft.DWT.Load();
+    };
+    var DWObject;
+
+    function Dynamsoft_OnReady() {
+      DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
+    }
+
+    function AcquireImage() {
+      if (DWObject) {
+        DWObject.SelectSource(function () {
+          DWObject.OpenSource();
+          DWObject.AcquireImage(
+            {
+              IfShowUI: false,
+              IfFeederEnabled: document.getElementById("ADF").checked,
+              PixelType: Dynamsoft.DWT.EnumDWT_PixelType.TWPT_RGB,
+              Resolution: 200,
+              IfDisableSourceAfterAcquire: true
+            },
+            function () {
+              console.log("Successful!");
+            },
+            function (settings, errCode, errString) {
+              alert(errString)
+            }
+          );
+        }, function () {
+          alert('SelectSource failed!');
+        });
+      }
+    }
+
+    function LoadImage() {
+      DWObject.LoadImageEx('', 5);
+    }
+  </script>
+</body>
+
+</html>
