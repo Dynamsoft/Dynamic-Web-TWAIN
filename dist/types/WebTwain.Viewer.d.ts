@@ -1,5 +1,6 @@
 import { WebTwainAcquire } from "./WebTwain.Acquire";
-import { Resolution } from "./Addon.Camera";
+import { DocumentConfiguration, Resolution } from "./Addon.Camera";
+import { DynamsoftEnumsDWT } from "./Dynamsoft.Enum";
 
 export interface WebTwainViewer extends WebTwainAcquire {
     /**
@@ -193,6 +194,16 @@ export interface DynamsoftViewer {
      * [Description] When set to true, will make sure the first image in the viewer is always selected when scrolling through multiple images.
      */
     autoChangeIndex: boolean;
+	    /**
+     * [Scope] Main viewer
+     * [Description] Return or set the selection mode used when acquiring images.
+     */
+    selectionMode: number | DynamsoftEnumsDWT.EnumDWT_SelectionMode;
+	/**
+     * [Scope] Main viewer
+     * [Description] Set whether to allow page dragging to reorder the pages.
+     */
+	allowPageDragging?: boolean;
     /**
      * [Scope] Main viewer
      * [Description] Return the index of the next image of the currently selected image.
@@ -234,7 +245,7 @@ export interface DynamsoftViewer {
     /**
      * [Scope] Global
      * [Description] Create a thumbnail viewer with specified settings.
-     * @param editorSettings The thumbnailViewerSettings settings. If not set, the default setting is used.
+     * @param thumbnailViewerSettings The thumbnailViewerSettings settings. If not set, the default setting is used.
      */
     createThumbnailViewer(thumbnailViewerSettings?: ThumbnailViewerSettings): ThumbnailViewer;
     /**
@@ -245,6 +256,13 @@ export interface DynamsoftViewer {
      * @param ifFull Whether to display the element in full screen.
      */
     createCustomElement(element: HTMLDivElement, location?: string, ifFull?: boolean): CustomElement;
+	/**
+     * [Scope] Global
+     * [Description] Create a document editor with specified settings.
+     * [Usage Notes]If you create it multiple times, you'll receive 'A DocumentEditor already exists' error, and an existing DocumentEditor object will be returned.
+     * @param documentConfiguration The DocumentEditor settings. If not set, the default setting is used.
+     */
+    createDocumentEditor(documentConfiguration?: DocumentConfiguration): DocumentEditor;
     /**
      * [Scope] Global
      * [Description] Return the current UI settings (from DVS itself)
@@ -278,6 +296,18 @@ export interface DynamsoftViewer {
      * @param type Specify a type to fit. (width, height, both)
      */
     fitWindow(type?: 'height' | 'width'): void;
+	/**
+     * [Scope] Main viewer
+     * Update checkbox style
+     * @argument checkboxSettings Settings for checkboxex.
+     */
+	updateCheckboxStyle(checkboxSettings?: CheckboxSettings): void;
+	/**
+     * [Scope] Main viewer
+	 * Update page number style
+	 * @argument pageNumberSettings Settings for page numbers.
+     */
+	updatePageNumberStyle(pageNumberSettings?: PageNumberSettings): void;
     /**
      * [Description] Set the CSS class name of the specified button defined in updateUISetting.
      * @param name Specify the button.
@@ -299,9 +329,9 @@ export interface DynamsoftViewer {
 	/**
 	 * [Scope] Global
 	 * [Description] Create a document webviewer with specified settings.
-	 * @param templateName The document webviewer settings. If not set, the default setting is used.
+	 * @param templateName The document webviewer settings. If not set, the default setting is used. The allowed value is "documentCapture".
 	 */
-	createTemplate(templateName?: string): DocumentViewerTemplate;
+	createTemplate(templateName?: string, documentConfiguration?: DocumentConfiguration): DocumentViewerTemplate;
     /**
      * [Scope] Global
      * [Description] Create a Dynamsoft Viewer instance and bind it to the WebTwain instance.
@@ -543,6 +573,8 @@ export interface ThumbnailViewerSettings {
      * Allow any CSS rules
      */
     selectedPageBackground?: string;
+	checkbox?: CheckboxSettings;
+	pageNumber?: PageNumberSettings;
 }
 export interface CustomElement {
     /**
@@ -601,6 +633,18 @@ export interface ThumbnailViewer {
      * [Description] Set the view mode.
      */
     updateViewMode(viewMode: ViewMode): void;
+	/**
+     * [Scope] Thumbnail viewer
+     * Update checkbox style
+     * @argument checkboxSettings Settings for checkboxex.
+     */
+	updateCheckboxStyle(checkboxSettings?: CheckboxSettings): void;
+	/**
+     * [Scope] Thumbnail viewer
+	 * Update page number style
+	 * @argument pageNumberSettings Settings for page numbers.
+     */
+	updatePageNumberStyle(pageNumberSettings?: PageNumberSettings): void;
     /**
      * [Scope] Thumbnail viewer
      * [Description] Specify an event listener for the viewer event.
@@ -739,6 +783,23 @@ export interface ThumbnailViewer {
      */
     selectedImageBackground: string;
 }
+export interface DocumentEditor {
+	 /**
+     * [Scope] DocumentEditor viewer
+     * [Description] Show the DocumentEditor viewer.
+     */
+    show(): void;
+    /**
+     * [Scope] DocumentEditor viewer
+     * [Description] Hide the DocumentEditor viewer.
+     */
+    hide(): void;
+    /**
+     * [Scope] DocumentEditor viewer
+     * [Description] Delete the DocumentEditor viewer.
+     */
+    dispose(): void;
+}
 
 export interface ViewMode {
     columns?: number;
@@ -806,4 +867,41 @@ export interface DocumentViewerTemplate {
      * Get CustomElement. Can display save & upload viewer in CustomElement.
      */
 	getCustomElement(): CustomElement;  
+}
+export interface CheckboxSettings {
+  visibility?: string;  //"visible":hidden", default:"hidden" 
+  width?: number | string;  //default: "24px", number unit: px, string value: "24px"/"10%", relative to parent container
+  height?: number | string;  //default: "24px", number unit: px, string value: "24px"/"10%", relative to parent container
+  background?: string;  //default: "#ffffff"
+  borderWidth?: number | string;   //default: "2px", unit: px, percentage value not supported
+  borderColor?: string;  //default : "#000000"
+  checkMarkColor?: string; //default: "#000000"
+  checkMarkLineWidth?: number | string; //default: "2px", unit: px, percentage value not supported
+  borderRadius?: number | string;   //default: 0, number unit: px, string value: "10px"/"10%", relative to itself
+  opacity?: number;  //default: 0.5, value range [0-1], value greater 1 defaults to 1
+  left?: number | string;   //default: 0, number unit: px, string value: "10px"/"10%", relative to parent container
+  top?: number | string;   //default: 0, number unit: px, string value: "10px"/"10%", relative to parent container
+  right?: number | string;   //default: "", number unit: px, string value: "10px"/"10%", relative to parent container
+  bottom?: number | string;  //default: "", number unit: px, string value: "10px"/"10%", relative to parent container
+  translateX?: number | string; //default: "", number unit: px, string value: "10px"/"10%", relative to itself
+  translateY?: number | string; //default: "";  number unit: px, string value: "10px"/"10%", relative to itself
+}
+export interface PageNumberSettings {
+  visibility?: string; //"visible": hidden", default: "hidden" 
+  width?: number | string; //default: "24px", number unit: px, string value: "24px"/"10%", relative to parent container
+  height?: number | string, //default: "24px", number unit: px, string value: "24px"/"10%", relative to parent container
+  background?: string; //default: "#ffffff"            
+  borderWidth?: number | string; //default: "1px", unit: px, percentage value not supported
+  borderColor?: string; //default: "#a79898"
+  borderRadius?: number | string;  //default: "50%", number unit: px, string value: "10px"/"10%", relative to itself
+  opacity?: number; //default: 0.5, value range [0-1], value greater 1 defaults to 1
+  color?: string;  //default : "#000000", supports #16 hexadecimal only
+  fontFamily?: string; //default : "sans-serif"
+  fontSize?: number | string; //default: 12, unit: px, percentage value not supported
+  left?: number | string;  //default: "", number unit: px, string value: "10px"/"10%", relative to parent container
+  top?: number | string;  //default: "", number unit: px, string value: "10px"/"10%", relative to parent container
+  right?: number | string;  //default: 0, number unit: px, string value: "10px"/"10%", relative to parent container
+  bottom?: number | string;  //default: 0, number unit: px, string value: "10px"/"10%", relative to parent container
+  translateX?: number | string; //default: "", number unit: px, string value: "10px"/"10%", relative to itself
+  translateY?: number | string; //default: "", number unit: px, string value: "10px"/"10%", relative to itself
 }

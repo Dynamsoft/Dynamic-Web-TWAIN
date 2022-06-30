@@ -14,7 +14,7 @@
 *
 * Copyright 2022, Dynamsoft Corporation
 * Author: Dynamsoft Support Team
-* Version: 17.2
+* Version: 17.3
 */
 import Dynamsoft from "./Dynamsoft";
 export default Dynamsoft;

@@ -69,9 +69,9 @@ export interface PDFWSetting {
     compression?: DynamsoftEnumsDWT.EnumDWT_PDFCompressionType | number;
     /**
      * Specify the page type.
-	 * 0： page width&height decided by image
+	 * 0: page width&height decided by image
 	 * 2: A4
-	 * 4： A3
+	 * 4: A3
 	 * 6: Letter
 	 * 8: Legal
      */

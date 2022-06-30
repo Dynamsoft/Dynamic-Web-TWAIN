@@ -1572,7 +1572,9 @@ export namespace DynamsoftEnumsDWT {
         /** CCITT modified Huffman RLE. */
         PDF_RLE = 4,
         /** JPEG compression. */
-        PDF_JPEG = 5
+        PDF_JPEG = 5,
+		PDF_JP2000 = 6,
+		PDF_JBIG2 = 7
     }
     /** ICAP_PIXELTYPE values (PT_ means Pixel Type) */
     enum EnumDWT_PixelType {
@@ -1851,4 +1853,13 @@ export namespace DynamsoftEnumsDWT {
         TDM_GENERAL_WIDTH_CONCENTRATION = 2,
         TDM_SKIP = 0
     }
+	enum EnumDWT_ConfirmExitType {
+        Cancel = 0,   //cancel, Stay on the original viewer
+        Exit = 1,     //Exit original viewer without saving the image data
+        SaveAndExit = 2   //Exit original viewer with saving the image data
+    }
+	enum EnumDWT_SelectionMode {
+		Single = 0,
+		Multiple = 1
+	}
 }

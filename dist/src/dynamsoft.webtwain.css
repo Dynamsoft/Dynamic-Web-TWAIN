@@ -1,4 +1,3 @@
-/* @20220322 143206 */ 
 /*!
 * Dynamsoft JavaScript Library
 * Product: Dynamsoft Web Twain
@@ -384,6 +383,7 @@
     left: 0;
     top: 20%;
     width: 90%;
+	pointer-events: none;
 }
 
 .dynamsoft-dialog .dynamsoft-dwt-dialog-body{
@@ -930,30 +930,6 @@ src: url('data:font/ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwR1NVQiCLJXoAAAE4AAA
   border: 0;
 }
 
-.ds-dvs-ui-shangyibu:before {
-    content: '\ebef';
-}
-
-.ds-dvs-ui-xiayibu:before {
-    content: '\e60f';
-}
-
-.ds-dvs-ui-lijiquerenx:before {
-    content: '\e631';
-}
-
-.ds-dvs-ui-shibie-chuanti:before {
-    content: '\e60e';
-}
-
-.ds-dvs-ui-zhaoxiangji:before {
-    content: '\e675';
-}
-
-.ds-dvs-ui-zhongpai:before {
-    content: '\e789';
-}
-
 .ds-dvs-ui-move_left:before {
     content: '\e648';
 }
@@ -976,10 +952,6 @@ src: url('data:font/ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwR1NVQiCLJXoAAAE4AAA
 
 .ds-dvs-ui-unselected:before {
     content: '\e628';
-}
-
-.ds-dvs-ui-selected1:before {
-    content: '\e627';
 }
 
 .ds-dvs-ui-exitFullWeb:before {

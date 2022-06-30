@@ -157,10 +157,6 @@ export interface DSLibEnv {
      */
     readonly bWin: boolean;
     /**
-     * Whether the operating system is 64bit Windows.
-     */
-    readonly bWin64: boolean;
-    /**
      * The base path.
      */
     readonly basePath: string;
@@ -188,14 +184,6 @@ export interface DSLibEnv {
      * Whether it is a pad viewer.
      */
     isPadViewer(): boolean;
-    /**
-     * Whether the platform is 64bit.
-     */
-    readonly isX64: boolean;
-    /**
-     * Information about macOSX.
-     */
-    readonly macOSX: string;
     /**
      * OS version.
      */
@@ -522,5 +510,13 @@ export interface WasmConfig {
      */
 	fetchOptions: any;
 }
-declare const Dynamsoft: (typeof DynamsoftStatic);
+export interface DWTInstall {
+    funcConfirmRemove?: () => Promise<boolean>;  
+	funcConfirmExit?: (bExistImage: boolean) => Promise<boolean>;
+	funcConfirmExitAfterSave?: (firedByDocumentEdit: boolean) => void;
+	funcConfirmCropViewerExit?: (bChanged: boolean, previousViewerName: string) => Promise<Number | DynamsoftEnumsDWT.EnumDWT_ConfirmExitType>;
+	funcConfirmMainViewerExit?: (bChanged: boolean, previousViewerName: string) => Promise<Number | DynamsoftEnumsDWT.EnumDWT_ConfirmExitType>;
+}
+declare const Dynamsoft: (DWTInstall & typeof DynamsoftStatic);
+//declare const Dynamsoft: (typeof DynamsoftStatic);
 export default Dynamsoft;

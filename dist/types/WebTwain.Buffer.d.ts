@@ -272,28 +272,37 @@ export interface WebTwainBuffer extends WebTwainIO {
      */
 	GetTagListByIndex(index:number): TagName[];	
 	/**
-     * Get the current file name.
+     * Get the current document name.
      */
-	GetCurrentFileName(): string;
+	GetCurrentDocumentName(): string;
 	/**
-     * Create the file.
-	 * @param fileName Specify the file name.
+     * Create the document.
+	 * @param fileName Specify the document name.
      */
-	CreateFile(fileName: string):boolean;
+	CreateDocument(documentName: string):boolean;
 	/**
-     * open the file.
-	 * @param fileName Specify the file name.
+     * open the document.
+	 * @param fileName Specify the document name.
      */
-	OpenFile(fileName: string):boolean;
+	OpenDocument(documentName: string):boolean;
 	/**
-     * remove the file.
-	 * @param fileName Specify the file name.
+     * remove the document.
      */
-	RemoveFile():boolean;
+	RemoveDocument(documentName:string):boolean;
 	/**
-     * Get the info of the all files.
+	 * Rename a document.
+	 * @argument oldDocumentName Specify the old document name.
+	 * @argument newDocumentName Specify the new document name.
+	 */
+	RenameDocument(oldDocumentName:string, newDocumentName:string):boolean;
+	/**
+     * Get the info of the all documents.
      */
-	GetFileInfoList(): FileInfo[];
+	GetDocumentInfoList(): DocumentInfo[];
+	/**
+     * Gets the RawData for the specified image captured from camera.
+     */
+	GetRawDataAsync(index: number): Promise<RawData>;
 }
 
 export interface TagName {
@@ -305,7 +314,32 @@ export interface TagInfo {
     imageIds: number[];
 }
 
-export interface FileInfo {
+export interface DocumentInfo {
     name: string;
     imageIds: number[];
 }
+
+export interface RawData {
+	displayImage:{  //Data of the display image, after filter and crop effects
+		data: Blob;
+		bitDepth: number;
+		height: number;
+		resolutionX: number;
+		resolutionY: number;
+		width: number;
+	},
+	documentData:{
+		angle: number;  //the clockwise rotation angle of the original image
+		polygon: [{x:number, y:number},{x:number, y:number},{x:number, y:number},{x:number, y:number}]; //selection area
+		filterValue: string;
+		originImage:{ //Data of the original image
+			bitDepth: number;
+			data: Blob;
+			height: number;
+			width: number;
+			resolutionX: number;
+			resolutionY: number;
+		}
+	}
+}
+

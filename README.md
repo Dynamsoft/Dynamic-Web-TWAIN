@@ -6,7 +6,7 @@
 
 [Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems. To see it in action, please visit <a href="https://demo.dynamsoft.com/web-twain/" target="_blank">**this online demo**</a>
 
-Note: Dynamic Web TWAIN SDK **v17.2.5** is built in this package. For more detail, check the [Version Info](#versions).
+Note: Dynamic Web TWAIN SDK **v17.3** is built in this package. For more detail, check the [Version Info](#versions).
 
 ## Table of Contents
 - [Supported Environments](#supported-environments)
@@ -225,35 +225,35 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
 >`Dynamsoft Service (DynamsoftService.exe, 64bit)`
 >
->**v17.2.1** (build version 1, 7, 2, 0228)
+>**v17.3** (build version 1, 7, 3, 0531)
 >
->`Dynamsoft Service Manager (DWASManager_17210228.dll, 64bit)`
+>`Dynamsoft Service Manager (DWASManager_17300531.dll, 64bit)`
 >
->**v17.2.1** (build version 17, 2, 1, 0228)
+>**v17.3** (build version 17, 3, 0, 0531)
 >
->`Dynamic Web TWAIN (dwt_17.2.1.0228.dll, 64bit)`
+>`Dynamic Web TWAIN (dwt_17.3.0.0531.dll, 64bit)`
 >
->**v17.2.1** (build version 17, 2, 1, 0228)
+>**v17.3** (build version 17, 3, 0, 0531)
 >
->`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.3.0.1026.dll, 64bit)`
+>`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.4.0.0531.dll, 64bit)`
 >
->**v17.2.1** (build version 11, 3, 0, 1026)
+>**v17.3** (build version 11, 4, 0, 0531)
 >
 >`Dynamsoft OCR Basic Engine (DynamicOCRx64_10.0.0.0618.dll, 64bit)`
 >
->**v17.2.1** (build version 10, 0, 0, 0618)
+>**v17.3** (build version 10, 0, 0, 0618)
 >
->`Dynamsoft Barcode Reader (dbrx64_8.6.0.1026.dll, 64bit)`
+>`Dynamsoft Barcode Reader (dbrx64_8.8.0.0531.dll, 64bit)`
 >
->**v8.6.0** (build version 8, 6, 0, 1026)
+>**v8.8.0** (build version 8, 8, 0, 0531)
 >
 >`Dynamsoft Webcam Addon (DynamicWebcamx64_15.0.0.0625.dll, 64bit)`
 >
->**v17.2.1** (build version 15, 0, 0, 0625)
+>**v17.3** (build version 15, 0, 0, 0625)
 >
 >`Dynamsoft Upload Module (UploadModule_1.7.2.1026.dll, 64bit)`
 >
->**v17.2.1** (build version 1, 7, 2, 1026)
+>**v17.3** (build version 1, 7, 2, 1026)
 
 ## Changelog
 
