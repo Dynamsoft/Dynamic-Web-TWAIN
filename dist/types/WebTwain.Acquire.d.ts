@@ -1,5 +1,6 @@
 import { DynamsoftEnumsDWT } from "./Dynamsoft.Enum";
 import { WebTwainEdit } from "./WebTwain.Edit";
+import { WebTwain } from "./WebTwain";
 
 export interface WebTwainAcquire extends WebTwainEdit {
     /**
@@ -84,9 +85,10 @@ export interface WebTwainAcquire extends WebTwainEdit {
     ): boolean | void;
     /**
      * Bring up the Source Selection User Interface (UI) for the user to choose a data source.
+     * @param deviceType The device type. Added the parameter deviceType in Dynamic Web TWAIN 18
      */
-    SelectSourceAsync(
-    ): Promise<boolean>;
+    SelectSourceAsync(deviceType?: DynamsoftEnumsDWT.EnumDWT_DeviceType | number
+    ): Promise<number>;
     /**
      * Select a data source by its index.
      * @param index The index of the data source.
@@ -97,6 +99,22 @@ export interface WebTwainAcquire extends WebTwainEdit {
      * @param index The index of the data source.
      */
     SelectSourceByIndexAsync(index: number): Promise<boolean>;
+    /**
+     * Return all available devices (scanners, eSCL scanners, etc.) for the device type (if specified)
+     * @param deviceType The device type
+     * @param refresh Default value: false
+     */
+	GetDevicesAsync(deviceType?: DynamsoftEnumsDWT.EnumDWT_DeviceType | number, refresh?: boolean): Promise<Device[]>;
+    /**
+     * Select the device to use for scanning
+     * @param device the device 
+     */
+	SelectDeviceAsync(device: Device): Promise< boolean>;
+    /**
+     * Scan documents into another DWObject control. eSCL is not supported.
+     * @param deviceConfiguration The device configuration
+     */
+	AcquireImageAsync(deviceConfiguration?: DeviceConfiguration): Promise< boolean>;
     /**
      * Sets a timer which stops the data source opening process once it expires.
      * @param duration Define the duration of the timer (in milliseconds).
@@ -636,6 +654,10 @@ export interface DeviceConfiguration {
      */
     IfDisableSourceAfterAcquire?: boolean;
     /**
+     * Whether to close source after aquisition.
+     */
+	IfCloseSourceAfterAcquire?:boolean;
+    /**
      * Whether to retrieve information about the image after it's transferred.
      */
     IfGetImageInfo?: boolean;
@@ -646,7 +668,7 @@ export interface DeviceConfiguration {
     /**
      * How much extended information is retrieved. Only valid when {IfGetExtImageInfo} is true.
      */
-    extendedImageInfoQueryLevel?: number;
+    extendedImageInfoQueryLevel?: DynamsoftEnumsDWT.EnumDWT_ExtImageInfo | number;
 	 /**
      * Whether to simulate the manufacturer's UI inside the client-side browser (only effective when IfShowUI is true).
      * (Added in 16.2)
@@ -1066,4 +1088,16 @@ export interface CapabilitySetup {
      * Whether to "ignore" or "fail" the request if an exception occurs when setting this specific capability.
      */
     exception?: string;
+}
+export interface ServiceInfo {
+	server: string; // same to serverUrl, user input
+	attrs?: any;
+}
+export interface Device {
+	name: string; 
+	displayName: string; 
+	deviceType: DynamsoftEnumsDWT.EnumDWT_DeviceType;
+	serviceInfo?: ServiceInfo;
+	deviceInfo?: any;
+	acquireImage(deviceConfiguration: DeviceConfiguration | null, sendTo: WebTwain): Promise< boolean>;
 }

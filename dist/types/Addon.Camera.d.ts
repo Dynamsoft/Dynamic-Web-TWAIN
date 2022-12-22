@@ -3,11 +3,11 @@ export interface Camera {
     /**
      * Hide the camera interface.
      */
-    hide(): void;
+    hide(): boolean;
     /**
      * Show the camera interface.
      */
-    show(): void;
+    show(): boolean;
     /**
      * Return a list of all available cameras.
      */
@@ -89,6 +89,18 @@ export interface Camera {
      */
     closeVideo(): void;
     /**
+     * Turn on the torch/flashlight.
+     */
+	turnOnTorch(): Promise<void>;
+    /**
+     * Turn off the torch/flashlight.
+     */
+	turnOffTorch(): Promise<void>;
+    /**
+     * Get the camera capabilities. The return type is MediaTrackCapabilities
+     */
+	getCapabilities(): MediaTrackCapabilities;
+    /**
      * Specify an event listener for the specified built-in viewer event.
      * @param eventName Specify the event name.
      * @param callback The event listener.
@@ -144,7 +156,7 @@ export interface ScannerViewer {
 		strokeWidth?: string;       //default: "2px"
 		dash?: string;   //The allowed value are "solid" and "dashed", the default value is "solid".
 	};
-	element?: HTMLDivElement | string;  //Bind the elment or elment id. 
+	element?: HTMLDivElement | HTMLElement | string;  //Bind the elment or elment id. 
 				//After binding, display the video in the spcified element, otherwise, display the video in full screen.
 	headerStyle?:{
 		background?: string;     //background color of the head, default : "#000000". Only supports #16 hexadecimal.
@@ -169,6 +181,12 @@ export interface ScannerViewer {
 		valueList?: any;
 		defaultValue?: Resolution; //Set the default value according to the value set in the valueList.
 	};
+	
+	torch?: { //
+		visibility?:string;   //Whether to show torch icon. The allowed values are "visible" and "hidden". The default value is "visible".
+		enableTorch?: boolean;   //Whether to enable torch. The default value is false.
+	};
+	
 	autoScan?: { //Automatically capture when a clear document is detected. Only applicable to video scanning. 
 		visibility?:string;   //Whether to display the automatic scan icon. The allowed value are "visible" and "hidden". The default value is "visible".
 		enableAutoScan?: boolean;   //Whether to enable automatic scan. The default value is false.
@@ -197,7 +215,7 @@ export interface ScannerViewer {
 
 export interface DocumentEditorSettings {
 	visibility?:string;  //Whether to display the documentEditor. The allowed value are "visible" and "hidden". The default value is "visible".
-	element?: HTMLDivElement | string;  //Bind the elment or elment id. 
+	element?: HTMLDivElement | HTMLElement | string;  //Bind the elment or elment id. 
                              //After binding, display the video in the spcified element, otherwise, display the video in full screen.
 	defaultViewerName?:string;  // default viewer.  The allowed value are "cropViewer" and "mainViewer". 
 	headerStyle?:{

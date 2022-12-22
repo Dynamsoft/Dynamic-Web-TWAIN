@@ -1862,4 +1862,18 @@ export namespace DynamsoftEnumsDWT {
 		Single = 0,
 		Multiple = 1
 	}
+	enum EnumDWT_ExtImageInfo {
+		default = 0, 
+        standard = 1, 
+        supported = 2 
+	}
+	enum EnumDWT_DeviceType{
+		TWAINSCANNER = 0x10, 
+		WIATWAINSCANNER = 0x20,
+		TWAINX64SCANNER = 0x40,
+		ICASCANNER = 0x80,
+		SANESCANNER = 0x100,
+		ESCLSCANNER = 0x200,
+		WIFIDIRECTSCANNER = 0x400
+	}	
 }

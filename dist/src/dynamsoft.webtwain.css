@@ -37,7 +37,7 @@
 
 .dynamsoft-progressBar {
     -webkit-appearance: none;
-    width: 280px;
+    width: 100%;
     margin-bottom: 20px;
     height: 14px;
     background-color: #e7e7e7;
@@ -218,8 +218,8 @@
 }
 
 .dynamsoft-dwt-dlg-header {
-    padding: 15px 15px 5px 5px;
-    height: 40px;
+    padding: 10px 10px 0 0;
+    height: 38px;
     position: relative;
 }
 
@@ -227,7 +227,7 @@
     text-align: center;
     height: 20px;
     font-size: 20px;
-    font-family: "Helvetica", "Arial", "sans-serif";
+    font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: rgba(68, 68, 68, 1);
     line-height: 36px;
 }
@@ -240,7 +240,7 @@
 }
 
 .dynamsoft-dwt-dlg-tips {
-    font-family: "Helvetica", "Arial", "sans-serif";
+    font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
     text-align: center;
     color: #606060;
     font-size: 16px;
@@ -258,12 +258,12 @@
 
 .dynamsoft-dwt-dlg-tail {
     text-align: center;
-    color: #AAAAAA;
-    background-color: #F4F6F7;
-    font-family: "Helvetica", "Arial", "sans-serif";
+    color: #606060;
+    background-color: #F5F5F5;
+    font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 24px;
-    padding: 15px;
+    padding: 20px;
 }
 
 .dynamsoft-dwt-dlg-red {
@@ -283,23 +283,36 @@
     background: #FE8E14;
     border-radius: 3px;
     font-size: 14px;
-    font-family: "Helvetica", "Arial", "sans-serif";
+    font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #FFFFFF;
     line-height: 36px;
 }
 
 .dynamsoft-dwt-dlg-button:hover {
-    background-color: #FFAE37;
+  background-color: #FFAE37;
+}
+
+.dynamsoft-dwt-dlg-button-android {
+  margin: 10px 0 0 0;
+  cursor: pointer;
+  text-align: center;
+  width: 117px;
+  background: #323234;
+  font-size: 14px;
+  font-family: Oswald,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #FFFFFF;
+  line-height: 36px;
 }
 
 .dynamsoft-dwt-dialogProgress {
-    width: 330px
+  max-width: 330px;
+  width: 80%
 }
 
 /* dialog/mask body */
 
 .ds-dwt-ui-showdlg {
-    font-family: "Helvetica", "Arial", "sans-serif";
+    font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #444444;
     font-size: 14px;
     line-height: 24px;
@@ -311,7 +324,7 @@
 }
 
 .ds-dwt-ui-dlg-license-wrap, .ds-dwt-ui-dlg-wrap {
-    font-family: "Helvetica", "Arial", "sans-serif";
+    font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #606060;
     font-size: 14px;
     line-height: 23px;
@@ -324,9 +337,18 @@
 .ds-dwt-ui-dlg a:link,.ds-dwt-ui-dlg a:visited,
 .dynamsoft-dialog-license a:link,.dynamsoft-dialog-license a:visited
 {
-  color: #50a8e1
+  color: #50A8E1
 }
 
+.ds-dwt-ui-dlg-android
+{
+  padding:0 20px 20px 20px
+}
+
+.ds-dwt-ui-dlg-android a:link,.ds-dwt-ui-dlg-android a:visited
+{
+  color: #FE8E14
+}
 
 .ds-dwt-ui-dlg .dynamsoft-dialog-close
 {
@@ -337,7 +359,7 @@
 
 
 .ds_license_header {
-    color: #333333;
+    color: #323234;
     font-size: 20px;
     padding: 40px 15px 15px 15px;
     text-align: center;
@@ -357,8 +379,8 @@
 }
 
 .dynamsoft-dialog {
-    font-family: "Helvetica", "Arial", "sans-serif";
-    color: #444444;
+    font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #323234;
     font-size: 16px;
     line-height: 24px;
     background-color: #FFFFFF;
@@ -416,8 +438,8 @@
 }
 
 .dynamsoft-dwt-box-title {
-    color: #333333;
-    font-family: "Helvetica", "Arial", "sans-serif";
+    color: #323234;
+    font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 16px;
     font-weight: bold;
     clear: both
@@ -445,7 +467,7 @@
     position: relative;
     height: 11px;
     font-size: 14px;
-    font-family: "Helvetica", "Arial", "sans-serif";
+    font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: rgba(119, 119, 119, 1);
     line-height: 36px;
 }

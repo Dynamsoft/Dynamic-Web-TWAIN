@@ -67,6 +67,10 @@ export interface WebTwainViewer extends WebTwainAcquire {
      */
     Zoom: number;
     Viewer: DynamsoftViewer;
+     /**
+     * Delete the web-twain Object.
+     */
+	dispose(): Promise<void>;
 }
 export interface DynamsoftViewer {
     /**
@@ -233,7 +237,7 @@ export interface DynamsoftViewer {
      * [Scope] Main viewer
      * [Description] Refresh the viewer, the effect is shown in "onPageRender" event
      */
-    render(): void;
+    render(): boolean;
     /**
      * [Scope] Global
      * [Description] Create an image editor with specified settings.
@@ -255,7 +259,7 @@ export interface DynamsoftViewer {
      * @param location Whether to put the element in the main viewer. Allowed values are left, top, right, bottom.
      * @param ifFull Whether to display the element in full screen.
      */
-    createCustomElement(element: HTMLDivElement, location?: string, ifFull?: boolean): CustomElement;
+    createCustomElement(element: HTMLDivElement | HTMLElement, location?: string, ifFull?: boolean): CustomElement;
 	/**
      * [Scope] Global
      * [Description] Create a document editor with specified settings.
@@ -337,17 +341,17 @@ export interface DynamsoftViewer {
      * [Description] Create a Dynamsoft Viewer instance and bind it to the WebTwain instance.
      * @param element Specify an HTML element to create the viewer.
      */
-    bind(element: HTMLDivElement, documentViewerTemplate?: DocumentViewerTemplate): boolean;
+    bind(element: HTMLDivElement | HTMLElement, documentViewerTemplate?: DocumentViewerTemplate): boolean;
     /**
      * [Scope] Main viewer
      * [Description] Show the viewer (Main viewer, ImageEditor, ThumbnailViewer, CustomElement).
      */
-    show(): void;
+    show(): boolean;
     /**
      * [Scope] Main viewer
      * [Description] Hide the viewer(Main viewer, ImageEditor, ThumbnailViewer, CustomElement).
      */
-    hide(): void;
+    hide(): boolean;
     /**
      * [Scope] Main viewer
      * [Description] Unbind the viewer.
@@ -374,7 +378,7 @@ export interface EditorSettings {
      * [Scope] ImageEditor viewer
      * [Description] Specify an HTML Element.
      */
-    element?: HTMLDivElement;
+    element?: HTMLDivElement | HTMLElement;
     /**
      * [Scope] ImageEditor viewer
      * [Description] The width of the image editor viewer. The default value is "100%".
@@ -581,17 +585,17 @@ export interface CustomElement {
      * [Scope] Current Element
      * [Description] Show the element.
      */
-    show(): void;
+    show(): boolean;
     /**
      * [Scope] Current Element
      * [Description] Hide the element.
      */
-    hide(): void;
+    hide(): boolean;
     /**
      * [Scope] Current Element
      * [Description] Delete the element.
      */
-    dispose(): void;
+    dispose(): boolean;
 	
 	element?: any;
 }
@@ -600,12 +604,12 @@ export interface ImageEditor {
      * [Scope] ImageEditor viewer
      * [Description] Show the ImageEditor viewer.
      */
-    show(): void;
+    show(): boolean;
     /**
      * [Scope] ImageEditor viewer
      * [Description] Hide the ImageEditor viewer.
      */
-    hide(): void;
+    hide(): boolean;
     /**
      * [Scope] ImageEditor viewer
      * [Description] Delete the ImageEditor viewer.
@@ -617,17 +621,17 @@ export interface ThumbnailViewer {
      * [Scope] Thumbnail viewer
      * [Description] Show the Thumbnail viewer.
      */
-    show(): void;
+    show(): boolean;
     /**
      * [Scope] Thumbnail viewer
      * [Description] Hide the Thumbnail viewer.
      */
-    hide(): void;
+    hide(): boolean;
     /**
      * [Scope] Thumbnail viewer
      * [Description] Delete the Thumbnail viewer.
      */
-    dispose(): void;
+    dispose(): boolean;
     /**
      * [Scope] Thumbnail viewer
      * [Description] Set the view mode.
@@ -788,17 +792,17 @@ export interface DocumentEditor {
      * [Scope] DocumentEditor viewer
      * [Description] Show the DocumentEditor viewer.
      */
-    show(): void;
+    show(): boolean;
     /**
      * [Scope] DocumentEditor viewer
      * [Description] Hide the DocumentEditor viewer.
      */
-    hide(): void;
+    hide(): boolean;
     /**
      * [Scope] DocumentEditor viewer
      * [Description] Delete the DocumentEditor viewer.
      */
-    dispose(): void;
+    dispose(): boolean;
 }
 
 export interface ViewMode {

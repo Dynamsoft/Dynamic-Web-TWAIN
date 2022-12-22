@@ -3,7 +3,7 @@ import { DynamsoftEnumsDWT} from "./Dynamsoft.Enum";
 import { WebTwain } from "./WebTwain";
 import { Settings } from "./Addon.OCRPro";
 import { FileUploader } from "./Dynamsoft.FileUploader";
-
+import { DeviceConfiguration, ServiceInfo, Device, CapabilityDetails, Capabilities} from "./WebTwain.Acquire";
 
 export namespace DynamsoftStatic {
     let Lib: DynamsoftLib;
@@ -26,7 +26,8 @@ export interface DWTInitialConfig {
     WebTwainId: string;
     Host?: string;
     Port?: string;
-    SSLPort?: string;
+    PortSSL?: string;
+	UseLocalService?: boolean;
 }
 export interface DynamsoftLib {
     /**
@@ -218,6 +219,7 @@ export interface DWTPro {
      * Whether to create a WebTwain instance automatically upon page load.
      */
     AutoLoad: boolean;
+	Host: string;
     /**
      * Close a dialog opened by the method ShowDialog.
      */
@@ -357,6 +359,7 @@ export interface DWTPro {
 	handshakeCode?: string;
 	sessionPassword?: string;
 	organizationID?: string;
+	licenseException?: string;
     /**
      * The product name.
      */
@@ -434,6 +437,30 @@ export interface DWTPro {
      * inited, _srcUseLocalService
      */
 	 IfCheckDCP: boolean;
+	 
+	OnLicenseException: () => void;
+    /**
+     * Dynamsoft.DWT.DeviceFriendlyName 
+     */
+	DeviceFriendlyName: string;
+    /**
+     * Bring up the Source Selection User Interface (UI) for the user to choose a data source.
+     * @param serverUrl The URL of the proxy server: https(http)://domain_name:port (default: 443).
+     * @param forceRefresh Default value: false.
+     */
+	FindDynamsoftServiceAsync(serverUrl: string, forceRefresh?: boolean): Promise<ServiceInfo[]>;  
+    /**
+     * Based on serviceInfo, return the existing DWObject if already exists, otherwise, create a new one.
+     * @param serverUrl The proxy server url or the serviceInfo.
+     * @param deviceType The value to filter scanners. Default: TWAINSCANNER
+     * @param forceRefresh Default value: false.
+     */
+	FindDevicesAsync(serverUrl: string | ServiceInfo, deviceType?: DynamsoftEnumsDWT.EnumDWT_DeviceType | number, forceRefresh?: boolean): Promise<Device[]>; 
+    /**
+     * Based on serviceInfo, return the existing object if already exists, otherwise, create a new one.
+     * @param serviceInfo The service information.
+     */
+	CreateRemoteScanObjectAsync(serviceInfo: ServiceInfo): Promise<RemoteScanObject>;
 }
 export interface DisplayInfo {
     loaderBarSource?: string;
@@ -516,6 +543,58 @@ export interface DWTInstall {
 	funcConfirmExitAfterSave?: (firedByDocumentEdit: boolean) => void;
 	funcConfirmCropViewerExit?: (bChanged: boolean, previousViewerName: string) => Promise<Number | DynamsoftEnumsDWT.EnumDWT_ConfirmExitType>;
 	funcConfirmMainViewerExit?: (bChanged: boolean, previousViewerName: string) => Promise<Number | DynamsoftEnumsDWT.EnumDWT_ConfirmExitType>;
+
+    OnLTSConnectionFailure?: (message?: string) => void;
+	OnLTSReturnedAnError?: (message?: string) => void;
+	OnLTSUUIDError?: (message?: string) => void;
+	OnLTSConnectionWarning?: () => void;
+	OnLTSPublicLicenseMessage?: (message?: string) => void;
+}
+export interface RemoteScanObject {
+	/**
+     * Return all available devices (scanners, eSCL scanners, etc.) for the device type (if specified)
+     * @param deviceType The device type
+     * @param refresh Default value: false
+     */
+	getDevices(deviceType?: DynamsoftEnumsDWT.EnumDWT_DeviceType | number, refresh?: boolean): Promise<Device[]>; 
+    /**
+     * Select the device to use for scanning
+     * @param device the device 
+     */
+	selectDevice(device: Device): Promise<boolean>; 
+    /**
+     * Scan documents into another DWObject control. Supports eSCL scanners and all other scanners with limited capabilities.
+     * @param deviceConfiguration The device configuration
+     * @param sendTo The DWObject control to scan into
+     */
+	acquireImage(deviceConfiguration?: DeviceConfiguration, sendTo?: WebTwain): Promise<boolean>; 
+    /**
+     * Close the data source (a TWAIN/ICA/SANE device which in most cases is a scanner) to free it to be used by other applications.
+     */
+	closeSource(): Promise<boolean>; 
+    /**
+     * Bring up the Source Selection User Interface (UI) for the user to choose a data source.
+     * @param deviceType The device type. 
+     */
+	selectSource(deviceType?: DynamsoftEnumsDWT.EnumDWT_DeviceType | number): Promise<number>;
+    /**
+     * Gets detailed information about all capabilities of the current data source.
+     * @argument capabilityDetails Detailed information about the specified capabilities.
+     */
+	getCapabilities():Promise<CapabilityDetails[]>;
+    /**
+     * Sets up one or multiple capabilities in one call.
+     * @param capabilities A object that describes how to set capabilities.
+     */
+	setCapabilities(capabilities: Capabilities): Promise<boolean>;
+    /**
+     * Load a data source to get it ready to acquire images.
+     */
+	openSource():Promise<boolean>;
+    /**
+     * Delete the Remote Scan Object.
+     */
+    dispose(): boolean;
 }
 declare const Dynamsoft: (DWTInstall & typeof DynamsoftStatic);
 //declare const Dynamsoft: (typeof DynamsoftStatic);
