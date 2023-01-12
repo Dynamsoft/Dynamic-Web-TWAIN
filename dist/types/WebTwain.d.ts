@@ -5,7 +5,6 @@ import { OCR } from "./Addon.OCR";
 import { OCRPro } from "./Addon.OCRPro";
 import { PDF } from "./Addon.PDF";
 import { Webcam } from "./Addon.Webcam";
-import { Camera } from "./Addon.Camera";
 
 export interface WebTwain extends WebTwainViewer {
     /**
@@ -47,5 +46,4 @@ export interface Addon {
     OCRPro: OCRPro;
     PDF: PDF;
     Webcam: Webcam;
-    Camera: Camera;
 }

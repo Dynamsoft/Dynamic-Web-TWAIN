@@ -404,10 +404,6 @@ export interface DWTPro {
      */
     Unload(): void;
     /**
-     * Whether to download the wasm for Camera Addon to use on initialization.
-     */
-    UseCameraAddonWasm: boolean;
-    /**
      * Whether to use the library in Local-Service mode or WASM mode.
      */
     UseLocalService: boolean;
@@ -461,6 +457,10 @@ export interface DWTPro {
      * @param serviceInfo The service information.
      */
 	CreateRemoteScanObjectAsync(serviceInfo: ServiceInfo): Promise<RemoteScanObject>;
+	/**
+     * Dynamsoft.DWT.ConnectWithSocket 
+     */
+	ConnectWithSocket: boolean;
 }
 export interface DisplayInfo {
     loaderBarSource?: string;

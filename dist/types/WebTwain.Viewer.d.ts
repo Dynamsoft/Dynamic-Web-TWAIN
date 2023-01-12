@@ -1,5 +1,4 @@
 import { WebTwainAcquire } from "./WebTwain.Acquire";
-import { DocumentConfiguration, Resolution } from "./Addon.Camera";
 import { DynamsoftEnumsDWT } from "./Dynamsoft.Enum";
 
 export interface WebTwainViewer extends WebTwainAcquire {
@@ -260,13 +259,6 @@ export interface DynamsoftViewer {
      * @param ifFull Whether to display the element in full screen.
      */
     createCustomElement(element: HTMLDivElement | HTMLElement, location?: string, ifFull?: boolean): CustomElement;
-	/**
-     * [Scope] Global
-     * [Description] Create a document editor with specified settings.
-     * [Usage Notes]If you create it multiple times, you'll receive 'A DocumentEditor already exists' error, and an existing DocumentEditor object will be returned.
-     * @param documentConfiguration The DocumentEditor settings. If not set, the default setting is used.
-     */
-    createDocumentEditor(documentConfiguration?: DocumentConfiguration): DocumentEditor;
     /**
      * [Scope] Global
      * [Description] Return the current UI settings (from DVS itself)
@@ -330,12 +322,6 @@ export interface DynamsoftViewer {
         columns: number,
         rows: number
     ): boolean;	
-	/**
-	 * [Scope] Global
-	 * [Description] Create a document webviewer with specified settings.
-	 * @param templateName The document webviewer settings. If not set, the default setting is used. The allowed value is "documentCapture".
-	 */
-	createTemplate(templateName?: string, documentConfiguration?: DocumentConfiguration): DocumentViewerTemplate;
     /**
      * [Scope] Global
      * [Description] Create a Dynamsoft Viewer instance and bind it to the WebTwain instance.
