@@ -327,7 +327,7 @@ export interface DynamsoftViewer {
      * [Description] Create a Dynamsoft Viewer instance and bind it to the WebTwain instance.
      * @param element Specify an HTML element to create the viewer.
      */
-    bind(element: HTMLDivElement | HTMLElement, documentViewerTemplate?: DocumentViewerTemplate): boolean;
+    bind(element: HTMLDivElement | HTMLElement): boolean;
     /**
      * [Scope] Main viewer
      * [Description] Show the viewer (Main viewer, ImageEditor, ThumbnailViewer, CustomElement).
@@ -839,25 +839,7 @@ export interface Area {
     right: number;
     bottom: number;
 }
-export interface DocumentViewerTemplate {
-	/**
-     * Save button click event
-     */
-	onSaveFunc?: () => void;    
-	/**
-     * Upload button click event
-     */
-	onUploadFunc?: () => void;  
-	/**
-     * Remove button click event
-     */
-	onRemoveSelectedFunc?: () => void; 
-	onExitFunc?: () => void;  
-	/**
-     * Get CustomElement. Can display save & upload viewer in CustomElement.
-     */
-	getCustomElement(): CustomElement;  
-}
+
 export interface CheckboxSettings {
   visibility?: string;  //"visible":hidden", default:"hidden" 
   width?: number | string;  //default: "24px", number unit: px, string value: "24px"/"10%", relative to parent container
