@@ -3,7 +3,7 @@
 * Product: Dynamsoft Web Twain
 * Web Site: https://www.dynamsoft.com
 *
-* Copyright 2022, Dynamsoft Corporation 
+* Copyright 2023, Dynamsoft Corporation 
 * Author: Dynamsoft Support Team
 */
  .dynamsoft-major-color {
@@ -193,6 +193,16 @@
 .dynamsoft-dwt-imgSizeEditor div input
 {
   -webkit-appearance: push-button;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
     user-select: none;
     white-space: pre;
     align-items: flex-start;
@@ -320,7 +330,6 @@
     padding: 0;
     border: 1px solid #e7e7e7;
     background-color: white;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 }
 
 .ds-dwt-ui-dlg-license-wrap, .ds-dwt-ui-dlg-wrap {
@@ -331,7 +340,6 @@
     width: 510px;
     height: 272px;
     padding: 0;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 }
 
 .ds-dwt-ui-dlg a:link,.ds-dwt-ui-dlg a:visited,

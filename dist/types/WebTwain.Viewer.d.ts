@@ -422,6 +422,7 @@ export interface EditorSettings {
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
      */
     dialogText?: any;
+	workMode?: number | DynamsoftEnumsDWT.EnumDWT_WorkMode;//default is normal  value:normal=0, balance=1,
 }
 export interface ThumbnailViewerSettings {
     /**
@@ -601,6 +602,11 @@ export interface ImageEditor {
      * [Description] Delete the ImageEditor viewer.
      */
     dispose(): void;
+	/**
+     * [Scope] ImageEditor viewer
+     * [Description] Update the changes in the ImageEditor to the server.
+     */
+	save():Promise<void>;
 }
 export interface ThumbnailViewer {
     /**

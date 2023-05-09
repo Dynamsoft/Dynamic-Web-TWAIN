@@ -1869,11 +1869,40 @@ export namespace DynamsoftEnumsDWT {
 	}
 	enum EnumDWT_DeviceType{
 		TWAINSCANNER = 0x10, 
-		WIATWAINSCANNER = 0x20,
+		WIASCANNER = 0x20,
 		TWAINX64SCANNER = 0x40,
 		ICASCANNER = 0x80,
 		SANESCANNER = 0x100,
 		ESCLSCANNER = 0x200,
-		WIFIDIRECTSCANNER = 0x400
+		WIFIDIRECTSCANNER = 0x400,
+		WIATWAINSCANNER = 0x800
 	}	
+	enum EnumDWT_ImageFormatType{
+		url = 0,  
+		blob = 1,
+		base64 = 2
+	}
+	enum EnumDWT_ResponseType{
+		text = 0,  
+		blob = 1,
+		arraybuffer = 2,
+		xml = 3,
+		json = 4
+	}
+	enum EnumDWT_WorkMode{
+		normal = 0, // old mode, the image is processed at the server and then displayed in viewer    
+		balance = 1, //new mode, the image is processed in canvas and then updated to the server
+	}
+	enum EnumPDF_Page{
+		Page_Default = 0,
+		Page_Custom = 1,
+		Page_A4 = 2,
+		Page_A4_Reverse = 3,
+		Page_A3 = 4,
+		Page_A3_Reverse = 5,
+		Page_Letter = 6,
+		Page_Letter_Reverse = 7,
+		Page_Legal = 8,
+		Page_Legal_Reverse = 9
+	}
 }

@@ -100,3 +100,44 @@ export interface Authorization {
      */
     Detail: any;
 }
+
+export interface BufferChangeInfo {
+    /**
+     * Action type includes 'add', 'remove', 'modify', 'shift' and 'filter'
+     */
+    action: string;
+    /**
+     * The image id (not the index) of the current page.
+     */
+    currentId: number;
+    /**
+     * All image ids.
+     */
+    imageIds: number[];
+    /**
+     * All selected image ids.
+     */
+    selectedIds: number[];
+}
+
+export interface OutputInfo {
+  /**
+   * Id of the image if it's transferred to the buffer.
+   */
+  imageId?: number;
+  /**
+   * Path of the image if it's transferred to the disk.
+   */
+  Path?: string;
+  /**
+   * Information about the image.
+   */
+  imageInfo?: object;
+  /**
+   * Extended information about the image.
+   */
+  extendedImageInfo?: object;
+}
+
+
+

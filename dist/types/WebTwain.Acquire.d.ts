@@ -629,7 +629,8 @@ export interface WebTwainAcquire extends WebTwainEdit {
     SetCapItemsString(index: number, newVal: string): void;
 }
 export interface DeviceConfiguration {
-    /**
+    PageSize?: DynamsoftEnumsDWT.EnumDWT_CapSupportedSizes | number;
+	/**
      * Whether to show the built-in User Interface from the device vendor
      */
     IfShowUI?: boolean;
@@ -669,21 +670,12 @@ export interface DeviceConfiguration {
      * How much extended information is retrieved. Only valid when {IfGetExtImageInfo} is true.
      */
     extendedImageInfoQueryLevel?: DynamsoftEnumsDWT.EnumDWT_ExtImageInfo | number;
-	 /**
-     * Whether to simulate the manufacturer's UI inside the client-side browser (only effective when IfShowUI is true).
-     * (Added in 16.2)
-     */
-    RemoteScan?:boolean;
-    /**
-     * Whether to simulate the manufacturer's UI inside the client-side browser (only effective when IfShowUI and RemoteScan are both true and the WebTwain instance doing the scan has no viewer of its own).
-     * (Added in 16.2)
-     */
-    ShowRemoteScanUI?:boolean;
     /**
      * Specify a source by its index.
      * (Added in 16.2)
      */
     SelectSourceByIndex?: number;
+	[key:string]: any;
 }
 export interface SourceDetails {
     /**
@@ -1099,5 +1091,4 @@ export interface Device {
 	deviceType: DynamsoftEnumsDWT.EnumDWT_DeviceType;
 	serviceInfo?: ServiceInfo;
 	deviceInfo?: any;
-	acquireImage(deviceConfiguration: DeviceConfiguration | null, sendTo: WebTwain): Promise< boolean>;
 }

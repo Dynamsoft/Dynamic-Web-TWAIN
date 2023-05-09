@@ -6,7 +6,7 @@
 
 [Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems. To see it in action, please visit <a href="https://demo.dynamsoft.com/web-twain/" target="_blank">**this online demo**</a>
 
-Note: Dynamic Web TWAIN SDK **v18.1** is built in this package. For more detail, check the [Version Info](#versions).
+Note: Dynamic Web TWAIN SDK **v18.2** is built in this package. For more detail, check the [Version Info](#versions).
 
 ## Table of Contents
 - [Supported Environments](#supported-environments)
@@ -37,7 +37,8 @@ Note: Dynamic Web TWAIN SDK **v18.1** is built in this package. For more detail,
 - Windows
 - Linux
 - macOS
-- Android / iOS (Remote scanner or camera)
+- Android 
+- iOS (Remote scanner)
 
 ### Supported CPU Architectures
 - x86/x64
@@ -149,10 +150,8 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 	        return DWObject.AcquireImageAsync({
 	          PixelType: Dynamsoft.DWT.EnumDWT_PixelType.TWPT_RGB,
 	          Resolution: 200,
-	          IfDisableSourceAfterAcquire: true 
+              IfCloseSourceAfterAcquire: true
 	        });
-	      }).then(function(){
-	        return DWObject.CloseSourceAsync();
 	      }).catch(function (exp) {
 	        alert(exp.message);
 	      });
@@ -190,22 +189,6 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 
 [More](https://www.dynamsoft.com/web-twain/features/)
 
-### WebAssembly for Camera 
-
-| Features     | Desktop            | Mobile  |
-| ------------- |:-------------:| -----:|
-| Document capture | :heavy_check_mark: | :heavy_check_mark: |
-| Document edge detection    | :heavy_check_mark:     |  :heavy_check_mark: |
-| Document perspective correction | :heavy_check_mark:     |  :heavy_check_mark: |
-| Document post-processing by filters| :heavy_check_mark:     |  :heavy_check_mark: |
-| Front and rear camera switching |:heavy_check_mark:     |  :heavy_check_mark: |
-| Dedicated image and PDF viewer|:heavy_check_mark:     |  :heavy_check_mark: |
-| Built-in ready-to-use UI| :heavy_check_mark:     |  :heavy_check_mark: |
-| SIMD and WebGL acceleration | :heavy_check_mark:     |  :heavy_check_mark: |
-| Multi-Format export and sharing | :heavy_check_mark:     |  :heavy_check_mark: |
-
-[More](https://www.dynamsoft.com/web-twain/features/mobile-web-capture-sdk/)
-
 ## Contact Us
 
 [Contact Dynamsoft](https://www.dynamsoft.com/company/contact/) to resolve any issue you encounter with the library.
@@ -218,35 +201,35 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
 >`Dynamsoft Service (DynamsoftService.exe, 64bit)`
 >
->**v18.0** (build version 1, 8, 0, 1025)
+>**v18.2** (build version 1, 8, 2, 0328)
 >
->`Dynamsoft Service Manager (DWASManager_18001025.dll, 64bit)`
+>`Dynamsoft Service Manager (DWASManager_18200328.dll, 64bit)`
 >
->**v18.0** (build version 18, 0, 0, 1025)
+>**v18.2** (build version 18, 2, 0, 0328)
 >
->`Device Manager (DeviceManager_18001025.dll, 64bit)`
+>`Device Manager (DeviceManager_18200328.dll, 64bit)`
 >
->**v18.0** (build version 18, 0, 0, 1025)
+>**v18.2** (build version 18, 2, 0, 0328)
 >
->`Dynamic Web TWAIN (dwt_18.0.0.1025.dll, 64bit)`
+>`Dynamic Web TWAIN (dwt_18.2.0.0328.dll, 64bit)`
 >
->**v18.0** (build version 18, 0, 0, 1025)
+>**v18.2** (build version 18, 2, 0, 0328)
 >
->`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.4.1.1025.dll, 64bit)`
+>`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.4.2.0328.dll, 64bit)`
 >
->**v18.0** (build version 11, 4, 1, 1025)
+>**v18.2** (build version 11, 4, 2, 0328)
 >
->`Dynamsoft Barcode Reader (dbrx64_9.4.0.1025.dll, 64bit)`
+>`Dynamsoft Barcode Reader (dbrx64_9.6.0.0328.dll, 64bit)`
 >
->**v9.4.0** (build version 9, 4, 0, 0823)
+>**v9.6.0** (build version 9, 6, 0, 0328)
 >
 >`Dynamsoft Webcam Addon (DynamicWebcamx64_15.0.0.0625.dll, 64bit)`
 >
->**v18.0** (build version 15, 0, 0, 0625)
+>**v18.2** (build version 15, 0, 0, 0625)
 >
->`Dynamsoft Upload Module (UploadModule_1.8.0.1025.dll, 64bit)`
+>`Dynamsoft Upload Module (UploadModule_1.8.2.0328.dll, 64bit)`
 >
->**v18.0** (build version 1, 8, 0, 1025)
+>**v18.2** (build version 1, 8, 2, 0328)
 
 ## Changelog
 

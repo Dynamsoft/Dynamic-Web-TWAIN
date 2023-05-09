@@ -925,6 +925,13 @@ export interface WebTwainIO extends WebTwainUtil {
      * @param cookie The cookie.
      */
     SetCookie(cookie: string): boolean;
+	/**
+     * Share the specified image(s) for Android. This function is only for Android.
+     * @param fileName The name to save to.
+     * @param indices Specify the image(s).
+     * @param type The format of the file.
+     */
+	ShareImages(fileName: string, indices: number[], type: DynamsoftEnumsDWT.EnumDWT_ImageType):Promise<void>;
 }
 export interface Base64Result {
     /**

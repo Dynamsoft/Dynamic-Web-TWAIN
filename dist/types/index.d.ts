@@ -1,4 +1,3 @@
-// Type definitions for dwt 16.2
 // Project: https://www.dynamsoft.com/products/webtwain_overview.aspx
 // Definitions by: Xiao Ling <https://github.com/yushulx>
 //                 Josh Hall <https://github.com/jbh>
@@ -14,7 +13,7 @@
 *
 * Copyright 2022, Dynamsoft Corporation
 * Author: Dynamsoft Support Team
-* Version: 17.3
+* Version: 18.2
 */
 import Dynamsoft from "./Dynamsoft";
 export default Dynamsoft;
