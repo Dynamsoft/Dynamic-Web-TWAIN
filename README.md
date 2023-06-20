@@ -6,7 +6,7 @@
 
 [Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems. To see it in action, please visit <a href="https://demo.dynamsoft.com/web-twain/" target="_blank">**this online demo**</a>
 
-Note: Dynamic Web TWAIN SDK **v18.2** is built in this package. For more detail, check the [Version Info](#versions).
+Note: Dynamic Web TWAIN SDK **v18.3** is built in this package. For more detail, check the [Version Info](#versions).
 
 ## Table of Contents
 - [Supported Environments](#supported-environments)
@@ -201,35 +201,35 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
 >`Dynamsoft Service (DynamsoftService.exe, 64bit)`
 >
->**v18.2** (build version 1, 8, 2, 0328)
+>**v18.3** (build version 1, 8, 3, 0627)
 >
->`Dynamsoft Service Manager (DWASManager_18200328.dll, 64bit)`
+>`Dynamsoft Service Manager (DWASManager_18300627.dll, 64bit)`
 >
->**v18.2** (build version 18, 2, 0, 0328)
+>**v18.3** (build version 18, 3, 0, 0627)
 >
->`Device Manager (DeviceManager_18200328.dll, 64bit)`
+>`Device Manager (DeviceManager_18300627.dll, 64bit)`
 >
->**v18.2** (build version 18, 2, 0, 0328)
+>**v18.3** (build version 18, 3, 0, 0627)
 >
->`Dynamic Web TWAIN (dwt_18.2.0.0328.dll, 64bit)`
+>`Dynamic Web TWAIN (dwt_18.3.0.0627.dll, 64bit)`
 >
->**v18.2** (build version 18, 2, 0, 0328)
+>**v18.3** (build version 18, 3, 0, 0627)
 >
->`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.4.2.0328.dll, 64bit)`
+>`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.5.0.0627.dll, 64bit)`
 >
->**v18.2** (build version 11, 4, 2, 0328)
+>**v18.3** (build version 11, 5, 0, 0627)
 >
->`Dynamsoft Barcode Reader (dbrx64_9.6.0.0328.dll, 64bit)`
+>`Dynamsoft Barcode Reader (dbrx64_9.6.0.0627.dll, 64bit)`
 >
->**v9.6.0** (build version 9, 6, 0, 0328)
+>**v9.6.0** (build version 9, 6, 0, 0627)
 >
 >`Dynamsoft Webcam Addon (DynamicWebcamx64_15.0.0.0625.dll, 64bit)`
 >
->**v18.2** (build version 15, 0, 0, 0625)
+>**v18.3** (build version 15, 0, 0, 0625)
 >
->`Dynamsoft Upload Module (UploadModule_1.8.2.0328.dll, 64bit)`
+>`Dynamsoft Upload Module (UploadModule_1.8.3.0627.dll, 64bit)`
 >
->**v18.2** (build version 1, 8, 2, 0328)
+>**v18.3** (build version 1, 8, 3, 0627)
 
 ## Changelog
 

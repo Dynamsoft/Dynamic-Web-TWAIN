@@ -207,6 +207,13 @@ export interface DynamsoftViewer {
      * [Description] Set whether to allow page dragging to reorder the pages.
      */
 	allowPageDragging?: boolean;
+	/**
+     * Set the zoom origin.
+     */
+	zoomOrigin?: {  //18.3
+		x: string;  //Default is "center", values: "left", "right", "center".
+		y: string;  //Default is "center", values: "top", "bottom", "center"
+	} 
     /**
      * [Scope] Main viewer
      * [Description] Return the index of the next image of the currently selected image.
@@ -423,6 +430,13 @@ export interface EditorSettings {
      */
     dialogText?: any;
 	workMode?: number | DynamsoftEnumsDWT.EnumDWT_WorkMode;//default is normal  value:normal=0, balance=1,
+	/**
+     * Set the zoom origin.
+     */
+	zoomOrigin?: {  //18.3
+		x: string;  //Default is "center", values: "left", "right", "center".
+		y: string;  //Default is "center", values: "top", "bottom", "center"
+	} 
 }
 export interface ThumbnailViewerSettings {
     /**
@@ -607,6 +621,13 @@ export interface ImageEditor {
      * [Description] Update the changes in the ImageEditor to the server.
      */
 	save():Promise<void>;
+	/**
+     * Set the zoom origin.
+     */
+	zoomOrigin?: {
+		x: string; //Default is "center", values: "left", "right", "center".
+		y: string; //Default is "center", values: "top", "bottom", "center"
+	};
 }
 export interface ThumbnailViewer {
     /**

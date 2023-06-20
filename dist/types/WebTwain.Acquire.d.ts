@@ -82,7 +82,7 @@ export interface WebTwainAcquire extends WebTwainEdit {
     SelectSource(
         successCallBack?: () => void,
         failureCallBack?: (errorCode: number, errorString: string) => void
-    ): boolean | void;
+    ): boolean | string;
     /**
      * Bring up the Source Selection User Interface (UI) for the user to choose a data source.
      * @param deviceType The device type. Added the parameter deviceType in Dynamic Web TWAIN 18

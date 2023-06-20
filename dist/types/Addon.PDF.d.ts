@@ -56,9 +56,9 @@ export interface Write {
      * Set up the PDF writing engine.
      * @param settings Configures how the PDF is generated.
      */
-    Setup(settings: PDFWSetting): void;
+    Setup(settings: PDFWSettings): void;
 }
-export interface PDFWSetting {
+export interface PDFWSettings {
     /**
      * Specify the author.
      */
@@ -116,4 +116,25 @@ export interface PDFWSetting {
      * Only valid when the {compression} is 'JPEG' or 'JPEG2000'.
      */
     quality?: number;
+	/**
+     * Reduce the file size when saving the image(s) as a PDF file. 
+     */
+	docCompressor?:{ //18.3
+		/**
+		 * Enabled document compressor.
+		 */
+		enabled: boolean;
+		 /**
+		 * sensitivity
+		 * The value ranges from 1 to 100. Default value is 50.
+		 * Only valid when the {compression} is 'JPEG' or 'JPEG2000'.
+		 */
+		sensitivity?: number;
+		/**
+		 * compressLevel
+		 * The value ranges from 0 to 100. Default value is 50.
+		 * Only valid when the {compression} is 'JPEG' or 'JPEG2000'.
+		 */
+		compressLevel?: number;
+	}
 }
