@@ -90,8 +90,8 @@ export interface WebTwainBuffer extends WebTwainIO {
      */
     GetImageYResolution(index: number): number;
     /**
-     * [Deprecation] Return an index from the selected indices array. Read SelectedImagesIndices instead.
-     * [Alternative] Read SelectedImagesIndices instead.
+	 * @deprecated since version 16.1.1. This function will be removed in future versions. Use `SelectedImagesIndices` instead.
+     * Return an index from the selected indices array. 
      * @param indexOfIndices Specify the index of the specified image.
      */
     GetSelectedImageIndex(indexOfIndices: number): number;
@@ -166,8 +166,8 @@ export interface WebTwainBuffer extends WebTwainIO {
      */
     IsBlankImage(index: number): boolean;
     /**
-     * [Deprecation] Detect whether a certain area on an image is blank.
-     * [Alternative] Use IsBlankImage or IsBlankImageExpress instead.
+	 * @deprecated since version 10.1. This function will be removed in future versions. Use `IsBlankImage` or `IsBlankImageExpress` instead.
+     * Detect whether a certain area on an image is blank.
      * @param index Specify the image.
      * @param left The x-coordinate of the upper-left corner of the rectangle.
      * @param top The y-coordinate of the upper-left corner of the rectangle.
@@ -181,6 +181,14 @@ export interface WebTwainBuffer extends WebTwainIO {
      * @param index Specify the image.
      */
     IsBlankImageExpress(index: number): boolean;
+	/**
+     * Check whether the specified image is blank.
+     * @param index Specify the image.
+     */
+	IsBlankImageAsync(index: number, options?: {
+		minBlockHeight?: number,//default value: 10
+		maxBlockHeight?: number   //default value: 30
+	}): Promise < boolean > ;
     /**
      * Return or set how many images can be held in the buffer.
      */
@@ -209,8 +217,8 @@ export interface WebTwainBuffer extends WebTwainIO {
      */
     SelectAllImages(): number[];
     /**
-     * [Deprecation] Return how many images are selected.
-     * [Alternative] Read the length of SelectedImagesIndices instead.
+	 * @deprecated since version 16.1.1. This function will be removed in future versions. Use the length of SelectedImagesIndices instead.
+     * Return how many images are selected.
      */
     SelectedImagesCount: number;
     /**
@@ -223,6 +231,7 @@ export interface WebTwainBuffer extends WebTwainIO {
      */
     SelectImages(indices: number[]): boolean;
     /**
+	 * @deprecated since version 16.1.1. This function will be removed in future versions. Use `Viewer.selectionRectAspectRatio` instead.
      * Specify a aspect ratio to be used when selecting a rectangle on an image.
      */
     SelectionRectAspectRatio: number;
@@ -232,8 +241,8 @@ export interface WebTwainBuffer extends WebTwainIO {
      */
     SetDefaultTag(tag: string): boolean;
     /**
-     * [Deprecation] You can use the method to select images programatically.
-     * [Alternative] Use SelectImages() or SelectAllImages() instead.
+	 * @deprecated since version 16.1.1. This function will be removed in future versions. Use `SelectImages` and `SelectAllImages` instead.
+     * You can use the method to select images programatically.
      * @param indexOfIndices The index of an array that holds the indices of selected images.
      * @param index The index of an image that you want to select.
      */
@@ -303,6 +312,62 @@ export interface WebTwainBuffer extends WebTwainIO {
      * Gets the RawData for the specified image captured from camera.
      */
 	GetRawDataAsync(index: number): Promise<RawData>;
+	/*
+	 * Move selected images to another document.
+     * @argument from The source document document name. 
+	 * @argument to The destination document name. 
+	 */
+	MoveToDocumentAsync(from: string, to: string): Promise<void>;
+	/*
+	 * Move selected images to another document.
+     * @argument from The source document document name. 
+	 * @argument to The destination document name. 
+	 * @argument sourceIndices The indices of the images to be moved. 
+	 */
+	MoveToDocumentAsync(from: string, to: string, sourceIndices: number[]): Promise<void>;
+	/*
+	 * Move selected images to another document.
+     * @argument from The source document document name. 
+	 * @argument to The destination document name. 
+	 * @argument targetIndex The index at which the source images should be inserted into the new document. If not specifed, the images will be appended to the destination document.
+	 */
+	MoveToDocumentAsync(from: string, to: string, targetIndex: number): Promise<void>;
+	/*
+	 * Move selected images to another document.
+     * @argument from The source document document name. 
+	 * @argument to The destination document name. 
+	 * @argument sourceIndices The indices of the images to be moved. 
+	 * @argument targetIndex The index at which the source images should be inserted into the new document. If not specifed, the images will be appended to the destination document.
+	 */
+	MoveToDocumentAsync(from: string, to: string, sourceIndices: number[], targetIndex: number): Promise<void>;
+	/*
+	 * Copy selected images to another document.
+     * @argument from The source document document name.
+	 * @argument to The destination document name.	 
+	 */
+	CopyToDocumentAsync(from: string, to: string): Promise<void>;
+	/*
+	 * Copy selected images to another document.
+     * @argument from The source document document name.
+	 * @argument to The destination document name.
+	 * @argument sourceIndices The indices of the images to be copied.  
+	 */
+	CopyToDocumentAsync(from: string, to: string, sourceIndices: number[]): Promise<void>;
+	/*
+	 * Copy selected images to another document.
+     * @argument from The source document document name.
+	 * @argument to The destination document name.
+	 * @argument targetIndex The index at which the source images should be inserted into the new document. If not specifed, the images will be appended to the destination document. 	 
+	 */
+	CopyToDocumentAsync(from: string, to: string, targetIndex: number): Promise<void>;
+	/*
+	 * Copy selected images to another document.
+     * @argument from The source document document name.
+	 * @argument to The destination document name.
+	 * @argument sourceIndices The indices of the images to be copied. 
+	 * @argument targetIndex The index at which the source images should be inserted into the new document. If not specifed, the images will be appended to the destination document. 	 
+	 */
+	CopyToDocumentAsync(from: string, to: string, sourceIndices: number[]|number, targetIndex: number): Promise<void>;
 }
 
 export interface TagName {

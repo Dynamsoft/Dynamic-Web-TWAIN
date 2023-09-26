@@ -19,6 +19,7 @@ export interface PDF {
         ) => void
     ): void;
     /**
+	 * @deprecated since version 18.4. This function will be removed in future versions. Use `GetReaderOptions` instead.
      * Return the convert mode.
      */
     GetConvertMode(): number;
@@ -32,16 +33,19 @@ export interface PDF {
      */
     IsTextBasedPDF(path: string): boolean;
     /**
+	 * @deprecated since version 18.4. This function will be removed in future versions. Use `SetReaderOptions` instead.
      * Set the convert mode.
      * @param mode Specify the mode.
      */
     SetConvertMode(mode: DynamsoftEnumsDWT.EnumDWT_ConvertMode | number): boolean;
     /**
+	 * @deprecated since version 18.4. This function will be removed in future versions. Use `SetReaderOptions` instead.
      * Set the password for reading encrypted PDF files.
      * @param password Specify the password.
      */
     SetPassword(password: string): boolean;
     /**
+	 * @deprecated since version 18.4. This function will be removed in future versions. Use `SetReaderOptions` instead.
      * Set the resolution for rasterizing.
      * @param resolution Specify the resolution.
      */
@@ -50,6 +54,16 @@ export interface PDF {
      * Set up the PDF writing engine.
      */
     Write: Write;
+	/**
+     * Set the PDF reader Options.
+     * @param options Specify the reader Options.
+     */
+	SetReaderOptions(options: ReaderOptions): boolean;
+	/**
+     * Returns the current PDF reader options.
+     * @param options Specify the reader Options.
+     */
+	GetReaderOptions(): ReaderOptions;
 }
 export interface Write {
     /**
@@ -137,4 +151,37 @@ export interface PDFWSettings {
 		 */
 		compressLevel?: number;
 	}
+}
+export interface ReaderOptions {
+    /**
+     * Default value: CM_AUTO
+     */
+    convertMode: DynamsoftEnumsDWT.EnumDWT_ConvertMode | number;   
+    /**
+     * If a password is required to open the PDF, set it here. Default value: "".
+     */
+    password?: string; 
+    renderOptions?: {
+         /**
+         * If convertMode is set to CM_RENDERALL or CM_AUTO, this controls whether or not annotations will be rendered. Default value: false.
+         */
+        renderAnnotations?: boolean;
+        /**
+         * DPI. Only affects text being rasterized. Does not affect images extracted from the PDF file. Default value: 200.
+         */
+		resolution?: number;  
+         /**
+         * Pixels. 0 is no limit. Default value: 0.
+         */
+		maxWidth?: number;
+        /** 
+         * Pixels. 0 is no limit. Default value: 0.
+         */
+		maxHeight?: number;
+         /**
+         * Whether or not to render in grayscale. Default value: false.
+         */
+		renderGrayscale?: boolean; 
+    }
+	
 }

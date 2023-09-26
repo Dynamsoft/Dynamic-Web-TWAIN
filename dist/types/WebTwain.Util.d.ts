@@ -22,6 +22,7 @@ export interface WebTwainUtil {
      */
     readonly ProductFamily: string;
     /**
+	 * @deprecated since version 18.0. This property will be removed in future versions. Use `Dynamsoft.DWT.ProductKey` instead.
      * Return or set the ProductKey.
      */
     ProductKey: string;
@@ -76,6 +77,7 @@ export interface WebTwainUtil {
      */
     readonly VersionInfo: string;
     /**
+	 * @deprecated since version 18.0. This function will be removed in future versions. Use property `Dynamsoft.DWT.ProductKey` instead.
      * Update / set the ProductKey.
      * @param productKey the ProductKey.
      */

@@ -181,6 +181,9 @@ export namespace DynamsoftEnumsDWT {
         CM_RENDERALL = 1,
         CM_IMAGEONLY = 2,
         CM_AUTO = 3,
+		/*
+		* @deprecated since version 18.4. This value will be removed in future versions. Use `ReaderOptions.renderOptions.renderAnnotations` instead.
+		*/
 		CM_RENDERALLWITHANNOTATION = 4
     }
     enum EnumErrorCode {
@@ -1875,19 +1878,22 @@ export namespace DynamsoftEnumsDWT {
 		SANESCANNER = 0x100,
 		ESCLSCANNER = 0x200,
 		WIFIDIRECTSCANNER = 0x400,
+		/*
+		* @deprecated since version 18.2. This value will be removed in future versions. Use the value `WIASCANNER` instead.
+		*/
 		WIATWAINSCANNER = 0x800
 	}	
 	enum EnumDWT_ImageFormatType{
-		url = 0,  
-		blob = 1,
-		base64 = 2
+		URL = 0,  
+		Blob = 1,
+		Base64 = 2
 	}
 	enum EnumDWT_ResponseType{
-		text = 0,  
-		blob = 1,
-		arraybuffer = 2,
-		xml = 3,
-		json = 4
+		Text = 0,  
+		Blob = 1,
+		ArrayBuffer = 2,
+		XML = 3,
+		JSON = 4
 	}
 	enum EnumDWT_WorkMode{
 		normal = 0, // old mode, the image is processed at the server and then displayed in viewer    

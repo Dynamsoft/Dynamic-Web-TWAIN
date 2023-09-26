@@ -3,6 +3,7 @@ import { DynamsoftEnumsDWT } from "./Dynamsoft.Enum";
 
 export interface WebTwainViewer extends WebTwainAcquire {
     /**
+	 * @deprecated since version 16.2. This function will be removed in future versions. Use `Viewer.bind` and `Viewer.show` instead.
      * Create a Dynamsoft Viewer instance and bind it to the WebTwain instance.
      * @param elementId Specify an HTML element to create the viewer.
      */
@@ -10,58 +11,72 @@ export interface WebTwainViewer extends WebTwainAcquire {
         elementId: string
     ): boolean;
     /**
+	 * @deprecated since version 16.2. This function will be removed in future versions. Use `Viewer.unbind` instead.
      * Unbind and destroy the viewer.
      */
     UnbindViewer(): boolean;
     /**
+	 * @deprecated since version 16.2. This property will be removed in future versions. Use `Viewer.background` instead.
      * Return or set the background colour of the viewer.
      */
     BackgroundColor: number;
     /**
+	 * @deprecated since version 16.2. This property will be removed in future versions. Use function `Viewer.selectedPageBorder` instead.
      * Return or set the border colour for selected image(s).
      */
     SelectionImageBorderColor: number;
     /**
+	 * @deprecated since version 16.2. This property will be removed in future versions. Use function `Viewer.fitWindow` instead.
      * Return or set how the image is fit in the viewer.
      */
     FitWindowType: number;
     /**
+	 * @deprecated since version 16.2. This property will be removed in future versions. Use function `Viewer.fitWindow` instead.
      * Return or set the border colour for selected image(s).
      */
     IfFitWindow: boolean;
     /**
+	 * @deprecated since version 16.2. This property will be removed in future versions. Use `Viewer.height` instead.
      * Return or set the height of the viewer.
      */
     Height: number | string;
     /**
+	 * @deprecated since version 16.2. This property will be removed in future versions. Use `Viewer.width` instead.
      * Return or set the width of the viewer.
      */
     Width: number | string;
     /**
+	 * @deprecated since version 16.2. This property will be removed in future versions. Use `ViewerEvent.imageX` instead.
      * Return the horizontal coordinate of the mouse.
      */
     readonly MouseX: number;
     /**
+	 * @deprecated since version 16.2. This property will be removed in future versions. Use `ViewerEvent.imageY` instead.
      * Return the vertical coordinate of the mouse.
      */
     readonly MouseY: number;
     /**
+	 * @deprecated since version 16.2. This function will be removed in future versions. Use `Viewer.cursor` instead.
      * Return or set the shape of the cursor.
      */
     MouseShape: boolean;
     /**
+	 * @deprecated since version 16.2. This property will be removed in future versions. Use `Viewer.ifAutoScroll` instead.
      * Return or set whether the thumbnails view scrolls when new images come in.
      */
     IfAutoScroll: boolean;
     /**
+	 * @deprecated since version 16.2. This property will be removed in future versions. Use function `Viewer.updatePageNumberStyle` instead.
      * Return or set whether to show the page numbers.
      */
     ShowPageNumber: boolean;
     /**
+	 * @deprecated since version 16.2. This property will be removed in future versions. Use `Viewer.pageMargin` instead.
      * Return or set the margin between images (in pixels).
      */
     ImageMargin: number;
     /**
+	 * @deprecated since version 16.2. This property will be removed in future versions. Use `Viewer.zoom` instead.
      * Return or set the zoom factor.
      */
     Zoom: number;
@@ -131,6 +146,7 @@ export interface DynamsoftViewer {
      */
     pageMargin: number | string;
     /**
+	 * @deprecated since version 18.4. This property will be removed in future versions. Use function `updateSelectionBoxStyle` instead.
      * [Scope] Main viewer
      * [Description] Set the border color of the selected area.
      * [Usage Notes] 'Invalid property value' is reported when the set value does not meet the CSS standard.
@@ -181,12 +197,14 @@ export interface DynamsoftViewer {
      */
     selectedPageBackground: string;
     /**
+	 * @deprecated since version 17.3. This property will be removed in future versions. Use function `updatePageNumberStyle` instead.
      * [Scope] Main viewer
      * [Description] Whether to show the page number. The default value is false.
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
      */
     showPageNumber: boolean;
 	 /**
+	 * @deprecated since version 17.3. This property will be removed in future versions. Use function `updateCheckboxStyle` instead.
      * [Scope] Main viewer
      * [Description] Whether to show the checkbox for multiple selected. The default value is false.
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
@@ -286,31 +304,37 @@ export interface DynamsoftViewer {
      * [Scope] Main viewer
      * [Description] Clear the selected area(s) on the current image.
      */
-    clearSelectedAreas(): void;
+    clearSelectedAreas(): boolean;
     /**
      * [Scope] Main viewer
      * [Description] Set one or more rectangular area(s) on the specified image.
      * @param areas Specify the areas.
      */
-    setSelectedAreas(areas: Area[]): void;
+    setSelectedAreas(areas: Area[]): boolean;
     /**
      * [Scope] Main viewer
      * [Description] Fit the image to the window
      * @param type Specify a type to fit. (width, height, both)
      */
-    fitWindow(type?: 'height' | 'width'): void;
+    fitWindow(type?: 'height' | 'width'): boolean;
 	/**
      * [Scope] Main viewer
      * Update checkbox style
      * @argument checkboxSettings Settings for checkboxex.
      */
-	updateCheckboxStyle(checkboxSettings?: CheckboxSettings): void;
+	updateCheckboxStyle(checkboxSettings?: CheckboxSettings): boolean;
 	/**
      * [Scope] Main viewer
 	 * Update page number style
 	 * @argument pageNumberSettings Settings for page numbers.
      */
-	updatePageNumberStyle(pageNumberSettings?: PageNumberSettings): void;
+	updatePageNumberStyle(pageNumberSettings?: PageNumberSettings): boolean;
+	/**
+     * [Scope] Main viewer
+     * Sets the graphical style for the selection box in the Viewer.
+     * @argument selectionBoxStyleSettings Settings for selection box.
+     */
+	updateSelectionBoxStyle(selectionBoxStyleSettings?: SelectionBoxStyleSettings): boolean;
     /**
      * [Description] Set the CSS class name of the specified button defined in updateUISetting.
      * @param name Specify the button.
@@ -513,12 +537,14 @@ export interface ThumbnailViewerSettings {
      */
 	allowResizing?: boolean;
     /**
+	 * @deprecated since version 17.3. This property will be removed in future versions. Use `pageNumber` instead.
      * [Scope] Thumbnail viewer
      * [Description] Whether to show the page number. The default value is false.
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
      */
     showPageNumber?: boolean;
 	/**
+	 * @deprecated since version 17.3. This property will be removed in future versions. Use `checkbox` instead.
      * [Scope] Thumbnail viewer
      * [Description] Whether to show the checkbox for multiple selected. The default value is false.
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
@@ -627,7 +653,13 @@ export interface ImageEditor {
 	zoomOrigin?: {
 		x: string; //Default is "center", values: "left", "right", "center".
 		y: string; //Default is "center", values: "top", "bottom", "center"
-	};
+	};	
+	/**
+     * [Scope] ImageEditor viewer
+     * Set the selction box styling.
+     * @argument selectionBoxStyleSettings Settings for selection box.
+     */
+	updateSelectionBoxStyle(selectionBoxStyleSettings?: SelectionBoxStyleSettings): boolean;
 }
 export interface ThumbnailViewer {
     /**
@@ -734,12 +766,14 @@ export interface ThumbnailViewer {
      */
 	allowResizing: boolean;
     /**
+	 * @deprecated since version 17.3. This property will be removed in future versions. Use function `updatePageNumberStyle` instead.
      * [Scope] Thumbnail viewer
      * [Description] Whether to show the page number. The default value is false.
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
      */
     showPageNumber: boolean;
 	/**
+	 * @deprecated since version 17.3. This property will be removed in future versions. Use function `updateCheckboxStyle` instead.
      * [Scope] Thumbnail viewer
      * [Description] Whether to show the checkbox for multiple selected. The default value is false.
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
@@ -903,4 +937,12 @@ export interface PageNumberSettings {
   bottom?: number | string;  //default: 0, number unit: px, string value: "10px"/"10%", relative to parent container
   translateX?: number | string; //default: "", number unit: px, string value: "10px"/"10%", relative to itself
   translateY?: number | string; //default: "", number unit: px, string value: "10px"/"10%", relative to itself
+}
+export interface SelectionBoxStyleSettings {
+  borderColor?: string;  //Default: rgba(0,0,0,1). Colour in "rgba(r, g, b, a)"
+  borderWidth?: number;  //Default: 1. Pixels. Width of individual pattern segments.
+  lineDash?: [number,number];  //Default: [5,2]. Pixels. Line spacing where x is shaded pixels and y is gap in pixels.
+  handleWidth?: number;  //Default: 9. Pixels.
+  handleHeight?: number;   //Default: 9. Pixels
+  handleColor?: string;  //Default: rgba(0,0,0,1). Colour in "rgba(r, g, b, a)"
 }

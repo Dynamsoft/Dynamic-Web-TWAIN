@@ -337,6 +337,10 @@ export interface DWTPro {
      * A callback function that is executed when a WebTwain instance is created.
      */
     OnWebTwainReady: () => void;
+	/**
+     * A callback function that is executed when a WebTwain instance is faild.
+     */
+    OnWebTwainError: (error: any) => void;
     /**
      * A callback function that is executed right before the creation of a WebTwain instance.
      */
@@ -354,12 +358,28 @@ export interface DWTPro {
      */
     ProductKey: string;	
     /**
+	 * @deprecated since version 18.0. This property will be removed in future versions. Use `Dynamsoft.DWT.ProductKey` instead.
 	 * LTS Settings
-	*/
+	 */
 	licenseServer?: string[];
+	/**
+	 * @deprecated since version 18.0. This property will be removed in future versions. Use `Dynamsoft.DWT.ProductKey` instead.
+	 * LTS Settings
+	 */
 	handshakeCode?: string;
+	/**
+	 * @deprecated since version 18.0. This property will be removed in future versions. Use `Dynamsoft.DWT.ProductKey` instead.
+	 * LTS Settings
+	 */
 	sessionPassword?: string;
+	/**
+	 * @deprecated since version 18.0. This property will be removed in future versions. Use `Dynamsoft.DWT.ProductKey` instead.
+	 * LTS Settings
+	 */
 	organizationID?: string;
+	/*
+	 * @deprecated since version 18.2. This property will be removed in future versions. Use RegisterEvent `OnWebTwainError` instead.
+	 */
 	licenseException?: string;
     /**
      * The product name.
@@ -379,6 +399,10 @@ export interface DWTPro {
      * Set or return where the library looks for resources files including service installers, CSS, etc.
      */
     ResourcesPath: string;
+	/**
+     * Set or return service installer path.
+     */
+	ServiceInstallerLocation: string;
     /**
      * The version of the Linux edition (the service, not wasm).
      */

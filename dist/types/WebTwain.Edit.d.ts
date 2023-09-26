@@ -3,6 +3,7 @@ import { WebTwainBuffer } from "./WebTwain.Buffer";
 
 export interface WebTwainEdit extends WebTwainBuffer {
     /**
+	 * @deprecated since version 16.2. This function will be removed in future versions. Use `Viewer.createImageEditor` instead.
      * Show the built-in image editor. If called without any arguments while the editor is open, it'll close the editor.
      * @param divId Specify a div element to hold the editor.
      * @param width Specify the width of the editor.
@@ -353,8 +354,8 @@ export interface WebTwainEdit extends WebTwainBuffer {
      */
     BackgroundFillColor: number;
     /**
-     * [Deprecation] Add text on an image.
-     * [Alternative] Annotation feature to be added in a later version.
+	 * @deprecated since version 16.1.1. This property will be removed in future versions. Annotation feature to be added in a later version.
+     * Add text on an image.
      * @param index  the index of the image that you want to add text to.
      * @param x the x coordinate for the text.
      * @param y the y coordinate for the text.
@@ -375,8 +376,8 @@ export interface WebTwainEdit extends WebTwainBuffer {
         backgroundOpacity: number
     ): boolean;
     /**
-     * [Deprecation] Create the font for adding text using the method AddText.
-     * [Alternative] Annotation feature to be added in a later version.
+	 * @deprecated since version 16.1.1. This property will be removed in future versions. Annotation feature to be added in a later version.
+     * Create the font for adding text using the method AddText.
      * @param height Specifies the desired height (in logical units) of the font.
      * The absolute value of nHeight must not exceed 16,384 device units after it is converted.
      * For all height comparisons, the font mapper looks for the largest font that does not
@@ -430,8 +431,8 @@ export interface WebTwainEdit extends WebTwainBuffer {
         faceName: string
     ): boolean;
     /**
-     * [Deprecation] Decorates image of a specified index in buffer with rectangles of transparent color.
-     * [Alternative] Annotation feature to be added in a later version.
+	 * @deprecated since version 16.1.1. This property will be removed in future versions. Annotation feature to be added in a later version.
+     * Decorates image of a specified index in buffer with rectangles of transparent color.
      * @param index specifies the index of image in buffer. The index is 0-based.
      * @param left Specify the rectangle (leftmost coordinate).
      * @param top Specify the rectangle (topmost coordinate).

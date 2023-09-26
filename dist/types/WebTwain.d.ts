@@ -12,19 +12,23 @@ export interface WebTwain extends WebTwainViewer {
      */
     Addon: Addon;
     /**
-     * [Deprecation] This API is no longer needed.
+	 * @deprecated since version 10.1. This property will be removed in future versions. 
+     * This API is no longer needed.
      */
     AllowMultiSelect: boolean;
     /**
-     * [Deprecation] This API is no longer needed.
+	 * @deprecated since version 10.1. This property will be removed in future versions. 
+     * This API is no longer needed.
      */
     AllowPluginAuthentication: boolean;
     /**
-     * [Deprecation] This API is no longer needed.
+	 * @deprecated since version 10.1. This property will be removed in future versions. 
+     * This API is no longer needed.
      */
     AsyncMode: boolean;
     /**
-     * [Deprecation] This API is no longer needed.
+	 * @deprecated since version 10.1. This property will be removed in future versions. 
+     * This API is no longer needed.
      */
     BorderStyle: DynamsoftEnumsDWT.EnumDWT_BorderStyle | number;
     /**
@@ -32,11 +36,13 @@ export interface WebTwain extends WebTwainViewer {
      */
     readonly bReady: boolean;
     /**
-     * [Deprecation] This API is no longer needed.
+	 * @deprecated since version 10.1. This property will be removed in future versions. 
+     * This API is no longer needed.
      */
     BrokerProcessType: number;
     /**
-     * [Deprecation] This API is no longer needed.
+	 * @deprecated since version 10.1. This property will be removed in future versions. 
+     * This API is no longer needed.
      */
     EnableInteractiveZoom: boolean;
 }
