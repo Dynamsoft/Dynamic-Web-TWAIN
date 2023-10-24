@@ -1,10 +1,11 @@
 /*!
 * Dynamsoft JavaScript Library
-* Product: Dynamsoft Web TWAIN
+* Product: Dynamic Web TWAIN
 * Web Site: https://www.dynamsoft.com
 *
 * Copyright 2023, Dynamsoft Corporation 
 * Author: Dynamsoft Support Team
+* Version: 18.4.1
 */
  .dynamsoft-major-color {
     color: #50a8e1;
@@ -152,70 +153,6 @@
     background-color: #7DA2CE;
     border: 1px solid #7DA2CE;
     z-index: 1;
-}
-
-/* image change size */
-
-.dynamsoft-dwt-imgSizeEditor {
-    position: absolute;
-    text-align: left;
-    padding: 0 0 0 15px;
-    margin: 0;
-    height: 150px;
-    width: 315px;
-    font-size: 12px;
-    border: 3px solid #cE5E04;
-    border-collapse: collapse;
-    background-color: #f0f0f0;
-    z-index: 9999;
-    line-height: 26px;
-}
-
-.dynamsoft-dwt-imgSizeEditor ul {
-    padding: 15px 0 0 0;
-    margin: 0;
-    list-style: none;
-}
-
-.dynamsoft-dwt-imgSizeEditor div {
-    margin: 5px 0 0 0;
-    text-align: center;
-}
-
-.dynamsoft-dwt-imgSizeEditor span {
-    margin: 0 0 0 10px;
-}
-
-.dynamsoft-dwt-imgSizeEditor input, .dynamsoft-dwt-imgSizeEditor select {
-    font-size: 12px;
-}
-
-.dynamsoft-dwt-imgSizeEditor div input
-{
-  -webkit-appearance: push-button;
-  -webkit-touch-callout: none;
-  /* iOS Safari */
-  -webkit-user-select: none;
-  /* Safari */
-  -khtml-user-select: none;
-  /* Konqueror HTML */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* Internet Explorer/Edge */
-    user-select: none;
-    white-space: pre;
-    align-items: flex-start;
-    text-align: center;
-    cursor: default;
-    color: -internal-light-dark-color(buttontext, rgb(170, 170, 170));
-    background-color: -internal-light-dark-color(rgb(239, 239, 239), rgb(74, 74, 74));
-    box-sizing: border-box;
-    padding: 1px 6px;
-    border-width: 2px;
-    border-style: outset;
-    border-color: -internal-light-dark-color(rgb(118, 118, 118), rgb(195, 195, 195));
-    border-image: initial;
 }
 
 .dynamsoft-dwt-EditorButton-selected {
@@ -1152,7 +1089,6 @@ src: url('data:font/ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwR1NVQiCLJXoAAAE4AAA
     content: '\e662';
 }
 
-.dynamsoft-dwt-imgSizeEditor li{list-style:none}
 .dynamsoft-dialog-selectsource li{list-style:none}
 .dynamsoft-dialog-license li{list-style:none}
 .ds-dwt-ui-dlg li{list-style:none}
