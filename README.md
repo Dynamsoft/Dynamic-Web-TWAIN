@@ -207,7 +207,7 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 >
 >`Device Manager (DeviceManager_18500312.dll, 64bit)`
 >
->**v18.5.0** (build version 18, 4, 0, 0926)
+>**v18.5.0** (build version 18, 5, 0, 0312)
 >
 >`Dynamic Web TWAIN (dwt_18.5.0.0312.dll, 64bit)`
 >
