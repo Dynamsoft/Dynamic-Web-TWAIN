@@ -75,6 +75,16 @@ export interface WebTwainAcquire extends WebTwainEdit {
      * @param bIncludeDetails Whether to return more details about the data sources or just their names.
      */
     GetSourceNamesAsync(bIncludeDetails: boolean): Promise<string[] | SourceDetails[]>;
+	/**
+     * Bring up the Source Selection User Interface (UI) for the user to choose a data source.
+     * @param successCallback A callback function that is executed if the request succeeds.
+     * @param failureCallback A callback function that is executed if the request fails.
+     * @argument errorCode The error code.
+     * @argument errorString The error string.
+     */
+    SelectSource(
+    ): boolean | string;
+	
     /**
      * Bring up the Source Selection User Interface (UI) for the user to choose a data source.
      * @param successCallback A callback function that is executed if the request succeeds.
@@ -83,9 +93,9 @@ export interface WebTwainAcquire extends WebTwainEdit {
      * @argument errorString The error string.
      */
     SelectSource(
-        successCallBack?: () => void,
-        failureCallBack?: (errorCode: number, errorString: string) => void
-    ): boolean | string;
+        successCallBack: () => void,
+        failureCallBack: (errorCode: number, errorString: string) => void
+    ): void;
     /**
      * Bring up the Source Selection User Interface (UI) for the user to choose a data source.
      * @param deviceType The device type. Added the parameter deviceType in Dynamic Web TWAIN 18
@@ -425,6 +435,23 @@ export interface WebTwainAcquire extends WebTwainEdit {
             errorString: string
         ) => void
     ): void;
+	 /**
+	 * Gets detailed information about specific capabilities of the current data source.
+	 * @param capabilities Specify one or multiple capabilities.
+     * @param successCallback A callback function that is executed if the request succeeds.
+     * @param failureCallback A callback function that is executed if the request fails.
+     * @argument capabilityDetails Detailed information about the specified capabilities.
+     * @argument errorCode The error code.
+     * @argument errorString The error string.
+     */
+    getCapabilities(
+		capabilities: DynamsoftEnumsDWT.EnumDWT_Cap[] | number[],
+        succssCallback: (capabilityDetails: CapabilityDetails[]) => void,
+        failureCallback: (
+            errorCode: number,
+            errorString: string
+        ) => void
+    ): void;
     /**
      * Sets up one or multiple capabilities in one call.
      * @param capabilities A object that describes how to set capabilities.
@@ -750,7 +777,7 @@ export interface ScanSetup {
     /**
      * The name of the data source (the scanner). If not set, the default data source is used.
      */
-    scanner?: string;
+    scanner?: string | Device;
     ui?: {
         /**
          * Whether to show the UI of the device.
@@ -877,7 +904,9 @@ export interface ScanSetup {
         /**
          * Whether to enable automatic brightness adjustment.
          */
-        autoBright?: boolean
+        autoBright?: boolean,
+		autoFeed?: boolean,
+		autoScan?: boolean
     };
     /**
      * A callback triggered before the scan, after the scan and after each page has been transferred.
@@ -959,7 +988,6 @@ export interface ScanSetup {
         httpParams?: {
             /**
              * Target of the request.
-             * Example: "http://dynamsoft.com/receivepost.aspx"
              */
             url?: string,
             /**
@@ -1024,7 +1052,16 @@ export interface CapabilityDetails {
     /**
      * The current value of the Capability
      */
-    curValue?: ValueAndLabel;
+    curValue?: ValueAndLabel | string | number | Frame;
+	defValue?: ValueAndLabel | string | number | Frame;
+	maxValue?: number;
+	minValue?: number;
+	stepSize?: number;
+	enums?: ValueAndLabel[] | any[];
+	/**
+     * The available values of the Capability
+     */
+	values?: ValueAndLabel[] | any[];
     /**
      * The index for the default value of the Capability
      */
@@ -1050,10 +1087,6 @@ export interface CapabilityDetails {
      * TWTY_int: 5
      */
     valueType?: ValueAndLabel;
-    /**
-     * The available values of the Capability
-     */
-    values?: ValueAndLabel[];
 }
 export interface ValueAndLabel {
     /**
@@ -1070,7 +1103,7 @@ export interface Capabilities {
     /**
      * Whether to "ignore" or "fail" the request if an exception occurs. This is an overall setting that is inherited by all capabilities.
      */
-    exceptition: string;
+    exception: string;
     /**
      * Specifies how to set capabilities
      */
@@ -1084,7 +1117,8 @@ export interface CapabilitySetup {
     /**
      * The value to set to the capability or the value of the capability after setting.
      */
-    curValue: number | string | object;
+    curValue?: number | string | object;
+	values?:any[];
     errorCode?: number;
     errorString?: string;
     /**
@@ -1102,4 +1136,11 @@ export interface Device {
 	deviceType: DynamsoftEnumsDWT.EnumDWT_DeviceType;
 	serviceInfo?: ServiceInfo;
 	deviceInfo?: any;
+}
+
+export interface Frame{
+	left:number,
+	top:number,
+	right:number,
+	bottom:number,
 }

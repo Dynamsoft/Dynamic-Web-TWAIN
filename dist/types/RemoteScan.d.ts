@@ -93,15 +93,15 @@ export interface RemoteScanObject {
 		optionConfig?:{
 			//'blob', 'arraybuffer', 'text', 'xml', 'json', default: 'text'
 			responseType?: DynamsoftEnumsDWT.EnumDWT_ResponseType,
-			formFields?:[{
+			formFields?:{
 				name: string,
 				value: Blob | string,
 				fileName ? : string
-			}],
-			headers?:[{
+			}[],
+			headers?:{
 				name: string,
 				value: string
-			}]
+			}[]
 		}
 	): Promise<any>;
 	/**
@@ -145,11 +145,11 @@ export interface RemoteScanObject {
 	 * Return the index of an image specified by the imageId.
 	 * @param imageId The imageId of the image.
 	 */
-	imageIDToIndex(imageId: number): number;
+	imageIDToIndex(imageId: string): number;
 	/**
 	* Return the imageId of an image specified by the index.
 	* @param index The index of the image.
 	*/
-	indexToImageID(index: number): number;
+	indexToImageID(index: number): string;
 }
 

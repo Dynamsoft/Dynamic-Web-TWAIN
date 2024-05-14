@@ -100,6 +100,14 @@ export interface WebTwainBuffer extends WebTwainIO {
      * @param type Sepcify the expected file type.
      */
     GetSelectedImagesSize(type: DynamsoftEnumsDWT.EnumDWT_ImageType | number): number;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `GetSkewAngle` instead.
+     * Return the skew angle of the specified image.
+     * @param index Specify the image.
+     */
+    GetSkewAngle(
+        index: number
+    ): number;
     /**
      * Return the skew angle of the specified image.
      * @param index Specify the image.
@@ -116,7 +124,23 @@ export interface WebTwainBuffer extends WebTwainIO {
         failureCallback?: (
             errorCode: number,
             errorString: string) => void
-    ): number | void;
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `GetSkewAngleEx` instead.
+     * Return the skew angle of the specified rectangle on the specified image.
+     * @param index Specify the image.
+     * @param left The x-coordinate of the upper-left corner of the rectangle.
+     * @param top The y-coordinate of the upper-left corner of the rectangle.
+     * @param right The x-coordinate of the lower-right corner of the rectangle.
+     * @param bottom The y-coordinate of the lower-right corner of the rectangle.
+     */
+    GetSkewAngleEx(
+        index: number,
+        left: number,
+        top: number,
+        right: number,
+        bottom: number
+    ): number;
     /**
      * Return the skew angle of the specified rectangle on the specified image.
      * @param index Specify the image.
@@ -141,7 +165,7 @@ export interface WebTwainBuffer extends WebTwainIO {
         failureCallback?: (
             errorCode: number,
             errorString: string) => void
-    ): number | void;
+    ): void;
     /**
      * Return how many images are held in the buffer
      */
@@ -154,12 +178,12 @@ export interface WebTwainBuffer extends WebTwainIO {
      * Return the imageId of an image specified by the index.
      * @param index The index of the image.
      */
-    IndexToImageID(index: number): number;
+    IndexToImageID(index: number): string;
     /**
      * Return the index of an image specified by the imageId.
      * @param imageId The imageId of the image.
      */
-    ImageIDToIndex(imageId: number): number;
+    ImageIDToIndex(imageId: string): number;
     /**
      * Check whether the specified image is blank.
      * @param index Specify the image.
@@ -279,7 +303,7 @@ export interface WebTwainBuffer extends WebTwainIO {
      * Get the status of the tags for a specific image.
 	 * @param index Specify one image.
      */
-	GetTagListByIndex(index:number): TagName[];	
+	GetTagListByIndex(index:number): string[];	
 	/**
      * Get the current document name.
      */
@@ -367,21 +391,24 @@ export interface WebTwainBuffer extends WebTwainIO {
 	 * @argument sourceIndices The indices of the images to be copied. 
 	 * @argument targetIndex The index at which the source images should be inserted into the new document. If not specifed, the images will be appended to the destination document. 	 
 	 */
-	CopyToDocumentAsync(from: string, to: string, sourceIndices: number[]|number, targetIndex: number): Promise<void>;
+	CopyToDocumentAsync(from: string, to: string, sourceIndices: number[], targetIndex: number): Promise<void>;
+	/*
+     * Update server-side data.
+	 * @param imageId The imageId of the image.
+     * @param blob Specify the blob. 
+     */
+	updateImage(imageId: string, blob: Blob): Promise <void>;
 }
 
-export interface TagName {
-    name: string;
-}
 
 export interface TagInfo {
     name: string;
-    imageIds: number[];
+    imageIds: string[];
 }
 
 export interface DocumentInfo {
     name: string;
-    imageIds: number[];
+    imageIds: string[];
 }
 
 export interface RawData {

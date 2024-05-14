@@ -49,6 +49,10 @@ export interface WebTwainIO extends WebTwainUtil {
      * Return or set whether to show open/save file dialog when saving images in the buffer or loading images from a local directory.
      */
     IfShowFileDialog: boolean;
+	 /**
+     * Return or set whether to load images in the order of selection when displaying the open file dialog.
+     */
+	IfSortBySelectionOrder: boolean;
     /**
      * Return or set whether to show the progress of an operation with a button to cancel it.
      */
@@ -400,6 +404,31 @@ export interface WebTwainIO extends WebTwainUtil {
             errorCode: number,
             errorString: string) => void
     ): void;
+	/**
+     * Upload the blob via a HTTP Post.
+     * @param URL The server-side script to receive the post.
+     * @param blobData Specify the blob.
+     * @param fileName The file name.
+     * @argument response The response value.
+     */
+    httpUploadBlob(
+        URL: string,
+        blobData: Blob,
+        fileName: string,
+		optionConfig?:{
+			//'blob', 'arraybuffer', 'text', 'xml', 'json', default: 'text'
+			responseType?: DynamsoftEnumsDWT.EnumDWT_ResponseType,
+			formFields?:{
+				name: string,
+				value: Blob | string,
+				fileName ? : string
+			}[],
+			headers?:{
+				name: string,
+				value: string
+			}[]
+		}
+    ): Promise<any>;
     /**
      * Upload the specified image(s) via a HTTP Post.
      * @param URL The server-side script to receive the post.
@@ -622,6 +651,14 @@ export interface WebTwainIO extends WebTwainUtil {
             errorString: string,
             response: string) => void
     ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `LoadImage` instead.
+     * Load image(s) specified by its absolute path.
+     * @param fileName The path of the image to load.
+     */
+    LoadImage(
+        fileName: string
+    ): boolean;
     /**
      * Load image(s) specified by its absolute path.
      * @param fileName The path of the image to load.
@@ -636,7 +673,17 @@ export interface WebTwainIO extends WebTwainUtil {
         failureCallback?: (
             errorCode: number,
             errorString: string) => void
-    ): void | boolean;
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `LoadImageEx` instead.
+     * Load image(s) specified by its absolute path.
+     * @param fileName The path of the image to load.
+     * @param type The format of the image.
+     */
+    LoadImageEx(
+        fileName: string,
+        type:DynamsoftEnumsDWT.EnumDWT_ImageType | number
+    ): boolean;
     /**
      * Load image(s) specified by its absolute path.
      * @param fileName The path of the image to load.
@@ -653,7 +700,16 @@ export interface WebTwainIO extends WebTwainUtil {
         failureCallback?: (
             errorCode: number,
             errorString: string) => void
-    ): void | boolean;
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `LoadImageFromBase64Binary` instead.
+     * Load image(s) from a base64 string.
+     * @param imageData The image data which is a base64 string without the data URI scheme.
+     */
+    LoadImageFromBase64Binary(
+        imageData: string,
+        imageType: DynamsoftEnumsDWT.EnumDWT_ImageType
+    ): boolean;
     /**
      * Load image(s) from a base64 string.
      * @param imageData The image data which is a base64 string without the data URI scheme.
@@ -669,7 +725,7 @@ export interface WebTwainIO extends WebTwainUtil {
         failureCallback?: (
             errorCode: number,
             errorString: string) => void
-    ): void | boolean;
+    ): void;
     /**
      * Load image(s) from a binary object (Blob | ArrayBuffer).
      * @param imageData The image data.
@@ -685,6 +741,12 @@ export interface WebTwainIO extends WebTwainUtil {
             errorCode: number,
             errorString: string) => void
     ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `LoadDibFromClipboard` instead.
+     * Load an image from the system clipboard. The image must be in DIB format.
+     */
+    LoadDibFromClipboard(
+    ): boolean;
     /**
      * Load an image from the system clipboard. The image must be in DIB format.
      * @param successCallback A callback function that is executed if the request succeeds.
@@ -697,7 +759,7 @@ export interface WebTwainIO extends WebTwainUtil {
         failureCallback?: (
             errorCode: number,
             errorString: string) => void
-    ): void | boolean;
+    ): void;
     /**
 	 * @deprecated since version 16.1.1. This property will be removed in future versions. 
      * Return or set how many threads can be used when you upload files through POST.
@@ -716,7 +778,17 @@ export interface WebTwainIO extends WebTwainUtil {
      * Export specified image data in the buffer to a new browser window and use the browser's built-in print feature to print the image(s).
      * @argument indices The indices of the converted images.
      */
-    PrintEx(indices: number[]): void;
+    PrintEx(indices: number[]): boolean;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `SaveAsBMP` instead.
+     * Save the specified image as a BMP file.
+     * @param fileName The name to save to.
+     * @param index The index which specifies the image to save.
+     */
+    SaveAsBMP(
+        fileName: string,
+        index: number
+    ): boolean;
     /**
      * Save the specified image as a BMP file.
      * @param fileName The name to save to.
@@ -729,9 +801,19 @@ export interface WebTwainIO extends WebTwainUtil {
     SaveAsBMP(
         fileName: string,
         index: number,
-        successCallback?: () => void,
-        failureCallback?: (errorCode: number, errorString: string) => void
-    ): void | boolean;
+        successCallback: () => void,
+        failureCallback: (errorCode: number, errorString: string) => void
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `SaveAsJPEG` instead.
+     * Save the specified image as a JPEG file.
+     * @param fileName The name to save to.
+     * @param index The index which specifies the image to save.
+     */
+    SaveAsJPEG(
+        fileName: string,
+        index: number
+    ): boolean;
     /**
      * Save the specified image as a JPEG file.
      * @param fileName The name to save to.
@@ -744,9 +826,19 @@ export interface WebTwainIO extends WebTwainUtil {
     SaveAsJPEG(
         fileName: string,
         index: number,
-        successCallback?: () => void,
-        failureCallback?: (errorCode: number, errorString: string) => void
-    ): void | boolean;
+        successCallback: () => void,
+        failureCallback: (errorCode: number, errorString: string) => void
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `SaveAsPDF` instead.
+     * Save the specified image as a PDF file.
+     * @param fileName The name to save to.
+     * @param index The index which specifies the image to save.
+     */
+    SaveAsPDF(
+        fileName: string,
+        index: number
+    ): boolean;
     /**
      * Save the specified image as a PDF file.
      * @param fileName The name to save to.
@@ -759,9 +851,19 @@ export interface WebTwainIO extends WebTwainUtil {
     SaveAsPDF(
         fileName: string,
         index: number,
-        successCallback?: () => void,
-        failureCallback?: (errorCode: number, errorString: string) => void
-    ): void | boolean;
+        successCallback: () => void,
+        failureCallback: (errorCode: number, errorString: string) => void
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `SaveAsPNG` instead.
+     * Save the specified image as a PNG file.
+     * @param fileName The name to save to.
+     * @param index The index which specifies the image to save.
+     */
+    SaveAsPNG(
+        fileName: string,
+        index: number
+    ): boolean;
     /**
      * Save the specified image as a PNG file.
      * @param fileName The name to save to.
@@ -774,9 +876,19 @@ export interface WebTwainIO extends WebTwainUtil {
     SaveAsPNG(
         fileName: string,
         index: number,
-        successCallback?: () => void,
-        failureCallback?: (errorCode: number, errorString: string) => void
-    ): void | boolean;
+        successCallback: () => void,
+        failureCallback: (errorCode: number, errorString: string) => void
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `SaveAsTIFF` instead.
+     * Save the specified image as a TIFF file.
+     * @param fileName The name to save to.
+     * @param index The index which specifies the image to save.
+     */
+    SaveAsTIFF(
+        fileName: string,
+        index: number
+    ): boolean;
     /**
      * Save the specified image as a TIFF file.
      * @param fileName The name to save to.
@@ -789,9 +901,17 @@ export interface WebTwainIO extends WebTwainUtil {
     SaveAsTIFF(
         fileName: string,
         index: number,
-        successCallback?: () => void,
-        failureCallback?: (errorCode: number, errorString: string) => void
-    ): void | boolean;
+        successCallback: () => void,
+        failureCallback: (errorCode: number, errorString: string) => void
+    ): void;
+	/**
+     * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `SaveAllAsMultiPageTIFF` instead.	
+     * Saves all the images in buffer as a multi-page TIFF file.
+     * @param fileName The name to save to.
+     */
+    SaveAllAsMultiPageTIFF(
+        fileName: string
+    ): boolean;
     /**
      * Saves all the images in buffer as a multi-page TIFF file.
      * @param fileName The name to save to.
@@ -802,9 +922,17 @@ export interface WebTwainIO extends WebTwainUtil {
      */
     SaveAllAsMultiPageTIFF(
         fileName: string,
-        successCallback?: () => void,
-        failureCallback?: (errorCode: number, errorString: string) => void
-    ): void | boolean;
+        successCallback: () => void,
+        failureCallback: (errorCode: number, errorString: string) => void
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `SaveAllAsPDF` instead.
+     * Saves all the images in buffer as a multi-page PDF file.
+     * @param fileName The name to save to.
+     */
+    SaveAllAsPDF(
+        fileName: string
+    ): boolean;
     /**
      * Saves all the images in buffer as a multi-page PDF file.
      * @param fileName The name to save to.
@@ -815,9 +943,17 @@ export interface WebTwainIO extends WebTwainUtil {
      */
     SaveAllAsPDF(
         fileName: string,
-        successCallback?: () => void,
-        failureCallback?: (errorCode: number, errorString: string) => void
-    ): void | boolean;
+        successCallback: () => void,
+        failureCallback: (errorCode: number, errorString: string) => void
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `SaveSelectedImagesAsMultiPagePDF` instead.
+     * Saves all selected images in buffer as a multi-page PDF file.
+     * @param fileName The name to save to.
+     */
+    SaveSelectedImagesAsMultiPagePDF(
+        fileName: string
+    ): boolean;
     /**
      * Saves all selected images in buffer as a multi-page PDF file.
      * @param fileName The name to save to.
@@ -828,9 +964,17 @@ export interface WebTwainIO extends WebTwainUtil {
      */
     SaveSelectedImagesAsMultiPagePDF(
         fileName: string,
-        successCallback?: () => void,
-        failureCallback?: (errorCode: number, errorString: string) => void
-    ): void | boolean;
+        successCallback: () => void,
+        failureCallback: (errorCode: number, errorString: string) => void
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `SaveSelectedImagesAsMultiPageTIFF` instead.
+     * Saves all selected images in buffer as a multi-page TIFF file.
+     * @param fileName The name to save to.
+     */
+    SaveSelectedImagesAsMultiPageTIFF(
+        fileName: string
+    ): boolean;
     /**
      * Saves all selected images in buffer as a multi-page TIFF file.
      * @param fileName The name to save to.
@@ -841,11 +985,11 @@ export interface WebTwainIO extends WebTwainUtil {
      */
     SaveSelectedImagesAsMultiPageTIFF(
         fileName: string,
-        successCallback?: () => void,
-        failureCallback?: (
+        successCallback: () => void,
+        failureCallback: (
             errorCode: number,
             errorString: string) => void
-    ): void | boolean;
+    ): void;
     /**
 	 * @deprecated since version 16.1.1. This property will be removed in future versions. Use `SelectedImagesIndices` instead.
      * Return an index from the selected indices array. 
@@ -865,6 +1009,16 @@ export interface WebTwainIO extends WebTwainUtil {
         successCallback?: (result: string[]) => void,
         failureCallback?: (errorCode: number, errorString: string) => void
     ): string | boolean;
+	/**
+     * Save the blob as a local file.
+     * @param fileName The file name.
+	 * @param blobData Specify the blob.
+     * @argument response The response value.
+     */
+	saveBlob(
+		fileName: string,
+		blobData: Blob,
+	): Promise<void>;
     /**
      * Add a custom field to the HTTP Post Form.
      * @param name The name of the field.
@@ -952,7 +1106,7 @@ export interface WebTwainIO extends WebTwainUtil {
      * Copy selected area to Blob or base64.
      * @param index Image to be copied from.
 	 * @param area Area of image to be copied. X,Y is top left corner origin, width and height is size of area to be copied.
-     * @param type The target image type of the blob/base64.
+     * @param type The format of the file.
 	 * @param imageFormatType Specify if the return should be Blob or base64 string. Only support blob or base64
      */
 	OutputSelectedAreaAsync(
@@ -966,6 +1120,45 @@ export interface WebTwainIO extends WebTwainUtil {
         type: DynamsoftEnumsDWT.EnumDWT_ImageType | number, 
         imageFormatType: DynamsoftEnumsDWT.EnumDWT_ImageFormatType | number, 
 	): Promise < Blob|string > ;
+	/**
+     * create Local Storage.
+     * @param Object Allow users to enhance the security of saved Local Storage data by using a password. 
+     */
+	createLocalStorage(settings?: {password?:string}): Promise <string>;
+	/**
+     * Check if LocalStorage exists.
+     * @param uid Unique identifier for the created LocalStorage.
+     */
+	localStorageExist(uid: string):Promise<boolean>;
+	/**
+     * Save image data to LocalStorage.
+     * @param Object.uid Unique identifier for the created LocalStorage.
+	 * @param Object.password Ensure that the entered password matches the one inputted when creating LocalStorage in order to successfully save.
+	 * @param indices The index array to be saved. Default to save all images.
+     */
+	saveToLocalStorage(settings: {
+	  uid: string, 
+	  password?:string,  
+	  indices?:[]
+	}): Promise<string[]>;  
+	/**
+     * Load images saved from LocalStorage.
+     * @param Object.uid Unique identifier for the created LocalStorage.
+	 * @param Object.password Ensure that the entered password matches the one inputted when creating LocalStorage in order to successfully load images.
+     */
+	loadFromLocalStorage (settings: {
+	  uid: string,
+	  password?:string,
+	}) : Promise<{oriImageId:string, newImageId: string}[]>; // uid is returned from 
+	/**
+     * Delete the saved LocalStorage.
+	 * @param Object.uid Unique identifier for the created LocalStorage.
+	 * @param Object.password Ensure that the entered password matches the one inputted when creating LocalStorage in order to successfully delete the specified LocalStorage.
+     */
+	removeLocalStorage(settings: {
+	  uid: string,
+	  password?:string,
+	}): Promise<boolean>; 
 }
 export interface Base64Result {
     /**
@@ -994,4 +1187,11 @@ export interface LicenseDetailItem {
     readonly OS: string;
     readonly Trial: string;
     readonly Version: string;
+}
+export interface MetaData{
+  width: number;
+  height: number;
+  bitDepth: number;
+  resolutionX: number;
+  resolutionY: number;
 }

@@ -151,6 +151,10 @@ export interface PDFWSettings {
 		 */
 		compressLevel?: number;
 	}
+	/**
+     * When saving a PDF, you can set a password for protection.
+     */
+	password?: string;
 }
 export interface ReaderOptions {
     /**

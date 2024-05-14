@@ -1508,13 +1508,6 @@ export namespace DynamsoftEnumsDWT {
         IT_MULTIPAGE_PDF = 7,
         IT_MULTIPAGE_TIF = 8
     }
-    enum EnumDWT_InitMsg {
-        Info = 1,
-        Error = 2,
-        NotInstalledError = 3,
-        DownloadError = 4,
-        DownloadNotRestartError = 5
-    }
     /** The method to do interpolation. */
     enum EnumDWT_InterpolationMethod {
         IM_NEARESTNEIGHBOUR = 1,

@@ -248,7 +248,7 @@ export interface DWTPro {
         port: string | number,
         portSSL: string | number,
         successCallBack: (DWObject: WebTwain) => void,
-        failureCallBack: (errorString: string) => void): void;
+        failureCallBack: ({code: number, message: string}) => void): void;
     /**
      * Create a WebTwain instance with UI.
      * @param ContainerId Specify the HTML element (typically of the type HTMLDivElement) to hold the UI.
@@ -258,14 +258,14 @@ export interface DWTPro {
      * @param successCallback A callback function that is executed if the request succeeds.
      * @param failureCallback A callback function that is executed if the request fails.
      */
-    CreateDWTObject(ContainerId: string, successCallBack: (DWObject: WebTwain) => void, failureCallBack: (errorString: string) => void): void;
+    CreateDWTObject(ContainerId: string, successCallBack: (DWObject: WebTwain) => void, failureCallBack: ({code: number, message: string}) => void): void;
     /**
      * Create a WebTwain instance without UI.
      * @param WebTwainId Specify the Id of the instance.
      * @param successCallback A callback function that is executed if the request succeeds.
      * @param failureCallback A callback function that is executed if the request fails.
      */
-    CreateDWTObjectEx(dwtInitialConfig: DWTInitialConfig, successCallBack: (DWObject: WebTwain) => void, failureCallBack: (errorString: string) => void): void;
+    CreateDWTObjectEx(dwtInitialConfig: DWTInitialConfig, successCallBack: (DWObject: WebTwain) => void, failureCallBack: (error: {code: number, message: string}) => void): void;
     /**
      * Define the display info.
      */
@@ -320,7 +320,7 @@ export interface DWTPro {
     /**
      * Create a WebTwain instance(s).
      */
-    Load(): void;
+    Load(): Promise<void>;
     /**
      * A callback function that is executed when the WebTwain related files are not found.
      */
@@ -390,7 +390,7 @@ export interface DWTPro {
      * @param event Specify the event.
      * @param callback Specify the callback.
      */
-    RegisterEvent(event: string, callback: (...args: any[]) => void): void;
+    RegisterEvent(event: string, callback: (...args: any[]) => void): boolean;
     /**
      * Remove all authorizations for accessing local resources.
      */
@@ -415,6 +415,10 @@ export interface DWTPro {
      * The version of the Windows edition (the service, not wasm).
      */
     ServerVersionInfo: string;
+	 /**
+     * The version of the Android edition (the service, not wasm).
+     */
+	ServerAndroidVersionInfo: string;
     /**
      * Built-in method to show a modal dialog.
      * @param width Width of the dialog.
@@ -452,7 +456,7 @@ export interface DWTPro {
      * IfInstallDWTModuleWithZIP, IfUpdateService,
      * IfUseEmbeddedDownloadNoticeForActiveX, IfUseViewer,
      * OnWebTwainInitMessage, OnWebTwainNeedUpgrade,
-     * OnWebTwainNeedUpgradeWebJavascript, OnWebTwainInitMessage
+     * OnWebTwainNeedUpgradeWebJavascript
      * OnWebTwainOldPluginNotAllowed, OnWebTwainOldPluginNotAllowed
      * Trial, UseDefaultInstallUI, ViewerJSIntegerited,
      * inited, _srcUseLocalService
@@ -473,6 +477,16 @@ export interface DWTPro {
      * Dynamsoft.DWT.ConnectWithSocket 
      */
 	ConnectWithSocket: boolean;
+	/**
+     * Dynamsoft.DWT.IfCheckCORS 
+	 * Whether to check CORS issue in detail, the default value is false.
+     */
+	IfCheckCORS: boolean;
+	/**
+     * Dynamsoft.DWT.IfCheckCert 
+	 * Whether to check certificates issue in detail, default value is true.
+     */
+	IfCheckCert: boolean;
 }
 export interface DisplayInfo {
     loaderBarSource?: string;

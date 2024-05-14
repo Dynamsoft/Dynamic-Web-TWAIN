@@ -111,22 +111,26 @@ export interface BufferChangeInfo {
     /**
      * The image id (not the index) of the current page.
      */
-    currentId: number;
+    currentId: string;
     /**
      * All image ids.
      */
-    imageIds: number[];
+    imageIds: string[];
     /**
      * All selected image ids.
      */
-    selectedIds: number[];
+    selectedIds: string[];
+    /**	
+	 * only when the value of action is 'modify'
+	 */
+	modifiedId?: string; 
 }
 
 export interface OutputInfo {
   /**
    * Id of the image if it's transferred to the buffer.
    */
-  imageId?: number;
+  imageId?: string;
   /**
    * Path of the image if it's transferred to the disk.
    */

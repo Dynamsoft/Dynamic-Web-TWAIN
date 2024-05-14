@@ -126,5 +126,5 @@ export interface FormField {
     Add: (
         key: string,
         value: string
-    ) => void;
+    ) => boolean;
 }

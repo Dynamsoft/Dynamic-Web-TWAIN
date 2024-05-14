@@ -1,14 +1,17 @@
-/*!
-* Dynamsoft JavaScript Library
+/*! 20240320
 * Product: Dynamic Web TWAIN
 * Web Site: https://www.dynamsoft.com
 *
-* Copyright 2023, Dynamsoft Corporation 
+* Copyright 2024, Dynamsoft Corporation
 * Author: Dynamsoft Support Team
-* Version: 18.4.2
+* Version: 18.5
 */
- .dynamsoft-major-color {
+.dynamsoft-major-color {
     color: #50a8e1;
+}
+
+#dwt-btn-install a:link {
+	color: #fe8e14;
 }
 
 .dynamsoft-backdrop {
@@ -170,13 +173,20 @@
     position: relative;
 }
 
-.dynamsoft-dwt-dlg-title {
+.dynamsoft-dwt-dlg-title, .dynamsoft-dwt-dlg-title-error {
     text-align: center;
-    height: 20px;
+    height: 24px;
     font-size: 20px;
     font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: rgba(68, 68, 68, 1);
-    line-height: 36px;
+    line-height: 32px;
+    padding: 10px 0 10px 0;
+}
+
+.dynamsoft-dwt-dlg-title-error {
+  color: #323234;
+}
+.dynamsoft-dwt-dlg-title-error {
+  color: red;
 }
 
 .dynamsoft-dwt-dlg-error {
@@ -396,11 +406,11 @@
 }
 
 .dynamsoft-dwt-installdlg-splitline {
-    width: 120px;
+    width: 135px;
     height: 1px;
-    background: rgba(238, 238, 238, 1);
+    background: #323234;
     position: relative;
-    top: 19px;
+    top: 34px;
 }
 
 .dynamsoft-dwt-installdlg-iconholder {
@@ -413,7 +423,7 @@
     height: 11px;
     font-size: 14px;
     font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: rgba(119, 119, 119, 1);
+    color: #323234;
     line-height: 36px;
 }
 

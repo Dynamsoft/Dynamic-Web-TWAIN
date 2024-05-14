@@ -92,7 +92,7 @@ export interface OCR {
     Recognize(
         index: number,
         successCallback: (
-            imageId: number,
+            imageId: string,
             result: OCRResult
         ) => void,
         failureCallback: (
@@ -141,7 +141,7 @@ export interface OCR {
         right: number,
         bottom: number,
         successCallback: (
-            imageId: number,
+            imageId: string,
             left: number,
             top: number,
             right: number,

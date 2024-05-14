@@ -26,7 +26,7 @@ export interface OCRPro {
      * @param index Specify the image.
      * @param successCallback A callback function that is executed if the request succeeds.
      * @param failureCallback A callback function that is executed if the request fails.
-     * @argument imageId The imageId of the image which can be used to find the index.
+     * @argument index The index of the image.
      * @argument result The OCR result.
      * @argument errorCode The error code.
      * @argument errorString The error string.
@@ -34,7 +34,7 @@ export interface OCRPro {
     Recognize(
         index: number,
         successCallback: (
-            imageId: number,
+            index: number,
             result: OCRProResult
         ) => void,
         failureCallback: (
@@ -68,7 +68,7 @@ export interface OCRPro {
      * @param aryRects Specify the rectangle(s).
      * @param successCallback A callback function that is executed if the request succeeds.
      * @param failureCallback A callback function that is executed if the request fails.
-     * @argument imageId The imageId of the image which can be used to find the index.
+     * @argument index The index of the image.
      * @argument result The OCR result.
      * @argument errorCode The error code.
      * @argument errorString The error string.
@@ -77,7 +77,7 @@ export interface OCRPro {
         index: number,
         aryRects: Rect[],
         successCallback: (
-            imageId: number,
+            index: number,
             aryRects: Rect[],
             result: OCRProResult
         ) => void,

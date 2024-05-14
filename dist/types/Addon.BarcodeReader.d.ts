@@ -30,7 +30,7 @@ export interface TextResults extends Array<any> {
     [index: number]: TextResult;
     description?: string;
     exception?: number;
-    imageid?: number;
+    imageid?: string;
 }
 export interface TextResult {
     /**

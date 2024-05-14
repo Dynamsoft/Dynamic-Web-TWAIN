@@ -922,7 +922,7 @@ export interface CheckboxSettings {
 export interface PageNumberSettings {
   visibility?: string; //"visible": hidden", default: "hidden" 
   width?: number | string; //default: "24px", number unit: px, string value: "24px"/"10%", relative to parent container
-  height?: number | string, //default: "24px", number unit: px, string value: "24px"/"10%", relative to parent container
+  height?: number | string; //default: "24px", number unit: px, string value: "24px"/"10%", relative to parent container
   background?: string; //default: "#ffffff"            
   borderWidth?: number | string; //default: "1px", unit: px, percentage value not supported
   borderColor?: string; //default: "#a79898"

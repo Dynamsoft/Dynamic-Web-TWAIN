@@ -43,6 +43,20 @@ export interface WebTwainEdit extends WebTwainBuffer {
         bitDepth: number,
         highQuality: boolean,
     ): boolean;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `ChangeImageSize` instead.
+     * Change the size of the specified image.
+     * @param index Specify the image.
+     * @param width Specify the new width.
+     * @param height Specify the new height.
+     * @param method Specify the algorithm for the change.
+     */
+    ChangeImageSize(
+        index: number,
+        width: number,
+        height: number,
+        method: DynamsoftEnumsDWT.EnumDWT_InterpolationMethod | number
+    ): boolean;
     /**
      * Change the size of the specified image.
      * @param index Specify the image.
@@ -64,7 +78,7 @@ export interface WebTwainEdit extends WebTwainBuffer {
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
     /**
      * Change the DPI (dots per inch) of the specified image.
      * @param index Specify the image.
@@ -72,7 +86,22 @@ export interface WebTwainEdit extends WebTwainBuffer {
      * @param yResolution Specify the vertical DPI.
      * @param resample Whether to resample the image.
      * @param method Specify the algorithm for the change.
-     * @param successCallback A callback function that is executed if the request succeeds.
+     */
+    SetDPI(
+        index: number,
+        xResolution: number,
+        yResolution: number,
+        resample: boolean,
+        method: DynamsoftEnumsDWT.EnumDWT_InterpolationMethod | number
+    ): boolean;
+	/**
+     * Change the DPI (dots per inch) of the specified image.
+     * @param index Specify the image.
+     * @param xResolution Specify the horizontal DPI.
+     * @param yResolution Specify the vertical DPI.
+     * @param resample Whether to resample the image.
+     * @param method Specify the algorithm for the change.
+	 * @param successCallback A callback function that is executed if the request succeeds.
      * @param failureCallback A callback function that is executed if the request fails.
      * @argument errorCode The error code.
      * @argument errorString The error string.
@@ -83,13 +112,20 @@ export interface WebTwainEdit extends WebTwainBuffer {
         yResolution: number,
         resample: boolean,
         method: DynamsoftEnumsDWT.EnumDWT_InterpolationMethod | number,
-        successCallback?: () => void,
-        failureCallback?: (
+		successCallback: () => void,
+        failureCallback: (
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
     /**
+     * Convert the specified image to black & white.
+     * @param index Specify the image.
+     */
+    ConvertToBW(
+        index: number
+    ): boolean;
+	/**
      * Convert the specified image to black & white.
      * @param index Specify the image.
      * @param successCallback A callback function that is executed if the request succeeds.
@@ -99,13 +135,20 @@ export interface WebTwainEdit extends WebTwainBuffer {
      */
     ConvertToBW(
         index: number,
-        successCallback?: () => void,
-        failureCallback?: (
+        successCallback: () => void,
+        failureCallback: (
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
     /**
+     * Convert the specified image to grayscale.
+     * @param index Specify the image.
+     */
+    ConvertToGrayScale(
+        index: number
+    ): boolean;
+	/**
      * Convert the specified image to grayscale.
      * @param index Specify the image.
      * @param successCallback A callback function that is executed if the request succeeds.
@@ -115,13 +158,20 @@ export interface WebTwainEdit extends WebTwainBuffer {
      */
     ConvertToGrayScale(
         index: number,
-        successCallback?: () => void,
-        failureCallback?: (
+        successCallback: () => void,
+        failureCallback: (
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
     /**
+     * Invert the colour of the pixels on the specified image.
+     * @param index Specify the image.
+     */
+    Invert(
+        index: number
+    ): boolean;
+	/**
      * Invert the colour of the pixels on the specified image.
      * @param index Specify the image.
      * @param successCallback A callback function that is executed if the request succeeds.
@@ -131,13 +181,22 @@ export interface WebTwainEdit extends WebTwainBuffer {
      */
     Invert(
         index: number,
-        successCallback?: () => void,
-        failureCallback?: (
+        successCallback: () => void,
+        failureCallback: (
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
     /**
+     * Change the width of the specified image by adding a margin or removing part of the image.
+     * @param index Specify the image.
+     * @param width Specify the new width.
+     */
+    SetImageWidth(
+        index: number,
+        width: number
+    ): boolean;
+	/**
      * Change the width of the specified image by adding a margin or removing part of the image.
      * @param index Specify the image.
      * @param width Specify the new width.
@@ -149,12 +208,20 @@ export interface WebTwainEdit extends WebTwainBuffer {
     SetImageWidth(
         index: number,
         width: number,
-        successCallback?: () => void,
-        failureCallback?: (
+        successCallback: () => void,
+        failureCallback: (
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `Flip` instead.
+     * Flip the specified image.
+     * @param index Specify the image.
+     */
+    Flip(
+        index: number
+    ): boolean;
     /**
      * Flip the specified image.
      * @param index Specify the image.
@@ -170,7 +237,15 @@ export interface WebTwainEdit extends WebTwainBuffer {
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `Mirror` instead.
+     * Mirror the specified image.
+     * @param index Specify the image.
+     */
+    Mirror(
+        index: number
+    ): boolean;
     /**
      * Mirror the specified image.
      * @param index Specify the image.
@@ -186,7 +261,15 @@ export interface WebTwainEdit extends WebTwainBuffer {
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `RotateLeft` instead.
+     * Rotate the specified image 90 degrees counterclockwise.
+     * @param index Specify the image.
+     */
+    RotateLeft(
+        index: number
+    ): boolean;
     /**
      * Rotate the specified image 90 degrees counterclockwise.
      * @param index Specify the image.
@@ -202,7 +285,15 @@ export interface WebTwainEdit extends WebTwainBuffer {
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `RotateRight` instead.
+     * Rotate the specified image 90 degrees clockwise.
+     * @param index Specify the image.
+     */
+    RotateRight(
+        index: number
+    ): boolean;
     /**
      * Rotate the specified image 90 degrees clockwise.
      * @param index Specify the image.
@@ -218,7 +309,19 @@ export interface WebTwainEdit extends WebTwainBuffer {
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `Rotate` instead.
+     * Rotate the specified image by the specified angle.
+     * @param index Specify the image.
+     * @param angle Specify the angle.
+     * @param keepSize Whether to keep the original size.
+     */
+    Rotate(
+        index: number,
+        angle: number,
+        keepSize: boolean
+    ): boolean;
     /**
      * Rotate the specified image by the specified angle.
      * @param index Specify the image.
@@ -238,7 +341,21 @@ export interface WebTwainEdit extends WebTwainBuffer {
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `RotateEx` instead.
+     * Rotate the specified image by the specified angle.
+     * @param index Specify the image.
+     * @param angle Specify the angle.
+     * @param keepSize Whether to keep the original size.
+     * @param method Specify the algorithm for the change.
+     */
+    RotateEx(
+        index: number,
+        angle: number,
+        keepSize: boolean,
+        method: DynamsoftEnumsDWT.EnumDWT_InterpolationMethod | number
+    ): boolean;
     /**
      * Rotate the specified image by the specified angle.
      * @param index Specify the image.
@@ -260,7 +377,23 @@ export interface WebTwainEdit extends WebTwainBuffer {
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `Crop` instead.
+     * Crop the specified image using the specified coordinates.
+     * @param index Specify the image.
+     * @param left Specify the rectangle (leftmost coordinate).
+     * @param top Specify the rectangle (topmost coordinate).
+     * @param right Specify the rectangle (rightmost coordinate).
+     * @param bottom Specify the rectangle (bottommost coordinate).
+     */
+    Crop(
+        index: number,
+        left: number,
+        top: number,
+        right: number,
+        bottom: number
+    ): boolean;
     /**
      * Crop the specified image using the specified coordinates.
      * @param index Specify the image.
@@ -284,7 +417,23 @@ export interface WebTwainEdit extends WebTwainBuffer {
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
+	/**
+	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `Erase` instead.
+     * Erase a rectangular area from the specified image.
+     * @param index Specify the image.
+     * @param left Specify the rectangle (leftmost coordinate).
+     * @param top Specify the rectangle (topmost coordinate).
+     * @param right Specify the rectangle (rightmost coordinate).
+     * @param bottom Specify the rectangle (bottommost coordinate).
+     */
+    Erase(
+        index: number,
+        left: number,
+        top: number,
+        right: number,
+        bottom: number
+    ): boolean;
     /**
      * Erase a rectangular area from the specified image.
      * @param index Specify the image.
@@ -308,7 +457,7 @@ export interface WebTwainEdit extends WebTwainBuffer {
             errorCode: number,
             errorString: string
         ) => void
-    ): void | boolean;
+    ): void;
     /**
      * Copy the specified image to the clipboard of the operating system.
      * @param index Specify the image.
