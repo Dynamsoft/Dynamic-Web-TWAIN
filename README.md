@@ -24,7 +24,6 @@ Note: Dynamic Web TWAIN SDK **v18.5.0** is built in this package. For more detai
 ### Supported Image Capturing Devices
 - Physical Document Scanners
 - Desktop Webcam
-- Mobile Camera
 
 ### Supported Web Browsers
 - Chrome
@@ -206,7 +205,7 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 >
 >**v18.5.0** (build version 18, 5, 0, 0312)
 >
->`Device Manager (DeviceManager_18400926.dll, 64bit)`
+>`Device Manager (DeviceManager_18500312.dll, 64bit)`
 >
 >**v18.5.0** (build version 18, 4, 0, 0926)
 >
@@ -233,12 +232,3 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 ## Changelog
 
 Check out the [release notes](https://www.dynamsoft.com/web-twain/docs/info/schedule/stable.html?product=dwt&utm_source=npm) of the Dynamic Web TWAIN library.
-
-
-**Note**
-
-If you are upgrading from the old versions to V17.1+, please add the following code after Dynamsoft.DWT.ProductKey to make [Dynamsoft.DWT.Load](https://www.dynamsoft.com/web-twain/docs/info/api/Dynamsoft_WebTwainEnv.html#load) take effect.
-
-> Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 270, Height: 350 }];
-
-Otherwise, the initialization will fail.
