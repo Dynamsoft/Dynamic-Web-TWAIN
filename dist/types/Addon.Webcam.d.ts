@@ -35,12 +35,12 @@ export interface Webcam {
     CloseSource(): boolean;
     /**
      * Start to play the video stream from the current camera.
-     * @param DWObject Specify a WebTwain instance to show the video.
+     * @param DWTObject Specify a WebTwain instance to show the video.
      * @param quality Specify the quality of the video.
      * @param frameDidShow A callback function that is triggered after each video frame is shown.
      */
     PlayVideo(
-        DWObject: WebTwain,
+        DWTObject: WebTwain,
         quality: number,
         frameDidShow?: () => void
     ): boolean;

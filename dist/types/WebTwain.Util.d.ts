@@ -134,7 +134,7 @@ export interface OutputInfo {
   /**
    * Path of the image if it's transferred to the disk.
    */
-  Path?: string;
+  path?: string;
   /**
    * Information about the image.
    */

@@ -124,7 +124,7 @@ export interface WebTwainAcquire extends WebTwainEdit {
      */
 	SelectDeviceAsync(device: Device): Promise< boolean>;
     /**
-     * Scan documents into another DWObject control. eSCL is not supported.
+     * Scan documents into another DWTObject control. eSCL is not supported.
      * @param deviceConfiguration The device configuration
      */
 	AcquireImageAsync(deviceConfiguration?: DeviceConfiguration): Promise< boolean>;

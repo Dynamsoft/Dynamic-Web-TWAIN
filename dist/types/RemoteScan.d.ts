@@ -23,7 +23,7 @@ export interface RemoteScanObject {
      */
 	getDevices(deviceQueryParams?:{serviceInfo?:ServiceInfo, deviceType?: DynamsoftEnumsDWT.EnumDWT_DeviceType | number, refresh?:boolean}): Promise<Device[]>;
     /**
-     * Scan documents into another DWObject control. Supports eSCL scanners and all other scanners with limited capabilities.
+     * Scan documents into another DWTObject control. Supports eSCL scanners and all other scanners with limited capabilities.
      * @param device the device
 	 * @param deviceConfiguration The device configuration
      */

@@ -5,7 +5,7 @@
 
 [Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems. To see it in action, please visit <a href="https://demo.dynamsoft.com/web-twain/" target="_blank">**this online demo**</a>
 
-Note: Dynamic Web TWAIN SDK **v18.5.0** is built in this package. For more detail, check the [Version Info](#versions).
+Note: Dynamic Web TWAIN SDK **v18.5.1** is built in this package. For more detail, check the [Version Info](#versions).
 
 ## Table of Contents
 - [Supported Environments](#supported-environments)
@@ -137,15 +137,15 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 	  window.onload = function () {
 	    Dynamsoft.DWT.Load();
 	  };
-	  var DWObject;
-	  function Dynamsoft_OnReady() {
+	  var DWTObject;
+	  Dynamsoft.DWT.RegisterEvent("OnWebTwainReady", function() {
 	    // dwtcontrolContainer is the id of the DIV to create the WebTwain instance in.
-	    DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
-	  }
+	    DWTObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
+	  });
 	  function AcquireImage() {
-	    if (DWObject) {
-	      DWObject.SelectSourceAsync().then(function(){
-	        return DWObject.AcquireImageAsync({
+	    if (DWTObject) {
+	      DWTObject.SelectSourceAsync().then(function(){
+	        return DWTObject.AcquireImageAsync({
 	          PixelType: Dynamsoft.DWT.EnumDWT_PixelType.TWPT_RGB,
 	          Resolution: 200,
               IfCloseSourceAfterAcquire: true
@@ -199,23 +199,23 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
 >`Dynamsoft Service (DynamsoftService.exe, 64bit)`
 >
->**v18.5.0** (build version 1, 8, 5, 0312)
+>**v18.5.1** (build version 1, 8, 5, 0828)
 >
 >`Dynamsoft Service Manager (DWASManager_18500312.dll, 64bit)`
 >
->**v18.5.0** (build version 18, 5, 0, 0312)
+>**v18.5.1** (build version 18, 5, 0, 0312)
 >
->`Device Manager (DeviceManager_18500312.dll, 64bit)`
+>`Device Manager (DeviceManager_18510828.dll, 64bit)`
 >
->**v18.5.0** (build version 18, 5, 0, 0312)
+>**v18.5.1** (build version 18, 5, 1, 0828)
 >
->`Dynamic Web TWAIN (dwt_18.5.0.0312.dll, 64bit)`
+>`Dynamic Web TWAIN (dwt_18.5.1.0828.dll, 64bit)`
 >
->**v18.5.0** (build version 18, 5, 0, 0312)
+>**v18.5.1** (build version 18, 5, 1, 0828)
 >
->`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.5.2.0312.dll, 64bit)`
+>`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.5.3.0828.dll, 64bit)`
 >
->**v18.5.0** (build version 11, 5, 2, 0312)
+>**v18.5.1** (build version 11, 5, 3, 0828)
 >
 >`Dynamsoft Barcode Reader (dbrx64_9.6.1.0312.dll, 64bit)`
 >
@@ -223,11 +223,11 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 >
 >`Dynamsoft Webcam Addon (DynamicWebcamx64_15.0.0.0625.dll, 64bit)`
 >
->**v18.5.0** (build version 15, 0, 0, 0625)
+>**v18.5.1** (build version 15, 0, 0, 0625)
 >
->`Dynamsoft Upload Module (UploadModule_1.8.5.0312.dll, 64bit)`
+>`Dynamsoft Upload Module (UploadModule_1.8.5.0828.dll, 64bit)`
 >
->**v18.5.0** (build version 1, 8, 5, 0312)
+>**v18.5.1** (build version 1, 8, 5, 0828)
 
 ## Changelog
 

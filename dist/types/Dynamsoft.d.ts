@@ -247,7 +247,7 @@ export interface DWTPro {
         host: string,
         port: string | number,
         portSSL: string | number,
-        successCallBack: (DWObject: WebTwain) => void,
+        successCallBack: (DWTObject: WebTwain) => void,
         failureCallBack: (error: {code: number, message: string}) => void): void;
     /**
      * Create a WebTwain instance with UI.
@@ -258,14 +258,14 @@ export interface DWTPro {
      * @param successCallback A callback function that is executed if the request succeeds.
      * @param failureCallback A callback function that is executed if the request fails.
      */
-    CreateDWTObject(ContainerId: string, successCallBack: (DWObject: WebTwain) => void, failureCallBack: (error: {code: number, message: string}) => void): void;
+    CreateDWTObject(ContainerId: string, successCallBack: (DWTObject: WebTwain) => void, failureCallBack: (error: {code: number, message: string}) => void): void;
     /**
      * Create a WebTwain instance without UI.
      * @param WebTwainId Specify the Id of the instance.
      * @param successCallback A callback function that is executed if the request succeeds.
      * @param failureCallback A callback function that is executed if the request fails.
      */
-    CreateDWTObjectEx(dwtInitialConfig: DWTInitialConfig, successCallBack: (DWObject: WebTwain) => void, failureCallBack: (error: {code: number, message: string}) => void): void;
+    CreateDWTObjectEx(dwtInitialConfig: DWTInitialConfig, successCallBack: (DWTObject: WebTwain) => void, failureCallBack: (error: {code: number, message: string}) => void): void;
     /**
      * Define the display info.
      */
