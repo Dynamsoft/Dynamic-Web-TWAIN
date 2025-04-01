@@ -14,7 +14,7 @@
     "directories": {},
     "files": [
         "dist",
-        "samples"
+        "dwt-openapi.yaml"
     ],
     "homepage": "https://www.dynamsoft.com/web-twain/overview/",
     "keywords": [
