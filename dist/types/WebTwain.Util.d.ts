@@ -10,6 +10,10 @@ export interface WebTwainUtil {
      */
     readonly ErrorString: string;
     /**
+     * The reason for returning the error is an extension of the ErrorString.
+     */
+    readonly ErrorCause: {code: number, message: string} | null;
+    /**
      * Return or set the log level for debugging.
      */
     LogLevel: number;

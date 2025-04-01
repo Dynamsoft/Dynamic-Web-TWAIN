@@ -233,6 +233,10 @@ export interface DynamsoftViewer {
 		y: string;  //Default is "center", values: "top", "bottom", "center"
 	} 
     /**
+     * Whether the viewer removes the focus border after selecting with the Tab key.  Default value: true.
+     */
+    disableFocusOutline: boolean;  // default value: true
+    /**
      * [Scope] Main viewer
      * [Description] Return the index of the next image of the currently selected image.
      */
@@ -700,7 +704,7 @@ export interface ThumbnailViewer {
      * @param name Specify the event name.
      * @param callback The event listener.
      */
-	on(eventName: string, callback: (...param: any[]) => void): void;
+    on(eventName: string, callback: (event: ThumbnailViewerEvent | KeyboardEvent, domEvent?: MouseEvent) => void): void;
     /**
      * [Scope] Thumbnail viewer
      * [Description] Remove the event handler.
@@ -882,17 +886,54 @@ export interface ViewerEvent {
 }
 export interface ThumbnailViewerEvent {
     /**
-     * The index of the current image.
+     * The index of the current document page.
      */
     index: number;
     /**
-     * The x-coordinate relative to the browser page.
+     * The mouse's x coordinate in the thumbnail image container relative to the top-left of the web page.
      */
     pageX: number;
     /**
-     * The y-coordinate relative to the browser page.
+     * The  mouse's y coordinate in the thumbnail image container relative to the top-left of the web page.
      */
     pageY: number;
+    /**
+     * The width of the thumbnail image container.
+     */
+    imageX: number;
+    /**
+     * The height of the thumbnail image container.
+     */
+    imageY: number;
+    /**
+     * The corresponding x coordinate in the original image.
+     */
+    pageHeight: number;
+    /**
+     * The corresponding y coordinate in the original image.
+     */
+    pageWidth: number;
+    /**
+     * The thumbnail image container's relative position.
+     */
+    position: {
+        /**
+         * The x coordinate relative to the container of the viewer.
+         */
+        canvasOffsetX: number;
+        /**
+         * The y coordinate relative to the container of the viewer.
+         */
+        canvasOffsetY: number;
+        /**
+         * The x coordinate relative to the canvas.
+         */
+        containerOffsetX: number;
+        /**
+         * The y coordinate relative to the canvas.
+         */
+        containerOffsetY: number;
+    }
 }
 export interface Area {
 	left: number;

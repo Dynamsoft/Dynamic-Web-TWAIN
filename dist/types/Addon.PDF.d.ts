@@ -33,6 +33,11 @@ export interface PDF {
      */
     IsTextBasedPDF(path: string): boolean;
     /**
+     * Detect whether the local PDF file requires rasterization to be read.
+     * @path Specify the path of the PDF file.
+     */
+    IsRasterizationRequired(path: string): boolean;
+    /**
 	 * @deprecated since version 18.4. This function will be removed in future versions. Use `SetReaderOptions` instead.
      * Set the convert mode.
      * @param mode Specify the mode.
@@ -186,6 +191,9 @@ export interface ReaderOptions {
          * Whether or not to render in grayscale. Default value: false.
          */
 		renderGrayscale?: boolean; 
-    }
-	
+    }; 
+    /**
+     * Set whether to preserve the original size when saving an unedited PDF. Default value: false.
+     */
+    preserveUnmodifiedOnSave?: boolean;   
 }

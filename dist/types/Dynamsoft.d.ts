@@ -390,7 +390,7 @@ export interface DWTPro {
      * @param event Specify the event.
      * @param callback Specify the callback.
      */
-    RegisterEvent(event: string, callback: (...args: any[]) => void): boolean;
+    RegisterEvent(event: string, callback: (...args: any[]) => void): void;
     /**
      * Remove all authorizations for accessing local resources.
      */

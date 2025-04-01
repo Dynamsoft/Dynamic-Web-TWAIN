@@ -5,7 +5,7 @@
 
 [Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems. To see it in action, please visit <a href="https://demo.dynamsoft.com/web-twain/" target="_blank">**this online demo**</a>
 
-Note: Dynamic Web TWAIN SDK **v18.5.1** is built in this package. For more detail, check the [Version Info](#versions).
+Note: Dynamic Web TWAIN SDK **v19.0** is built in this package. For more detail, check the [Version Info](#versions).
 
 ## Table of Contents
 - [Supported Environments](#supported-environments)
@@ -35,8 +35,6 @@ Note: Dynamic Web TWAIN SDK **v18.5.1** is built in this package. For more detai
 - Windows
 - Linux
 - macOS
-- Android 
-- iOS (Remote scanner)
 
 ### Supported CPU Architectures
 - x86/x64
@@ -168,7 +166,7 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 
 ## Features
 
-### Dynamsoft Service for Scanner 
+### Dynamic Web TWAIN Service for Scanner 
 
 | Features     | Windows            | Linux  | macOS|
 | ------------- |:-------------:| -----:| -----:|
@@ -197,37 +195,37 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
 ## Versions
 
->`Dynamsoft Service (DynamsoftService.exe, 64bit)`
+>`Dynamic Web TWAIN Service (DynamicWebTWAINService.exe, 64bit)`
 >
->**v18.5.1** (build version 1, 8, 5, 0828)
+>**v19.0** (build version 1, 9, 0, 0318)
 >
->`Dynamsoft Service Manager (DWASManager_18500312.dll, 64bit)`
+>`Dynamic Web TWAIN Service Manager (DWASManager_19000318.dll, 64bit)`
 >
->**v18.5.1** (build version 18, 5, 0, 0312)
+>**v19.0** (build version 19, 0, 0, 0318)
 >
->`Device Manager (DeviceManager_18510828.dll, 64bit)`
+>`Device Manager (DeviceManager_19000318.dll, 64bit)`
 >
->**v18.5.1** (build version 18, 5, 1, 0828)
+>**v19.0** (build version 19, 0, 0, 0318)
 >
->`Dynamic Web TWAIN (dwt_18.5.1.0828.dll, 64bit)`
+>`Dynamic Web TWAIN (dwt_19.0.0.0318.dll, 64bit)`
 >
->**v18.5.1** (build version 18, 5, 1, 0828)
+>**v19.0** (build version 19, 0, 0, 0318)
 >
->`Dynamsoft PDF Rasterizer (DynamicPdfRx64_11.5.3.0828.dll, 64bit)`
+>`Dynamsoft Image encryption and decryption & PDF Rasterizer (DMCodecx64.dll, 64bit)`
 >
->**v18.5.1** (build version 11, 5, 3, 0828)
+>**v19.0** (build version 12, 0, 0, 1225)
 >
->`Dynamsoft Barcode Reader (dbrx64_9.6.1.0312.dll, 64bit)`
+>`Dynamsoft Barcode Reader (dbrx64_9.6.2.0318.dll, 64bit)`
 >
->**v9.6.1** (build version 9, 6, 1, 0312)
+>**v9.6.1** (build version 9, 6, 2, 0318)
 >
 >`Dynamsoft Webcam Addon (DynamicWebcamx64_15.0.0.0625.dll, 64bit)`
 >
->**v18.5.1** (build version 15, 0, 0, 0625)
+>**v19.0** (build version 15, 0, 0, 0625)
 >
->`Dynamsoft Upload Module (UploadModule_1.8.5.0828.dll, 64bit)`
+>`Dynamsoft Upload Module (UploadModule_1.9.0.0318.dll, 64bit)`
 >
->**v18.5.1** (build version 1, 8, 5, 0828)
+>**v19.0** (build version 1, 9, 0, 0318)
 
 ## Changelog
 

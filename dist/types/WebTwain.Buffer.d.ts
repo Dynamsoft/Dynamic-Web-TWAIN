@@ -210,7 +210,7 @@ export interface WebTwainBuffer extends WebTwainIO {
      * @param index Specify the image.
      */
 	IsBlankImageAsync(index: number, options?: {
-		minBlockHeight?: number,//default value: 10
+		minBlockHeight?: number,//default value: 20
 		maxBlockHeight?: number   //default value: 30
 	}): Promise < boolean > ;
     /**

@@ -1,0 +1,4459 @@
+openapi: 3.0.1
+info:
+  title: DWT
+  description: ''
+  version: 1.0.0
+tags:
+  - name: Server Control
+  - name: Scanner Control
+  - name: Document Management
+  - name: Document Processing
+paths:
+  /server:
+    get:
+      summary: Get the server settings.
+      deprecated: false
+      description: |
+        Get the server settings. Some settings can only be retrieved by the admin.
+      operationId: getServerSettings
+      tags:
+        - Server Control
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerSettings'
+              example:
+                logLevel: 1
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: &ref_0
+                $ref: '#/components/schemas/Error'
+              example:
+                code: -2112
+                message: This endpoint only supports GET and PATCH.
+                statusCode: 405
+          headers: {}
+      security: []
+    patch:
+      summary: Update only specified server settings.
+      deprecated: false
+      description: >
+        Update only specified server settings. Some settings can only be updated
+        by the admin.
+      operationId: patchServerSettings
+      tags:
+        - Server Control
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServerSettingsInput'
+            example: ''
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  logLevel:
+                    type: integer
+                    format: int32
+                    default: 0
+                    description: server log level.
+              example:
+                logLevel: 1
+          headers: {}
+        '400':
+          description: Bad request. e.g. parameter is invalid.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET and PATCH.
+                statusCode: 405
+          headers: {}
+      security: []
+  /server/version:
+    get:
+      summary: Get the server API version.
+      deprecated: false
+      description: In the future, the client can pass the API version to call different API versions.
+      operationId: getServerVersion
+      tags:
+        - Server Control
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    description: server API version.
+                    examples:
+                      - '20240719'
+                  compatible:
+                    type: boolean
+                    description: server is compatible with the client.
+                    examples:
+                      - true
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET.
+                statusCode: 405
+          headers: {}
+      security: []
+  /device/scanners:
+    get:
+      summary: Retrieve a list scanners
+      deprecated: false
+      description: ''
+      operationId: getScanners
+      tags:
+        - Scanner Control
+      parameters:
+        - name: type
+          in: query
+          description: >
+            Device type. It can be one type or a combination. The default uses
+            TWAIN/TWAIN64/WIA/ICA/SANE.
+          required: false
+          schema: &ref_2
+            $ref: '#/components/schemas/ScannerType'
+            description: one value of ScannerType
+            examples:
+              - 16
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items: &ref_3
+                  $ref: '#/components/schemas/Scanner'
+              example:
+                - name: TWAIN2 FreeImage Software Scanner
+                  type: 16
+                  device: >-
+                    {"deviceInfo":{"Manufacturer":"VFdBSU4gV29ya2luZyBHcm91cA==","ProductFamily":"U29mdHdhcmUgU2Nhbg==","ProductName":"VFdBSU4yIEZyZWVJbWFnZSBTb2Z0d2FyZSBTY2FubmVy","ProtocolMajor":2,"ProtocolMinor":1,"SupportedGroups":0,"Version":{"Country":1,"Info":"Mi4xLjMgc2FtcGxlIHJlbGVhc2UgMzJiaXQ=","Language":2,"MajorNum":2,"MinorNum":1}},"deviceType":16,"isSystemDefaultPrinter":false,"name":"VFdBSU4yIEZyZWVJbWFnZSBTb2Z0d2FyZSBTY2FubmVy"}
+          headers: {}
+        '400':
+          description: Bad request. e.g. parameter is invalid.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET.
+                statusCode: 405
+          headers: {}
+      security: []
+  /device/scanners/jobs:
+    post:
+      summary: Create a scan job
+      deprecated: false
+      description: >
+        You can scan with the specified scanner. If the scanner is not specified, the last used scanner or the defalut scanner will be used. You
+        can set capabilities of the scanner. You can show the scanner ui if you are
+        operating on the machine running Dynamic Web TWAIN Service. You can get scanned image with the job uid, or save to the
+        specified document. You can create a pending job with the specified
+        scanner. One scanner can only have one pending job. If the scanner is
+        shared, it is recommended to create a pending job for the specified scanner.
+        Default other requests for the job will only allow the domain when job
+        created.
+
+        Once the job was created, you have to delete the job manually unless you
+        set a jobTimeout and it times out. 
+      operationId: createScanJob
+      tags:
+        - Scanner Control
+      parameters:
+        - name: X-DICS-LICENSE-KEY
+          in: header
+          description: Product key
+          required: true
+          example: ''
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateScanJobOptions'
+            example: ''
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScannerJob'
+          headers: {}
+        '400':
+          description: Bad request. e.g. parameter is invalid.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '403':
+          description: The license is invalid.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2800
+                message: >-
+                  The current product key is empty or invalid. Please contact
+                  the site administrator.
+                statusCode: 403
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports POST.
+                statusCode: 405
+          headers: {}
+        '423':
+          description: The scanner is currently in use.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1004
+                message: >-
+                  The source is connected to the maximum supported number of
+                  applications.
+                statusCode: 423
+          headers: {}
+      security: []
+  /device/scanners/jobs/{jobuid}:
+    get:
+      summary: Retrieve the scan job status.
+      deprecated: false
+      description: |
+        You can get the job status.
+      operationId: getScanJobStatus
+      tags:
+        - Scanner Control
+      parameters:
+        - name: jobuid
+          in: path
+          description: ''
+          required: true
+          example: ''
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - status
+                  - code
+                  - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - pending
+                      - running
+                      - completed
+                      - faulted
+                      - canceled
+                    description: scanner job status
+                  code:
+                    type: number
+                    description: error code
+                    default: '0'
+                  message:
+                    type: string
+                    description: error message
+                    default: Successful
+                description: Scanner Job Information
+          headers: {}
+        '404':
+          description: Error resonpse
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: This provided job UID is invalid.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET, PATCH and DELETE.
+                statusCode: 405
+          headers: {}
+        '410':
+          description: >-
+            The job was deleted. If the service restarted and all the jobs
+            were lost, it will return 404.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: Invalid Value.
+                statusCode: 410
+          headers: {}
+      security: []
+    patch:
+      summary: Update the scan job status.
+      deprecated: false
+      description: >
+        When the job status is pending, you can update the status of the job.
+        Otherwise, it will be ignored.
+      operationId: updateScanJob
+      tags:
+        - Scanner Control
+      parameters:
+        - name: jobuid
+          in: path
+          description: ''
+          required: true
+          example: ''
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  default: running
+                  enum:
+                    - running
+                    - canceled
+                  description: >
+                    Update the job status. If the job is running, it only accepts
+                    Canceled to cancel the job. If the job is pending, it only accepts
+                    Running to start the job.
+              required:
+                - status
+            example: ''
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - running
+                      - canceled
+                    default: running
+                    description: scanner job status.
+                required:
+                  - status
+          headers: {}
+        '400':
+          description: Error resonpse
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: This provided job UID is invalid.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET, PATCH and DELETE.
+                statusCode: 405
+          headers: {}
+        '409':
+          description: >-
+            When you try to cancel a not pending or running job, update a not
+            pending job to running.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1011
+                message: Operation out of expected sequence.
+                statusCode: 409
+          headers: {}
+        '410':
+          description: The job was deleted.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: Invalid Value.
+                statusCode: 410
+          headers: {}
+      security: []
+    delete:
+      summary: Delete the scan job
+      deprecated: false
+      description: >
+        If the job is running, the job will be canceled first, and then be
+        deleted, including all scanned documents.
+      operationId: deleteScanJob
+      tags:
+        - Scanner Control
+      parameters:
+        - name: jobuid
+          in: path
+          description: ''
+          required: true
+          example: ''
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Successful operation
+          headers: {}
+        '404':
+          description: Error resonpse
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: This provided job UID is invalid.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET, PATCH and DELETE.
+                statusCode: 405
+          headers: {}
+        '410':
+          description: The job was deleted.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: Invalid Value.
+                statusCode: 410
+          headers: {}
+      security: []
+  /device/scanners/jobs/{jobuid}/scanner/capabilities:
+    get:
+      summary: Retrieve the capabilities of the scanner specified in the scan job.
+      deprecated: false
+      description: >
+        You can get the capabilities of scanner specified in the job, but it is only valid
+        when the job is pending.
+      operationId: getCurrentScannerCapabilities
+      tags:
+        - Scanner Control
+      parameters:
+        - name: jobuid
+          in: path
+          description: ''
+          required: true
+          example: ''
+          schema:
+            type: string
+        - name: caps
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            description: >
+              capability id. multiple values seperated by commas. e.g.
+              caps=5,2,1.  If no pages specified, return all capabilities.
+            externalDocs:
+              url: >-
+                https://www.dynamsoft.com/web-twain/docs/info/api/Dynamsoft_Enum.html#dynamsoftDWTenumDWT_cap
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                externalDocs:
+                  url: >-
+                    https://www.dynamsoft.com/web-twain/docs/info/api/Interfaces.html#capabilitydetails
+                properties: {}
+                items:
+                  type: object
+                  properties: {}
+          headers: {}
+        '400':
+          description: Error resonpse
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: This provided job UID is invalid.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET.
+                statusCode: 405
+          headers: {}
+        '409':
+          description: Support only when the scan job is pending.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1011
+                message: Operation out of expected sequence.
+                statusCode: 409
+          headers: {}
+        '410':
+          description: The job was deleted.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: Invalid Value.
+                statusCode: 410
+          headers: {}
+      security: []
+  /device/scanners/jobs/{jobuid}/scanner/settings:
+    get:
+      summary: Retrieve the settings of the scanner specified in the scan job.
+      deprecated: false
+      description: >
+        You can get the scanner settings. It only supports TWAIN scanners, and
+        it is only valid when the job is pending. We will call EnableSourceUI to get
+        the settings.
+      operationId: getCurrentScannerSettings
+      tags:
+        - Scanner Control
+      parameters:
+        - name: jobuid
+          in: path
+          description: ''
+          required: true
+          example: ''
+          schema:
+            type: string
+        - name: showui
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: boolean
+            default: true
+            description: >
+              If true, will show the UI for the user to set the scanner settings. If
+              false, will not show the UI.
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  settings:
+                    type: string
+                    description: base64 encoded
+              example:
+                settings: >-
+                  Rfj6pIMTNkCu3BfDloGItBAAAAACEAAABgAFAAEAAAAQAAAAExAAAAYABQAAAAAAEAAAAAcQAAAGAAUAAQAAABAAAAArEQAABAAFABgAAAAQAAAAHBEAAAQABQAAAAAAEAAAAAABAAAEAAUAAAAAABwAAAAUEQAACAAFAPgqAAAAAAAANCEAAAAAAAAQAAAADBEAAAQABQACAAAAEAAAAB8RAAAEAAUAAAAAABAAAAABAQAABAAFAAIAAAAQAAAAIBEAAAQABQAAAAAAEAAAACIRAAAEAAUAAwAAABAAAAAQEQAABAAFAAAAAAAQAAAAAgEAAAQABQAAAAAAEAAAABgRAAAHAAUAAABIQxAAAAAZEQAABwAFAAAASEMQAAAAIxEAAAcABQAAAABDEAAAAAMRAAAHAAUAAAAAABAAAAABEQAABwAFAAAAAAAQAAAACBEAAAcABQAAAIA/EAAAAAGAAAAGAAUAAAAAAA==
+          headers: {}
+        '400':
+          description: Error resonpse
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: This provided job UID is invalid.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET.
+                statusCode: 405
+          headers: {}
+        '409':
+          description: The job is not in pending.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1011
+                message: Operation out of expected sequence.
+                statusCode: 409
+          headers: {}
+        '410':
+          description: The job was deleted.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: Invalid Value.
+                statusCode: 410
+          headers: {}
+      security: []
+  /device/scanners/jobs/{jobuid}/next-page-info:
+    get:
+      summary: Get the next page information for a specific job.
+      deprecated: false
+      description: >
+        Get the next scanned page info. If the scanned page is not ready, it will not
+        return until the page is ready. If the response code is 200, we can try to get
+        the next until the reponse code is 204.
+      operationId: getNextScannedPageInfo
+      tags:
+        - Scanner Control
+      parameters:
+        - name: jobuid
+          in: path
+          description: ''
+          required: true
+          example: ''
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >-
+            Successful operation. We will also return the image url; if scan to
+            a document, also return document uid and page uid.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScanDocumentInfo'
+          headers: {}
+        '204':
+          description: No more pages. scan done.
+          headers: {}
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: This provided job UID is invalid.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET.
+                statusCode: 405
+          headers: {}
+        '410':
+          description: The job was deleted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              example:
+                code: -1034
+                message: Invalid Value.
+                statusCode: 410
+          headers: {}
+      security: []
+  /device/scanners/jobs/{jobuid}/next-page:
+    get:
+      summary: Get the next page for a specific job.
+      deprecated: false
+      description: >
+        Get the next scanned page content. If the scanned page is not ready, it will not
+        return until the page is ready. If the response code is 200, we can try to get
+        the next until the reponse code is 204.
+      operationId: getNextScannedPage
+      tags:
+        - Scanner Control
+      parameters:
+        - name: jobuid
+          in: path
+          description: ''
+          required: true
+          example: ''
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            enum:
+              - image/jpeg
+              - image/png
+            default: image/png
+            description: mime type
+      responses:
+        '200':
+          description: Successful operation. return image/png or image/jpeg stream.
+          content:
+            image/jpeg:
+              schema:
+                type: object
+                properties: {}
+              example: "ÿØÿà \x10JFIF \x01\x01\x01 ` `  ÿá ZExif  MM *   \b \x05\x03\x01 \x05   \x01   J\x03\x03 \x01   \x01    Q\x10 \x01   \x01\x01   Q\x11 \x04   \x01  \x0EÃQ\x12 \x04   \x01  \x0EÃ     \x01†\_  ±\x8FÿÛ C \x02\x01\x01\x02\x01\x01\x02\x02\x02\x02\x02\x02\x02\x02\x03\x05\x03\x03\x03\x03\x03\x06\x04\x04\x03\x05\a\x06\a\a\a\x06\a\a\b\t\v\t\b\b\r\n\b\a\a\r\n\r\n\r\n\v\f\f\f\f\a\t\x0E\x0F\r\n\f\x0E\v\f\f\fÿÛ C\x01\x02\x02\x02\x03\x03\x03\x06\x03\x03\x06\f\b\a\b\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\fÿÀ \x11\b \x01 \x01\x03\x01\" \x02\x11\x01\x03\x11\x01ÿÄ \x1F  \x01\x05\x01\x01\x01\x01\x01\x01        \x01\x02\x03\x04\x05\x06\a\b\t\r\n\vÿÄ µ\x10 \x02\x01\x03\x03\x02\x04\x03\x05\x05\x04\x04  \x01}\x01\x02\x03 \x04\x11\x05\x12!1A\x06\x13Qa\a\"q\x142\x81‘¡\b#B±Á\x15RÑð$3br‚\t\r\n\x16\x17\x18\x19\x1A%&'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyzƒ„…†‡ˆ‰Š’“”•–—˜™š¢£¤¥¦§¨©ª²³´µ¶·¸¹ºÂÃÄÅÆÇÈÉÊÒÓÔÕÖ×ØÙÚáâãäåæçèéêñòóôõö÷øùúÿÄ \x1F\x01 \x03\x01\x01\x01\x01\x01\x01\x01\x01\x01      \x01\x02\x03\x04\x05\x06\a\b\t\r\n\vÿÄ µ\x11 \x02\x01\x02\x04\x04\x03\x04\a\x05\x04\x04 \x01\x02w \x01\x02\x03\x11\x04\x05!1\x06\x12AQ\aaq\x13\"2\x81\b\x14B‘¡±Á\t#3Rð\x15brÑ\r\n\x16$4á%ñ\x17\x18\x19\x1A&'()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz‚ƒ„…†‡ˆ‰Š’“”•–—˜™š¢£¤¥¦§¨©ª²³´µ¶·¸¹ºÂÃÄÅÆÇÈÉÊÒÓÔÕÖ×ØÙÚâãäåæçèéêòóôõö÷øùúÿÚ \f\x03\x01 \x02\x11\x03\x11 ? ýü¢Š(\x03ÿÙ"
+          headers: {}
+        '204':
+          description: No more pages. scan done.
+          headers: {}
+        '400':
+          description: Error resonpse
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: This provided job UID is invalid.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET.
+                statusCode: 405
+          headers: {}
+        '410':
+          description: The job was deleted.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: Invalid Value.
+                statusCode: 410
+          headers: {}
+        x-200-2:
+          description: ''
+          content:
+            image/png:
+              schema:
+                type: object
+                properties: {}
+              example: "‰PNG\r\n\x1A\r\n   \r\nIHDR   \x01   \x01\b\x02   \x90wSÞ   \x01sRGB ®Î\x1Cé   \x04gAMA  ±\x8F\vüa\x05   \tpHYs  \x0EÃ  \x0EÃ\x01Ço¨d   \fIDAT\x18Wcøÿÿ? \x05þ\x02þ§5\x81„    IEND®B`‚"
+          headers: {}
+      security: []
+  /storage/documents:
+    post:
+      summary: Create a new document.
+      deprecated: false
+      description: >-
+        The document will be stored in the Dynamic Web TWAIN Service working
+        folder and all the contents will be encrypted.
+      operationId: createDocument
+      tags:
+        - Document Management
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDocumentOptions'
+              description: password for the document
+            example: ''
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema: &ref_1
+                description: document info
+                $ref: '#/components/schemas/DocumentInfo'
+              example:
+                uid: 190807444d76
+                pages: []
+          headers: {}
+        '400':
+          description: Error resonpse
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports POST.
+                statusCode: 405
+          headers: {}
+      security: []
+  /storage/documents/{documentuid}:
+    get:
+      summary: Retrieve document info
+      deprecated: false
+      description: Retrieve the document info, including pages info.
+      operationId: getDocumentInfo
+      tags:
+        - Document Management
+      parameters:
+        - name: documentuid
+          in: path
+          description: UID of document
+          required: true
+          example: ''
+          schema:
+            type: string
+        - name: X-DICS-DOC-PASSWORD
+          in: header
+          description: the password of document in storage
+          required: false
+          example: ''
+          schema:
+            type: string
+            maxLength: 32
+            description: cannot exceed 32 chars.
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema: *ref_1
+              example:
+                uid: 190807444d76
+                pages:
+                  - uid: 190817548d70
+                  - uid: '190817648270'
+          headers: {}
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1043
+                message: Password invalid.
+                statusCode: 403
+          headers: {}
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1040
+                message: The uid does not exist.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET and DELETE.
+                statusCode: 405
+          headers: {}
+      security: []
+    delete:
+      summary: Delete the document.
+      deprecated: false
+      description: All the data will be deleted.
+      operationId: deleteDocument
+      tags:
+        - Document Management
+      parameters:
+        - name: documentuid
+          in: path
+          description: UID of document
+          required: true
+          example: ''
+          schema:
+            type: string
+        - name: X-DICS-DOC-PASSWORD
+          in: header
+          description: the password of document in storage
+          required: false
+          example: ''
+          schema:
+            type: string
+            maxLength: 32
+            description: cannot exceed 32 chars.
+      responses:
+        '204':
+          description: Successful operation
+          headers: {}
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1043
+                message: Password invalid.
+                statusCode: 403
+          headers: {}
+        '404':
+          description: Error resonpse
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1040
+                message: The uid does not exist.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET and DELETE.
+                statusCode: 405
+          headers: {}
+      security: []
+  /storage/documents/{documentuid}/content:
+    get:
+      summary: Retrieve the document content with specified format.
+      deprecated: false
+      description: >
+        Can specify one or more pages with page index or uid, otherwise, the whole
+        document. Also can specify pdf info, and encryption.
+      operationId: getDocContent
+      tags:
+        - Document Management
+      parameters:
+        - name: documentuid
+          in: path
+          description: UID of document
+          required: true
+          example: ''
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: output mime type
+          required: false
+          schema:
+            type: string
+            enum:
+              - image/jpeg
+              - image/png
+              - image/tiff
+              - application/pdf
+            default: application/pdf
+            description: |
+              Specified the output format.
+        - name: quality
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 100
+            default: 80
+            description: >-
+              range is 0 to 100. only valid for jpeg/jpeg2000
+              compression.
+        - name: pages
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: ''
+            description: >
+              page indices or uids. multiple values seperated by commas. e.g.
+              pages=5,2,1.  If no pages specified, for image/png, image/jpeg,
+              only return first page; for image/tiff, application/pdf, return
+              all pages.
+        - name: author
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: ''
+            externalDocs:
+              url: >-
+                https://www.dynamsoft.com/web-twain/docs/info//api/interfaces.html#pdfwsettings
+        - name: compression
+          in: query
+          description: >-
+            for tiff, please refer to
+            https://www.dynamsoft.com/web-twain/docs/info/api/Dynamsoft_Enum.html#dynamsoftDWTenumDWT_tiffcompressiontype
+
+            for pdf, please refer to
+            https://www.dynamsoft.com/web-twain/docs/info/api/Dynamsoft_Enum.html#dynamsoftDWTenumDWT_pdfcompressiontype
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+            description: auto, BW use JBIG2, GrayScale & Color use Jpeg
+            externalDocs:
+              url: >-
+                https://www.dynamsoft.com/web-twain/docs/info//api/interfaces.html#pdfwsettings
+        - name: pageType
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+            description: page size
+            externalDocs:
+              url: >-
+                https://www.dynamsoft.com/web-twain/docs/info//api/interfaces.html#pdfwsettings
+        - name: creator
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: ''
+            externalDocs:
+              url: >-
+                https://www.dynamsoft.com/web-twain/docs/info//api/interfaces.html#pdfwsettings
+        - name: creationDate
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: ''
+            externalDocs:
+              url: >-
+                https://www.dynamsoft.com/web-twain/docs/info//api/interfaces.html#pdfwsettings
+        - name: keyWords
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: ''
+            externalDocs:
+              url: >-
+                https://www.dynamsoft.com/web-twain/docs/info//api/interfaces.html#pdfwsettings
+        - name: modifiedDate
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: ''
+            externalDocs:
+              url: >-
+                https://www.dynamsoft.com/web-twain/docs/info//api/interfaces.html#pdfwsettings
+        - name: producer
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: ''
+            externalDocs:
+              url: >-
+                https://www.dynamsoft.com/web-twain/docs/info//api/interfaces.html#pdfwsettings
+        - name: subject
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: ''
+            externalDocs:
+              url: >-
+                https://www.dynamsoft.com/web-twain/docs/info//api/interfaces.html#pdfwsettings
+        - name: title
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: ''
+            externalDocs:
+              url: >-
+                https://www.dynamsoft.com/web-twain/docs/info//api/interfaces.html#pdfwsettings
+        - name: version
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: '1.5'
+            externalDocs:
+              url: >-
+                https://www.dynamsoft.com/web-twain/docs/info//api/interfaces.html#pdfwsettings
+        - name: password
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            maxLength: 32
+            default: ''
+            description: password to encrypt pdf.
+            externalDocs:
+              url: >-
+                https://www.dynamsoft.com/web-twain/docs/info//api/interfaces.html#pdfwsettings
+        - name: X-DICS-DOC-PASSWORD
+          in: header
+          description: the password of document in storage
+          required: false
+          example: ''
+          schema:
+            type: string
+            maxLength: 32
+            description: cannot exceed 32 chars.
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            image/jpeg:
+              schema:
+                type: object
+                properties: {}
+              example: "ÿØÿà \x10JFIF \x01\x01\x01 ` `  ÿá ZExif  MM *   \b \x05\x03\x01 \x05   \x01   J\x03\x03 \x01   \x01    Q\x10 \x01   \x01\x01   Q\x11 \x04   \x01  \x0EÃQ\x12 \x04   \x01  \x0EÃ     \x01†   ±\x8FÿÛ C \x02\x01\x01\x02\x01\x01\x02\x02\x02\x02\x02\x02\x02\x02\x03\x05\x03\x03\x03\x03\x03\x06\x04\x04\x03\x05\a\x06\a\a\a\x06\a\a\b\t\v\t\b\b\r\n\b\a\a\r\n\r\n\r\n\v\f\f\f\f\a\t\x0E\x0F\r\n\f\x0E\v\f\f\fÿÛ C\x01\x02\x02\x02\x03\x03\x03\x06\x03\x03\x06\f\b\a\b\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\fÿÀ \x11\b \x01 \x01\x03\x01\" \x02\x11\x01\x03\x11\x01ÿÄ \x1F  \x01\x05\x01\x01\x01\x01\x01\x01        \x01\x02\x03\x04\x05\x06\a\b\t\r\n\vÿÄ µ\x10 \x02\x01\x03\x03\x02\x04\x03\x05\x05\x04\x04  \x01}\x01\x02\x03 \x04\x11\x05\x12!1A\x06\x13Qa\a\"q\x142\x81‘¡\b#B±Á\x15RÑð$3br‚\t\r\n\x16\x17\x18\x19\x1A%&'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyzƒ„…†‡ˆ‰Š’“”•–—˜™š¢£¤¥¦§¨©ª²³´µ¶·¸¹ºÂÃÄÅÆÇÈÉÊÒÓÔÕÖ×ØÙÚáâãäåæçèéêñòóôõö÷øùúÿÄ \x1F\x01 \x03\x01\x01\x01\x01\x01\x01\x01\x01\x01      \x01\x02\x03\x04\x05\x06\a\b\t\r\n\vÿÄ µ\x11 \x02\x01\x02\x04\x04\x03\x04\a\x05\x04\x04 \x01\x02w \x01\x02\x03\x11\x04\x05!1\x06\x12AQ\aaq\x13\"2\x81\b\x14B‘¡±Á\t#3Rð\x15brÑ\r\n\x16$4á%ñ\x17\x18\x19\x1A&'()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz‚ƒ„…†‡ˆ‰Š’“”•–—˜™š¢£¤¥¦§¨©ª²³´µ¶·¸¹ºÂÃÄÅÆÇÈÉÊÒÓÔÕÖ×ØÙÚâãäåæçèéêòóôõö÷øùúÿÚ \f\x03\x01 \x02\x11\x03\x11 ? ýü¢Š(\x03ÿÙ"
+          headers: {}
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1043
+                message: Password invalid.
+                statusCode: 403
+          headers: {}
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1040
+                message: The uid does not exist.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET.
+                statusCode: 405
+          headers: {}
+        x-200-2:
+          description: Error resonpse
+          content:
+            application/pdf:
+              schema: *ref_0
+              example: "%PDF-1.5\r\n%¡³Å×\r\n1 0 obj\r\n<</Pages 2 0 R /Type/Catalog>>\r\nendobj\r\n2 0 obj\r\n<</Count 1/Kids[ 4 0 R ]/Type/Pages>>\r\nendobj\r\n3 0 obj\r\n<<>>\r\nendobj\r\n4 0 obj\r\n<</Contents 7 0 R /CropBox[ 0 -0.25 1 0.75]/MediaBox[ 0 0 0.75 0.75]/Parent 2 0 R /Resources<</ExtGState<</FXE1 5 0 R >>/XObject<</FXX1 6 0 R >>>>/Rotate 0/Type/Page>>\r\nendobj\r\n5 0 obj\r\n<</BM/Normal/CA 1/ca 1>>\r\nendobj\r\n6 0 obj\r\n<</BitsPerComponent 8/ColorSpace/DeviceRGB/Filter/DCTDecode/Height 1/Length 631/Subtype/Image/Type/XObject/Width 1>>stream\r\nÿØÿà \x10JFIF \x01\x01\x01 ` `  ÿÛ C \x06\x04\x05\x06\x05\x04\x06\x06\x05\x06\a\a\x06\b\r\n\x10\r\n\r\n\t\t\r\n\x14\x0E\x0F\f\x10\x17\x14\x18\x18\x17\x14\x16\x16\x1A\x1D%\x1F\x1A\e#\x1C\x16\x16 , #&')*)\x19\x1F-0-(0%()(ÿÛ C\x01\a\a\a\r\n\b\r\n\x13\r\n\r\n\x13(\x1A\x16\x1A((((((((((((((((((((((((((((((((((((((((((((((((((ÿÀ \x11\b \x01 \x01\x03\x01\" \x02\x11\x01\x03\x11\x01ÿÄ \x1F  \x01\x05\x01\x01\x01\x01\x01\x01        \x01\x02\x03\x04\x05\x06\a\b\t\r\n\vÿÄ µ\x10 \x02\x01\x03\x03\x02\x04\x03\x05\x05\x04\x04  \x01}\x01\x02\x03 \x04\x11\x05\x12!1A\x06\x13Qa\a\"q\x142\x81‘¡\b#B±Á\x15RÑð$3br‚\t\r\n\x16\x17\x18\x19\x1A%&'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyzƒ„…†‡ˆ‰Š’“”•–—˜™š¢£¤¥¦§¨©ª²³´µ¶·¸¹ºÂÃÄÅÆÇÈÉÊÒÓÔÕÖ×ØÙÚáâãäåæçèéêñòóôõö÷øùúÿÄ \x1F\x01 \x03\x01\x01\x01\x01\x01\x01\x01\x01\x01      \x01\x02\x03\x04\x05\x06\a\b\t\r\n\vÿÄ µ\x11 \x02\x01\x02\x04\x04\x03\x04\a\x05\x04\x04 \x01\x02w \x01\x02\x03\x11\x04\x05!1\x06\x12AQ\aaq\x13\"2\x81\b\x14B‘¡±Á\t#3Rð\x15brÑ\r\n\x16$4á%ñ\x17\x18\x19\x1A&'()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz‚ƒ„…†‡ˆ‰Š’“”•–—˜™š¢£¤¥¦§¨©ª²³´µ¶·¸¹ºÂÃÄÅÆÇÈÉÊÒÓÔÕÖ×ØÙÚâãäåæçèéêòóôõö÷øùúÿÚ \f\x03\x01 \x02\x11\x03\x11 ? ú¦Š(\_\x0FÿÙ\r\nendstream\r\nendobj\r\n7 0 obj\r\n<</Filter/FlateDecode/Length 39>>stream\r\nxœ+ä2Ð37U0 A\x18#9—\vÌW(JçÒw‹ˆ0TpÉW\bä\x02 ¹þ\bá\r\nendstream\r\nendobj\r\nxref\r\n0 8\r\n0000000000 65535 f\r\n0000000017 00000 n\r\n0000000066 00000 n\r\n0000000122 00000 n\r\n0000000145 00000 n\r\n0000000331 00000 n\r\n0000000374 00000 n\r\n0000001159 00000 n\r\ntrailer\r\n<<\r\n/Root 1 0 R\r\n/Info 3 0 R\r\n/Size 8\r\n/Tag /Dynamsoft\r\n>>\r\nstartxref\r\n1269\r\n%%EOF\r\n"
+          headers: {}
+        x-200-3:
+          description: ''
+          content:
+            image/png:
+              schema:
+                type: object
+                properties: {}
+              example: "‰PNG\r\n\x1A\r\n   \r\nIHDR   \x01   \x01\b\x02   \x90wSÞ   \x01sRGB ®Î\x1Cé   \x04gAMA  ±\x8F\vüa\x05   \tpHYs  \x0EÃ  \x0EÃ\x01Ço¨d   \fIDAT\x18Wcøÿÿ? \x05þ\x02þ§5\x81„    IEND®B`‚"
+          headers: {}
+        x-200-4:
+          description: ''
+          content:
+            image/tiff:
+              schema:
+                type: object
+                properties: {}
+              example: "II* \x0E   €?àP\x10 \x0F þ \x04 \x01        \x01\x04 \x01   \x01   \x01\x01\x04 \x01   \x01   \x02\x01\x03 \x03   È   \x03\x01\x03 \x01   \x05   \x06\x01\x03 \x01   \x02   \x11\x01\x04 \x01   \b   \x15\x01\x03 \x01   \x03   \x16\x01\x04 \x01   \x01   \x17\x01\x04 \x01   \x05   \x1A\x01\x05 \x01   Î   \e\x01\x05 \x01   Ö   \x1C\x01\x03 \x01   \x01   (\x01\x03 \x01   \x02   =\x01\x03 \x01   \x02       \b \b \b  w\x01 è\x03   w\x01 è\x03  "
+          headers: {}
+      security: []
+  /storage/documents/{documentuid}/pages:
+    post:
+      summary: Insert new page(s) into an existing document.
+      deprecated: false
+      description: >
+        By default, it will append the pages to the end of document. for multiple tiff, we
+        will split it into multiple images. And for multiple pdf, we will also
+        split it into multiple pages and save raw content.
+      operationId: insertDocPage
+      tags:
+        - Document Management
+      parameters:
+        - name: documentuid
+          in: path
+          description: UID of document
+          required: true
+          example: ''
+          schema:
+            type: string
+        - name: X-DICS-DOC-PASSWORD
+          in: header
+          description: the password of document in storage
+          required: false
+          example: ''
+          schema:
+            type: string
+            maxLength: 32
+            description: cannot exceed 32 chars.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - source
+              properties:
+                insertPos:
+                  type: number
+                  description: >
+                    Positive integer. The new page will be inserted before this
+                    index. If not set or out of the maximum range, the blank
+                    page will be added after the last page.
+                source:
+                  oneOf:
+                    - type: string
+                      examples:
+                        - >-
+                          https://127.0.0.1:18623/api/device/scanners/jobs/dd40716d-48d1-4d32-89f7-1d53f9665d91/next-page?page=19522d0c5282
+                  description: >-
+                    Currently only support image url from scan job. eg.
+                    "https://127.0.0.1:18623/api/device/scanners/jobs/dd40716d-48d1-4d32-89f7-1d53f9665d91/next-page?page=19522d0c5282"
+            example: ''
+      responses:
+        '200':
+          description: Page inserted successfully
+          content:
+            application/json:
+              schema: *ref_1
+              example:
+                uid: 190807444d76
+                pages:
+                  - uid: 190817548d70
+                  - uid: 190818458d85
+          headers: {}
+        '400':
+          description: Error resonpse
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1043
+                message: Password invalid.
+                statusCode: 403
+          headers: {}
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1040
+                message: The uid does not exist.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports POST.
+                statusCode: 405
+          headers: {}
+      security: []
+  /storage/documents/{documentuid}/pages/{param}:
+    delete:
+      summary: Delete the specified page.
+      deprecated: false
+      description: Delete the page by uid or page number.
+      operationId: deleteDocPage
+      tags:
+        - Document Management
+      parameters:
+        - name: documentuid
+          in: path
+          description: UID of document
+          required: true
+          example: ''
+          schema:
+            type: string
+        - name: param
+          in: path
+          description: 'UID of the page or page index number (0-based). '
+          required: true
+          example: ''
+          schema:
+            type: string
+        - name: X-DICS-DOC-PASSWORD
+          in: header
+          description: the password of document in storage
+          required: false
+          example: ''
+          schema:
+            type: string
+            maxLength: 32
+            description: cannot exceed 32 chars.
+      responses:
+        '204':
+          description: Page removed successfully
+          headers: {}
+        '400':
+          description: Error resonpse
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1043
+                message: Password invalid.
+                statusCode: 403
+          headers: {}
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1040
+                message: The provided page UID is invalid.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports DELETE.
+                statusCode: 405
+          headers: {}
+      security: []
+  /process/{operation}:
+    post:
+      summary: Create a new processing for a specified source.
+      deprecated: false
+      description: >
+        Some operations can be implemented by external modules. Currently,
+        check-blank is Windows only.
+      operationId: createDocProcess
+      tags:
+        - Document Processing
+      parameters:
+        - name: operation
+          in: path
+          description: type of processing
+          required: true
+          example: ''
+          schema:
+            type: string
+            description: >
+              currently only process DWT urls, so we cannot pass index,
+              only has one page. read-barcode can accept a barcode reader
+              template settings. and need to pass extra license with header
+              X-DICS-LICENSE-KEY. check-blank can accept null or
+              {minBlockHeight?: number, maxBlockHeight?: number}. rotate can
+              accept {rotation: number, keepSize?: boolean}.
+              calculate-skew-angle can accept null.
+            enum:
+              - check-blank
+              - read-barcode
+        - name: X-DICS-LICENSE-KEY
+          in: header
+          description: the license for image processing
+          required: false
+          example: ''
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: different processings have different parameters.
+              $ref: '#/components/schemas/CreateProcessOptions'
+            example: ''
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: boolean
+                    description: is blank image or not
+                required:
+                  - result
+              example:
+                result: true
+          headers: {}
+        '400':
+          description: Bad request. e.g. parameter is invalid.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '403':
+          description: License is invalid.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2800
+                message: >-
+                  The current product key is empty or invalid, please contact
+                  the site administrator.
+                statusCode: 403
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports POST.
+                statusCode: 405
+          headers: {}
+        x-200-2:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                description: barcode result
+              example:
+                - BarcodeFormat: 2
+                  BarcodeFormatString: CODE_128
+                  LocalizationResult:
+                    ResultPoints:
+                      - 723, 274
+                      - 1021, 275
+                      - 1021, 375
+                      - 723, 374
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 100
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 2
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 723
+                    x2: 1021
+                    x3: 1021
+                    x4: 723
+                    y1: 274
+                    y2: 275
+                    y3: 375
+                    y4: 374
+                  barcodeBytes:
+                    - 67
+                    - 79
+                    - 68
+                    - 69
+                    - 49
+                    - 50
+                    - 56
+                  barcodeFormat: 2
+                  barcodeFormatString: CODE_128
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: CODE128
+                  detailedResult:
+                    checkDigitBytes: []
+                    moduleSize: 2
+                    startCharsBytes: []
+                    stopCharsBytes: []
+                  localizationResult:
+                    ResultPoints:
+                      - 723, 274
+                      - 1021, 275
+                      - 1021, 375
+                      - 723, 374
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 100
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 2
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 723
+                    x2: 1021
+                    x3: 1021
+                    x4: 723
+                    y1: 274
+                    y2: 275
+                    y3: 375
+                    y4: 374
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 2
+                      barcodeFormatString: CODE_128
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 67
+                        - 79
+                        - 68
+                        - 69
+                        - 49
+                        - 50
+                        - 56
+                      clarity: -1
+                      confidence: 100
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 4
+                  BarcodeFormatString: CODE_93
+                  LocalizationResult:
+                    ResultPoints:
+                      - 183, 652
+                      - 551, 652
+                      - 551, 768
+                      - 183, 768
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 100
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 4
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 183
+                    x2: 551
+                    x3: 551
+                    x4: 183
+                    y1: 652
+                    y2: 652
+                    y3: 768
+                    y4: 768
+                  barcodeBytes:
+                    - 67
+                    - 79
+                    - 68
+                    - 69
+                    - 57
+                    - 51
+                  barcodeFormat: 4
+                  barcodeFormatString: CODE_93
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: CODE93
+                  detailedResult:
+                    checkDigitBytes: []
+                    moduleSize: 4
+                    startCharsBytes:
+                      - 42
+                    stopCharsBytes:
+                      - 42
+                  localizationResult:
+                    ResultPoints:
+                      - 183, 652
+                      - 551, 652
+                      - 551, 768
+                      - 183, 768
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 100
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 4
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 183
+                    x2: 551
+                    x3: 551
+                    x4: 183
+                    y1: 652
+                    y2: 652
+                    y3: 768
+                    y4: 768
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 4
+                      barcodeFormatString: CODE_93
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 67
+                        - 79
+                        - 68
+                        - 69
+                        - 57
+                        - 51
+                      clarity: -1
+                      confidence: 100
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 131072
+                  BarcodeFormatString: GS1 Databar Limited
+                  LocalizationResult:
+                    ResultPoints:
+                      - 1348, 663
+                      - 1545, 663
+                      - 1545, 797
+                      - 1348, 797
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 131072
+                    barcodeFormatString: GS1 Databar Limited
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 100
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 3
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1348
+                    x2: 1545
+                    x3: 1545
+                    x4: 1348
+                    y1: 663
+                    y2: 663
+                    y3: 797
+                    y4: 797
+                  barcodeBytes:
+                    - 48
+                    - 48
+                    - 48
+                    - 48
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                    - 54
+                    - 55
+                    - 56
+                    - 57
+                    - 53
+                  barcodeFormat: 131072
+                  barcodeFormatString: GS1 Databar Limited
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: '00001234567895'
+                  detailedResult: null
+                  localizationResult:
+                    ResultPoints:
+                      - 1348, 663
+                      - 1545, 663
+                      - 1545, 797
+                      - 1348, 797
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 131072
+                    barcodeFormatString: GS1 Databar Limited
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 100
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 3
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1348
+                    x2: 1545
+                    x3: 1545
+                    x4: 1348
+                    y1: 663
+                    y2: 663
+                    y3: 797
+                    y4: 797
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 131072
+                      barcodeFormatString: GS1 Databar Limited
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 48
+                        - 48
+                        - 48
+                        - 48
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                        - 54
+                        - 55
+                        - 56
+                        - 57
+                        - 53
+                      clarity: -1
+                      confidence: 100
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 268435456
+                  BarcodeFormatString: AZTEC
+                  LocalizationResult:
+                    ResultPoints:
+                      - 777, 1354
+                      - 888, 1354
+                      - 888, 1465
+                      - 777, 1465
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 268435456
+                    barcodeFormatString: AZTEC
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 100
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 8
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 777
+                    x2: 888
+                    x3: 888
+                    x4: 777
+                    y1: 1354
+                    y2: 1354
+                    y3: 1465
+                    y4: 1465
+                  barcodeBytes:
+                    - 68
+                    - 121
+                    - 110
+                    - 97
+                    - 109
+                    - 115
+                    - 111
+                    - 102
+                    - 116
+                  barcodeFormat: 268435456
+                  barcodeFormatString: AZTEC
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: Dynamsoft
+                  detailedResult:
+                    columns: 15
+                    layerNumber: -1
+                    moduleSize: 8
+                    rows: 15
+                  localizationResult:
+                    ResultPoints:
+                      - 777, 1354
+                      - 888, 1354
+                      - 888, 1465
+                      - 777, 1465
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 268435456
+                    barcodeFormatString: AZTEC
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 100
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 8
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 777
+                    x2: 888
+                    x3: 888
+                    x4: 777
+                    y1: 1354
+                    y2: 1354
+                    y3: 1465
+                    y4: 1465
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 268435456
+                      barcodeFormatString: AZTEC
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 68
+                        - 121
+                        - 110
+                        - 97
+                        - 109
+                        - 115
+                        - 111
+                        - 102
+                        - 116
+                      clarity: -1
+                      confidence: 100
+                      deformation: 0
+                      resultType: 0
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 268435456
+                      barcodeFormatString: AZTEC
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 68
+                        - 121
+                        - 110
+                        - 97
+                        - 109
+                        - 115
+                        - 111
+                        - 102
+                        - 116
+                      clarity: -1
+                      confidence: 100
+                      deformation: 0
+                      resultType: 1
+                - BarcodeFormat: 134217728
+                  BarcodeFormatString: DATAMATRIX
+                  LocalizationResult:
+                    ResultPoints:
+                      - 1074, 1346
+                      - 1229, 1346
+                      - 1229, 1502
+                      - 1074, 1502
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 134217728
+                    barcodeFormatString: DATAMATRIX
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 98
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 9
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1074
+                    x2: 1229
+                    x3: 1229
+                    x4: 1074
+                    y1: 1346
+                    y2: 1346
+                    y3: 1502
+                    y4: 1502
+                  barcodeBytes:
+                    - 119
+                    - 119
+                    - 119
+                    - 46
+                    - 100
+                    - 121
+                    - 110
+                    - 97
+                    - 109
+                    - 115
+                    - 111
+                    - 102
+                    - 116
+                    - 46
+                    - 99
+                    - 111
+                    - 109
+                  barcodeFormat: 134217728
+                  barcodeFormatString: DATAMATRIX
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: www.dynamsoft.com
+                  detailedResult:
+                    columns: 18
+                    dataRegionColumns: 16
+                    dataRegionNumber: 1
+                    dataRegionRows: 16
+                    moduleSize: 9
+                    rows: 18
+                  localizationResult:
+                    ResultPoints:
+                      - 1074, 1346
+                      - 1229, 1346
+                      - 1229, 1502
+                      - 1074, 1502
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 134217728
+                    barcodeFormatString: DATAMATRIX
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 98
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 9
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1074
+                    x2: 1229
+                    x3: 1229
+                    x4: 1074
+                    y1: 1346
+                    y2: 1346
+                    y3: 1502
+                    y4: 1502
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 134217728
+                      barcodeFormatString: DATAMATRIX
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 119
+                        - 119
+                        - 119
+                        - 46
+                        - 100
+                        - 121
+                        - 110
+                        - 97
+                        - 109
+                        - 115
+                        - 111
+                        - 102
+                        - 116
+                        - 46
+                        - 99
+                        - 111
+                        - 109
+                      clarity: -1
+                      confidence: 98
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 0
+                  BarcodeFormatString: USPS Intelligent Mail
+                  LocalizationResult:
+                    ResultPoints:
+                      - 1753, 1380
+                      - 2397, 1381
+                      - 2397, 1480
+                      - 1753, 1479
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 0
+                    barcodeFormatString: USPS Intelligent Mail
+                    barcodeFormatString_2: USPS Intelligent Mail
+                    barcodeFormat_2: 1048576
+                    confidence: 96
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 5
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1753
+                    x2: 2397
+                    x3: 2397
+                    x4: 1753
+                    y1: 1380
+                    y2: 1381
+                    y3: 1480
+                    y4: 1479
+                  barcodeBytes:
+                    - 52
+                    - 52
+                    - 49
+                    - 50
+                    - 51
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                    - 54
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                    - 54
+                    - 55
+                    - 56
+                    - 57
+                  barcodeFormat: 0
+                  barcodeFormatString: USPS Intelligent Mail
+                  barcodeFormatString_2: USPS Intelligent Mail
+                  barcodeFormat_2: 1048576
+                  barcodeText: '44123123456123456789'
+                  detailedResult: null
+                  localizationResult:
+                    ResultPoints:
+                      - 1753, 1380
+                      - 2397, 1381
+                      - 2397, 1480
+                      - 1753, 1479
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 0
+                    barcodeFormatString: USPS Intelligent Mail
+                    barcodeFormatString_2: USPS Intelligent Mail
+                    barcodeFormat_2: 1048576
+                    confidence: 96
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 5
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1753
+                    x2: 2397
+                    x3: 2397
+                    x4: 1753
+                    y1: 1380
+                    y2: 1381
+                    y3: 1480
+                    y4: 1479
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 0
+                      barcodeFormatString: USPS Intelligent Mail
+                      barcodeFormatString_2: USPS Intelligent Mail
+                      barcodeFormat_2: 1048576
+                      bytes:
+                        - 52
+                        - 52
+                        - 49
+                        - 50
+                        - 51
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                        - 54
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                        - 54
+                        - 55
+                        - 56
+                        - 57
+                      clarity: -1
+                      confidence: 96
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 0
+                  BarcodeFormatString: Australian Post
+                  LocalizationResult:
+                    ResultPoints:
+                      - 1838, 282
+                      - 2294, 282
+                      - 2294, 346
+                      - 1838, 346
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 0
+                    barcodeFormatString: Australian Post
+                    barcodeFormatString_2: Australian Post
+                    barcodeFormat_2: 8388608
+                    confidence: 95
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 6
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1838
+                    x2: 2294
+                    x3: 2294
+                    x4: 1838
+                    y1: 282
+                    y2: 282
+                    y3: 346
+                    y4: 346
+                  barcodeBytes:
+                    - 49
+                    - 49
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                    - 54
+                    - 55
+                    - 56
+                    - 50
+                    - 54
+                    - 52
+                    - 52
+                    - 49
+                    - 57
+                    - 49
+                    - 53
+                  barcodeFormat: 0
+                  barcodeFormatString: Australian Post
+                  barcodeFormatString_2: Australian Post
+                  barcodeFormat_2: 8388608
+                  barcodeText: 11,12345678,26 44 19 15
+                  detailedResult: null
+                  localizationResult:
+                    ResultPoints:
+                      - 1838, 282
+                      - 2294, 282
+                      - 2294, 346
+                      - 1838, 346
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 0
+                    barcodeFormatString: Australian Post
+                    barcodeFormatString_2: Australian Post
+                    barcodeFormat_2: 8388608
+                    confidence: 95
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 6
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1838
+                    x2: 2294
+                    x3: 2294
+                    x4: 1838
+                    y1: 282
+                    y2: 282
+                    y3: 346
+                    y4: 346
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 0
+                      barcodeFormatString: Australian Post
+                      barcodeFormatString_2: Australian Post
+                      barcodeFormat_2: 8388608
+                      bytes:
+                        - 49
+                        - 49
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                        - 54
+                        - 55
+                        - 56
+                        - 50
+                        - 54
+                        - 52
+                        - 52
+                        - 49
+                        - 57
+                        - 49
+                        - 53
+                      clarity: -1
+                      confidence: 95
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 0
+                  BarcodeFormatString: Postnet
+                  LocalizationResult:
+                    ResultPoints:
+                      - 1699, 1067
+                      - 2467, 1067
+                      - 2467, 1106
+                      - 1699, 1106
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 0
+                    barcodeFormatString: Postnet
+                    barcodeFormatString_2: Postnet
+                    barcodeFormat_2: 2097152
+                    confidence: 93
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 6
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1699
+                    x2: 2467
+                    x3: 2467
+                    x4: 1699
+                    y1: 1067
+                    y2: 1067
+                    y3: 1106
+                    y4: 1106
+                  barcodeBytes:
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                    - 54
+                    - 55
+                    - 56
+                    - 57
+                    - 48
+                    - 49
+                    - 52
+                  barcodeFormat: 0
+                  barcodeFormatString: Postnet
+                  barcodeFormatString_2: Postnet
+                  barcodeFormat_2: 2097152
+                  barcodeText: '123456789014'
+                  detailedResult: null
+                  localizationResult:
+                    ResultPoints:
+                      - 1699, 1067
+                      - 2467, 1067
+                      - 2467, 1106
+                      - 1699, 1106
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 0
+                    barcodeFormatString: Postnet
+                    barcodeFormatString_2: Postnet
+                    barcodeFormat_2: 2097152
+                    confidence: 93
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 6
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1699
+                    x2: 2467
+                    x3: 2467
+                    x4: 1699
+                    y1: 1067
+                    y2: 1067
+                    y3: 1106
+                    y4: 1106
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 0
+                      barcodeFormatString: Postnet
+                      barcodeFormatString_2: Postnet
+                      barcodeFormat_2: 2097152
+                      bytes:
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                        - 54
+                        - 55
+                        - 56
+                        - 57
+                        - 48
+                        - 49
+                        - 52
+                      clarity: -1
+                      confidence: 93
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 0
+                  BarcodeFormatString: Royal Mail 4-State Customer Barcode
+                  LocalizationResult:
+                    ResultPoints:
+                      - 1799, 554
+                      - 2367, 554
+                      - 2367, 618
+                      - 1799, 618
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 0
+                    barcodeFormatString: Royal Mail 4-State Customer Barcode
+                    barcodeFormatString_2: Royal Mail 4-State Customer Barcode
+                    barcodeFormat_2: 16777216
+                    confidence: 92
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 6
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1799
+                    x2: 2367
+                    x3: 2367
+                    x4: 1799
+                    y1: 554
+                    y2: 554
+                    y3: 618
+                    y4: 618
+                  barcodeBytes:
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                    - 54
+                    - 55
+                    - 65
+                    - 66
+                    - 67
+                  barcodeFormat: 0
+                  barcodeFormatString: Royal Mail 4-State Customer Barcode
+                  barcodeFormatString_2: Royal Mail 4-State Customer Barcode
+                  barcodeFormat_2: 16777216
+                  barcodeText: 1234567ABC
+                  detailedResult: null
+                  localizationResult:
+                    ResultPoints:
+                      - 1799, 554
+                      - 2367, 554
+                      - 2367, 618
+                      - 1799, 618
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 0
+                    barcodeFormatString: Royal Mail 4-State Customer Barcode
+                    barcodeFormatString_2: Royal Mail 4-State Customer Barcode
+                    barcodeFormat_2: 16777216
+                    confidence: 92
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 6
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1799
+                    x2: 2367
+                    x3: 2367
+                    x4: 1799
+                    y1: 554
+                    y2: 554
+                    y3: 618
+                    y4: 618
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 0
+                      barcodeFormatString: Royal Mail 4-State Customer Barcode
+                      barcodeFormatString_2: Royal Mail 4-State Customer Barcode
+                      barcodeFormat_2: 16777216
+                      bytes:
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                        - 54
+                        - 55
+                        - 65
+                        - 66
+                        - 67
+                      clarity: -1
+                      confidence: 92
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 0
+                  BarcodeFormatString: Planet
+                  LocalizationResult:
+                    ResultPoints:
+                      - 1696, 814
+                      - 2464, 814
+                      - 2464, 853
+                      - 1696, 853
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 0
+                    barcodeFormatString: Planet
+                    barcodeFormatString_2: Planet
+                    barcodeFormat_2: 4194304
+                    confidence: 92
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 6
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1696
+                    x2: 2464
+                    x3: 2464
+                    x4: 1696
+                    y1: 814
+                    y2: 814
+                    y3: 853
+                    y4: 853
+                  barcodeBytes:
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                    - 54
+                    - 55
+                    - 56
+                    - 57
+                    - 48
+                    - 49
+                    - 52
+                  barcodeFormat: 0
+                  barcodeFormatString: Planet
+                  barcodeFormatString_2: Planet
+                  barcodeFormat_2: 4194304
+                  barcodeText: '123456789014'
+                  detailedResult: null
+                  localizationResult:
+                    ResultPoints:
+                      - 1696, 814
+                      - 2464, 814
+                      - 2464, 853
+                      - 1696, 853
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 0
+                    barcodeFormatString: Planet
+                    barcodeFormatString_2: Planet
+                    barcodeFormat_2: 4194304
+                    confidence: 92
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 6
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1696
+                    x2: 2464
+                    x3: 2464
+                    x4: 1696
+                    y1: 814
+                    y2: 814
+                    y3: 853
+                    y4: 853
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 0
+                      barcodeFormatString: Planet
+                      barcodeFormatString_2: Planet
+                      barcodeFormat_2: 4194304
+                      bytes:
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                        - 54
+                        - 55
+                        - 56
+                        - 57
+                        - 48
+                        - 49
+                        - 52
+                      clarity: -1
+                      confidence: 92
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 16384
+                  BarcodeFormatString: GS1 Databar Stacked Omnidirectional
+                  LocalizationResult:
+                    ResultPoints:
+                      - 1382, 318
+                      - 1578, 318
+                      - 1570, 515
+                      - 1377, 515
+                    accompanyingTextBytes: []
+                    angle: 180
+                    barcodeFormat: 16384
+                    barcodeFormatString: GS1 Databar Stacked Omnidirectional
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 90
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 4
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1382
+                    x2: 1578
+                    x3: 1570
+                    x4: 1377
+                    y1: 318
+                    y2: 318
+                    y3: 515
+                    y4: 515
+                  barcodeBytes:
+                    - 48
+                    - 49
+                    - 50
+                    - 51
+                    - 48
+                    - 52
+                    - 53
+                    - 54
+                    - 48
+                    - 55
+                    - 56
+                    - 57
+                    - 48
+                    - 53
+                  barcodeFormat: 16384
+                  barcodeFormatString: GS1 Databar Stacked Omnidirectional
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: '01230456078905'
+                  detailedResult: null
+                  localizationResult:
+                    ResultPoints:
+                      - 1382, 318
+                      - 1578, 318
+                      - 1570, 515
+                      - 1377, 515
+                    accompanyingTextBytes: []
+                    angle: 180
+                    barcodeFormat: 16384
+                    barcodeFormatString: GS1 Databar Stacked Omnidirectional
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 90
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 4
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1382
+                    x2: 1578
+                    x3: 1570
+                    x4: 1377
+                    y1: 318
+                    y2: 318
+                    y3: 515
+                    y4: 515
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 16384
+                      barcodeFormatString: GS1 Databar Stacked Omnidirectional
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 48
+                        - 49
+                        - 50
+                        - 51
+                        - 48
+                        - 52
+                        - 53
+                        - 54
+                        - 48
+                        - 55
+                        - 56
+                        - 57
+                        - 48
+                        - 53
+                      clarity: -1
+                      confidence: 90
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 33554432
+                  BarcodeFormatString: PDF417
+                  LocalizationResult:
+                    ResultPoints:
+                      - 153, 1346
+                      - 605, 1346
+                      - 605, 1486
+                      - 153, 1486
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 33554432
+                    barcodeFormatString: PDF417
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 88
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 4
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 153
+                    x2: 605
+                    x3: 605
+                    x4: 153
+                    y1: 1346
+                    y2: 1346
+                    y3: 1486
+                    y4: 1486
+                  barcodeBytes:
+                    - 119
+                    - 119
+                    - 119
+                    - 46
+                    - 100
+                    - 121
+                    - 110
+                    - 97
+                    - 109
+                    - 115
+                    - 111
+                    - 102
+                    - 116
+                    - 46
+                    - 99
+                    - 111
+                    - 109
+                  barcodeFormat: 33554432
+                  barcodeFormatString: PDF417
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: www.dynamsoft.com
+                  detailedResult:
+                    columns: 3
+                    errorCorrectionLevel: 2
+                    moduleSize: 4
+                    rows: 7
+                  localizationResult:
+                    ResultPoints:
+                      - 153, 1346
+                      - 605, 1346
+                      - 605, 1486
+                      - 153, 1486
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 33554432
+                    barcodeFormatString: PDF417
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 88
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 4
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 153
+                    x2: 605
+                    x3: 605
+                    x4: 153
+                    y1: 1346
+                    y2: 1346
+                    y3: 1486
+                    y4: 1486
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 33554432
+                      barcodeFormatString: PDF417
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 119
+                        - 119
+                        - 119
+                        - 46
+                        - 100
+                        - 121
+                        - 110
+                        - 97
+                        - 109
+                        - 115
+                        - 111
+                        - 102
+                        - 116
+                        - 46
+                        - 99
+                        - 111
+                        - 109
+                      clarity: -1
+                      confidence: 88
+                      deformation: 0
+                      resultType: 0
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 33554432
+                      barcodeFormatString: PDF417
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 119
+                        - 119
+                        - 119
+                        - 46
+                        - 100
+                        - 121
+                        - 110
+                        - 97
+                        - 109
+                        - 115
+                        - 111
+                        - 102
+                        - 116
+                        - 46
+                        - 99
+                        - 111
+                        - 109
+                      clarity: -1
+                      confidence: 88
+                      deformation: 0
+                      resultType: 1
+                - BarcodeFormat: 67108864
+                  BarcodeFormatString: QR_CODE
+                  LocalizationResult:
+                    ResultPoints:
+                      - 838, 1094
+                      - 989, 1094
+                      - 988, 1244
+                      - 839, 1244
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 67108864
+                    barcodeFormatString: QR_CODE
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 86
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 6
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 838
+                    x2: 989
+                    x3: 988
+                    x4: 839
+                    y1: 1094
+                    y2: 1094
+                    y3: 1244
+                    y4: 1244
+                  barcodeBytes:
+                    - 119
+                    - 119
+                    - 119
+                    - 46
+                    - 100
+                    - 121
+                    - 110
+                    - 97
+                    - 109
+                    - 115
+                    - 111
+                    - 102
+                    - 116
+                    - 46
+                    - 99
+                    - 111
+                    - 109
+                  barcodeFormat: 67108864
+                  barcodeFormatString: QR_CODE
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: www.dynamsoft.com
+                  detailedResult:
+                    columns: 25
+                    errorCorrectionLevel: 2
+                    model: 2
+                    moduleSize: 6
+                    rows: 25
+                    version: 2
+                  localizationResult:
+                    ResultPoints:
+                      - 838, 1094
+                      - 989, 1094
+                      - 988, 1244
+                      - 839, 1244
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 67108864
+                    barcodeFormatString: QR_CODE
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 86
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 6
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 838
+                    x2: 989
+                    x3: 988
+                    x4: 839
+                    y1: 1094
+                    y2: 1094
+                    y3: 1244
+                    y4: 1244
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 67108864
+                      barcodeFormatString: QR_CODE
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 119
+                        - 119
+                        - 119
+                        - 46
+                        - 100
+                        - 121
+                        - 110
+                        - 97
+                        - 109
+                        - 115
+                        - 111
+                        - 102
+                        - 116
+                        - 46
+                        - 99
+                        - 111
+                        - 109
+                      clarity: -1
+                      confidence: 86
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 32
+                  BarcodeFormatString: EAN_13
+                  LocalizationResult:
+                    ResultPoints:
+                      - 177, 876
+                      - 462, 876
+                      - 462, 976
+                      - 177, 976
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 85
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 2
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 177
+                    x2: 462
+                    x3: 462
+                    x4: 177
+                    y1: 876
+                    y2: 876
+                    y3: 976
+                    y4: 976
+                  barcodeBytes:
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                    - 54
+                    - 55
+                    - 56
+                    - 57
+                    - 48
+                    - 49
+                    - 50
+                    - 56
+                  barcodeFormat: 32
+                  barcodeFormatString: EAN_13
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: '1234567890128'
+                  detailedResult:
+                    checkDigitBytes: []
+                    moduleSize: 2
+                    startCharsBytes: []
+                    stopCharsBytes: []
+                  localizationResult:
+                    ResultPoints:
+                      - 177, 876
+                      - 462, 876
+                      - 462, 976
+                      - 177, 976
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 85
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 2
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 177
+                    x2: 462
+                    x3: 462
+                    x4: 177
+                    y1: 876
+                    y2: 876
+                    y3: 976
+                    y4: 976
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 32
+                      barcodeFormatString: EAN_13
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                        - 54
+                        - 55
+                        - 56
+                        - 57
+                        - 48
+                        - 49
+                        - 50
+                        - 56
+                      clarity: -1
+                      confidence: 85
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 0
+                  BarcodeFormatString: DotCode
+                  LocalizationResult:
+                    ResultPoints:
+                      - 886, 897
+                      - 1018, 897
+                      - 1018, 985
+                      - 886, 985
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 0
+                    barcodeFormatString: DotCode
+                    barcodeFormatString_2: DotCode
+                    barcodeFormat_2: 2
+                    confidence: 82
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 4
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 886
+                    x2: 1018
+                    x3: 1018
+                    x4: 886
+                    y1: 897
+                    y2: 897
+                    y3: 985
+                    y4: 985
+                  barcodeBytes:
+                    - 68
+                    - 121
+                    - 110
+                    - 97
+                    - 109
+                    - 115
+                    - 111
+                    - 102
+                    - 116
+                    - 32
+                    - 66
+                    - 97
+                    - 114
+                    - 99
+                    - 111
+                    - 100
+                    - 101
+                    - 32
+                    - 82
+                    - 101
+                    - 97
+                    - 100
+                    - 101
+                    - 114
+                  barcodeFormat: 0
+                  barcodeFormatString: DotCode
+                  barcodeFormatString_2: DotCode
+                  barcodeFormat_2: 2
+                  barcodeText: Dynamsoft Barcode Reader
+                  detailedResult: null
+                  localizationResult:
+                    ResultPoints:
+                      - 886, 897
+                      - 1018, 897
+                      - 1018, 985
+                      - 886, 985
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 0
+                    barcodeFormatString: DotCode
+                    barcodeFormatString_2: DotCode
+                    barcodeFormat_2: 2
+                    confidence: 82
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 4
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 886
+                    x2: 1018
+                    x3: 1018
+                    x4: 886
+                    y1: 897
+                    y2: 897
+                    y3: 985
+                    y4: 985
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 0
+                      barcodeFormatString: DotCode
+                      barcodeFormatString_2: DotCode
+                      barcodeFormat_2: 2
+                      bytes:
+                        - 68
+                        - 121
+                        - 110
+                        - 97
+                        - 109
+                        - 115
+                        - 111
+                        - 102
+                        - 116
+                        - 32
+                        - 66
+                        - 97
+                        - 114
+                        - 99
+                        - 111
+                        - 100
+                        - 101
+                        - 32
+                        - 82
+                        - 101
+                        - 97
+                        - 100
+                        - 101
+                        - 114
+                      clarity: -1
+                      confidence: 82
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 536870912
+                  BarcodeFormatString: Maxicode
+                  LocalizationResult:
+                    ResultPoints:
+                      - 1396, 1327
+                      - 1595, 1327
+                      - 1595, 1525
+                      - 1396, 1525
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 536870912
+                    barcodeFormatString: Maxicode
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 81
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 7
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1396
+                    x2: 1595
+                    x3: 1595
+                    x4: 1396
+                    y1: 1327
+                    y2: 1327
+                    y3: 1525
+                    y4: 1525
+                  barcodeBytes:
+                    - 77
+                    - 97
+                    - 120
+                    - 105
+                    - 99
+                    - 111
+                    - 100
+                    - 101
+                    - 32
+                    - 102
+                    - 114
+                    - 111
+                    - 109
+                    - 32
+                    - 68
+                    - 121
+                    - 110
+                    - 97
+                    - 109
+                    - 115
+                    - 111
+                    - 102
+                    - 116
+                  barcodeFormat: 536870912
+                  barcodeFormatString: Maxicode
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: Maxicode from Dynamsoft
+                  detailedResult: null
+                  localizationResult:
+                    ResultPoints:
+                      - 1396, 1327
+                      - 1595, 1327
+                      - 1595, 1525
+                      - 1396, 1525
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 536870912
+                    barcodeFormatString: Maxicode
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 81
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 7
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 1396
+                    x2: 1595
+                    x3: 1595
+                    x4: 1396
+                    y1: 1327
+                    y2: 1327
+                    y3: 1525
+                    y4: 1525
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 536870912
+                      barcodeFormatString: Maxicode
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 77
+                        - 97
+                        - 120
+                        - 105
+                        - 99
+                        - 111
+                        - 100
+                        - 101
+                        - 32
+                        - 102
+                        - 114
+                        - 111
+                        - 109
+                        - 32
+                        - 68
+                        - 121
+                        - 110
+                        - 97
+                        - 109
+                        - 115
+                        - 111
+                        - 102
+                        - 116
+                      clarity: -1
+                      confidence: 81
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 512
+                  BarcodeFormatString: INDUSTRIAL_25
+                  LocalizationResult:
+                    ResultPoints:
+                      - 157, 1109
+                      - 672, 1109
+                      - 672, 1229
+                      - 157, 1229
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 70
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 5
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 157
+                    x2: 672
+                    x3: 672
+                    x4: 157
+                    y1: 1109
+                    y2: 1109
+                    y3: 1229
+                    y4: 1229
+                  barcodeBytes:
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                    - 54
+                  barcodeFormat: 512
+                  barcodeFormatString: INDUSTRIAL_25
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: '123456'
+                  detailedResult:
+                    checkDigitBytes: []
+                    moduleSize: 5
+                    startCharsBytes: []
+                    stopCharsBytes: []
+                  localizationResult:
+                    ResultPoints:
+                      - 157, 1109
+                      - 672, 1109
+                      - 672, 1229
+                      - 157, 1229
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 70
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 5
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 157
+                    x2: 672
+                    x3: 672
+                    x4: 157
+                    y1: 1109
+                    y2: 1109
+                    y3: 1229
+                    y4: 1229
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 512
+                      barcodeFormatString: INDUSTRIAL_25
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                        - 54
+                      clarity: -1
+                      confidence: 70
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 16
+                  BarcodeFormatString: ITF
+                  LocalizationResult:
+                    ResultPoints:
+                      - 935, 469
+                      - 1233, 469
+                      - 1233, 565
+                      - 935, 565
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 68
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 3
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 935
+                    x2: 1233
+                    x3: 1233
+                    x4: 935
+                    y1: 469
+                    y2: 469
+                    y3: 565
+                    y4: 565
+                  barcodeBytes:
+                    - 48
+                    - 48
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                    - 54
+                  barcodeFormat: 16
+                  barcodeFormatString: ITF
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: '00123456'
+                  detailedResult:
+                    checkDigitBytes: []
+                    moduleSize: 3
+                    startCharsBytes: []
+                    stopCharsBytes: []
+                  localizationResult:
+                    ResultPoints:
+                      - 935, 469
+                      - 1233, 469
+                      - 1233, 565
+                      - 935, 565
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 68
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 3
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 935
+                    x2: 1233
+                    x3: 1233
+                    x4: 935
+                    y1: 469
+                    y2: 469
+                    y3: 565
+                    y4: 565
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 16
+                      barcodeFormatString: ITF
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 48
+                        - 48
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                        - 54
+                      clarity: -1
+                      confidence: 68
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 128
+                  BarcodeFormatString: UPC_A
+                  LocalizationResult:
+                    ResultPoints:
+                      - 752, 649
+                      - 1061, 649
+                      - 1061, 767
+                      - 752, 767
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 61
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 3
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 752
+                    x2: 1061
+                    x3: 1061
+                    x4: 752
+                    y1: 649
+                    y2: 649
+                    y3: 767
+                    y4: 767
+                  barcodeBytes:
+                    - 48
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                    - 54
+                    - 55
+                    - 56
+                    - 57
+                    - 48
+                    - 53
+                  barcodeFormat: 128
+                  barcodeFormatString: UPC_A
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: '012345678905'
+                  detailedResult:
+                    checkDigitBytes: []
+                    moduleSize: 3
+                    startCharsBytes: []
+                    stopCharsBytes: []
+                  localizationResult:
+                    ResultPoints:
+                      - 752, 649
+                      - 1061, 649
+                      - 1061, 767
+                      - 752, 767
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 61
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 3
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 752
+                    x2: 1061
+                    x3: 1061
+                    x4: 752
+                    y1: 649
+                    y2: 649
+                    y3: 767
+                    y4: 767
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 128
+                      barcodeFormatString: UPC_A
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 48
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                        - 54
+                        - 55
+                        - 56
+                        - 57
+                        - 48
+                        - 53
+                      clarity: -1
+                      confidence: 61
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 8
+                  BarcodeFormatString: CODABAR
+                  LocalizationResult:
+                    ResultPoints:
+                      - 183, 465
+                      - 478, 464
+                      - 478, 560
+                      - 183, 559
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 59
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 2
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 183
+                    x2: 478
+                    x3: 478
+                    x4: 183
+                    y1: 465
+                    y2: 464
+                    y3: 560
+                    y4: 559
+                  barcodeBytes:
+                    - 48
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                  barcodeFormat: 8
+                  barcodeFormatString: CODABAR
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: '012345'
+                  detailedResult:
+                    checkDigitBytes: []
+                    moduleSize: 2
+                    startCharsBytes:
+                      - 67
+                    stopCharsBytes:
+                      - 68
+                  localizationResult:
+                    ResultPoints:
+                      - 183, 465
+                      - 478, 464
+                      - 478, 560
+                      - 183, 559
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 59
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 2
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 183
+                    x2: 478
+                    x3: 478
+                    x4: 183
+                    y1: 465
+                    y2: 464
+                    y3: 560
+                    y4: 559
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 8
+                      barcodeFormatString: CODABAR
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 48
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                      clarity: -1
+                      confidence: 59
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 1024
+                  BarcodeFormatString: CODE_39_EXTENDED
+                  LocalizationResult:
+                    ResultPoints:
+                      - 183, 272
+                      - 564, 273
+                      - 564, 373
+                      - 183, 372
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 57
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 3
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 183
+                    x2: 564
+                    x3: 564
+                    x4: 183
+                    y1: 272
+                    y2: 273
+                    y3: 373
+                    y4: 372
+                  barcodeBytes:
+                    - 67
+                    - 79
+                    - 68
+                    - 69
+                    - 51
+                    - 57
+                  barcodeFormat: 1024
+                  barcodeFormatString: CODE_39_EXTENDED
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: CODE39
+                  detailedResult:
+                    checkDigitBytes: []
+                    moduleSize: 3
+                    startCharsBytes:
+                      - 42
+                    stopCharsBytes:
+                      - 42
+                  localizationResult:
+                    ResultPoints:
+                      - 183, 272
+                      - 564, 273
+                      - 564, 373
+                      - 183, 372
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 57
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 3
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 183
+                    x2: 564
+                    x3: 564
+                    x4: 183
+                    y1: 272
+                    y2: 273
+                    y3: 373
+                    y4: 372
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 1024
+                      barcodeFormatString: CODE_39_EXTENDED
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 67
+                        - 79
+                        - 68
+                        - 69
+                        - 51
+                        - 57
+                      clarity: -1
+                      confidence: 57
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 64
+                  BarcodeFormatString: EAN_8
+                  LocalizationResult:
+                    ResultPoints:
+                      - 579, 467
+                      - 780, 467
+                      - 780, 549
+                      - 579, 549
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 56
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 3
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 579
+                    x2: 780
+                    x3: 780
+                    x4: 579
+                    y1: 467
+                    y2: 467
+                    y3: 549
+                    y4: 549
+                  barcodeBytes:
+                    - 48
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                    - 54
+                    - 53
+                  barcodeFormat: 64
+                  barcodeFormatString: EAN_8
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: '01234565'
+                  detailedResult:
+                    checkDigitBytes: []
+                    moduleSize: 3
+                    startCharsBytes: []
+                    stopCharsBytes: []
+                  localizationResult:
+                    ResultPoints:
+                      - 579, 467
+                      - 780, 467
+                      - 780, 549
+                      - 579, 549
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 56
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 3
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 579
+                    x2: 780
+                    x3: 780
+                    x4: 579
+                    y1: 467
+                    y2: 467
+                    y3: 549
+                    y4: 549
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 64
+                      barcodeFormatString: EAN_8
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 48
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                        - 54
+                        - 53
+                      clarity: -1
+                      confidence: 56
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 262144
+                  BarcodeFormatString: PatchCode
+                  LocalizationResult:
+                    ResultPoints:
+                      - 0, 0
+                      - 2641, 0
+                      - 2641, 1721
+                      - 0, 1721
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 262144
+                    barcodeFormatString: PatchCode
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 41
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 7
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 0
+                    x2: 2641
+                    x3: 2641
+                    x4: 0
+                    y1: 0
+                    y2: 0
+                    y3: 1721
+                    y4: 1721
+                  barcodeBytes:
+                    - 80
+                    - 97
+                    - 116
+                    - 99
+                    - 104
+                    - 32
+                    - 50
+                  barcodeFormat: 262144
+                  barcodeFormatString: PatchCode
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: Patch 2
+                  detailedResult: null
+                  localizationResult:
+                    ResultPoints:
+                      - 0, 0
+                      - 2641, 0
+                      - 2641, 1721
+                      - 0, 1721
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 262144
+                    barcodeFormatString: PatchCode
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 41
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 7
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 0
+                    x2: 2641
+                    x3: 2641
+                    x4: 0
+                    y1: 0
+                    y2: 0
+                    y3: 1721
+                    y4: 1721
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 262144
+                      barcodeFormatString: PatchCode
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 80
+                        - 97
+                        - 116
+                        - 99
+                        - 104
+                        - 32
+                        - 50
+                      clarity: -1
+                      confidence: 41
+                      deformation: 0
+                      resultType: 0
+                - BarcodeFormat: 256
+                  BarcodeFormatString: UPC_E
+                  LocalizationResult:
+                    ResultPoints:
+                      - 613, 892
+                      - 767, 892
+                      - 766, 974
+                      - 613, 974
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 31
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 3
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 613
+                    x2: 767
+                    x3: 766
+                    x4: 613
+                    y1: 892
+                    y2: 892
+                    y3: 974
+                    y4: 974
+                  barcodeBytes:
+                    - 48
+                    - 49
+                    - 50
+                    - 51
+                    - 52
+                    - 53
+                    - 54
+                    - 53
+                  barcodeFormat: 256
+                  barcodeFormatString: UPC_E
+                  barcodeFormatString_2: No Barcode Format in group 2
+                  barcodeFormat_2: 0
+                  barcodeText: '01234565'
+                  detailedResult:
+                    checkDigitBytes: []
+                    moduleSize: 3
+                    startCharsBytes: []
+                    stopCharsBytes: []
+                  localizationResult:
+                    ResultPoints:
+                      - 613, 892
+                      - 767, 892
+                      - 766, 974
+                      - 613, 974
+                    accompanyingTextBytes: []
+                    angle: 0
+                    barcodeFormat: 3147775
+                    barcodeFormatString: OneD
+                    barcodeFormatString_2: No Barcode Format in group 2
+                    barcodeFormat_2: 0
+                    confidence: 31
+                    documentName: '{B683937D-B327-4488-A2C0-499760CB6BF0}'
+                    moduleSize: 3
+                    pageNumber: 1
+                    regionName: ''
+                    resultCoordinateType: 1
+                    terminatePhase: 32
+                    x1: 613
+                    x2: 767
+                    x3: 766
+                    x4: 613
+                    y1: 892
+                    y2: 892
+                    y3: 974
+                    y4: 974
+                  results:
+                    - accompanyingTextBytes: []
+                      barcodeFormat: 256
+                      barcodeFormatString: UPC_E
+                      barcodeFormatString_2: No Barcode Format in group 2
+                      barcodeFormat_2: 0
+                      bytes:
+                        - 48
+                        - 49
+                        - 50
+                        - 51
+                        - 52
+                        - 53
+                        - 54
+                        - 53
+                      clarity: -1
+                      confidence: 31
+                      deformation: 0
+                      resultType: 0
+          headers: {}
+      security: []
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+        - statusCode
+        - code
+        - message
+      properties:
+        statusCode:
+          type: number
+          description: >-
+            http status code, 401 is authentication error (missing auth, or auth
+            is invalid), 403 is license error or no access, e.g. non-admin want
+            to access admin resource
+        code:
+          type: number
+          format: int32
+          description: error code in server, Usually is 0 or a negative number.
+        message:
+          type: string
+        cause:
+          type: object
+          description: optional, if exits, it show the system error code and message.
+          properties:
+            code:
+              type: number
+              format: int32
+              description: system error code.
+            message:
+              type: string
+              description: system error string of the code.
+      examples:
+        - cause:
+            code: 3
+            message: The system cannot find the path specified.
+          code: -2113
+          message: The parameter is not valid.
+          statusCode: 400
+    ScanDocumentInfo:
+      type: object
+      description: |
+        Not all info is same with documentation, e.g. image url, image uid
+      externalDocs:
+        url: >-
+          https://www.dynamsoft.com/web-twain/docs/info/api/Interfaces.html#outputinfo
+      properties: {}
+      examples:
+        - extendedImageInfo: {}
+          imageId: 1
+          imageInfo:
+            BitsPerPixel: 24
+            BitsPerSample:
+              - 8
+              - 8
+              - 8
+              - 0
+              - 0
+              - 0
+              - 0
+              - 0
+            Compression: 0
+            ImageLayout:
+              DocumentNumber: 1
+              Frame:
+                Bottom: 11
+                Left: 0
+                Right: 8.5
+                Top: 0
+              FrameNumber: 0
+              PageNumber: 1
+            ImageLength: 2200
+            ImageWidth: 1700
+            PixelType: 2
+            Planar: false
+            SamplesPerPixel: 3
+            XResolution: 200
+            YResolution: 200
+          imageuid: 1951d65a72b1
+          url: >-
+            https://127.0.0.1:18623/api/device/scanners/jobs/510dadf2-7e29-4172-80f1-49fa5d2ea0bf/next-page?page=1951d65a72b1
+    ScannerType:
+      externalDocs:
+        url: >-
+          https://www.dynamsoft.com/web-twain/docs/info/api/Dynamsoft_Enum.html#dynamsoftDWTenumDWT_devicetype
+      type: integer
+      format: int32
+      description: |
+        one or a combination of:
+          * 0x10 TWAINSCANNER
+          * 0x20 WIASCANNER
+          * 0x40 TWAINX64SCANNER
+          * 0x80 ICASCANNER
+          * 0x100 SANESCANNER
+          * 0x200 ESCLSCANNER
+          * 0x400 WIFIDIRECTSCANNER
+          * 0x800 WIATWAINSCANNER 
+      examples:
+        - 16
+    Scanner:
+      type: object
+      description: |
+        We also return websocket protocol info. but not list.
+      properties:
+        name:
+          type: string
+          description: Scanner name
+          examples:
+            - TWAIN2 FreeImage Software Scanner
+        type: *ref_2
+        device:
+          type: string
+          description: A json string of the scanner details.
+          examples:
+            - >-
+              {"deviceInfo":{"Manufacturer":"VFdBSU4gV29ya2luZyBHcm91cA==","ProductFamily":"U29mdHdhcmUgU2Nhbg==","ProductName":"VFdBSU4yIEZyZWVJbWFnZSBTb2Z0d2FyZSBTY2FubmVy","ProtocolMajor":2,"ProtocolMinor":1,"SupportedGroups":0,"Version":{"Country":1,"Info":"Mi4xLjMgc2FtcGxlIHJlbGVhc2UgMzJiaXQ=","Language":2,"MajorNum":2,"MinorNum":1}},"deviceType":16,"isSystemDefaultPrinter":false,"name":"VFdBSU4yIEZyZWVJbWFnZSBTb2Z0d2FyZSBTY2FubmVy"}
+      required:
+        - name
+        - type
+        - device
+    CreateScanJobOptions:
+      type: object
+      properties:
+        autoRun:
+          type: boolean
+          default: true
+          description: >-
+            If true, will run the job at once after created. otherwise the job
+            will be created but not run, status is pending, and the scanner
+            will be locked, if the scanner is a twain source, the source will be
+            opened automatically. Recommend to set it as false, avoid your
+            papers may be scanned by others.
+        scannerFailureTimeout:
+          type: integer
+          format: int32
+          default: 15
+          description: >-
+            time out for communication with scanner. unit is second. default is
+            15. We have a default 15 seconds for twain scanner open. Twain
+            scanner will report error when failed to open source, or paper
+            jammed. If you are not near the scanner, recommend to set a suitable
+            time. We will start timer when open source, set capability/settings,
+            acquire, and when we received a page, we will restart the timer.
+        jobTimeout:
+          type: integer
+          format: int32
+          default: 0
+          description: >-
+            time out for the scan job. unit is second. default is 0, never
+            timeout. If you create a pending job, the scanner will be locked
+            auto, you can release the scanner through delete the job or set a
+            job timeout. We will start timer after pending job was created, but
+            when the job is running, we will stop the timer. After the job was
+            done (completed or canceled or fault), we will restart the timer if
+            you set.
+        device:
+          type: string
+          description: same to scanner returned, in Device.device
+        config:
+          type: object
+          description: >
+            property apply order is settings -> caps -> config Add a
+            CheckFeederLoaded property to check if the feeder is loaded.
+          externalDocs:
+            url: >-
+              https://www.dynamsoft.com/web-twain/docs/info/api/Interfaces.html#DeviceConfiguration
+          properties: {}
+        caps:
+          type: object
+          description: scanner capability setting
+          externalDocs:
+            url: >-
+              https://www.dynamsoft.com/web-twain/docs/info/api/Interfaces.html#capabilities
+          properties: {}
+        settings:
+          type: string
+          description: >
+            If caps and settings exist at the same time, we will apply settings
+            first, then caps. It is only for twain scanner. We can get the settings via
+            /device/scanners/jobs/{jobuid}/scanner/settings
+        checkFeederLoaded:
+          type: boolean
+          description: >-
+            for TWAIN driver, if scan with feeder, set it as true, we will try
+            to detect the feeder is loaded, if the driver is supported, it can
+            work, otherwise it may be not right. (ICA not sure)
+          default: false
+      examples:
+        - autoRun: false
+          device: >-
+            {"deviceInfo":{"Manufacturer":"VFdBSU4gV29ya2luZyBHcm91cA==","ProductFamily":"U29mdHdhcmUgU2Nhbg==","ProductName":"VFdBSU4yIEZyZWVJbWFnZSBTb2Z0d2FyZSBTY2FubmVy","ProtocolMajor":2,"ProtocolMinor":1,"SupportedGroups":0,"Version":{"Country":1,"Info":"Mi4xLjMgc2FtcGxlIHJlbGVhc2UgMzJiaXQ=","Language":2,"MajorNum":2,"MinorNum":1}},"deviceType":16,"isSystemDefaultPrinter":false,"name":"VFdBSU4yIEZyZWVJbWFnZSBTb2Z0d2FyZSBTY2FubmVy"}
+          name: TWAIN2 FreeImage Software Scanner
+          checkFeederLoaded: true
+          config:
+            PixelType: 1
+            Resolution: 300
+            IfFeederEnabled: true
+            IfDuplexEnabled: false
+            IfGetImageInfo: true
+            IfGetExtImageInfo: true
+            extendedImageInfoQueryLevel: 0
+            IfCloseSourceAfterAcquire: true
+            XferCount: 11
+          caps:
+            exception: ignore
+            capabilities:
+              - capability: 4355
+                curValue: 500
+          settings: >-
+            Rfj6pIMTNkCu3BfDloGItBAAAAACEAAABgAFAAEAAAAQAAAAExAAAAYABQAAAAAAEAAAAAcQAAAGAAUAAQAAABAAAAArEQAABAAFABgAAAAQAAAAHBEAAAQABQAAAAAAEAAAAAABAAAEAAUAAAAAABwAAAAUEQAACAAFAPgqAAAAAAAANCEAAAAAAAAQAAAADBEAAAQABQACAAAAEAAAAB8RAAAEAAUAAAAAABAAAAABAQAABAAFAAIAAAAQAAAAIBEAAAQABQAAAAAAEAAAACIRAAAEAAUAAwAAABAAAAAQEQAABAAFAAAAAAAQAAAAAgEAAAQABQAAAAAAEAAAABgRAAAHAAUAAABIQxAAAAAZEQAABwAFAAAASEMQAAAAIxEAAAcABQAAAABDEAAAAAMRAAAHAAUAAAAAABAAAAABEQAABwAFAAAAAAAQAAAACBEAAAcABQAAAIA/EAAAAAGAAAAGAAUAAAAAAA==
+    ScannerJob:
+      properties:
+        jobuid:
+          type: string
+          examples:
+            - B3701DC5-86D3-44B6-A8A1-FF0B5D43FD86
+        status:
+          type: string
+          default: running
+          enum:
+            - pending
+            - running
+            - completed
+            - faulted
+          description: >-
+            If the job is completed, the status will be completed; If faulted,
+            the status will be faulted, e.g. failed to open source, scanner was
+            locked by others... Job status possible transitions: 
+              1. pending->running->completed
+              2. pending->running->faulted
+              3. pending->running->canceled
+        scanner: *ref_3
+      type: object
+      required:
+        - jobuid
+        - status
+        - scanner
+    PageInfo:
+      type: object
+      properties:
+        uid:
+          type: string
+          examples:
+            - 190817548d70
+          description: page uid
+      required:
+        - uid
+      description: page info
+    DocumentInfo:
+      type: object
+      properties:
+        uid:
+          type: string
+          examples:
+            - 190807444d76
+          description: document uid
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageInfo'
+            description: page info
+          description: pages info
+      required:
+        - pages
+        - uid
+      description: document info
+    ServerSettingsInput:
+      type: object
+      description: some settings only admin can change. can only update any of them.
+      properties:
+        logLevel:
+          type: integer
+          format: int32
+          description: 0 is disabled, 30 is verbos, 1 is debug + info + error.
+          examples:
+            - 1
+    ServerSettings:
+      type: object
+      description: Currently, only return log level.
+      properties:
+        logLevel:
+          type: integer
+          format: int32
+          description: 0 is disabled, 30 is verbos, 1 is debug + info + error
+          examples:
+            - 1
+      required:
+        - logLevel
+    CreateDocumentOptions:
+      type: object
+      properties:
+        password:
+          type: string
+          default: ''
+          maxLength: 32
+          description: max length is 32
+    CreateProcessOptions:
+      type: object
+      properties:
+        settings:
+          oneOf:
+            - type: object
+              examples:
+                - minBlockHeight: 20
+                  maxBlockHeight: 30
+                - ImageParameter:
+                    Name: BestCoverage
+                    BarcodeFormatIds_2:
+                      - BF2_POSTALCODE
+                      - BF2_DOTCODE
+                    DeblurLevel: 9
+                    ExpectedBarcodesCount: 512
+                    ScaleDownThreshold: 100000
+                    LocalizationModes:
+                      - Mode: LM_CONNECTED_BLOCKS
+                      - Mode: LM_SCAN_DIRECTLY
+                      - Mode: LM_STATISTICS
+                      - Mode: LM_LINES
+                      - Mode: LM_STATISTICS_MARKS
+                    GrayscaleTransformationModes:
+                      - Mode: GTM_ORIGINAL
+                      - Mode: GTM_INVERTED
+                - ImageParameter:
+                    Name: Balance
+                    BarcodeFormatIds_2:
+                      - BF2_POSTALCODE
+                      - BF2_DOTCODE
+                    DeblurLevel: 5
+                    ExpectedBarcodesCount: 512
+                    LocalizationModes:
+                      - Mode: LM_CONNECTED_BLOCKS
+                      - Mode: LM_STATISTICS
+                - ImageParameter:
+                    Name: BestSpeed
+                    BarcodeFormatIds_2:
+                      - BF2_POSTALCODE
+                      - BF2_DOTCODE
+                    DeblurLevel: 3
+                    ExpectedBarcodesCount: 512
+                    LocalizationModes:
+                      - Mode: LM_SCAN_DIRECTLY
+                    TextFilterModes:
+                      - MinImageDimension: 262144
+                        Mode: TFM_GENERAL_CONTOUR
+              properties: {}
+          description: >-
+            for barcode reader, default is coverage template. you can also  pass
+            "coverage" or "speed" or "balance".
+        source:
+          oneOf:
+            - type: string
+              description: DWT image url. If it's DWT image url, we should think cors.
+              examples:
+                - >-
+                  https://127.0.0.1:18623/api/device/scanners/jobs/dd40716d-48d1-4d32-89f7-1d53f9665d91/next-page?page=19522d0c5282
+      required:
+        - source
+  securitySchemes: {}
+servers: []
+security: []

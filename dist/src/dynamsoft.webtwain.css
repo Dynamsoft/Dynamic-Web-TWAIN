@@ -2,9 +2,9 @@
 * Product: Dynamic Web TWAIN
 * Web Site: https://www.dynamsoft.com
 *
-* Copyright 2024, Dynamsoft Corporation
+* Copyright 2025, Dynamsoft Corporation
 * Author: Dynamsoft Support Team
-* Version: 18.5.1
+* Version: 19.0
 */
 .dynamsoft-major-color {
     color: #50a8e1;
@@ -16,6 +16,12 @@
 
 dialog[open]{display:block}
 dialog[closed]{display:none}
+
+.ds-dwt-ui-dlg a:link,.ds-dwt-ui-dlg a:visited,
+.dynamsoft-dialog-license a:link,.dynamsoft-dialog-license a:visited
+{
+  color: #50A8E1
+}
 
 .dynamsoft-backdrop {
     position: fixed;
@@ -244,7 +250,12 @@ dialog[closed]{display:none}
     text-align: center;
 }
 
-.dynamsoft-dwt-dlg-button {
+.ds-download-div {
+  text-align:center
+}
+
+.dynamsoft-dwt-dlg-button, .ds-download-div>a:link {
+    display: inline-block;
     margin: 20px auto;
     cursor: pointer;
     text-align: center;
@@ -257,8 +268,11 @@ dialog[closed]{display:none}
     line-height: 36px;
 }
 
-.dynamsoft-dwt-dlg-button:hover {
+.dynamsoft-dwt-dlg-button:hover, .ds-download-div>a:hover {
   background-color: #FFAE37;
+}
+.ds-dwt-ui-dlg .ds-download-div a:visited, .ds-dwt-ui-dlg .ds-download-div a:visited {
+    color: #FFFFFF;
 }
 
 .dynamsoft-dwt-dlg-button-android {
@@ -299,12 +313,6 @@ dialog[closed]{display:none}
     width: 510px;
     height: 272px;
     padding: 0;
-}
-
-.ds-dwt-ui-dlg a:link,.ds-dwt-ui-dlg a:visited,
-.dynamsoft-dialog-license a:link,.dynamsoft-dialog-license a:visited
-{
-  color: #50A8E1
 }
 
 .ds-dwt-ui-dlg-android
