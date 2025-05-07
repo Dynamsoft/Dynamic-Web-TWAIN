@@ -1,10 +1,10 @@
-/*! 20240828 - 20240320
+/*! 20250428 - 20240828 - 20240320
 * Product: Dynamic Web TWAIN
 * Web Site: https://www.dynamsoft.com
 *
 * Copyright 2025, Dynamsoft Corporation
 * Author: Dynamsoft Support Team
-* Version: 19.0
+* Version: 19.1
 */
 .dynamsoft-major-color {
     color: #50a8e1;
@@ -254,13 +254,13 @@ dialog[closed]{display:none}
   text-align:center
 }
 
-.dynamsoft-dwt-dlg-button, .ds-download-div>a:link {
+.dynamsoft-dwt-dlg-button, .ds-download-div>a:link, .ds-download-div>a:visited {
     display: inline-block;
     margin: 20px auto;
     cursor: pointer;
     text-align: center;
     width: 117px;
-    background: #FE8E14;
+    background: #FE8E14 !important;
     border-radius: 3px;
     font-size: 14px;
     font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;

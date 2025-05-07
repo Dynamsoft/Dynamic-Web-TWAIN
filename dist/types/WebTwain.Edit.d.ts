@@ -28,7 +28,7 @@ export interface WebTwainEdit extends WebTwainBuffer {
      * @param index Specify the image.
      * @param value Specify the value of contrast.
      */
-	ChangeContrastAsnyc(
+    ChangeContrastAsnyc(
         index: number,
         value: number
     ): Promise<boolean>;
@@ -165,14 +165,14 @@ export interface WebTwainEdit extends WebTwainBuffer {
         ) => void
     ): void;
     /**
-     * Invert the colour of the pixels on the specified image.
+     * Invert the color of the pixels on the specified image.
      * @param index Specify the image.
      */
     Invert(
         index: number
     ): boolean;
 	/**
-     * Invert the colour of the pixels on the specified image.
+     * Invert the color of the pixels on the specified image.
      * @param index Specify the image.
      * @param successCallback A callback function that is executed if the request succeeds.
      * @param failureCallback A callback function that is executed if the request fails.
@@ -499,7 +499,7 @@ export interface WebTwainEdit extends WebTwainBuffer {
         bottom: number
     ): boolean;
     /**
-     * Return or set the fill colour for the empty area on an image that has been cut/cropped/erased.
+     * Return or set the fill color for the empty area on an image that has been cut/cropped/erased.
      */
     BackgroundFillColor: number;
     /**

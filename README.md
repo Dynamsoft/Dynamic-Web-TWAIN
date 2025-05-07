@@ -5,7 +5,7 @@
 
 [Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems. To see it in action, please visit <a href="https://demo.dynamsoft.com/web-twain/" target="_blank">**this online demo**</a>
 
-Note: Dynamic Web TWAIN SDK **v19.0** is built in this package. For more detail, check the [Version Info](#versions).
+Note: Dynamic Web TWAIN SDK **v19.1** is built in this package. For more detail, check the [Version Info](#versions).
 
 ## Table of Contents
 - [Supported Environments](#supported-environments)
@@ -63,8 +63,6 @@ Note: Dynamic Web TWAIN SDK **v19.0** is built in this package. For more detail,
 If you do not have a physical scanner to test on Windows, you can install a virtual scanner. 
 - [Virtual Scanner for Windows](https://download.dynamsoft.com/tool/twainds.win32.installer.2.1.3.msi)
 
-Read more [here](https://www.dynamsoft.com/web-twain/docs/getstarted/hardware.html?ver=latest#no-scanner-to-test).
-
 ## Deployment
 
 Dynamic Web TWAIN relies on the files in the `/dist/` folder to work. Make sure to put these files on your server and correctly refer to them by specifying the path with `ResourcesPath` (relative and absolute paths are both fine).
@@ -80,7 +78,7 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 <html>
 <head>
 	<title>Hello World</title>
-	<script src="dist/dynamsoft.webtwain.min.js"></script>
+	<script src="https://unpkg.com/dwt@latest/dist/dynamsoft.webtwain.min.js"></script>
 </head>
 <body>
 </body>
@@ -96,12 +94,12 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 <html>
 <head>
 	<title>Hello World</title>
-	<script src="dist/dynamsoft.webtwain.min.js"></script>
+	<script src="https://unpkg.com/dwt@latest/dist/dynamsoft.webtwain.min.js"></script>
 </head>
 <body>
 	<script type="text/javascript">
-	  Dynamsoft.DWT.ResourcesPath = "dist";
-	  Dynamsoft.DWT.ProductKey = 't0140cQMAA...';
+	  Dynamsoft.DWT.ResourcesPath = "https://unpkg.com/dwt@latest/dist";
+	  Dynamsoft.DWT.ProductKey = 'DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9';
       Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 270, Height: 350 }];
 	</script>
 </body>
@@ -123,14 +121,14 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 <html>
 <head>
 	<title>Hello World</title>
-	<script src="dist/dynamsoft.webtwain.min.js"></script>
+	<script src="https://unpkg.com/dwt@latest/dist/dynamsoft.webtwain.min.js"></script>
 </head>
 <body>
 	<input type="button" value="Scan" onclick="AcquireImage();" />
 	<div id="dwtcontrolContainer"></div>
 	<script type="text/javascript">
-	  Dynamsoft.DWT.ResourcesPath = "dist";
-	  Dynamsoft.DWT.ProductKey = 't0140cQMAA...'; // Put your own key here
+	  Dynamsoft.DWT.ResourcesPath = "https://unpkg.com/dwt@latest/dist";
+	  Dynamsoft.DWT.ProductKey = 'DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9'; // Put your own key here
       Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 270, Height: 350 }];
 	  window.onload = function () {
 	    Dynamsoft.DWT.Load();
@@ -197,23 +195,23 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
 >`Dynamic Web TWAIN Service (DynamicWebTWAINService.exe, 64bit)`
 >
->**v19.0** (build version 1, 9, 0, 0318)
+>**v19.1** (build version 1, 9, 0, 0428)
 >
 >`Dynamic Web TWAIN Service Manager (DWASManager_19000318.dll, 64bit)`
 >
->**v19.0** (build version 19, 0, 0, 0318)
+>**v19.1** (build version 19, 0, 0, 0318)
 >
->`Device Manager (DeviceManager_19000318.dll, 64bit)`
+>`Device Manager (DeviceManager_19100428.dll, 64bit)`
 >
->**v19.0** (build version 19, 0, 0, 0318)
+>**v19.1** (build version 19, 1, 0, 0428)
 >
->`Dynamic Web TWAIN (dwt_19.0.0.0318.dll, 64bit)`
+>`Dynamic Web TWAIN (dwt_19.1.0.0428.dll, 64bit)`
 >
->**v19.0** (build version 19, 0, 0, 0318)
+>**v19.1** (build version 19, 1, 0, 0428)
 >
 >`Dynamsoft Image encryption and decryption & PDF Rasterizer (DMCodecx64.dll, 64bit)`
 >
->**v19.0** (build version 12, 0, 0, 1225)
+>**v19.1** (build version 12, 0, 0, 0318)
 >
 >`Dynamsoft Barcode Reader (dbrx64_9.6.2.0318.dll, 64bit)`
 >
@@ -221,11 +219,11 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 >
 >`Dynamsoft Webcam Addon (DynamicWebcamx64_15.0.0.0625.dll, 64bit)`
 >
->**v19.0** (build version 15, 0, 0, 0625)
+>**v19.1** (build version 15, 0, 0, 0625)
 >
 >`Dynamsoft Upload Module (UploadModule_1.9.0.0318.dll, 64bit)`
 >
->**v19.0** (build version 1, 9, 0, 0318)
+>**v19.1** (build version 1, 9, 0, 0318)
 
 ## Changelog
 

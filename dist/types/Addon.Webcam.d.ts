@@ -70,7 +70,7 @@ export interface Webcam {
      * Set the specified camera property.
      * @param property Specify the property.
      * @param value Specify the value.
-     * @param auto Specify whether the propery should change automatically.
+     * @param auto Specify whether the property should change automatically.
      */
     SetCameraControlPropertySetting(
         property: DynamsoftEnumsDWT.EnumDWT_CameraControlProperty | number,
@@ -95,7 +95,7 @@ export interface Webcam {
      * Set the specified video property.
      * @param property Specify the property.
      * @param value Specify the value.
-     * @param auto Specify whether the propery should change automatically.
+     * @param auto Specify whether the property should change automatically.
      */
     SetVideoPropertySetting(
         property: DynamsoftEnumsDWT.EnumDWT_VideoProperty | number,
@@ -197,7 +197,7 @@ export interface VideoControlProperty {
      */
     GetValue(): number;
     /**
-     * Return whether the property is set autmatically or not.
+     * Return whether the property is set automatically or not.
      */
     GetIfAuto(): boolean;
 }
@@ -219,7 +219,7 @@ export interface VideoControlPropertyExtra {
      */
     GetSteppingDelta(): number;
     /**
-     * Return whether the property is set autmatically or not.
+     * Return whether the property is set automatically or not.
      */
     GetIfAuto(): boolean;
 }
@@ -229,7 +229,7 @@ export interface CameraControlProperty {
      */
     GetValue(): number;
     /**
-     * Return whether the property is set autmatically or not.
+     * Return whether the property is set automatically or not.
      */
     GetIfAuto(): boolean;
 }
@@ -251,7 +251,7 @@ export interface CameraControlPropertyExtra {
      */
     GetSteppingDelta(): number;
     /**
-     * Return whether the property is set autmatically or not.
+     * Return whether the property is set automatically or not.
      */
     GetIfAuto(): boolean;
 }

@@ -499,7 +499,7 @@ export interface WebTwainIO extends WebTwainUtil {
      * Upload the specified image via a HTTP Post request.
      * @param host The HTTP Host.
      * @param index Specify the image.
-     * @param target The target wherethe request is sent.
+     * @param target The target where the request is sent.
      * @param type The format of the file.
      * @param fileName The file name.
      * @param onEmptyResponse A callback function that is executed if the response is empty.
@@ -523,7 +523,7 @@ export interface WebTwainIO extends WebTwainUtil {
      * Upload the specified image via a HTTP Post request.
      * @param host The HTTP Host.
      * @param index Specify the image.
-     * @param target The target wherethe request is sent.
+     * @param target The target where the request is sent.
      * @param fileName The file name.
      * @param type The format of the file.
      * @param onEmptyResponse A callback function that is executed if the response is empty.
@@ -547,7 +547,7 @@ export interface WebTwainIO extends WebTwainUtil {
     /**
      * Upload all images in the buffer as a TIFF file via a HTTP Post request.
      * @param host The HTTP Host.
-     * @param target The target wherethe request is sent.
+     * @param target The target where the request is sent.
      * @param fileName The file name.
      * @param onEmptyResponse A callback function that is executed if the response is empty.
      * @param onServerReturnedSomething A callback function that is executed if the response is not empty.
@@ -568,7 +568,7 @@ export interface WebTwainIO extends WebTwainUtil {
     /**
      * Upload all images in the buffer as a PDF file via a HTTP Post request.
      * @param host The HTTP Host.
-     * @param target The target wherethe request is sent.
+     * @param target The target where the request is sent.
      * @param fileName The file name.
      * @param onEmptyResponse A callback function that is executed if the response is empty.
      * @param onServerReturnedSomething A callback function that is executed if the response is not empty.
@@ -589,7 +589,7 @@ export interface WebTwainIO extends WebTwainUtil {
     /**
      * Upload all selected images in the buffer as a PDF file via a HTTP Post request.
      * @param host The HTTP Host.
-     * @param target The target wherethe request is sent.
+     * @param target The target where the request is sent.
      * @param fileName The file name.
      * @param onEmptyResponse A callback function that is executed if the response is empty.
      * @param onServerReturnedSomething A callback function that is executed if the response is not empty.
@@ -610,7 +610,7 @@ export interface WebTwainIO extends WebTwainUtil {
     /**
      * Upload all selected images in the buffer as a TIFF file via a HTTP Post request.
      * @param host The HTTP Host.
-     * @param target The target wherethe request is sent.
+     * @param target The target where the request is sent.
      * @param fileName The file name.
      * @param onEmptyResponse A callback function that is executed if the response is empty.
      * @param onServerReturnedSomething A callback function that is executed if the response is not empty.
@@ -632,7 +632,7 @@ export interface WebTwainIO extends WebTwainUtil {
      * Upload the specified file via a HTTP Post request.
      * @param host The HTTP Host.
      * @param path Specify the file to upload.
-     * @param target The target wherethe request is sent.
+     * @param target The target where the request is sent.
      * @param fileName The file name.
      * @param onEmptyResponse A callback function that is executed if the response is empty.
      * @param onServerReturnedSomething A callback function that is executed if the response is not empty.

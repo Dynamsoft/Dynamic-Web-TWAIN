@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: DWT
   description: ''
-  version: 1.0.0
+  version: '20250428'
 tags:
   - name: Server Control
   - name: Scanner Control
@@ -114,12 +114,12 @@ paths:
                   version:
                     type: string
                     description: server API version.
-                    examples:
+                    example:
                       - '20240719'
                   compatible:
                     type: boolean
                     description: server is compatible with the client.
-                    examples:
+                    example:
                       - true
           headers: {}
         '405':
@@ -151,7 +151,7 @@ paths:
           schema: &ref_2
             $ref: '#/components/schemas/ScannerType'
             description: one value of ScannerType
-            examples:
+            example:
               - 16
       responses:
         '200':
@@ -209,7 +209,7 @@ paths:
       tags:
         - Scanner Control
       parameters:
-        - name: X-DICS-LICENSE-KEY
+        - name: DWT-PRODUCT-KEY
           in: header
           description: Product key
           required: true
@@ -933,7 +933,7 @@ paths:
           example: ''
           schema:
             type: string
-        - name: X-DICS-DOC-PASSWORD
+        - name: DWT-DOC-PASSWORD
           in: header
           description: the password of document in storage
           required: false
@@ -1010,7 +1010,7 @@ paths:
           example: ''
           schema:
             type: string
-        - name: X-DICS-DOC-PASSWORD
+        - name: DWT-DOC-PASSWORD
           in: header
           description: the password of document in storage
           required: false
@@ -1252,7 +1252,7 @@ paths:
             externalDocs:
               url: >-
                 https://www.dynamsoft.com/web-twain/docs/info//api/interfaces.html#pdfwsettings
-        - name: X-DICS-DOC-PASSWORD
+        - name: DWT-DOC-PASSWORD
           in: header
           description: the password of document in storage
           required: false
@@ -1356,7 +1356,7 @@ paths:
           example: ''
           schema:
             type: string
-        - name: X-DICS-DOC-PASSWORD
+        - name: DWT-DOC-PASSWORD
           in: header
           description: the password of document in storage
           required: false
@@ -1382,7 +1382,7 @@ paths:
                 source:
                   oneOf:
                     - type: string
-                      examples:
+                      example:
                         - >-
                           https://127.0.0.1:18623/api/device/scanners/jobs/dd40716d-48d1-4d32-89f7-1d53f9665d91/next-page?page=19522d0c5282
                   description: >-
@@ -1465,7 +1465,7 @@ paths:
           example: ''
           schema:
             type: string
-        - name: X-DICS-DOC-PASSWORD
+        - name: DWT-DOC-PASSWORD
           in: header
           description: the password of document in storage
           required: false
@@ -1541,14 +1541,14 @@ paths:
               currently only process DWT urls, so we cannot pass index,
               only has one page. read-barcode can accept a barcode reader
               template settings. and need to pass extra license with header
-              X-DICS-LICENSE-KEY. check-blank can accept null or
+              DWT-PRODUCT-KEY. check-blank can accept null or
               {minBlockHeight?: number, maxBlockHeight?: number}. rotate can
               accept {rotation: number, keepSize?: boolean}.
               calculate-skew-angle can accept null.
             enum:
               - check-blank
               - read-barcode
-        - name: X-DICS-LICENSE-KEY
+        - name: DWT-PRODUCT-KEY
           in: header
           description: the license for image processing
           required: false
@@ -4129,7 +4129,7 @@ components:
             message:
               type: string
               description: system error string of the code.
-      examples:
+      example:
         - cause:
             code: 3
             message: The system cannot find the path specified.
@@ -4144,7 +4144,7 @@ components:
         url: >-
           https://www.dynamsoft.com/web-twain/docs/info/api/Interfaces.html#outputinfo
       properties: {}
-      examples:
+      example:
         - extendedImageInfo: {}
           imageId: 1
           imageInfo:
@@ -4194,7 +4194,7 @@ components:
           * 0x200 ESCLSCANNER
           * 0x400 WIFIDIRECTSCANNER
           * 0x800 WIATWAINSCANNER 
-      examples:
+      example:
         - 16
     Scanner:
       type: object
@@ -4204,13 +4204,13 @@ components:
         name:
           type: string
           description: Scanner name
-          examples:
+          example:
             - TWAIN2 FreeImage Software Scanner
         type: *ref_2
         device:
           type: string
           description: A json string of the scanner details.
-          examples:
+          example:
             - >-
               {"deviceInfo":{"Manufacturer":"VFdBSU4gV29ya2luZyBHcm91cA==","ProductFamily":"U29mdHdhcmUgU2Nhbg==","ProductName":"VFdBSU4yIEZyZWVJbWFnZSBTb2Z0d2FyZSBTY2FubmVy","ProtocolMajor":2,"ProtocolMinor":1,"SupportedGroups":0,"Version":{"Country":1,"Info":"Mi4xLjMgc2FtcGxlIHJlbGVhc2UgMzJiaXQ=","Language":2,"MajorNum":2,"MinorNum":1}},"deviceType":16,"isSystemDefaultPrinter":false,"name":"VFdBSU4yIEZyZWVJbWFnZSBTb2Z0d2FyZSBTY2FubmVy"}
       required:
@@ -4284,7 +4284,7 @@ components:
             to detect the feeder is loaded, if the driver is supported, it can
             work, otherwise it may be not right. (ICA not sure)
           default: false
-      examples:
+      example:
         - autoRun: false
           device: >-
             {"deviceInfo":{"Manufacturer":"VFdBSU4gV29ya2luZyBHcm91cA==","ProductFamily":"U29mdHdhcmUgU2Nhbg==","ProductName":"VFdBSU4yIEZyZWVJbWFnZSBTb2Z0d2FyZSBTY2FubmVy","ProtocolMajor":2,"ProtocolMinor":1,"SupportedGroups":0,"Version":{"Country":1,"Info":"Mi4xLjMgc2FtcGxlIHJlbGVhc2UgMzJiaXQ=","Language":2,"MajorNum":2,"MinorNum":1}},"deviceType":16,"isSystemDefaultPrinter":false,"name":"VFdBSU4yIEZyZWVJbWFnZSBTb2Z0d2FyZSBTY2FubmVy"}
@@ -4311,7 +4311,7 @@ components:
       properties:
         jobuid:
           type: string
-          examples:
+          example:
             - B3701DC5-86D3-44B6-A8A1-FF0B5D43FD86
         status:
           type: string
@@ -4339,7 +4339,7 @@ components:
       properties:
         uid:
           type: string
-          examples:
+          example:
             - 190817548d70
           description: page uid
       required:
@@ -4350,7 +4350,7 @@ components:
       properties:
         uid:
           type: string
-          examples:
+          example:
             - 190807444d76
           description: document uid
         pages:
@@ -4371,7 +4371,7 @@ components:
           type: integer
           format: int32
           description: 0 is disabled, 30 is verbos, 1 is debug + info + error.
-          examples:
+          example:
             - 1
     ServerSettings:
       type: object
@@ -4381,7 +4381,7 @@ components:
           type: integer
           format: int32
           description: 0 is disabled, 30 is verbos, 1 is debug + info + error
-          examples:
+          example:
             - 1
       required:
         - logLevel
@@ -4399,7 +4399,7 @@ components:
         settings:
           oneOf:
             - type: object
-              examples:
+              example:
                 - minBlockHeight: 20
                   maxBlockHeight: 30
                 - ImageParameter:
@@ -4449,7 +4449,7 @@ components:
           oneOf:
             - type: string
               description: DWT image url. If it's DWT image url, we should think cors.
-              examples:
+              example:
                 - >-
                   https://127.0.0.1:18623/api/device/scanners/jobs/dd40716d-48d1-4d32-89f7-1d53f9665d91/next-page?page=19522d0c5282
       required:

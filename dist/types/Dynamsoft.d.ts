@@ -276,12 +276,12 @@ export interface DWTPro {
      */
     DeleteDWTObject(Id: string): boolean;
     /**
-     * Return the WebTwain instance specified by its ContainerId or WebTwainId. If no parameter is provided, the first valid WebTwain instance is returnd.
+     * Return the WebTwain instance specified by its ContainerId or WebTwainId. If no parameter is provided, the first valid WebTwain instance is returned.
      * @param ContainerIdOrWebTwainId The ContainerId or WebTwainId.
      */
     GetWebTwain(ContainerIdOrWebTwainId?: string): WebTwain;
     /**
-     * Return the WebTwain instance specified by its ContainerId or WebTwainId. If no parameter is provided, the first valid WebTwain instance is returnd.
+     * Return the WebTwain instance specified by its ContainerId or WebTwainId. If no parameter is provided, the first valid WebTwain instance is returned.
      * @param ContainerIdOrWebTwainId The ContainerId or WebTwainId.
      */
     GetWebTwainEx(ContainerIdOrWebTwainId?: string): WebTwain;
