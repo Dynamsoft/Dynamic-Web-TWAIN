@@ -28,7 +28,7 @@ export interface WebTwainEdit extends WebTwainBuffer {
      * @param index Specify the image.
      * @param value Specify the value of contrast.
      */
-    ChangeContrastAsnyc(
+    ChangeContrastAsync(
         index: number,
         value: number
     ): Promise<boolean>;

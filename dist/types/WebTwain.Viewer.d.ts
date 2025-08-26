@@ -233,9 +233,9 @@ export interface DynamsoftViewer {
 		y: string;  //Default is "center", values: "top", "bottom", "center"
 	} 
     /**
-     * Whether the viewer removes the focus border after selecting with the Tab key.  Default value: true.
+     * Whether the viewer displays the focus border after selecting with the Tab key.  Default value: false.
      */
-    disableFocusOutline: boolean;  // default value: true
+    focusOutlineEnabled: boolean;  // default value: false
     /**
      * [Scope] Main viewer
      * [Description] Return the index of the next image of the currently selected image.

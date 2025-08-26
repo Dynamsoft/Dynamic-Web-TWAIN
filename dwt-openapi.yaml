@@ -4229,6 +4229,11 @@ components:
             will be locked, if the scanner is a twain source, the source will be
             opened automatically. Recommend to set it as false, avoid your
             papers may be scanned by others.
+        requestFocusForScanningUI:
+          type: boolean
+          default: true
+          description: >-
+            If true, the scanner UI will be brought to the top and get focus.
         scannerFailureTimeout:
           type: integer
           format: int32

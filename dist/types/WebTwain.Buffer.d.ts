@@ -33,6 +33,10 @@ export interface WebTwainBuffer extends WebTwainIO {
      */
     FilterImagesByTag(tag: string): boolean;
     /**
+     * Stop filtering images by tag. 
+     */
+    ClearFilter(): boolean;
+    /**
      * Return the pixel bit depth of the specified image.
      * @param index Specify the image.
      */

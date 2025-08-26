@@ -356,6 +356,10 @@ export interface WebTwainAcquire extends WebTwainEdit {
      */
     readonly ImageLayoutFrameTop: number;
     /**
+     * Return the frame number of the current image.
+     */
+    readonly ImageLayoutFrameNumber: number;
+    /**
      * Return the document number of the current image.
      */
     readonly ImageLayoutDocumentNumber: number;

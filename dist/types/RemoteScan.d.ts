@@ -56,15 +56,15 @@ export interface RemoteScanObject {
 	/**
      * @param forceRefresh Default value: false.
      */
-	getDynamsoftService(forceRefresh?: boolean): Promise<ServiceInfo[]>;
+	getServices(forceRefresh?: boolean): Promise<ServiceInfo[]>;
 	/**
      * Set the default dynamsoftService for storing the data
      */
-	setDefaultDynamsoftService(serviceInfo:ServiceInfo):Promise<void>;
+	setDefaultService(serviceInfo:ServiceInfo):Promise<void>;
 	/**
      * Get the default dynamsoftService.
      */
-	getDefaultDynamsoftService():ServiceInfo|null;
+	getDefaultService():ServiceInfo|null;
 	/**
      * Get image(s) form dynamsoftService.
 	 * @param indices Specify the image(s).
