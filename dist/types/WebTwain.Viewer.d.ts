@@ -366,7 +366,7 @@ export interface DynamsoftViewer {
      * [Description] Create a Dynamsoft Viewer instance and bind it to the WebTwain instance.
      * @param element Specify an HTML element to create the viewer.
      */
-    bind(element: HTMLDivElement | HTMLElement): boolean;
+    bind(element: HTMLDivElement | HTMLElement | string): boolean;
     /**
      * [Scope] Main viewer
      * [Description] Show the viewer (Main viewer, ImageEditor, ThumbnailViewer, CustomElement).
@@ -741,11 +741,11 @@ export interface ThumbnailViewer {
     scrollDirection: string;
     /**
      * [Scope] Thumbnail viewer
-     * [Description] Set the margin between images & the margin between image and the viewer border). The default value is 10.
+     * [Description] Set the pageMargin between images & the margin between image and the viewer border). The default value is 10.
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
      * number in pixels, string in percentage
      */
-    margin: number | string;
+    pageMargin: number | string;
     /**
      * [Scope] Thumbnail viewer
      * [Description] Set the background of the entire thumbnail viewer. The default value is white.
@@ -816,14 +816,14 @@ export interface ThumbnailViewer {
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
      * Allow any CSS rules
      */
-    hoverBackground: string;
+    hoverPageBackground: string;
     /**
      * [Scope] Thumbnail viewer
      * [Description] Set the image border when the mouse is hovered.
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
      * Allow any CSS rules
      */
-    hoverBorder: string;
+    hoverPageBorder: string;
     /**
      * [Scope] Thumbnail viewer
      * [Description] Set the background when dragging the image. The default value is yellow.
@@ -837,14 +837,14 @@ export interface ThumbnailViewer {
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
      * Allow any CSS rules
      */
-    selectedImageBorder: string;
+    selectedPageBorder: string;
     /**
      * [Scope] Thumbnail viewer
      * [Description] Set the background of the selected image.
      * [Usage Notes] 'Invalid property value' will be reported when the specified value type is wrong or the parameter name is spelled incorrectly.
      * Allow any CSS rules
      */
-    selectedImageBackground: string;
+    selectedPageBackground: string;
 }
 export interface DocumentEditor {
 	 /**
