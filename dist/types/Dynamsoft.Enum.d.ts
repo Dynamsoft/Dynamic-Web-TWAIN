@@ -64,6 +64,24 @@ export namespace DynamsoftEnumsDBR {
 }
 
 export namespace DynamsoftEnumsDWT {
+    /** OCR Page Orientation Detection Mode */
+    enum EnumDWT_PageOrientationDetectionMode  {
+        FAST = 0,
+        BALANCE = 1,
+        PRECISION = 2
+    }
+    enum EnumDWT_PageOrientation {
+        AUTO = -1,
+        ANGLE_0 = 0,
+        ANGLE_90 = 90,
+        ANGLE_180 = 180,
+        ANGLE_270 = 270
+    }
+    enum EnumDWT_OCRKitOutputFormat{
+        TEXT = 0,
+        PDF_PLAIN_TEXT = 1,
+        PDF_WITH_EXTRA_TEXTLAYER = 2
+    }
     /** OCR Languages */
     enum EnumDWT_OCRLanguage {
         OCRL_ENG = "eng",

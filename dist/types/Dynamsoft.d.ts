@@ -487,6 +487,11 @@ export interface DWTPro {
 	 * Whether to check certificates issue in detail, default value is true.
      */
 	IfCheckCert: boolean;
+    /**
+     * Dynamsoft.DWT.EnableLocalNetworkMixedContent 
+	 * If enabled, the library will use HTTP to communicate with the service. The host must be localhost or 127.0.0.1. The default value is false.
+     */
+    EnableLocalNetworkMixedContent: boolean;
 }
 export interface DisplayInfo {
     loaderBarSource?: string;

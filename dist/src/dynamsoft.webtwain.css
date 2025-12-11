@@ -4,15 +4,35 @@
 *
 * Copyright 2025, Dynamsoft Corporation
 * Author: Dynamsoft Support Team
-* Version: 19.2
+* Version: 19.3
 */
 .dynamsoft-major-color {
     color: #50a8e1;
 }
 
-#dwt-btn-install a:link {
-	color: #fe8e14;
+#dwt-btn-install a:link, .dynamsoft-dwt-dlg-tail a:link {
+	color: #fe8e14 !important;
 }
+
+.dynamsoft-dwt-dlg-tail a:link {
+	text-decoration: underline;
+}
+
+.dynamsoft-dwt-installdlg-button {
+    background: transparent;
+    color: #fe8e14;
+    border: 2px solid #fe8e14;
+    margin-bottom: 20px;
+    height: 40px;
+    width: 117px;
+    border: 2px solid #FE8E14;
+    font: normal normal normal 20px / 30px Oswald;
+}
+
+.dynamsoft-dwt-dlg-tail-guide {
+  font: normal normal normal 13px / 22px Open Sans;
+}
+
 
 dialog[open]{display:block}
 dialog[closed]{display:none}
@@ -191,20 +211,37 @@ dialog[closed]{display:none}
     position: relative;
 }
 
-.dynamsoft-dwt-dlg-title, .dynamsoft-dwt-dlg-title-error {
+.dynamsoft-dwt-dlg-title {
     text-align: center;
     height: 24px;
-    font-size: 20px;
-    font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    line-height: 32px;
     padding: 10px 0 10px 0;
+    font: normal normal 600 24px / 38px Open Sans;
+    letter-spacing: 0px;
+    color: #363636;
 }
 
 .dynamsoft-dwt-dlg-title-error {
-  color: #323234;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAhCAYAAABeD2IVAAAABHNCSVQICAgIfAhkiAAAAxtJREFUWEe9mE1y2jAUxyXbCcumJyicoHCCwiJApwMNJyicoOm2gyfuwHSbI5SeICm005AsQk4QeoLQE9TdBWpbfbIwSMYWkin1AmZsS++n9/HXkzHa4Rp162WEgrcI45NwGkIu4fdzo39N/zNfOOvIoX3cxsj4lDSeIDRo9sadrHNnggo9hMmt1CghraweywhVvYeQFRkU+WGZRhg+zwscuP8mvIuI65uLQsuZuLoe04biw0YI+e1bi3xk+MIpH1leboowerbMsQ/gLWevUNSo6R8+YISP0ozGc80yceGlczXTAdPy1KhbpeE5Y0DoZ6M/zicZG9rVCYC/iCoSvNXaC9R3p573fPKwmlySyBuFQHCl0b+aqIIpewq8dBHpESTxXbN3XZYZgfcHUdKDfk3BW6V/CpVl5dSzf7xgijF+wqIddJq9m4EKmJKnYNVrCSCEKnY7mjxKbCoBpk8qrz7eTKNnfA7qSMRWqLgEHFhGka+mWFILEpBVIqRQahIgVNqGLgmLAm8emEZpm0RIoeIS4FnzYlyhZZ5ah1gAF8KflGOpUHEJSEtUFSjdQkmFUpUAFSjqDVEi0ASEt5JWiYlQOitThdKRiBSo2i1sqkwcYxIQX50q1NJbq20Keq6Zb85LSV3EBtQ2CdgFKqxm73AWCSosOLGLEKCYBOTu4SbbaFMG8WA6nqLjVCRCgFKRgE1PsbaY9lbwf6Ky8Y7sKqg+fp6WHiuoMBH9ALzEeiWdvYqOfUSPrmqXua2QVlB8yap0ASobq+ydoV27BOOvmbdEiQihtpHLJv/2/rgYGMY5zOx61qKj6i2ZOC+h1hIApfoFjkfsHKdwDbtVd92e6I0Vuwg0A7sFahLv2lOP7Bqsg126YU+TCIDiY5usGzKHfbVrp0B1zqoPtXXPeqJEMG9hfqWeOX+qmhMKkVV+hWdo9MZYgMpyHFK2nPJi2Aj6uV/R4xAqXppGELzjW9pdjcrGM20kZzTsy6QMj21Y6bvAPsm4uSPBDiVB9gXlP/EI3Qin6PUyweQUE1RcfQvYMxGtWDgbTjAhA75q/wIa+kpAkhRxswAAAABJRU5ErkJggg==') #FFF2E5 no-repeat center left; background-position: 20px center; padding-left: 10px;  cursor: pointer; background-size: 28px 28px;
+    width: 396px;
+    padding: 10px 15px;
+    margin: 0 auto;
+    text-align: center;
+    font: normal normal 600 17px / 24px Open Sans;
+    letter-spacing: 0px;
+    color: #B37D47;
+    opacity: 1;
 }
-.dynamsoft-dwt-dlg-title-error {
-  color: red;
+
+.dynamsoft-dwt-dlg-subtitle {
+    text-align: center;
+    height: 24px;
+    font-size: 16px;
+    font-family: OpenSans, "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 32px;
+    padding: 25px 0 10px 0;
+    font: normal normal normal 16px / 22px Open Sans;
+    letter-spacing: 0px;
+    color: #363636;
 }
 
 .dynamsoft-dwt-dlg-error {
@@ -261,11 +298,14 @@ dialog[closed]{display:none}
     text-align: center;
     width: 117px;
     background: #FE8E14 !important;
-    border-radius: 3px;
-    font-size: 14px;
-    font-family: OpenSans,"Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 18px;
+    font-family: OpenSans, "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #FFFFFF;
     line-height: 36px;
+    font: normal normal normal 18px / 28px Oswald;
+    letter-spacing: 0px;
+    height: 36px;
+    padding-top: 3px;
 }
 
 .dynamsoft-dwt-dlg-button:hover, .ds-download-div>a:hover {
@@ -385,6 +425,7 @@ dialog[closed]{display:none}
 
 .dynamsoft-dialog .dynamsoft-dwt-dialog-body{
 	border: 1px solid #CCC;
+  text-align: center;
 }
 
 .dynamsoft-dialog-license .dynamsoft-dialog-close,

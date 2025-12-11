@@ -5,7 +5,7 @@
 
 [Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems. To see it in action, please visit <a href="https://demo.dynamsoft.com/web-twain/" target="_blank">**this online demo**</a>
 
-Note: Dynamic Web TWAIN SDK **v19.2** is built in this package. For more detail, check the [Version Info](#versions).
+Note: Dynamic Web TWAIN SDK **v19.3** is built in this package. For more detail, check the [Version Info](#versions).
 
 ## Table of Contents
 - [Supported Environments](#supported-environments)
@@ -275,35 +275,35 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
 >`Dynamic Web TWAIN Service (DynamicWebTWAINService.exe, 64bit)`
 >
->**v19.2** (build version 1, 9, 2, 0826)
+>**v19.3** (build version 1, 9, 3, 1028)
 >
->`Dynamic Web TWAIN Service Manager (DWASManager_19200826.dll, 64bit)`
+>`Dynamic Web TWAIN Service Manager (DWASManager_19301028.dll, 64bit)`
 >
->**v19.2** (build version 19, 2, 0, 0826)
+>**v19.3** (build version 19, 3, 0, 1028)
 >
->`Device Manager (DeviceManager_19200826.dll, 64bit)`
+>`Device Manager (DeviceManager_19301028.dll, 64bit)`
 >
->**v19.2** (build version 19, 2, 0, 0826)
+>**v19.3** (build version 19, 3, 0, 1028)
 >
->`Dynamic Web TWAIN (dwt_19.2.0.0826.dll, 64bit)`
+>`Dynamic Web TWAIN (dwt_19.3.0.1028.dll, 64bit)`
 >
->**v19.2** (build version 19, 2, 0, 0826)
+>**v19.3** (build version 19, 3, 0, 1028)
 >
 >`Dynamsoft Image encryption and decryption & PDF Rasterizer (DMCodecx64.dll, 64bit)`
 >
->**v19.2** (build version 12, 0, 1, 0826)
+>**v19.3** (build version 12, 0, 1, 1028)
 >
 >`Dynamsoft Barcode Reader (dbrx64_9.6.2.0318.dll, 64bit)`
 >
->**v9.6.1** (build version 9, 6, 2, 0318)
+>**v9.6.2** (build version 9, 6, 2, 0318)
 >
 >`Dynamsoft Webcam Addon (DynamicWebcamx64_19.2.0.0826.dll, 64bit)`
 >
->**v19.2** (build version 19, 2, 0, 0826)
+>**v19.3** (build version 19, 2, 0, 0826)
 >
 >`Dynamsoft Upload Module (UploadModule_1.9.0.0318.dll, 64bit)`
 >
->**v19.2** (build version 1, 9, 0, 0318)
+>**v19.3** (build version 1, 9, 0, 0318)
 
 ## Changelog
 

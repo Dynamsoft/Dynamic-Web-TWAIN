@@ -160,6 +160,10 @@ export interface PDFWSettings {
      * When saving a PDF, you can set a password for protection.
      */
 	password?: string;
+    /**
+     * Specify the PDFA version. For example, 'pdf/a-1b' or "pdf/a-2b".
+     */
+    pdfaVersion?: string; 
 }
 export interface ReaderOptions {
     /**

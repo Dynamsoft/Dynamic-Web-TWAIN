@@ -770,6 +770,7 @@ export interface WebTwainIO extends WebTwainUtil {
      */
     MaxUploadImageSize: number;
     /**
+     * @deprecated since version 19.3. This property will be removed in future versions. Use function `PrintEx` instead.
      * Export all image data in the buffer to a new browser window and use the browser's built-in print feature to print the image(s).
      * @param useOSPrintWindow Whether to use the print feature of the operating system instead.
      */
@@ -777,8 +778,9 @@ export interface WebTwainIO extends WebTwainUtil {
     /**
      * Export specified image data in the buffer to a new browser window and use the browser's built-in print feature to print the image(s).
      * @argument indices The indices of the converted images.
+     * @argument settings Configure the printing method.
      */
-    PrintEx(indices: number[]): boolean;
+    PrintEx(indices: number[], settings?: PrintSettings): boolean;
 	/**
 	 * @deprecated since version 18.5. This property will be removed in future versions. Use asynchronous function `SaveAsBMP` instead.
      * Save the specified image as a BMP file.
@@ -1194,4 +1196,8 @@ export interface MetaData{
   bitDepth: number;
   resolutionX: number;
   resolutionY: number;
+}
+export interface PrintSettings{
+  mode?: string;  //'browser' | 'os'
+  osPrintOptions?: { showPrintDialog?: boolean; };  
 }

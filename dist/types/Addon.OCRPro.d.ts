@@ -111,8 +111,8 @@ export interface OCRPro {
 }
 export interface Rect {
     left: number;
-    right: number;
     top: number;
+    right: number;
     bottom: number;
 }
 export interface OCRProResult {
