@@ -4,7 +4,7 @@
     "authors": [
         "Dynamsoft"
     ],
-    "description": "Dynamic Web TWAIN is a TWAIN/ICA/SANE-based SDK specifically designed for web apps running on browsers for win/lin/macOS.",
+    "description": "Dynamic Web TWAIN is a TWAIN/ICA/SANE-based SDK specifically designed for web apps running on browsers for win/linux/macOS.",
     "main": "dist/dynamsoft.webtwain.min.js",
     "keywords": [
         "TWAIN",
@@ -25,7 +25,6 @@
         "HTML5 scanning",
         "JavaScript scanning",
         "Web scanning",
-        "TWAIN",
         "WIA",
         "Web TWAIN",
         "document scanning",

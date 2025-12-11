@@ -14,6 +14,7 @@
     "directories": {},
     "files": [
         "dist",
+        "legal.txt",
         "dwt-openapi.yaml"
     ],
     "homepage": "https://www.dynamsoft.com/web-twain/overview/",
@@ -36,7 +37,6 @@
         "HTML5 scanning",
         "JavaScript scanning",
         "Web scanning",
-        "TWAIN",
         "WIA",
         "Web TWAIN",
         "document scanning",
