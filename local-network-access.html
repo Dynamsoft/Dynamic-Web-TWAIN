@@ -197,14 +197,14 @@
             <p>When it is asking for permission, please click "<strong>Allow</strong>".</p>
             
             <div class="image-container">
-                <img id="permission-dialog" src="/assets/imgs/end-user/chrome-142-permission-dialog.jpg" alt="permission-dialog">
+                <img id="permission-dialog" src="./assets/imgs/end-user/chrome-142-permission-dialog.jpg" alt="permission-dialog">
 
             </div>
             
             <p>If you accidentally block the access, you can reset it as shown in the following dialog.</p>
             
             <div class="image-container">
-                <img id="site-settings" src="/assets/imgs/end-user/chrome-142-site-settings.jpg" alt="site-settings">
+                <img id="site-settings" src="./assets/imgs/end-user/chrome-142-site-settings.jpg" alt="site-settings">
 
             </div>
         </div>
@@ -228,11 +228,11 @@
                 <ol>
                     <li>
                         <p>Permission dialog:</p>
-                        <img src="/assets/imgs/end-user/chrome-145-permission-dialog.jpg" alt="Chrome 145+ permission dialog">
+                        <img src="./assets/imgs/end-user/chrome-145-permission-dialog.jpg" alt="Chrome 145+ permission dialog">
                     </li>
                     <li>
                         <p>Site settings:</p>
-                        <img src="/assets/imgs/end-user/chrome-145-site-settings.jpg" alt="Chrome 145+ site settings">
+                        <img src="./assets/imgs/end-user/chrome-145-site-settings.jpg" alt="Chrome 145+ site settings">
                     </li>
                 </ol>
             </div>
@@ -241,11 +241,11 @@
                 <ol>
                     <li>
                         <p>Permission dialog:</p>
-                        <img src="/assets/imgs/end-user/chrome-142-permission-dialog.jpg" alt="Chrome 142-144 permission dialog">
+                        <img src="./assets/imgs/end-user/chrome-142-permission-dialog.jpg" alt="Chrome 142-144 permission dialog">
                     </li>
                     <li>
                         <p>Site settings:</p>
-                        <img src="/assets/imgs/end-user/chrome-142-site-settings.jpg" alt="Chrome 142-144 site settings">
+                        <img src="./assets/imgs/end-user/chrome-142-site-settings.jpg" alt="Chrome 142-144 site settings">
                     </li>
                 </ol>
             </div>
@@ -254,11 +254,11 @@
                 <ol>
                     <li>
                         <p>Permission dialog:</p>
-                        <img src="/assets/imgs/end-user/edge-145-permission-dialog.jpg" alt="Edge 145+ Permission Dialog">
+                        <img src="./assets/imgs/end-user/edge-145-permission-dialog.jpg" alt="Edge 145+ Permission Dialog">
                     </li>
                     <li>
                         <p>Site settings:</p>
-                        <img src="/assets/imgs/end-user/edge-145-site-settings.jpg" alt="Edge 145+ site settings">
+                        <img src="./assets/imgs/end-user/edge-145-site-settings.jpg" alt="Edge 145+ site settings">
                     </li>
                 </ol>
             </div>
@@ -267,11 +267,11 @@
                 <ol>
                     <li>
                         <p>Permission dialog:</p>
-                        <img src="/assets/imgs/end-user/edge-142-permission-dialog.jpg" alt="Edge 142-144 Permission Dialog">
+                        <img src="./assets/imgs/end-user/edge-142-permission-dialog.jpg" alt="Edge 142-144 Permission Dialog">
                     </li>
                     <li>
                         <p>Site settings:</p>
-                        <img src="/assets/imgs/end-user/edge-142-site-settings.jpg" alt="Edge 142-144 site settings">
+                        <img src="./assets/imgs/end-user/edge-142-site-settings.jpg" alt="Edge 142-144 site settings">
                     </li>
                 </ol>
             </div>
@@ -280,11 +280,11 @@
                 <ol>
                     <li>
                         <p>Permission dialog:</p>
-                        <img src="/assets/imgs/end-user/firefox-permission-dialog.jpg" alt="Firefox Permission Dialog">
+                        <img src="./assets/imgs/end-user/firefox-permission-dialog.jpg" alt="Firefox Permission Dialog">
                     </li>
                     <li>
                         <p>Site settings:</p>
-                        <img src="/assets/imgs/end-user/firefox-site-settings.jpg" alt="Firefox site settings">
+                        <img src="./assets/imgs/end-user/firefox-site-settings.jpg" alt="Firefox site settings">
                     </li>
                 </ol>
             </div>
@@ -321,22 +321,22 @@
             if (browser) {
                 if (browser === "chrome") {
                     if (browserVersion >= 145) {
-                        permissionDialog.src = "/assets/imgs/end-user/chrome-145-permission-dialog.jpg";
-                        siteSettingsDialog.src = "/assets/imgs/end-user/chrome-145-site-settings.jpg";
+                        permissionDialog.src = "./assets/imgs/end-user/chrome-145-permission-dialog.jpg";
+                        siteSettingsDialog.src = "./assets/imgs/end-user/chrome-145-site-settings.jpg";
                     } else {
-                        permissionDialog.src = "/assets/imgs/end-user/chrome-142-permission-dialog.jpg";
-                        siteSettingsDialog.src = "/assets/imgs/end-user/chrome-142-site-settings.jpg";
+                        permissionDialog.src = "./assets/imgs/end-user/chrome-142-permission-dialog.jpg";
+                        siteSettingsDialog.src = "./assets/imgs/end-user/chrome-142-site-settings.jpg";
                     }
                 } else if (browser === "firefox") {
-                    permissionDialog.src = "/assets/imgs/end-user/firefox-permission-dialog.jpg";
-                    siteSettingsDialog.src = "/assets/imgs/end-user/firefox-site-settings.jpg";
+                    permissionDialog.src = "./assets/imgs/end-user/firefox-permission-dialog.jpg";
+                    siteSettingsDialog.src = "./assets/imgs/end-user/firefox-site-settings.jpg";
                 } else if (browser === "edge" ) {
                     if (browserVersion >= 145) {
-                        permissionDialog.src = "/assets/imgs/end-user/edge-145-permission-dialog.jpg";
-                        siteSettingsDialog.src = "/assets/imgs/end-user/edge-145-site-settings.jpg";
+                        permissionDialog.src = "./assets/imgs/end-user/edge-145-permission-dialog.jpg";
+                        siteSettingsDialog.src = "./assets/imgs/end-user/edge-145-site-settings.jpg";
                     } else {
-                        permissionDialog.src = "/assets/imgs/end-user/edge-142-permission-dialog.jpg";
-                        siteSettingsDialog.src = "/assets/imgs/end-user/edge-142-site-settings.jpg";
+                        permissionDialog.src = "./assets/imgs/end-user/edge-142-permission-dialog.jpg";
+                        siteSettingsDialog.src = "./assets/imgs/end-user/edge-142-site-settings.jpg";
                     }
                 }
                 
