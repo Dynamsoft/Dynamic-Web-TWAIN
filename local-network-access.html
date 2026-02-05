@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allow Access to Local Scanning Service - End-User Guide</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        h1, h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-top: 30px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        strong {
+            font-weight: 600;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .image-caption {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+        
+        .tab-container {
+            margin-top: 30px;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .tab-header {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #f6f8fa;
+            border-bottom: 1px solid #e1e4e8;
+        }
+        
+        .tab-button {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            color: #586069;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .tab-button:hover {
+            background-color: #eaecef;
+            color: #24292e;
+        }
+        
+        .tab-button.active {
+            background-color: white;
+            color: #24292e;
+            border-bottom: 2px solid #f9826c;
+        }
+        
+        .tab-content {
+            padding: 25px;
+            background-color: white;
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .notice {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+        
+        .notice p {
+            margin: 0;
+        }
+        
+        .browser-info {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .url-params {
+            font-family: monospace;
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .content-section {
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .tab-button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Allow Access to Local Scanning Service</h1>
+        
+        <div class="content-section">
+            <p>In latest browsers, you may need to grant access to apps on your device to make proper scanning.</p>
+            
+            <p>When it is asking for permission, please click "<strong>Allow</strong>".</p>
+            
+            <div class="image-container">
+                <img id="permission-dialog" src="/assets/imgs/end-user/chrome-142-permission-dialog.jpg" alt="permission-dialog">
+
+            </div>
+            
+            <p>If you accidentally block the access, you can reset it as shown in the following dialog.</p>
+            
+            <div class="image-container">
+                <img id="site-settings" src="/assets/imgs/end-user/chrome-142-site-settings.jpg" alt="site-settings">
+
+            </div>
+        </div>
+        
+        <div class="notice">
+            <p><strong>Note: </strong>The UI may vary according to different browsers and browser versions. The following shows the different UIs.</p>
+        </div>
+        
+        <h2>Different Browser UIs</h2>
+        
+        <div class="tab-container">
+            <div class="tab-header">
+                <button class="tab-button active" data-tab="chrome-145">Chrome 145+</button>
+                <button class="tab-button" data-tab="chrome-142-144">Chrome 142-144</button>
+                <button class="tab-button" data-tab="edge-145">Edge 145+</button>
+                <button class="tab-button" data-tab="edge-142-144">Edge 142-144</button>
+                <button class="tab-button" data-tab="firefox">FireFox</button>
+            </div>
+            
+            <div class="tab-content active" id="chrome-145">
+                <ol>
+                    <li>
+                        <p>Permission dialog:</p>
+                        <img src="/assets/imgs/end-user/chrome-145-permission-dialog.jpg" alt="Chrome 145+ permission dialog">
+                    </li>
+                    <li>
+                        <p>Site settings:</p>
+                        <img src="/assets/imgs/end-user/chrome-145-site-settings.jpg" alt="Chrome 145+ site settings">
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="tab-content" id="chrome-142-144">
+                <ol>
+                    <li>
+                        <p>Permission dialog:</p>
+                        <img src="/assets/imgs/end-user/chrome-142-permission-dialog.jpg" alt="Chrome 142-144 permission dialog">
+                    </li>
+                    <li>
+                        <p>Site settings:</p>
+                        <img src="/assets/imgs/end-user/chrome-142-site-settings.jpg" alt="Chrome 142-144 site settings">
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="tab-content" id="edge-145">
+                <ol>
+                    <li>
+                        <p>Permission dialog:</p>
+                        <img src="/assets/imgs/end-user/edge-145-permission-dialog.jpg" alt="Edge 145+ Permission Dialog">
+                    </li>
+                    <li>
+                        <p>Site settings:</p>
+                        <img src="/assets/imgs/end-user/edge-145-site-settings.jpg" alt="Edge 145+ site settings">
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="tab-content" id="edge-142-144">
+                <ol>
+                    <li>
+                        <p>Permission dialog:</p>
+                        <img src="/assets/imgs/end-user/edge-142-permission-dialog.jpg" alt="Edge 142-144 Permission Dialog">
+                    </li>
+                    <li>
+                        <p>Site settings:</p>
+                        <img src="/assets/imgs/end-user/edge-142-site-settings.jpg" alt="Edge 142-144 site settings">
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="tab-content" id="firefox">
+                <ol>
+                    <li>
+                        <p>Permission dialog:</p>
+                        <img src="/assets/imgs/end-user/firefox-permission-dialog.jpg" alt="Firefox Permission Dialog">
+                    </li>
+                    <li>
+                        <p>Site settings:</p>
+                        <img src="/assets/imgs/end-user/firefox-site-settings.jpg" alt="Firefox site settings">
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    button.classList.add('active');
+                    
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            updateImageBasedOnBrowser();
+        });
+        
+        function updateImageBasedOnBrowser(){
+            const urlParams = new URLSearchParams(window.location.search);
+            const browser = urlParams.get("browser");
+            const browserVersion = urlParams.get("browserversion");
+            const permissionDialog = document.getElementById('permission-dialog');
+            const siteSettingsDialog = document.getElementById("site-settings");
+            
+            if (browser) {
+                if (browser === "chrome") {
+                    if (browserVersion >= 145) {
+                        permissionDialog.src = "/assets/imgs/end-user/chrome-145-permission-dialog.jpg";
+                        siteSettingsDialog.src = "/assets/imgs/end-user/chrome-145-site-settings.jpg";
+                    } else {
+                        permissionDialog.src = "/assets/imgs/end-user/chrome-142-permission-dialog.jpg";
+                        siteSettingsDialog.src = "/assets/imgs/end-user/chrome-142-site-settings.jpg";
+                    }
+                } else if (browser === "firefox") {
+                    permissionDialog.src = "/assets/imgs/end-user/firefox-permission-dialog.jpg";
+                    siteSettingsDialog.src = "/assets/imgs/end-user/firefox-site-settings.jpg";
+                } else if (browser === "edge" ) {
+                    if (browserVersion >= 145) {
+                        permissionDialog.src = "/assets/imgs/end-user/edge-145-permission-dialog.jpg";
+                        siteSettingsDialog.src = "/assets/imgs/end-user/edge-145-site-settings.jpg";
+                    } else {
+                        permissionDialog.src = "/assets/imgs/end-user/edge-142-permission-dialog.jpg";
+                        siteSettingsDialog.src = "/assets/imgs/end-user/edge-142-site-settings.jpg";
+                    }
+                }
+                
+
+            }
+        }
+        
+        function switchTab(tabId) {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
