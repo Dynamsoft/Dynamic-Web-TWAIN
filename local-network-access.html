@@ -314,9 +314,7 @@
         });
         
         function updateImageBasedOnBrowser(){
-            const hash = window.location.hash; 
-            const queryString = hash.includes('?') ? hash.split('?')[1] : '';
-            const urlParams = new URLSearchParams(queryString);
+            const urlParams = new URLSearchParams(window.location.search);
             const browser = urlParams.get("browser");
             const browserVersion = urlParams.get("browserversion");
             const permissionDialog = document.getElementById('permission-dialog');
