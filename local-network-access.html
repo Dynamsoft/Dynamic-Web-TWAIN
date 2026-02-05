@@ -289,6 +289,8 @@
                 </ol>
             </div>
         </div>
+        <h2>Others</h2>
+        <div class="content-section">If you still have problems scanning, please contact your IT department for help.</div>
     </div>
 
     <script>
@@ -312,7 +314,9 @@
         });
         
         function updateImageBasedOnBrowser(){
-            const urlParams = new URLSearchParams(window.location.search);
+            const hash = window.location.hash; 
+            const queryString = hash.includes('?') ? hash.split('?')[1] : '';
+            const urlParams = new URLSearchParams(queryString);
             const browser = urlParams.get("browser");
             const browserVersion = urlParams.get("browserversion");
             const permissionDialog = document.getElementById('permission-dialog');
