@@ -581,6 +581,9 @@ export interface DWTInstall {
 	OnLTSPublicLicenseWarning?: (message?: string) => void;
 	OnLicenseExpiredWarning?: (...arg: any[]) => void;
 	OnLicenseError?: (message?: string, errorCode?: number) => void;
+	OnCorsConfigError?: (message?: string) => void;
+	OnBrowserLNADenied?: (message?: string, bReturnToInstallDialog?: boolean, bPromptPermisstion?: boolean) => void;
+	OnProcessLicenseErrorContent?: (content?: string) => void;
 }
 declare const Dynamsoft: (DWTInstall & typeof DynamsoftStatic);
 //declare const Dynamsoft: (typeof DynamsoftStatic);
