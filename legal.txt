@@ -228,7 +228,7 @@ that were granted to the IJG for code derived from their software.
 
 ++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++
 
-libpng 1.6.52
+libpng 1.6.57
 (http://www.libpng.org/)
 
 COPYRIGHT NOTICE, DISCLAIMER, and LICENSE
@@ -237,8 +237,8 @@ COPYRIGHT NOTICE, DISCLAIMER, and LICENSE
 PNG Reference Library License version 2
 ---------------------------------------
 
- * Copyright (c) 1995-2025 The PNG Reference Library Authors.
- * Copyright (c) 2018-2025 Cosmin Truta.
+ * Copyright (c) 1995-2026 The PNG Reference Library Authors.
+ * Copyright (c) 2018-2026 Cosmin Truta.
  * Copyright (c) 2000-2002, 2004, 2006-2018 Glenn Randers-Pehrson.
  * Copyright (c) 1996-1997 Andreas Dilger.
  * Copyright (c) 1995-1996 Guy Eric Schalnat, Group 42, Inc.
@@ -598,9 +598,9 @@ For these and/or other purposes and motivations, and without any expectation of 
 
 ++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++
 
-OpenSSL 3.0.19
+OpenSSL 3.0.20
 (https://www.openssl.org/)
-
+                                 
                                  Apache License
                            Version 2.0, January 2004
                         https://www.apache.org/licenses/
@@ -777,7 +777,7 @@ OpenSSL 3.0.19
       of your accepting any such warranty or additional liability.
 
    END OF TERMS AND CONDITIONS
-
+   
 ++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++
 
 JsonCpp 1.9.6
