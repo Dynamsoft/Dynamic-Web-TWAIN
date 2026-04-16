@@ -285,9 +285,9 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 >
 >**v19.3.3** (build version 19, 3, 0, 1028)
 >
->`Dynamic Web TWAIN (dwt_19.3.0.1028.dll, 64bit)`
+>`Dynamic Web TWAIN (dwt_19.3.2.0306.dll, 64bit)`
 >
->**v19.3.3** (build version 19, 3, 0, 1028)
+>**v19.3.3** (build version 19, 3, 2, 0306)
 >
 >`Dynamsoft Image encryption and decryption & PDF Rasterizer (DMCodecx64.dll, 64bit)`
 >
