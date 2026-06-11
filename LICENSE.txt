@@ -1,5 +1,5 @@
 Dynamic Web TWAIN License Agreement 
-Revision date: 3/28/2025
+Revision date: 3/28/2026
 IMPORTANT - READ CAREFULLY: THIS IS A LEGAL AGREEMENT BETWEEN YOU (OR "LICENSEE") AND DYNAMSOFT CORPORATION, FOR THE DYNAMSOFT SOFTWARE AND ANY ACCOMPANYING ONLINE OR ELECTRONIC DOCUMENTATION ("SOFTWARE"). BEFORE CONTINUING WITH THE INSTALLATION OF THE SOFTWARE, YOU MUST READ, ACKNOWLEDGE AND ACCEPT THE TERMS AND CONDITIONS OF THE SOFTWARE LICENSE AGREEMENT THAT FOLLOWS ("AGREEMENT"). IF YOU DO NOT ACCEPT THE TERMS AND CONDITIONS OF THE AGREEMENT, DO NOT CLICK AN "AGREE" OR SIMILAR BUTTON AND DO NOT INSTALL OR USE THE SOFTWARE.
 1. DEFINITIONS
 •	"Application" means an end user program that the Licensee develops using the Software and into which the Redistributables are incorporated, and which contain significant additional functionality over and above the functionality contained in the Software. Read what is counted as a single application to learn more.
