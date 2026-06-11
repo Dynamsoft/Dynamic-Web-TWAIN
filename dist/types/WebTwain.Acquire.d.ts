@@ -1,6 +1,7 @@
 import { DynamsoftEnumsDWT } from "./Dynamsoft.Enum";
 import { WebTwainEdit } from "./WebTwain.Edit";
 import { WebTwain } from "./WebTwain";
+import { OutputInfo } from "./WebTwain.Util";
 
 export interface WebTwainAcquire extends WebTwainEdit {
     /**
@@ -1029,7 +1030,8 @@ export interface Status {
     bScanCompleted?: boolean;
     event?: string;
     result?: {
-        currentPageNum?: number
+        currentPageNum?: number;
+        outputInfo?: OutputInfo;   
     };
 }
 export interface TiffTag {

@@ -114,13 +114,21 @@ paths:
                   version:
                     type: string
                     description: server API version.
-                    example:
-                      - '20240719'
+                    example: '20240719'
                   compatible:
                     type: boolean
                     description: server is compatible with the client.
+                    example: true
+                  moduleVersions:
+                    type: object
+                    description: the versions of different modules of the server.
                     example:
-                      - true
+                      core: ['18.5.5.0416', '19.4.0.0410']
+                    additionalProperties: 
+                        type: array
+                        items:
+                          type: string
+                        description: the version of core module.
           headers: {}
         '405':
           description: Method not allowed
@@ -135,7 +143,7 @@ paths:
       security: []
   /device/scanners:
     get:
-      summary: Retrieve a list scanners
+      summary: Retrieve a list of scanners
       deprecated: false
       description: ''
       operationId: getScanners
@@ -194,7 +202,7 @@ paths:
       summary: Create a scan job
       deprecated: false
       description: >
-        You can scan with the specified scanner. If the scanner is not specified, the last used scanner or the defalut scanner will be used. You
+        You can scan with the specified scanner. If the scanner is not specified, the last used scanner or the default scanner will be used. You
         can set capabilities of the scanner. You can show the scanner ui if you are
         operating on the machine running Dynamic Web TWAIN Service. You can get scanned image with the job uid, or save to the
         specified document. You can create a pending job with the specified
@@ -324,7 +332,7 @@ paths:
                 description: Scanner Job Information
           headers: {}
         '404':
-          description: Error resonpse
+          description: Error response
           content:
             application/json:
               schema: *ref_0
@@ -411,7 +419,7 @@ paths:
                   - status
           headers: {}
         '400':
-          description: Error resonpse
+          description: Error response
           content:
             application/json:
               schema: *ref_0
@@ -485,7 +493,7 @@ paths:
           description: Successful operation
           headers: {}
         '404':
-          description: Error resonpse
+          description: Error response
           content:
             application/json:
               schema: *ref_0
@@ -540,7 +548,7 @@ paths:
           schema:
             type: string
             description: >
-              capability id. multiple values seperated by commas. e.g.
+              capability id. multiple values separated by commas. e.g.
               caps=5,2,1.  If no pages specified, return all capabilities.
             externalDocs:
               url: >-
@@ -555,13 +563,12 @@ paths:
                 externalDocs:
                   url: >-
                     https://www.dynamsoft.com/web-twain/docs/info/api/Interfaces.html#capabilitydetails
-                properties: {}
                 items:
                   type: object
                   properties: {}
           headers: {}
         '400':
-          description: Error resonpse
+          description: Error response
           content:
             application/json:
               schema: *ref_0
@@ -656,7 +663,7 @@ paths:
                   Rfj6pIMTNkCu3BfDloGItBAAAAACEAAABgAFAAEAAAAQAAAAExAAAAYABQAAAAAAEAAAAAcQAAAGAAUAAQAAABAAAAArEQAABAAFABgAAAAQAAAAHBEAAAQABQAAAAAAEAAAAAABAAAEAAUAAAAAABwAAAAUEQAACAAFAPgqAAAAAAAANCEAAAAAAAAQAAAADBEAAAQABQACAAAAEAAAAB8RAAAEAAUAAAAAABAAAAABAQAABAAFAAIAAAAQAAAAIBEAAAQABQAAAAAAEAAAACIRAAAEAAUAAwAAABAAAAAQEQAABAAFAAAAAAAQAAAAAgEAAAQABQAAAAAAEAAAABgRAAAHAAUAAABIQxAAAAAZEQAABwAFAAAASEMQAAAAIxEAAAcABQAAAABDEAAAAAMRAAAHAAUAAAAAABAAAAABEQAABwAFAAAAAAAQAAAACBEAAAcABQAAAIA/EAAAAAGAAAAGAAUAAAAAAA==
           headers: {}
         '400':
-          description: Error resonpse
+          description: Error response
           content:
             application/json:
               schema: *ref_0
@@ -713,7 +720,7 @@ paths:
       description: >
         Get the next scanned page info. If the scanned page is not ready, it will not
         return until the page is ready. If the response code is 200, we can try to get
-        the next until the reponse code is 204.
+        the next until the response code is 204.
       operationId: getNextScannedPageInfo
       tags:
         - Scanner Control
@@ -773,6 +780,112 @@ paths:
                 statusCode: 410
           headers: {}
       security: []
+  /device/scanners/jobs/{jobuid}/content:
+    get:
+      summary: Retrieve the document content with specified format.
+      deprecated: false
+      description: >
+        Can specify a single page by page index, and also supports specifying image MIME types, such as image/jpeg, image/png.
+      operationId: getScannedPageContent
+      tags:
+        - Scanner Control
+      parameters:
+        - name: jobuid
+          in: path
+          description: UID of the scan job
+          required: true
+          example: ''
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: output mime type
+          required: true
+          schema:
+            type: string
+            enum:
+              - image/jpeg
+              - image/png
+            description: |
+              Specified the output format.
+        - name: page
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: number
+            description: >
+              The page index starts from 0. Return the specified page.
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            image/jpeg:
+              schema:
+                type: object
+                properties: {}
+              example: "ÿØÿà \x10JFIF \x01\x01\x01 ` `  ÿá ZExif  MM *   \b \x05\x03\x01 \x05   \x01   J\x03\x03 \x01   \x01    Q\x10 \x01   \x01\x01   Q\x11 \x04   \x01  \x0EÃQ\x12 \x04   \x01  \x0EÃ     \x01†   ±\x8FÿÛ C \x02\x01\x01\x02\x01\x01\x02\x02\x02\x02\x02\x02\x02\x02\x03\x05\x03\x03\x03\x03\x03\x06\x04\x04\x03\x05\a\x06\a\a\a\x06\a\a\b\t\v\t\b\b\r\n\b\a\a\r\n\r\n\r\n\v\f\f\f\f\a\t\x0E\x0F\r\n\f\x0E\v\f\f\fÿÛ C\x01\x02\x02\x02\x03\x03\x03\x06\x03\x03\x06\f\b\a\b\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\f\fÿÀ \x11\b \x01 \x01\x03\x01\" \x02\x11\x01\x03\x11\x01ÿÄ \x1F  \x01\x05\x01\x01\x01\x01\x01\x01        \x01\x02\x03\x04\x05\x06\a\b\t\r\n\vÿÄ µ\x10 \x02\x01\x03\x03\x02\x04\x03\x05\x05\x04\x04  \x01}\x01\x02\x03 \x04\x11\x05\x12!1A\x06\x13Qa\a\"q\x142\x81‘¡\b#B±Á\x15RÑð$3br‚\t\r\n\x16\x17\x18\x19\x1A%&'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyzƒ„…†‡ˆ‰Š’“”•–—˜™š¢£¤¥¦§¨©ª²³´µ¶·¸¹ºÂÃÄÅÆÇÈÉÊÒÓÔÕÖ×ØÙÚáâãäåæçèéêñòóôõö÷øùúÿÄ \x1F\x01 \x03\x01\x01\x01\x01\x01\x01\x01\x01\x01      \x01\x02\x03\x04\x05\x06\a\b\t\r\n\vÿÄ µ\x11 \x02\x01\x02\x04\x04\x03\x04\a\x05\x04\x04 \x01\x02w \x01\x02\x03\x11\x04\x05!1\x06\x12AQ\aaq\x13\"2\x81\b\x14B‘¡±Á\t#3Rð\x15brÑ\r\n\x16$4á%ñ\x17\x18\x19\x1A&'()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz‚ƒ„…†‡ˆ‰Š’“”•–—˜™š¢£¤¥¦§¨©ª²³´µ¶·¸¹ºÂÃÄÅÆÇÈÉÊÒÓÔÕÖ×ØÙÚâãäåæçèéêòóôõö÷øùúÿÚ \f\x03\x01 \x02\x11\x03\x11 ? ýü¢Š(\x03ÿÙ"
+          headers: {}
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: The provided job UID is invalid.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET.
+                statusCode: 405
+          headers: {}
+        '409':
+          description: The job is in pending.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1011
+                message: Operation out of expected sequence.
+                statusCode: 409
+          headers: {}
+        '410':
+          description: The job was deleted.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1034
+                message: Invalid value.
+                statusCode: 410
+          headers: {}
+        x-200-3:
+          description: ''
+          content:
+            image/png:
+              schema:
+                type: object
+                properties: {}
+              example: "‰PNG\r\n\x1A\r\n   \r\nIHDR   \x01   \x01\b\x02   \x90wSÞ   \x01sRGB ®Î\x1Cé   \x04gAMA  ±\x8F\vüa\x05   \tpHYs  \x0EÃ  \x0EÃ\x01Ço¨d   \fIDAT\x18Wcøÿÿ? \x05þ\x02þ§5\x81„    IEND®B`‚"
+          headers: {}
+      security: []
   /device/scanners/jobs/{jobuid}/next-page:
     get:
       summary: Get the next page for a specific job.
@@ -780,7 +893,7 @@ paths:
       description: >
         Get the next scanned page content. If the scanned page is not ready, it will not
         return until the page is ready. If the response code is 200, we can try to get
-        the next until the reponse code is 204.
+        the next until the response code is 204.
       operationId: getNextScannedPage
       tags:
         - Scanner Control
@@ -817,7 +930,7 @@ paths:
           description: No more pages. scan done.
           headers: {}
         '400':
-          description: Error resonpse
+          description: Error response
           content:
             application/json:
               schema: *ref_0
@@ -897,7 +1010,7 @@ paths:
                 pages: []
           headers: {}
         '400':
-          description: Error resonpse
+          description: Error response
           content:
             application/json:
               schema: *ref_0
@@ -1044,7 +1157,7 @@ paths:
                 statusCode: 403
           headers: {}
         '404':
-          description: Error resonpse
+          description: Error response
           content:
             application/json:
               schema: *ref_0
@@ -1061,6 +1174,103 @@ paths:
               example:
                 code: -2112
                 message: This endpoint only supports GET and DELETE.
+                statusCode: 405
+          headers: {}
+      security: []
+    patch:
+      summary: Update document customData metadata.
+      deprecated: false
+      description:  Update the customData of a document. The new metadata will completely overwrite the existing one.Only one copy of customData is stored at any time.
+      operationId: updateDocumentCustomData
+      tags:
+        - Document Management
+      parameters:
+        - name: documentuid
+          in: path
+          description: UID of document
+          required: true
+          example: ''
+          schema:
+            type: string
+        - name: DWT-DOC-PASSWORD
+          in: header
+          description: the password of document in storage
+          required: false
+          example: ''
+          schema:
+            type: string
+            maxLength: 32
+            description: cannot exceed 32 chars.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                metadata:
+                  oneOf:
+                    - type: string
+                    - type: object
+                  description: Custom data to update, will fully overwrite existing data
+              required:
+                - metadata
+            example:
+              metadata:
+                fileName: test.pdf
+                uploadTime: '2025-01-01'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema: *ref_1
+              example:
+                uid: 190807444d76
+                metadata:
+                  fileName: test.pdf
+                  uploadTime: '2025-01-01'
+                pages:
+                  - uid: 190817548d70
+                  - uid: '190817648270'
+          headers: {}
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2113
+                message: The parameter is not valid.
+                statusCode: 400
+          headers: {}
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1043
+                message: Password invalid.
+                statusCode: 403
+          headers: {}
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -1040
+                message: The uid does not exist.
+                statusCode: 404
+          headers: {}
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema: *ref_0
+              example:
+                code: -2112
+                message: This endpoint only supports GET, PATCH and DELETE.
                 statusCode: 405
           headers: {}
       security: []
@@ -1117,7 +1327,7 @@ paths:
             type: string
             default: ''
             description: >
-              page indices or uids. multiple values seperated by commas. e.g.
+              page indices or uids. multiple values separated by commas. e.g.
               pages=5,2,1.  If no pages specified, for image/png, image/jpeg,
               only return first page; for image/tiff, application/pdf, return
               all pages.
@@ -1312,7 +1522,7 @@ paths:
                 statusCode: 405
           headers: {}
         x-200-2:
-          description: Error resonpse
+          description: Error response
           content:
             application/pdf:
               schema: *ref_0
@@ -1402,7 +1612,7 @@ paths:
                   - uid: 190818458d85
           headers: {}
         '400':
-          description: Error resonpse
+          description: Error response
           content:
             application/json:
               schema: *ref_0
@@ -1479,7 +1689,7 @@ paths:
           description: Page removed successfully
           headers: {}
         '400':
-          description: Error resonpse
+          description: Error response
           content:
             application/json:
               schema: *ref_0
@@ -4364,6 +4574,14 @@ components:
             $ref: '#/components/schemas/PageInfo'
             description: page info
           description: pages info
+        metadata:
+          oneOf:
+            - type: string
+            - type: object
+          description: document metadata, it is a json object, and the content depends on your scanner and driver, e.g. for twain scanner, it may contain some fields like "Author", "Title", "Subject", "Keywords", "Creator", "Producer", "CreationDate", "ModDate"...
+          example:
+              fileName: test.pdf
+              uploadTime: '2025-01-01'
       required:
         - pages
         - uid
@@ -4460,5 +4678,8 @@ components:
       required:
         - source
   securitySchemes: {}
-servers: []
+servers:
+  - url: https://127.0.0.1:18623/api
+    description: Local Dynamic Web TWAIN Service endpoint.
 security: []
+

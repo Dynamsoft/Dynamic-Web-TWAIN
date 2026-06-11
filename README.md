@@ -5,13 +5,12 @@
 
 [Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems. To see it in action, please visit <a href="https://demo.dynamsoft.com/web-twain/" target="_blank">**this online demo**</a>
 
-Note: Dynamic Web TWAIN SDK **v19.3.3** is built in this package. For more detail, check the [Version Info](#versions).
+Note: Dynamic Web TWAIN SDK **v19.4.0** is built in this package. For more detail, check the [Version Info](#versions).
 
 ## Table of Contents
 - [Supported Environments](#supported-environments)
 - [License Key](#license-key)
 - [Installation](#installation)
-- [Deployment](#deployment)
 - [Quick Start](#quick-start)
 - [Documentation](#documentation)
 - [Features](#features)
@@ -47,7 +46,7 @@ Note: Dynamic Web TWAIN SDK **v19.3.3** is built in this package. For more detai
 ## Installation
 
 - Official web site
-	
+    
     **Dynamic Web TWAIN SDK for Windows, Linux, macOS**
     
     [![](https://img.shields.io/badge/Download-Offline%20SDK-orange)](https://www.dynamsoft.com/web-twain/downloads)
@@ -62,12 +61,6 @@ Note: Dynamic Web TWAIN SDK **v19.3.3** is built in this package. For more detai
 
 If you do not have a physical scanner to test on Windows, you can install a virtual scanner. 
 - [Virtual Scanner for Windows](https://download.dynamsoft.com/tool/twainds.win32.installer.2.1.3.msi)
-
-## Deployment
-
-Dynamic Web TWAIN relies on the files in the `/dist/` folder to work. Make sure to put these files on your server and correctly refer to them by specifying the path with `ResourcesPath` (relative and absolute paths are both fine).
-
-If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt), you will still need to host the `/dist/` folder somewhere on your server and refer to it by specifying the path with `ResourcesPath`. This is because file types like .msi are not allowed by this CDN.
 
 ## Quick Start
 
@@ -115,7 +108,7 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
       Dynamsoft.DWT.ResourcesPath = "https://cdn.jsdelivr.net/npm/dwt@latest/dist";
       //You need to set the service installer location here since the installer's size exceeds jsdelivr's limit. 
       //You'd better host the installers in your own environment.
-	  Dynamsoft.DWT.ServiceInstallerLocation = 'https://unpkg.com/dwt/dist/dist/';
+      Dynamsoft.DWT.ServiceInstallerLocation = 'https://unpkg.com/dwt/dist/dist/';
       Dynamsoft.DWT.ProductKey = 'DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9';
       Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 270, Height: 350 }];
     </script>
@@ -134,6 +127,8 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
 <body>
     <script type="text/javascript">
       Dynamsoft.DWT.ResourcesPath = "https://unpkg.com/dwt@latest/dist";
+      //You'd better host the installers in your own environment.
+      Dynamsoft.DWT.ServiceInstallerLocation = 'https://unpkg.com/dwt/dist/dist/';
       Dynamsoft.DWT.ProductKey = 'DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9';
       Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 270, Height: 350 }];
     </script>
@@ -160,7 +155,7 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
     <script src="https://cdn.jsdelivr.net/npm/dwt@latest/dist/dynamsoft.webtwain.min.js"></script>
 </head>
 <body>
-	<button onclick="AcquireImage();">Scan</button>
+    <button onclick="AcquireImage();">Scan</button>
     <div id="dwtcontrolContainer"></div>
     <script type="text/javascript">
       Dynamsoft.DWT.ResourcesPath = "https://cdn.jsdelivr.net/npm/dwt@latest/dist";
@@ -204,10 +199,12 @@ If you are making use of the `CDN` [jsDelivr](https://cdn.jsdelivr.net/npm/dwt),
     <script src="https://unpkg.com/dwt@latest/dist/dynamsoft.webtwain.min.js"></script>
 </head>
 <body>
-	<button onclick="AcquireImage();">Scan</button>
+    <button onclick="AcquireImage();">Scan</button>
     <div id="dwtcontrolContainer"></div>
     <script type="text/javascript">
       Dynamsoft.DWT.ResourcesPath = "https://unpkg.com/dwt@latest/dist";
+      //You'd better host the installers in your own environment.
+      Dynamsoft.DWT.ServiceInstallerLocation = 'https://unpkg.com/dwt/dist/dist/';
       Dynamsoft.DWT.ProductKey = 'DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9'; // Put your own key here
       Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 270, Height: 350 }];
       window.onload = function () {
@@ -275,35 +272,35 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
 >`Dynamic Web TWAIN Service (DynamicWebTWAINService.exe, 64bit)`
 >
->**v19.3.3** (build version 1, 9, 3, 1028)
+>**v19.4.0** (build version 1, 9, 4, 0410)
 >
->`Dynamic Web TWAIN Service Manager (DWASManager_19301028.dll, 64bit)`
+>`Dynamic Web TWAIN Service Manager (DWASManager_19400410, 64bit)`
 >
->**v19.3.3** (build version 19, 3, 0, 1028)
+>**v19.4.0** (build version 19, 4, 0, 0410)
 >
->`Device Manager (DeviceManager_19301028.dll, 64bit)`
+>`Device Manager (DeviceManager_19400410.dll, 64bit)`
 >
->**v19.3.3** (build version 19, 3, 0, 1028)
+>**v19.4.0** (build version 19, 4, 0, 0410)
 >
->`Dynamic Web TWAIN (dwt_19.3.2.0306.dll, 64bit)`
+>`Dynamic Web TWAIN (dwt_19.4.0.0410.dll, 64bit)`
 >
->**v19.3.3** (build version 19, 3, 2, 0306)
+>**v19.4.0** (build version 19, 4, 0, 0410)
 >
 >`Dynamsoft Image encryption and decryption & PDF Rasterizer (DMCodecx64.dll, 64bit)`
 >
->**v19.3.3** (build version 12, 0, 4, 0416)
+>**v19.4.0** (build version 12, 0, 4, 0416)
 >
->`Dynamsoft Barcode Reader (dbrx64_9.6.2.0318.dll, 64bit)`
+>`Dynamsoft Barcode Reader (dbrx64_9.6.3.0410.dll, 64bit)`
 >
->**v9.6.2** (build version 9, 6, 2, 0318)
+>**v9.6.3** (build version 9, 6, 3, 0410)
 >
->`Dynamsoft Webcam Addon (DynamicWebcamx64_19.2.0.0826.dll, 64bit)`
+>`Dynamsoft Webcam Addon (DynamicWebcamx64_19.4.0.0410.dll, 64bit)`
 >
->**v19.3.3** (build version 19, 2, 0, 0826)
+>**v19.4.0** (build version 19, 4, 0, 0410)
 >
->`Dynamsoft Upload Module (UploadModule_1.9.0.0318.dll, 64bit)`
+>`Dynamsoft Upload Module (UploadModule_1.9.4.0410.dll, 64bit)`
 >
->**v19.3.3** (build version 1, 9, 0, 0318)
+>**v19.4.0** (build version 1, 9, 4, 0410)
 
 ## Changelog
 

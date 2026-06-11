@@ -136,32 +136,11 @@ export interface PDFWSettings {
      */
     quality?: number;
 	/**
-     * Reduce the file size when saving the image(s) as a PDF file. 
-     */
-	docCompressor?:{ //18.3
-		/**
-		 * Enabled document compressor.
-		 */
-		enabled: boolean;
-		 /**
-		 * sensitivity
-		 * The value ranges from 1 to 100. Default value is 50.
-		 * Only valid when the {compression} is 'JPEG' or 'JPEG2000'.
-		 */
-		sensitivity?: number;
-		/**
-		 * compressLevel
-		 * The value ranges from 0 to 100. Default value is 50.
-		 * Only valid when the {compression} is 'JPEG' or 'JPEG2000'.
-		 */
-		compressLevel?: number;
-	}
-	/**
      * When saving a PDF, you can set a password for protection.
      */
 	password?: string;
     /**
-     * Specify the PDFA version. For example, 'pdf/a-1b' or "pdf/a-2b".
+     * Specify the PDFA version. For example, 'pdf/a-1b', "pdf/a-2b" or "pdf/a-3b".
      */
     pdfaVersion?: string; 
 }

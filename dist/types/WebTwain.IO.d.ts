@@ -1136,21 +1136,25 @@ export interface WebTwainIO extends WebTwainUtil {
      * Save image data to LocalStorage.
      * @param Object.uid Unique identifier for the created LocalStorage.
 	 * @param Object.password Ensure that the entered password matches the one inputted when creating LocalStorage in order to successfully save.
-	 * @param indices The index array to be saved. Default to save all images.
+	 * @param Object.indices The index array to be saved. Default to save all images.
+     * @param Object.maxThreads The maximum number of threads to use for the operation.
      */
 	saveToLocalStorage(settings: {
 	  uid: string, 
 	  password?:string,  
-	  indices?:[]
+	  indices?:[],
+      maxThreads?: number
 	}): Promise<string[]>;  
 	/**
      * Load images saved from LocalStorage.
      * @param Object.uid Unique identifier for the created LocalStorage.
 	 * @param Object.password Ensure that the entered password matches the one inputted when creating LocalStorage in order to successfully load images.
+     * @param Object.maxThreads The maximum number of threads to use for the operation.
      */
 	loadFromLocalStorage (settings: {
 	  uid: string,
 	  password?:string,
+      maxThreads?: number
 	}) : Promise<{oriImageId:string, newImageId: string}[]>; // uid is returned from 
 	/**
      * Delete the saved LocalStorage.
