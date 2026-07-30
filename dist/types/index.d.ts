@@ -8,7 +8,7 @@
 *
 * Copyright 2026, Dynamsoft Corporation
 * Author: Dynamsoft Support Team
-* Version: 19.4.0
+* Version: 19.4.2
 */
 import Dynamsoft from "./Dynamsoft";
 export default Dynamsoft;

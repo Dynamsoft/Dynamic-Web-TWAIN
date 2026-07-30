@@ -32,7 +32,7 @@ Copyright notice:
 
 ++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++
 
-libtiff 4.7.1
+libtiff 4.7.2
 (https://libtiff.gitlab.io/libtiff/)
 
 # LibTIFF license
@@ -867,7 +867,7 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 ++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++
 
-libcurl 8.20.0
+libcurl 8.21.0
 (https://curl.se/)
 
 COPYRIGHT AND PERMISSION NOTICE

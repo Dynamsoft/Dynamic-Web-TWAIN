@@ -5,7 +5,7 @@
 
 [Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/overview/) is a cross-platform scanning SDK designed for web document management applications. With just a few lines of JavaScript code, you can develop robust web applications to scan documents, edit images and save them to file systems. To see it in action, please visit <a href="https://demo.dynamsoft.com/web-twain/" target="_blank">**this online demo**</a>
 
-Note: Dynamic Web TWAIN SDK **v19.4.0** is built in this package. For more detail, check the [Version Info](#versions).
+Note: Dynamic Web TWAIN SDK **v19.4.2** is built in this package. For more detail, check the [Version Info](#versions).
 
 ## Table of Contents
 - [Supported Environments](#supported-environments)
@@ -272,23 +272,23 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 
 >`Dynamic Web TWAIN Service (DynamicWebTWAINService.exe, 64bit)`
 >
->**v19.4.0** (build version 1, 9, 4, 0410)
+>**v19.4.2** (build version 1, 9, 4, 0728)
 >
 >`Dynamic Web TWAIN Service Manager (DWASManager_19400410, 64bit)`
 >
->**v19.4.0** (build version 19, 4, 0, 0410)
+>**v19.4.2** (build version 19, 4, 0, 0410)
 >
 >`Device Manager (DeviceManager_19400410.dll, 64bit)`
 >
->**v19.4.0** (build version 19, 4, 0, 0410)
+>**v19.4.2** (build version 19, 4, 0, 0410)
 >
 >`Dynamic Web TWAIN (dwt_19.4.0.0410.dll, 64bit)`
 >
->**v19.4.0** (build version 19, 4, 0, 0410)
+>**v19.4.2** (build version 19, 4, 0, 0410)
 >
 >`Dynamsoft Image encryption and decryption & PDF Rasterizer (DMCodecx64.dll, 64bit)`
 >
->**v19.4.0** (build version 12, 0, 4, 0416)
+>**v19.4.2** (build version 12, 0, 5, 0728)
 >
 >`Dynamsoft Barcode Reader (dbrx64_9.6.3.0410.dll, 64bit)`
 >
@@ -296,11 +296,11 @@ https://www.dynamsoft.com/Products/WebTWAIN_License.aspx
 >
 >`Dynamsoft Webcam Addon (DynamicWebcamx64_19.4.0.0410.dll, 64bit)`
 >
->**v19.4.0** (build version 19, 4, 0, 0410)
+>**v19.4.2** (build version 19, 4, 0, 0410)
 >
 >`Dynamsoft Upload Module (UploadModule_1.9.4.0410.dll, 64bit)`
 >
->**v19.4.0** (build version 1, 9, 4, 0410)
+>**v19.4.2** (build version 1, 9, 4, 0410)
 
 ## Changelog
 
