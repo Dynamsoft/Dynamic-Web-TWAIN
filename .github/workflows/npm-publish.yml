@@ -1,0 +1,81 @@
+name: Publish NPM Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: npm-publish-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish to NPM
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    steps:
+        # ============================================================
+        # 1. Checkout the exact release tag
+        # ============================================================
+        - name: Checkout release tag
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+
+        # ============================================================
+        # 2. Setup Node.js
+        # npm Trusted Publishing requires:
+        # Node.js >= 22.14.0
+        # npm >= 11.5.1
+        # ============================================================
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: '22.x'
+            registry-url: 'https://registry.npmjs.org'
+
+        # ============================================================
+        # 3. Verify Node / npm
+        # ============================================================
+        - name: Verify Node and npm
+          run: |
+            node --version
+            npm --version
+
+        # ============================================================
+        # 4. Verify package version
+        # ============================================================
+        - name: Verify package version
+          shell: bash
+          run: |
+            PACKAGE_VERSION=$(node -p "require('./package.json').version")
+            TAG_VERSION="${GITHUB_REF_NAME#v}"
+
+            echo "Package version: $PACKAGE_VERSION"
+            echo "Tag version:     $TAG_VERSION"
+
+            if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
+                echo "::error::package.json version does not match Git tag."
+                exit 1
+            fi
+
+        # ============================================================
+        # 5. Show package information
+        # ============================================================
+        - name: Verify package
+          run: |
+            npm pkg get name version
+            npm pack --dry-run
+
+        # ============================================================
+        # 6. Publish to npm using Trusted Publishing / OIDC
+        # ============================================================
+        - name: Publish to npm
+          run: |
+            npm publish --provenance --access public
