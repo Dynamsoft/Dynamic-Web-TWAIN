@@ -598,7 +598,7 @@ For these and/or other purposes and motivations, and without any expectation of 
 
 ++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++
 
-OpenSSL 3.5.7
+OpenSSL 3.5.8
 (https://www.openssl.org/)
                                  
                                   Apache License
@@ -867,7 +867,7 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 ++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++--++
 
-libcurl 8.21.0
+libcurl 8.22.0
 (https://curl.se/)
 
 COPYRIGHT AND PERMISSION NOTICE
