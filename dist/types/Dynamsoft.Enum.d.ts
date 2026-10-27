@@ -77,7 +77,7 @@ export namespace DynamsoftEnumsDWT {
         ANGLE_180 = 180,
         ANGLE_270 = 270
     }
-    enum EnumDWT_OCRKitOutputFormat{
+    enum EnumDWT_OCRConnectorOutputFormat{
         TEXT = 0,
         PDF_PLAIN_TEXT = 1,
         PDF_WITH_EXTRA_TEXTLAYER = 2

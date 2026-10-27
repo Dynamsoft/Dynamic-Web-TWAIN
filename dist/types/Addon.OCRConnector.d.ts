@@ -1,6 +1,6 @@
 import { DynamsoftEnumsDWT } from "./Dynamsoft.Enum";
 
-export interface OCRKit {
+export interface OCRConnector {
     /**
      * Return the OCR installation information.
      */
@@ -11,7 +11,14 @@ export interface OCRKit {
     DetectPageOrientation(
        index: number, 
        settings?: {
-            detectionMode?: DynamsoftEnumsDWT.EnumDWT_PageOrientationDetectionMode | number
+            /**
+             * The OCR engine to use.
+             * Added in 19.5
+             */
+            engine?: {
+                name: string;
+            };    
+            detectionMode?: DynamsoftEnumsDWT.EnumDWT_PageOrientationDetectionMode | number;
        }
     ): Promise<AngleInfo>;
     /**
@@ -24,10 +31,24 @@ export interface OCRKit {
     Recognize(
         index: number,
         options?: {
+            /**
+             * The OCR engine to use.
+             * Added in 19.5
+             */
+            engine?: {
+                name: string;
+            };
             settings?: {
-                language?: string,   
-                pageOrientation?: DynamsoftEnumsDWT.EnumDWT_PageOrientation | number, 
-            }, 
+                language?: string;
+                pageOrientation?: DynamsoftEnumsDWT.EnumDWT_PageOrientation | number;
+                /** 
+                 * The recognition level for OCR.
+                 * Added in 19.5
+                 * @example "accurate" or "fast", Default is "accurate".
+                 * macOS only
+                 */
+                recognitionLevel?: "accurate" | "fast";
+            };
             rects?:Rect[]
         }
     ): Promise<OCRResult>; 
@@ -38,7 +59,7 @@ export interface OCRKit {
      * @param format Specify the output format.
      */
     SaveToPath(indices: number[], 
-        outputFormat: DynamsoftEnumsDWT.EnumDWT_OCRKitOutputFormat | number, 
+        outputFormat: DynamsoftEnumsDWT.EnumDWT_OCRConnectorOutputFormat | number, 
         path: string): Promise<boolean>;
     /**
      * Save the OCR result as a blob.
@@ -46,14 +67,14 @@ export interface OCRKit {
      * @param format Specify the output format.
      */
     SaveAsBlob(indices: number[], 
-        outputFormat:DynamsoftEnumsDWT.EnumDWT_OCRKitOutputFormat | number): Promise<Blob>;
+        outputFormat:DynamsoftEnumsDWT.EnumDWT_OCRConnectorOutputFormat | number): Promise<Blob>;
     /**
      * Save the OCR result as a base64 string.
      * @param indices Specify the image(s).
      * @param format Specify the output format.
      */
     SaveAsBase64(indices: number[], 
-        outputFormat:DynamsoftEnumsDWT.EnumDWT_OCRKitOutputFormat | number): Promise<string>;
+        outputFormat:DynamsoftEnumsDWT.EnumDWT_OCRConnectorOutputFormat | number): Promise<string>;
 
 }
 export interface OCRResult {
@@ -68,7 +89,7 @@ export interface OCRResult {
     /**
      * The rotation angle of the page and its confidence level.
      */
-    orientation: {value: number; confidence: number}; 
+    orientation?: {value: number; confidence?: number}; 
     blocks:{
         geometry: Rect;
         lines: {
@@ -76,6 +97,8 @@ export interface OCRResult {
              * The region of the line.
              */
             geometry: Rect;
+            value?: string;
+            confidence?: number; 
             words?:{
                 /**
                  * OCR result of the word.
@@ -84,7 +107,7 @@ export interface OCRResult {
                  /**
                  * The confidence level of the OCR result of the word.
                  */
-                confidence: number;  
+                confidence?: number;  
                  /**
                  * The region of the word.
                  */
@@ -97,7 +120,23 @@ export interface OCRInfo {
     /**
      * Return the OCR version.
      */
-    version: string;    
+    version: string; 
+    /**
+     * The OCR engines available.
+     * Added in 19.5
+     */
+    engines: {  
+        /**
+        * The name of the engine.
+        */
+        name: string; 
+        /** 
+         * Languages supported by this engine.
+         * Added in 19.5
+         * @example ["en", "es", "ar", "fr", "de"]
+         */
+        languages: string[];
+    }[];
 }
 export interface AngleInfo {
     /**

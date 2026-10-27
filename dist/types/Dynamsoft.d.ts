@@ -492,6 +492,10 @@ export interface DWTPro {
 	 * If enabled, the library will use HTTP to communicate with the service. The host must be localhost or 127.0.0.1. The default value is false.
      */
     EnableLocalNetworkMixedContent: boolean;
+    /**
+     * Token for authentication or other purposes.
+     */
+    Token: string;
 }
 export interface DisplayInfo {
     loaderBarSource?: string;

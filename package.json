@@ -1,14 +1,11 @@
 {
     "name": "dwt",
-    "version": "19.4.4",
+    "version": "19.5.0",
     "author": {
         "name": "Dynamsoft",
         "url": "https://www.dynamsoft.com"
     },
     "license": "SEE LICENSE IN LICENSE.txt",
-    "dependencies": {
-		"dynamsoft-core": "*"
-    },
     "description": "Dynamic Web TWAIN (DWT) is an SDK covering the full web document scanning workflow: image acquisition via TWAIN/WIA/ICA/SANE/eSCL, viewing/editing, barcode reading, image export (PDF/TIFF/JPEG/PNG), and server upload — on Windows, macOS, and Linux.",
     "devDependencies": {},
     "directories": {},

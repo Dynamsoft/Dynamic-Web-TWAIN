@@ -40,7 +40,7 @@ paths:
                 message: This endpoint only supports GET and PATCH.
                 statusCode: 405
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
     patch:
       summary: Update only specified server settings.
       deprecated: false
@@ -93,7 +93,7 @@ paths:
                 message: This endpoint only supports GET and PATCH.
                 statusCode: 405
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /server/version:
     get:
       summary: Get the server API version.
@@ -140,7 +140,7 @@ paths:
                 message: This endpoint only supports GET.
                 statusCode: 405
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /device/scanners:
     get:
       summary: Retrieve a list of scanners
@@ -196,7 +196,7 @@ paths:
                 message: This endpoint only supports GET.
                 statusCode: 405
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /device/scanners/jobs:
     post:
       summary: Create a scan job
@@ -282,7 +282,7 @@ paths:
                   applications.
                 statusCode: 423
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /device/scanners/jobs/{jobuid}:
     get:
       summary: Retrieve the scan job status.
@@ -363,7 +363,7 @@ paths:
                 message: Invalid Value.
                 statusCode: 410
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
     patch:
       summary: Update the scan job status.
       deprecated: false
@@ -470,7 +470,7 @@ paths:
                 message: Invalid Value.
                 statusCode: 410
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
     delete:
       summary: Delete the scan job
       deprecated: false
@@ -522,7 +522,7 @@ paths:
                 message: Invalid Value.
                 statusCode: 410
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /device/scanners/jobs/{jobuid}/scanner/capabilities:
     get:
       summary: Retrieve the capabilities of the scanner specified in the scan job.
@@ -617,7 +617,7 @@ paths:
                 message: Invalid Value.
                 statusCode: 410
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /device/scanners/jobs/{jobuid}/scanner/settings:
     get:
       summary: Retrieve the settings of the scanner specified in the scan job.
@@ -712,7 +712,7 @@ paths:
                 message: Invalid Value.
                 statusCode: 410
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /device/scanners/jobs/{jobuid}/next-page-info:
     get:
       summary: Get the next page information for a specific job.
@@ -779,7 +779,7 @@ paths:
                 message: Invalid Value.
                 statusCode: 410
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /device/scanners/jobs/{jobuid}/content:
     get:
       summary: Retrieve the document content with specified format.
@@ -885,7 +885,7 @@ paths:
                 properties: {}
               example: "‰PNG\r\n\x1A\r\n   \r\nIHDR   \x01   \x01\b\x02   \x90wSÞ   \x01sRGB ®Î\x1Cé   \x04gAMA  ±\x8F\vüa\x05   \tpHYs  \x0EÃ  \x0EÃ\x01Ço¨d   \fIDAT\x18Wcøÿÿ? \x05þ\x02þ§5\x81„    IEND®B`‚"
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /device/scanners/jobs/{jobuid}/next-page:
     get:
       summary: Get the next page for a specific job.
@@ -978,7 +978,7 @@ paths:
                 properties: {}
               example: "‰PNG\r\n\x1A\r\n   \r\nIHDR   \x01   \x01\b\x02   \x90wSÞ   \x01sRGB ®Î\x1Cé   \x04gAMA  ±\x8F\vüa\x05   \tpHYs  \x0EÃ  \x0EÃ\x01Ço¨d   \fIDAT\x18Wcøÿÿ? \x05þ\x02þ§5\x81„    IEND®B`‚"
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /storage/documents:
     post:
       summary: Create a new document.
@@ -1029,7 +1029,7 @@ paths:
                 message: This endpoint only supports POST.
                 statusCode: 405
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /storage/documents/{documentuid}:
     get:
       summary: Retrieve document info
@@ -1107,7 +1107,7 @@ paths:
                 message: This endpoint only supports GET and DELETE.
                 statusCode: 405
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
     delete:
       summary: Delete the document.
       deprecated: false
@@ -1176,7 +1176,7 @@ paths:
                 message: This endpoint only supports GET and DELETE.
                 statusCode: 405
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
     patch:
       summary: Update document customData metadata.
       deprecated: false
@@ -1273,7 +1273,7 @@ paths:
                 message: This endpoint only supports GET, PATCH and DELETE.
                 statusCode: 405
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /storage/documents/{documentuid}/content:
     get:
       summary: Retrieve the document content with specified format.
@@ -1546,7 +1546,7 @@ paths:
                 properties: {}
               example: "II* \x0E   €?àP\x10 \x0F þ \x04 \x01        \x01\x04 \x01   \x01   \x01\x01\x04 \x01   \x01   \x02\x01\x03 \x03   È   \x03\x01\x03 \x01   \x05   \x06\x01\x03 \x01   \x02   \x11\x01\x04 \x01   \b   \x15\x01\x03 \x01   \x03   \x16\x01\x04 \x01   \x01   \x17\x01\x04 \x01   \x05   \x1A\x01\x05 \x01   Î   \e\x01\x05 \x01   Ö   \x1C\x01\x03 \x01   \x01   (\x01\x03 \x01   \x02   =\x01\x03 \x01   \x02       \b \b \b  w\x01 è\x03   w\x01 è\x03  "
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /storage/documents/{documentuid}/pages:
     post:
       summary: Insert new page(s) into an existing document.
@@ -1651,7 +1651,7 @@ paths:
                 message: This endpoint only supports POST.
                 statusCode: 405
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /storage/documents/{documentuid}/pages/{param}:
     delete:
       summary: Delete the specified page.
@@ -1728,7 +1728,7 @@ paths:
                 message: This endpoint only supports DELETE.
                 statusCode: 405
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
   /process/{operation}:
     post:
       summary: Create a new processing for a specified source.
@@ -4306,7 +4306,7 @@ paths:
                       deformation: 0
                       resultType: 0
           headers: {}
-      security: []
+      security: [{BearerAuth: []}]
 components:
   schemas:
     Error:
@@ -4677,9 +4677,11 @@ components:
                   https://127.0.0.1:18623/api/device/scanners/jobs/dd40716d-48d1-4d32-89f7-1d53f9665d91/next-page?page=19522d0c5282
       required:
         - source
-  securitySchemes: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
 servers:
   - url: https://127.0.0.1:18623/api
     description: Local Dynamic Web TWAIN Service endpoint.
-security: []
-
+security: [{BearerAuth: []}]
